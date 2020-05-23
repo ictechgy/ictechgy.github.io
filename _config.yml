@@ -94,7 +94,7 @@ analytics:
 # Site Author
 author:
   name             : "JJanghong"
-  avatar           : assets/profile  # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : /assets/images/photo-avatar.jpeg  # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "공부중입니다."
   location         : "Republic of Korea"
   email            :
