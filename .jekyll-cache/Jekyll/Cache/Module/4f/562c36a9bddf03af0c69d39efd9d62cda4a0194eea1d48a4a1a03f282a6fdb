@@ -1,4 +1,4 @@
-I"
+I"y
 
 <div class="masthead">
   <div class="masthead__inner-wrap">
@@ -10,7 +10,17 @@
           <span class="site-subtitle">개발공부</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
