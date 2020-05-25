@@ -1,0 +1,785 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux_day2 - 개발 끄적끄적</title>
+<meta name="description" content="작업용 개인 폴더를 만들 때 폴더명에 공백을 두지 말 것. 밑줄_로 처리하라고 하셨다. TUI작업시 경로가 두개로 잡힘? → 그럼 워크스테이션때문이 아니라 가상머신에 깔려있는 LinuxOS때문인건가. 그리고 두개로 잡힌다는건 무슨 말일까 ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="Linux_day2">
+<meta property="og:url" content="http://localhost:4000/Linux_day2/">
+
+
+  <meta property="og:description" content="작업용 개인 폴더를 만들 때 폴더명에 공백을 두지 말 것. 밑줄_로 처리하라고 하셨다. TUI작업시 경로가 두개로 잡힘? → 그럼 워크스테이션때문이 아니라 가상머신에 깔려있는 LinuxOS때문인건가. 그리고 두개로 잡힌다는건 무슨 말일까 ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-26T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Linux_day2/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux_day2">
+    <meta itemprop="description" content="작업용 개인 폴더를 만들 때 폴더명에 공백을 두지 말 것. 밑줄_로 처리하라고 하셨다. TUI작업시 경로가 두개로 잡힘? → 그럼 워크스테이션때문이 아니라 가상머신에 깔려있는 LinuxOS때문인건가. 그리고 두개로 잡힌다는건 무슨 말일까">
+    <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Linux_day2
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>작업용 개인 폴더를 만들 때 폴더명에 공백을 두지 말 것. 밑줄_로 처리하라고 하셨다. TUI작업시 경로가 두개로 잡힘? → 그럼 워크스테이션때문이 아니라 가상머신에 깔려있는 LinuxOS때문인건가. 그리고 두개로 잡힌다는건 무슨 말일까</p>
+
+<p>TUI로 먼저 설치한 후 삭제한 뒤 GUI로 설치
+-&gt; GUI를 제공하지 않도록 최소로만 설치해보았다(각종 과정은 생략하고 필요한 것만 설치)</p>
+
+<p>서버는 무조건 아이디와 패스워드를 확인한다(윈도우는 그런거 없는경우 바로 바탕화면으로 가짐) → 허용되지 않은 접근을 막기 위함.. 비밀번호는 필수 생성해야하는 것 같더라(Root계정이든 사용자 계정이든)
+최고관리자계정은 ROOT계정(윈도우의 Adminstrator라고 보면 된다.)</p>
+
+<p>설치 및 부팅이 완료되면 TUI방식으로 로그인을 하는 창이 나오고 로그인을 완료하면 Command Line이 생긴다. (비밀번호 입력은 입력해도 보이지는 않는다. 보안때문인건가. 예전에 리눅스 터미널창에서 sudo입력해서 패키지파일 설치하려 할 때 루트계정 비밀번호 입력하는 부분에서도 비밀번호 입력하는지는 안보이게 해놓았던 것 같은데)</p>
+
+<p>ls /   - 명령어 입력시 커맨드가 있는 위치의 폴더를 볼 수 있다.
+ls는 List의 축약어이다. 즉 현재 커맨드가 있는 위치의 폴더 및 파일을 list로 보여달라는 명령어이다.</p>
+
+<p>GUI가 만들어지기 전에는 위와같은 TUI방식으로만 리눅스 OS를 사용하였다고 한다.
+불편하기는 했지만 속도면에서는 우월했다고 한다.</p>
+
+<p>가상머신 세팅
+VMware Workstation pro 12실행 -&gt; Create a New Virtual Machine</p>
+
+<p>설치타입 선택
+Typical - 간략화된 설치단계를 진행할 수 있음
+Custom 사용자 정의설치 클릭 후 진행 -&gt; 제품별 하드웨어 지원한계를 볼 수 있다.
+12버전은 12버전에서만 실행가능하며 하위버전은 상위버전에서 실행가능하나 그 역은 불가능하다. 또한 하드웨어상의 여러 제약사항을 볼 수 있다.(버전이 높아질 수록 지원하는 메모리용량이라던지 등이 일반적으로 증가)</p>
+
+<p>Host PC - 윈도우
+우리가 가상머신에서 설치할 운영체제는 Guest라고 한다.</p>
+
+<p>우리는 가상머신세팅을 먼저 하고 운영체제를 나중에 설치할 것이므로 I will -을 선택한다</p>
+
+<p>그 다음에는 돌릴 운영체제OS를 선택하고 버전을 선택하면 된다.
+Solaris 는 유닉스 운영체제인 듯 보인다.
+Linux탭 클릭 및 CentOS-64Bit를 지정해주자.</p>
+
+<p>가상머신명을 지정해주는데, “class1_이름” 으로 해주도록 하자.(가상머신명에 한글불가)
+위치는 개인폴더 하위의 1_직접설치로 지정</p>
+
+<p>프로세서 설정이 나온다. 가상머신의 프로세서 숫자와 프로세서당코어숫자를 지정해줄 수 있다.</p>
+
+<p>Number of processor
+실제 컴퓨터에 꽂혀있는 CPU개수
+Server를 제외하면 거의 모든 PC는 CPU가 한개</p>
+
+<p>Number of cores per processor
+CPU하나속에 들어있는 코어개수(쿼드코어 옥타코어 등)</p>
+
+<p>우리는 큰 작업을 할 것이 아니므로 각각 1로 지정.</p>
+
+<p>데이터처리가능용량인 메모리용량을 지정할 수 있다. 1024MB지정</p>
+
+<p>리눅스 OS도 인터넷을 하려면 고유의 IP가 필요하다.. 이 때 가상머신에서 어떤 방식으로 IP를 부여받을지를 정할 수 있다. VMware에서는 몇가지 방식을 기본적으로 잡아서 제공한다. 
+네트워크제어판쪽에서 어댑터설정변경을 통해 존재하는 인터넷 어댑터 연결상황 및 목록을 볼 수 있고 이 중 이더넷쪽이 우리가 쓰는 실질적인 물리적 데이터 네트워크 라고 보면 된다. 조금 다를 수도 있긴 하다. 
+VMware에서 쓰는 네트워크는 VMnet1과 VMnet8이다. 왜 두개나 있는지는..</p>
+
+<p>VMware의 Edit메뉴 중 Virtual Network Editor를 통해 VMware에서의 가상 인터넷 설정을 조회하고 변경할 수 있다.</p>
+
+<p>관리자권한이 필요하므로 change setting를 누르고 관리자 권한 부여
+보면은 설정마다 네트워크가 따로 구현되어있어야 해서 VMnet1은 호스트온리용, VMnet8은 NAT용으로 쓰이는 것 같다. (VMnet0도 있는데 이건 브릿지용)</p>
+
+<p>밑의 information을 보면.. 
+브릿지는 외부네트워크와 바로 연결짓는 용도로 쓰는 것 같다. 
+NAT는 호스트의 아이피를 공유하는것 같고(공유이긴 하나 다른 아이피를 쓰되 결국 호스트의 아이피를 통해 흘러가는 형식일 듯)
+Host-Only는 내부용으로만 쓸 때 쓰는 것 같다.</p>
+
+<p>네트워크타입 설정
+-&gt; NAT사용. 공유기에 보통 들어있는 NAT란?
+NAT는 공인IP를 사설IP로 변경해줌. (또는 그 역)</p>
+
+<p>공인IP는 유료이며 개인이 쓸 수 없다. 인터넷상에서 중복될 수 없다. 인터넷을 쓸 수 있게 해주는데, 문제는 갯수가 부족함 → IPv6
+0.0.0.0 ~ 255.255.255.255 까지의 경우의 수가 존재함(IPv4)</p>
+
+<p>서브네팅(아이피쪼개기)을 해도 부족. Subnet Mask - 부분망</p>
+
+<p>그래서 도입된 것이 NAT이다.</p>
+
+<p>사설IP는 무료이며 혼자 쓰는것은 하나의 NAT상에서만 가능하다. 서로 다른 NAT상에서 구동할 경우 사설IP는 중복될 수 있다. 
+-&gt;사설IP는 인터넷을 독자적으로 쓰는데 쓸 수 없다. 꼭 공인IP가 필요</p>
+
+<p>공인IP는 네이버에서 검색할 수 있다. 선생님과 강의실 컴퓨터들은 모두 공인IP는 같다.
+즉 하나의 공인IP를 쓰되 그 하위의 공유기를 통해 사설IP를 할당하여 모든 기기를 구분하여 쓴다는 뜻</p>
+
+<p>호스트컴퓨터 - 스위치 - 공유기 - 인터넷     ← Lan과 Wan에 있어 스위치와 라우터</p>
+
+<p>공유기를 좌우로 구분하여 사설아이피와 공인아이피가 갈린다.
+공유기의 NAT가 IP타입을 바꿔줌.</p>
+
+<p>DHCP는?
+실질적으로 사설IP를 부여하는 것은 DHCP이고 그걸 번역해주는 것을 해주는 것이 NAT인가?
+동적으로 IP를 수거하고 그때그때 주인없는 IP를 제공하는 것이 DHCP의 역할이다.</p>
+
+<p>브릿지Bridge - 아이피 없이 상대컴퓨터와 내 컴퓨터를 연결하는 것.
+브릿지로 리눅스네트워크를 잡으면 내 실제컴퓨터와 IP가 비슷함.
+192.168.0 까지는 같겠지만 뒤의 한자리쪽은 다름.
+그냥 같은방안에 있는 것인데 단지 자리만 다른 자리에 앉아있는 개념 → 브릿지라고 이게??</p>
+
+<p>네이버 검색 결과 브릿지는 LAN끼리를 연결하는 것이라고 한다.</p>
+
+<p>VMware설정에서 브릿지는 뭐랄까 외부로 네트워크를 바로 연결하는 것이라고 보였는데 그 뜻이.. 새로운 IP를 할당받는다는게 아니라 다이렉트로 다른 컴퓨터랑 연결하겠다는 뜻이라는 건가</p>
+
+<p>host-only - 외부와의 연결을 하지 않겠다. 인터넷이 되지 않음
+윈도우즈서버에서 주로 쓴다. 윈도우즈 서버는 서버를 보통 3개를 쓰는데(아마도 백업용 하나 테스트용 하나 실질적구동용 하나 뭐 이런용도겠지) 하나만 NAT또는 브릿지로 인터넷이 되도록 하고 나머지 두개는 host only로 두고 인터넷이 되는 다른 하나의 서버와 연결을 하는 방식을 취한다.</p>
+
+<p>입출력장치 - LSI 논리 선택
+입출력장치에 대한 알고리즘 설정인듯</p>
+
+<p>가상하드디스크 - SCSI 선택
+하드디스크의 포맷타입인거같다.. SATA방식이냐.. 등
+뭐 여기서 어차피 우리의 실절적 물리하드디스크공간을 쓰는것이다보니 우리 물리디스크의 포맷방식에 영향을 주로 받는 것으로 보인다. 따라서 SATA한다고 해서 속도가 엄청 빠르다고 할 수는 없다고 하셨다.</p>
+
+<p>IDE 병렬화 디스크. 속도느림. 디스크의 조상</p>
+
+<p>사용할 디스크 선택. 가상의 디스크를 만들자. 이 설정에서 다른 설정들이 의미하는 바는?</p>
+
+<p>용량선택
+실제디스크용량을 잡는 Allocate 선택 x → 바로 용량부터 확보하겠다는 건가..</p>
+
+<p>가상디스크파일을 하나로 쓸지 분할해서 쓸지 선택할 수 있다. 
+하나의 파일로 쓰면 압축할 때는 좋으나 속도는 떨어짐.
+Split하면 저장속도가 빠름
+예전에는 single file로만 만들 수 있었다.</p>
+
+<p>디스크파일명은 기본값으로 손대지 않는다.</p>
+
+<p>Customize Hardware를 통해 필요하지 않은 장치는 제거해도 된다.</p>
+
+<p>CentOS설치하기
+CD를 안넣고 파워를 키면 OS설치 CD를 찾다가 못찾고 오류메시지 출력됨</p>
+
+<p>Edit virtual machine settings에서 CD를 ISO파일로서 넣어주도록 하자
+물리드라이브를 직접 Auto detect하도록 되어있는데 CD가 없으므로,,</p>
+
+<p>그 다음에 파워를 키자.
+강의실컴퓨터의 경우 핸들이 잘못되었다는 메시지가 뜨는데 그런 경우 OS설치경로쪽에서</p>
+
+<p>class1_jinhong.vmx를 메모장으로 키고 vmci0.present의 값을 “FALSE”로 바꿔주도록 하자</p>
+
+<p>설치 언어를 찾아볼 때 한국어로 검색을 할 수 없으니 스크롤을 내려서 한국어를 찾도록 하자.
+한국어키보드를 기본적으로 제공해주지 않는 상황이다. 
+선생님은 검색창에 ko를 입력하라고 하심</p>
+
+<p>날짜 시간 설정.</p>
+
+<p>설치소스탭을 통해 ISO파일을 검사할 수 있다. 무결성검사?</p>
+
+<p>무결성 검사란 어떤 프로그램이나 파일이 내가 원하는대로 동작하고 버그가 생기지 않는것인지 검사하는 거라고 보면 되는 것 같던데..</p>
+
+<p>소프트웨어선택 탭 클릭
+TUI환경에서는 최소설치를 지정하였고 개발용도구를 추가선택설치하였다.
+(개발용도구도 나중에 따로 설치할 수 있으나 같이 해둬야 편하다고 했다)</p>
+
+<p>우리는 서버-GUI사용 을 클릭하자. 일단은 개발용도구탭만 클릭
+그래픽도 설치할 것이므로 설치하는 것이 좀 많다.</p>
+
+<p>설치대상탭 클릭.
+이전에는 파티션을 자동으로 설정하도록 했는데 이번에는 파티션을 직접 설정해보자.
+즉 파일이나 폴더별로 얼마나 용량을 부여할 것인지를 설정할 수 있는 것 같다. 
+(파티션이란 하드디스크를 여러개로 쪼개서 나눠서 쓸 수 있도록 하는 것)</p>
+
+<p>파티션 직접설정 클릭 및 완료 누르면 설정창으로 가게 됨.</p>
+
+<p>LVM이라고 되어있는 것을 표준파티션으로 바꾸자</p>
+
+<p>첫번째
+‘+’를 클릭하자.
+마운트지점에 /슬래시 입력. 용량 200 입력.
+마운트 지점 추가 클릭</p>
+
+<p>두번째
+/boot
+1000
+추가</p>
+
+<p>세번째
+/var
+2000</p>
+
+<p>네번째
+swap
+2048</p>
+
+<p>다섯번째
+/home
+200</p>
+
+<p>이제 남은 용량을 Root쪽에 다 줄 것이다. 
+/ 클릭하고 용량부분에 200넣었던 것을 지우고 99999 입력. 그러면 남은 용량 다 부여할 수 있음.
+/var를 클릭해서 /용량이 14.87나오는지 보자</p>
+
+<p>각각의 폴더가 의미하는 것과 마지막에 루트계정쪽에 모든 용량을 다 주는 의미는? 그리고 남은 992KB는 버려지는건가..</p>
+
+<p>뭐랄까 /boot 는 시스템 부팅에 필요한 파일공간을 지정하는 거 같고 그런거같은데</p>
+
+<p>포맷정보창에서 변경사항적용. 파티션을 우리가 설정하였다.</p>
+
+<p>네트워크 및 호스트명 설정 클릭
+설정버튼 클릭 → 일반항목탭 클릭 → 사용가능하면 자동으로 이 네트워크에 연결 클릭 –&gt;  저장 → 아까 가상머신상에서 설정되어있던 기본세팅을 토대로 실제 IP가 잡힘(NAT?)</p>
+
+<p>설치시작 클릭</p>
+
+<p>사용자 생성
+성명은 kg
+사용자 이름은 itbank
+암호 itbank
+성명은 실제 사람이름같은걸 의미하는거 같고 사용자 이름은 닉네임같은거인듯</p>
+
+<p>root암호 설정 - itbank</p>
+
+<p>꼭 잘 따라해서 입력하라는 이유는.. 뭐 로그인할때 까먹어서 로그인 못해서도 안되지만 뭐 나중에 여타 서버를 구축할 때 저 계정명과 비밀번호가 일치해야해서 그런건가.
+그리고 비밀번호는 안만들수도 있는 거 같음. 사용자계정쪽에서..
+root는 꼭 비밀번호 만들어야하는건가</p>
+
+<p>아까 TUI로 설치하는 것과는 다르게 설치하는 것이 많다.</p>
+
+<p>ISO파일을 받는 법
+주소창에 https://www.centos.org/ 입력
+get CentOS now클릭 → 아무 버튼 클릭 → Mirror List 클릭 → south korea찾기 → http://mirror.kakao.com/centos/ 클릭 → 버전을 찾아 설치. (7.4.1708 클릭) → isos/클릭 → x86_64 클릭 → 
+CentOS-7-x86_64-Everything-1708.iso
+8694792192
+2017-Sep-06 10:59
+클릭</p>
+
+<p>다 받고나서 용량을 확인해보자
+8,491,008KB인지 확인하자</p>
+
+<p>재부팅 → 라이센스 동의 → 설정완료</p>
+
+<p>GUI설치 완료</p>
+
+<p>VM탭에서 스냅샷찍어서 타임머신 만들도록 하자. 혹시 모를 상황 대비</p>
+
+<p>BIOS 바이오스에서 가상머신을 지원하지 못하도록 VT-X메시지가 뜨는 경우가 있는데 이런 경우 바이오스세팅으로 가서 해당 기능을 풀어줘야한다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-26T00:00:00+09:00">May 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Linux_day2%20http%3A%2F%2Flocalhost%3A4000%2FLinux_day2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FLinux_day2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FLinux_day2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/Linux_day19/" class="pagination--pager" title="Linux_day19
+">Previous</a>
+    
+    
+      <a href="/Linux_day20/" class="pagination--pager" title="Linux_day20
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day8/" rel="permalink">Linux_day8
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty접속 안됐으나 VMware 가상네트워크설정에서 NAT에 있어서 두가지 체크사항 건드리니까 다시 됨. 한가지만 체크되어있었는데 먼저 체크 푼 다음에 설정창 껐다가 다시 키고, 체크사항 두개 다시 체크한 뒤에 설정창 끔.  OS GUI에서도 네트워크 설정부분 껐다가 켰다. 아...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day7/" rel="permalink">Linux_day7
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.
+한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???
+간결하면서도 강력한 기능을 제공
+GUI...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day6/" rel="permalink">Linux_day6
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">논리연산자
+이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
+a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
+a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

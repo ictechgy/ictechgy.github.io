@@ -1,0 +1,991 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux2_day19 - 개발 끄적끄적</title>
+<meta name="description" content="DataBase    체계화된 데이터의 모임   작성된 목록으로써 여러 응용시스템들의 통합된 정보들을 저장하여 운영할 수 있는 공용 데이터(자료)들의 묶음  ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="Linux2_day19">
+<meta property="og:url" content="http://localhost:4000/Linux2_day19/">
+
+
+  <meta property="og:description" content="DataBase    체계화된 데이터의 모임   작성된 목록으로써 여러 응용시스템들의 통합된 정보들을 저장하여 운영할 수 있는 공용 데이터(자료)들의 묶음  ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-26T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Linux2_day19/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux2_day19">
+    <meta itemprop="description" content="DataBase  체계화된 데이터의 모임  작성된 목록으로써 여러 응용시스템들의 통합된 정보들을 저장하여 운영할 수 있는 공용 데이터(자료)들의 묶음">
+    <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Linux2_day19
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>DataBase</p>
+<ul>
+  <li>체계화된 데이터의 모임</li>
+  <li>작성된 목록으로써 여러 응용시스템들의 통합된 정보들을 저장하여 운영할 수 있는 공용 데이터(자료)들의 묶음</li>
+</ul>
+
+<p>자료</p>
+<ul>
+  <li>현실 세계에서 관찰이나 측정을 통해 수집한 단순한 사실(가공되지 않은 상태)</li>
+</ul>
+
+<p>정보</p>
+<ul>
+  <li>의사 결정에 도움을 줄 수 있는 유용한 형태(가공해서 얻은 결과물)</li>
+</ul>
+
+<p>→ 공중전화에 있는 전화번호부나 노래방에 있는 노래방책도 데이터베이스라고 볼 수 있다.
+⇒ 아직 가공되지 않은 자료들의 모임이라고 볼 수 있으며 이 자료들을 가공하여 정보를 추출해낸다. 따라서 데이터베이스는 가공되지 않은 데이터자료들의 집합이라고 보면 된다.</p>
+
+<p>DBMS(DataBase Management System)</p>
+<ul>
+  <li>사용자와 데이터베이스 사이에서 사용자의 요구에 따라 정보를 생성해주고, 데이터베이스를 관리해주는 소프트웨어</li>
+  <li>데이터의 종속성과 중복성의 문제를 해결하기 위해 제안된 시스템</li>
+  <li>모든 응용 프로그램의 데이터베이스를 공용할 수 있도록 관리</li>
+</ul>
+
+<p>●	장점
+1)	데이터의 중복성을 해결
+2)	자료를 공동으로 이용
+3)	데이터의 일관성과 무결성을 유지
+4)	데이터를 표준화하고 통합하여 관리</p>
+
+<p>●	단점
+1)	전산화비용이 증가
+2)	대용량 디스크의 집중적인 접근으로 인해 과부하가 발생
+3)	시스템이 복잡하고 파일의 백업과 회복이 어려움
+4)	데이터베이스 전문가 부족</p>
+
+<p>RDBMS(Relationship DBMS) - 관계형 데이터베이스 매니지먼트 시스템</p>
+<ul>
+  <li>관계형 테이터 모델을 사용하는 데이터베이스라고 함</li>
+  <li>집합론과 논리분야의 개념을 사용하여 만들어진 이 데이터 모델은 개체들간의 관계를 바탕으로 데이터를 저장</li>
+  <li>계층 모델과 망 모델의 복잡한 구조를 단순화시킨 모델</li>
+  <li>표(Table)를 이용하여 데이터 상호 관계를 정의하는 DB구조</li>
+  <li>데이터 저장에 필요한 명령어를 지원하기 위해 1974년 IBM연구소에서 SQL을 창안</li>
+</ul>
+
+<p>SQL(Structured Query Language : 구조화된 질의 언어)</p>
+<ul>
+  <li>관계형 데이터베이스의 데이터를 관리 및 처리하기 위해 설계된 프로그래밍 언어</li>
+  <li>현재 많은 데이터베이스 프로그램들이 이 언어를 표준으로 채택하여 지원</li>
+</ul>
+
+<p>종류로는 데이터 정의언어, 데이터 조작 언어, 데이터 제어 언어가 있음</p>
+
+<p>RDBMS의 장단점
+●	장점
+1)	간결함
+2)	보기 편함
+3)	다른 데이터베이스로부터의 변환이 용이</p>
+
+<p>●	단점
+1)	성능이 다소 떨어짐</p>
+
+<p>RDBMS의 종류
+Oracle(상업), MySQL(오픈소스, CentOS 6.x), MariaDB(CentOS 7) 등</p>
+
+<p>(mariadb는 우라가 rpm명령어로 패키지 설치시 실습했던 패키지)</p>
+
+<p>MySQL</p>
+<ul>
+  <li>SQL을 사용하는 오픈소스 RDBMS</li>
+  <li>매우 빠르고 유연하며 사용하기 쉬운 장점</li>
+  <li>다중 사용자, 다중 스레드를 지원하고 C, C++, Java, PHP 스크립트 언어를 제공함</li>
+  <li>유닉스, 리눅스, 윈도우즈 서버에서 사용가능함</li>
+  <li>홈페이지나 쇼핑몰 등 웹 개발에 널리 이용되고 있음</li>
+  <li>CentOS 6.x 에서 사용</li>
+</ul>
+
+<p>Linux, Apache, MySQL, PHP → LAMP라고 한다. 이렇게 연동해서 많이 씀</p>
+
+<p>MariaDB</p>
+<ul>
+  <li>SQL을 사용하는 오픈소스 RDBMS</li>
+  <li>MySQL과 동일한 소스코드를 기반으로, 라이선스는 GPLv2를 따름</li>
+  <li>현재 Oracle 소유의 불확실한 MySQL의 라이선스 상태에 반발하여 만들어짐</li>
+  <li>MySQL 5.5까지는 소스코드가 동일하나 그 이후부터는 다르게 개발한다고 함(버전이나 쓰는 것 등)</li>
+  <li>CentOS 7.x에서 사용</li>
+</ul>
+
+<p>SUN MicroSystems에서 unix및 nfs와 MySQL을 만들었었음. 그리고 이 썬마이크로시스템즈를 Oracle이 인수하였다. MySQL은 오픈소스로 만들어졌으나 Oracle에서 상업화를 진행하려고 함. 따라서 MySQL의 라이선스상태가 불안정해졌고 언제 상업화가 될지를 모르게 됨. 이에 반발하여 MySQL을 만들었던 사람이 Oracle을 나와 MariaDB를 만듦.
+MySQL과 MariaDB는 개발자의 자녀이름</p>
+
+<p>MariaDB 패키지 설치 유무를 확인
+rpm -qa | grep mariadb
+→ 하나밖에 없으므로 yum install mariadb*로 설치. (패키지명은 mariadb로 시작)</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>rpm -qa</td>
+      <td>grep mariadb</td>
+      <td>nl 을 하여 패키지 8개 확인</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>mariadb 서비스명은 mariadb.service
+이제 막 깔았기 때문에 systemctl is-active mariadb.service로 확인해보면 unknown나온다. systemctl restart mariadb.service 로 서비스 시작</p>
+
+<p>mariadb 접속방법</p>
+
+<p>1)	mysql -u 계정명 -p  → mariadb에 그냥 접속</p>
+
+<p>2)	mysql -u 계정명 -p 사용할DB명 → 쓸 DB지정하여 mariadb에 접속</p>
+
+<p>mysql은 mariadb를 실행할 명령어
+-u는 sql문을 실행할 유저를 지정하는 옵션 → 계정명에는 계정의 이름을 작성
+-p는 sql문을 실행할 유저의 비밀번호
+사용할 DB는 접속을 하려는 DB명을 써주자</p>
+
+<p>mysql -u root -p mysql
+mysql이라는 데이터베이스를 mysql이라는 명령어로 접속.
+비밀번호는 위 명령어 상태에서 입력하는게 아니다.</p>
+
+<p>현재 비밀번호는 null값이므로 엔터만 쳐서 접속.
+→ DataBase에 접속</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82837477-22c14b00-9f04-11ea-9a3b-464a9a0d22d1.png" alt="image" /></p>
+
+<p>만약 데이터베이스를 지정하지 않았다면</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82837487-2785ff00-9f04-11ea-91ff-3b13358e0863.png" alt="image" />
+이렇게 뜬다.</p>
+
+<p>현재 날짜와 mariadb 프로그램의 버전을 확인하는 방법
+select version(), current_date; → select 명령어는 어떤 데이터를 추출할 때 쓰는 SQL질의문. 맨 뒤에 ; 은 꼭 찍어줘야 한다.</p>
+
+<p>여러줄에 걸쳐 쿼리문을 작성할거면 ; 를 안쓰면 된다.  쿼리문 작성이 끝났으면 ; 쓰기.
+현재의 입력상태를 취소하려면 \c 를 입력하면 된다.</p>
+
+<p>창을 깨끗하게 하려면 system clear 또는 Ctrl + L 을 입력</p>
+
+<p>명령어가 길어지면 자동 줄바꿈이 되긴 하지만 엔터쳐서 다음줄에 작성해도 된다. 한줄에 작성하는 것과 동일한 효과</p>
+
+<p>여러 값들이 모여 Table을 구성하고 이 Table이 모인 저장소를 하나의 DataBase라 보면 됨. 그리고 그런 DataBase들을 총체적으로 관리해주는 것이 RDBMS 이다.
+→ ex) kgitbank 라는 DataBase에는 여러 영업부가 있으며 각 영업부를 개별 Table로서 관리한다. 그리고 각각의 Table들에는 값들이 존재한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82837497-32409400-9f04-11ea-9b21-703bf3cd7b68.png" alt="image" />
+이런 Table들이 모여 하나의 DataBase를 이루고, 이런 DataBase들을 총 관리해주는 것이 DBMS 프로그램들이다.</p>
+
+<p>명령어
+1)	show</p>
+<ul>
+  <li>데이터베이스, 테이블 목록 출력</li>
+</ul>
+
+<p>show는 데이터베이스, 테이블 관련해서 사용</p>
+
+<p>사용형식(database) - 어떤 데이터베이스들이 존재하고 있는지 보려 할 때.
+show database; → 에러
+show databases; 라고 하여 복수형으로 작성한다.
+⇒ 데이터베이스에 none 상태로 접근했다면 이 명령어를 통해 데이터베이스가 뭐있나 확인 후 접근하면 됨</p>
+
+<p>사용형식(table) - 내가 접근상태에 있는 데이터베이스 하위에 어떤 테이블들이 있는지 확인.
+show table; → 에러
+show tables; 라고 하여 복수형으로 작성한다.
+→ 테이블 목록 출력(특정 데이터베이스에 접근한 상태여야만 사용 가능)</p>
+
+<p>Table(테이블)</p>
+<ul>
+  <li>관계형 데이터베이스에서 수직 열과 수평 행의 모델을 사용해 조직된 데이터 요소(값)들의 집합</li>
+</ul>
+
+<p>2)	describe</p>
+<ul>
+  <li>접속한 데이터베이스의 테이블들에 대한 스키마(schema) 정보 확인</li>
+  <li>describe는 테이블 관련해서 사용(특정 테이블 지정하여 사용)</li>
+</ul>
+
+<p>schema(스키마)</p>
+<ul>
+  <li>데이터베이스를 구성하는 레코드의 크기, 키(key)값으로서의 정의여부, 레코드의 관계, 검색 방법 등을 정의 한 것</li>
+  <li>데이터베이스의 구조와 제약조건에 전반적인 명세를 기술</li>
+</ul>
+
+<p>사용형식
+describe 테이블;
+desc 테이블;
+explain 테이블;</p>
+
+<p>mysql 데이터베이스에 존재하는 user table에 대해 살펴보자.
+describe user; 또는 explain user; 라고 치면 user table의 field(column) 구성이 나온다.</p>
+
+<p>3)	use</p>
+<ul>
+  <li>작업중인 데이터베이스 변경</li>
+</ul>
+
+<p>use는 데이터베이스 관련해서 사용(cd처럼)</p>
+
+<p>사용형식
+use 데이터베이스;
+→ 지정한 데이터베이스로 변경</p>
+
+<p>show databases;로 어떤 데이터베이스가 있는지 확인한다.
+use test; 로 test 데이터베이스에 갔다가 use mysql 로 다시 돌아오자.
+→ use를 쓸 때 맨 뒤에 세미콜론은 없어도 작동은 한다. 그리고 불러오는 데이터베이스에 테이블값이 존재하면 테이블정보를 읽어온다는 메시지가 추가적으로 출력된다.</p>
+
+<p>4)	create</p>
+<ul>
+  <li>데이터베이스, 테이블 생성</li>
+</ul>
+
+<p>create는 데이터베이스, 테이블 관련해서 사용</p>
+
+<p>사용형식(database)
+create database 데이터베이스명;
+→ 지정한 이름으로 데이터베이스 생성</p>
+
+<p>create database testdatabase; 로 데이터베이스 생성하고 show databases;로 확인</p>
+
+<p>사용형식(table)
+create table 테이블;
+→ 현재 접근상태인 데이터베이스 내에 테이블을 생성</p>
+
+<p>mysql 데이터베이스 접근상태에서 
+create table testtable; 을 입력하면 오류가 난다. 최소한 하나의 1 column을 만들어야 한다고 뜸</p>
+
+<p>Column(열)</p>
+<ul>
+  <li>열이란, 테이블의 각 행의 하나씩을 차지하는 특정 단순형 데이터 값들의 집합</li>
+  <li>열은 어떤 행들로 이루어지는지 구조를 제공</li>
+</ul>
+
+<p>Field(필드)
+필드라는 용어는 종종 열(Column)과 바꾸어 쓰지만, 많은 이들은 필드를 한 행과 한 열의 교차지점에 있는 단일 값을 특별히 지칭</p>
+
+<p>따라서 Table을 만들려면,
+create table 테이블명 (필드명 필드타입(값의길이)); 이렇게 입력해야 한다.
+→ 테이블 생성시 필드 1개를 같이 생성</p>
+
+<p>아까 입력을 아래와 같이 해야함.
+create table testtable (name char(20));
+→ testtable이라는 이름의 테이블을 하나 만드는데, name이라는 Field(Column)이 하나 존재하며 그 열에 해당하는 행들에는 데이터로 문자값만이 들어갈 수 있다. 문자값은 20바이트로 제한되어있음</p>
+
+<p>필드를 두세개 더 만들고 싶다면 
+create table testtable (name char(20), age int(3));
+위와같이 쉼표로 구분하여 필드를 더 작성해주면 된다.
+이후에 show tables; 로 테이블 생성여부를 확인가능하며 desc testtable; 로 Field에 대한 정보를 볼 수 있다.
+→ Null값 가능여부, Key값으로 설정되어있는지의 여부, Default 기본값이 무엇인지, Extra 추가적인 뭔가 있는지 이런 정보들을 볼 수 있다.
+⇒ Key값이란, 그 Field(Column)에 들어갈 값들을 유일무이한 값들로 정할 것인지의 여부이다. 즉 중복을 허용하겠냐의 여부임.(개별 레코드들을 구분하는 기준이 됨)</p>
+
+<p>create table 테이블 (필드 필드타입(값의길이), 필드 필드타입(값의길이));
+→ 테이블 생성시 필드2개 같이 생성</p>
+
+<p>생성한 다음에 desc testtable; 로 어떠한 테이블인지 확인 가능</p>
+
+<p>⇒ 크기(길이)를 지정할 때 C언어같은 곳에서 보던 char이나 int 의 자료형 크기는 생각 안하는게 낫다. 여기서 우리가 숫자로 바이트수를 직접 지정한다.</p>
+
+<p>5)	drop</p>
+<ul>
+  <li>데이터베이스 또는 테이블을 삭제(큰 개념으로서의 삭제)</li>
+</ul>
+
+<p>drop 데이터베이스, 테이블 관련해서 사용</p>
+
+<p>사용형식(database)
+drop database 데이터베이스명;
+→ 지정한 데이터베이스 삭제</p>
+
+<p>drop database testdatabase; 로 삭제 후 show databases; 로 봐보자.</p>
+
+<p>사용형식(table)
+drop table 테이블명;
+→ 내가 있는 데이터베이스에서 지정한 테이블 삭제</p>
+
+<p>drop table testtable; 로 삭제하고 show tables; 로 확인</p>
+
+<p>6)	select</p>
+<ul>
+  <li>접속한 데이터베이스에 테이블의 필드(컬럼)에 레코드(값)을 조회</li>
+</ul>
+
+<p>레코드(record)</p>
+<ul>
+  <li>테이블의 행에 저장된 정보</li>
+  <li>각 레코드는 테이블 안 각 열에 대한 필드를 차지</li>
+</ul>
+
+<p>select는 테이블 관련해서 사용</p>
+
+<p>사용형식
+select *(모든 필드) from 테이블;
+→ 테이블의 필드와 모든 레코드를 조회</p>
+
+<p>select * from user 로 mysql데이터베이스 안의 user테이블 값을 봐보자.
+→ 너무 길어서 이상하게 나옴</p>
+
+<p>select * from db; 도 해보자. → 이것도 좀 많이 나온다.</p>
+
+<p>몇개만 찝어서 보기
+select 필드 from 테이블;
+→ 테이블의 필드 하나에 대한 레코드들을 조회</p>
+
+<p>select host from user; 를 해보자.</p>
+
+<p>더 보고 싶다면
+select 필드1, 필드2 from 테이블;
+→ 테이블의 두개 필드에 대한 레코드들을 조회</p>
+
+<p>select host, user, password from user;를 해보자.</p>
+
+<p>⇒ 명령어에 있어서 대소문자 구분은 없지만 테이블을 지정할때에는 대소문자 구분
+즉, SQL에 있어서 대소문자 구분은 없으나 데이터베이스의 직접적인 값들에 대해서는 대소문자가 구분된다는건가.</p>
+
+<p>아무튼 위의 명령어를 치면</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82837517-41bfdd00-9f04-11ea-9376-9b973b468719.png" alt="image" />
+이런 결과가 나온다.
+1~4행까지는 ‘나’ root 에 대한 것이며 password가 지정되지 않은 null값임을 의미하고 있다. 
+5, 6행은 식별불가능한 사용자에 대한 정보이다. 
+→ root 사용자에 대해 비밀번호도 설정해주고 식별되지 않은 사용자에 대해 삭제를 해보자.</p>
+
+<p>7)	update</p>
+<ul>
+  <li>접속한 데이터베이스에서 특정 테이블의 필드에 대한 레코드값을 수정</li>
+</ul>
+
+<p>update는 테이블 관련해서 사용</p>
+
+<p>사용형식
+update 테이블명 set 필드=‘수정할 값’;
+→ 테이블의 특정 필드에 대한 레코드값 전부를 수정</p>
+
+<p>update user set password=‘itbank’; 한 뒤에 select host, user, password from user; 로 보면 전부다 수정이 된 것을 확인할 수 있다.</p>
+
+<p>특정 행에 대한 것만 수정하고 싶다면? → 조건을 추가한다.
+update 테이블명 set 필드=‘수정할값’ where(조건) 필드=‘값’;
+→ 테이블에서 특정 필드에 있어서 조건을 건 레코드에 대한 값만을 수정</p>
+
+<p>root 라는 user필드값을 가진 1~4행의 값만 바꾸고 싶다면?
+update user set password=‘itbank’ where user=‘root’;
+→ 그런데 비밀번호란인데 비밀번호가 그냥 다 보인다.</p>
+
+<p>참고로 password 필드에 비밀번호를 생성하거나 수정할 경우 password()함수를 사용하여 비밀번호를 암호화 시켜주어야 함.
+예를 들어, 
+update user set password=password(‘수정할값’); 으로 하면 된다.</p>
+
+<p>조건을 추가적으로 걸어서
+update user set password=password(‘itbank’) where user=‘root’; 이렇게 쓰면 된다.
+그리고서는 select host, user, password from user; 로 보면 잘 바뀐 것을 볼 수 있다.</p>
+
+<p>update user set password=password(‘itbank’) where user!=‘’;
+이렇게 쓸 수도 있다. 부정연산자 != 사용</p>
+
+<p>8)	delete</p>
+<ul>
+  <li>접속한 데이터베이스에서 특정 필드에 대한 레코드를 삭제할 때 사용</li>
+</ul>
+
+<p>delete는 테이블 관련해서 사용(작은 개념의 삭제. 아까 데이터베이스나 테이블을 통째로 삭제할 때는 drop을 썼었음)</p>
+
+<p>사용형식
+delete from 테이블명; 
+→ 모든 레코드값이 사라진다. 지정한 테이블에서 모든 필드에 대한 레코드들을 삭제</p>
+
+<p>따라서 조건을 건다.
+delete from 테이블명 where 필드=‘값’;
+→ 테이블에서 조건을 건 필드에 대해 일치하는 값이 존재하는 레코드 값(행)을 통째로 삭제</p>
+
+<p>select host, user, password from user; 했을 때 아래와 같이 식별되지 않은 사용자가 있었다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82837529-497f8180-9f04-11ea-85ee-91d801f2e61c.png" alt="image" />
+저 두 행에 대해 통째로 삭제해보자.</p>
+
+<p>delete from user where user=‘’;
+delete from user where user!=‘root’;
+delete from user where password=‘itbank’;
+delete from user where password!=‘알고리즘값?’;</p>
+
+<p>위의 명령어들 중 하나를 사용해보면 맨 밑의 두 행이 날라간다.</p>
+
+<p>select host, db, user from db; 로 db테이블을 봐보자. 익명사용자에 대한 정보값들만 존재한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82837537-500df900-9f04-11ea-812c-d99066c88b92.png" alt="image" />
+내부 또는 외부 host가 어떤 db와 연결가능한 상태인지 나오며 그 user 이름은 무엇인지 나온다.
+ → %값은 외부를 의미. localhost는 내부</p>
+
+<p>식별되지 않은 사용자 두 행에 대해 삭제를 진행하자.
+delete from db;
+delete from db where user=‘’;
+delete from db where host=‘%’; <br />
+delete from db where db=‘test<em>’; → 이건 먹히지 않는다. 질의는 먹히는데 test</em> 이라는 그 이름 그대로의 값을 찾아서 지우려 하기 때문에 위의 두 행중 어느것도 지워지지 않는다.</p>
+
+<p>delete from db where db=‘test’ or db=‘test_%’; 
+→ and연산자도 있으며 조건들을 중첩하여 적용하려 할 때 쓴다. or은 저 조건중 하나라도 부합되면 일치하는 것으로 보고.
+delete from db where db like ‘test%’; 등 여러가지가 있다.</p>
+
+<p>삭제 후 select * from db; 로 확인</p>
+
+<p>9)	insert</p>
+<ul>
+  <li>접속한 데이터베이스에서 특정 테이블을 지정하여 특정 필드의 레코드 안에 값을 삽입</li>
+</ul>
+
+<p>insert는 테이블 관련해서 사용</p>
+
+<p>사용형식
+insert into 테이블명 (필드) value (‘값’);
+→ 테이블에서 특정 필드에 대한 레코드 삽입</p>
+
+<p>insert into 테이블(필드1, 필드2, 필드3) values(‘값1’, ‘값2’, ‘값3’);
+→ 테이블의 3개 필드에 레코드값으로 삽입</p>
+
+<p>⇒ 테이블에서 맨 밑에 행 하나를 추가하여 지정한 필드에 해당하는 레코드부분에 넣고자 하는 값을 넣게 된다.</p>
+
+<p>id값도 존재할까. 그리고 저장을 할때 따로 명령어를 쳐야하는 것도 있었는데
+MySQL에서는 id값이 존재했다. 즉 각 Record들이 기본적으로 번호로서 구분되었음. Column(Field)는 우리가 정하지만 이 id부분은 컴퓨터가 자동부여를 해줬었다. 즉 Column(Field)로서 Primary key로 지정된 id가 존재했었음</p>
+
+<p>참고로, mysql 데이터베이스에 있는 user table은 사용자 생성 테이블임. 다시말해 사용자는 반드시 user table에서만 생성할 수 있음.
+mysql 데이터베이스의 db table은 외부 다른 데이터베이스와 사용자를 연동(연결)시켜주는 테이블임. 다시말해, 사용자가 지정한 데이터베이스에 접속하기 위해서는 반드시 db table에서 연결을 시켜주어야 함
+→ mysql 데이터베이스의 user테이블은 이 mariadb에 접근가능한 사용자 테이블이다. 특정 사용자를 특정 데이터베이스에 접근가능하게 하려면 mysql 데이터베이스에서 db테이블을 통해 연동시켜주어야 한다.</p>
+
+<p>user table을 이용하여 사용자를 생성하고 create로 데이터베이스를 만든 다음에 db table에서 연결해주기. 그리고 해당 사용자가 해당 데이터베이스에 잘 접근할 수 있는지를 살펴보자.</p>
+
+<p>user table을 이용하여 사용자 생성
+insert into user (host, user, password) values (‘localhost’, ‘saram’, password(‘kg’));
+를 한 뒤에 select host, user, password from user; 로 확인</p>
+
+<p>insert into user (host, user, password) values (‘localhost’, ‘계정명’, password(‘값’));
+→ 사용자 생성</p>
+
+<p>나머지는 내일할 것이며 다른 명령어들도 살펴볼 것임.</p>
+
+<p>이런 SQL명령어들 JSP시간에 살펴봤었는데..</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-26T00:00:00+09:00">May 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Linux2_day19%20http%3A%2F%2Flocalhost%3A4000%2FLinux2_day19%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FLinux2_day19%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FLinux2_day19%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/Linux2_day18/" class="pagination--pager" title="Linux2_day18
+">Previous</a>
+    
+    
+      <a href="/Linux2_day2/" class="pagination--pager" title="Linux2_day2
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day8/" rel="permalink">Linux_day8
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty접속 안됐으나 VMware 가상네트워크설정에서 NAT에 있어서 두가지 체크사항 건드리니까 다시 됨. 한가지만 체크되어있었는데 먼저 체크 푼 다음에 설정창 껐다가 다시 키고, 체크사항 두개 다시 체크한 뒤에 설정창 끔.  OS GUI에서도 네트워크 설정부분 껐다가 켰다. 아...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day7/" rel="permalink">Linux_day7
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.
+한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???
+간결하면서도 강력한 기능을 제공
+GUI...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day6/" rel="permalink">Linux_day6
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">논리연산자
+이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
+a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
+a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

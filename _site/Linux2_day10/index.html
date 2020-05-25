@@ -1,0 +1,893 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux2_day10 - 개발 끄적끄적</title>
+<meta name="description" content="NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음 해당 파일은 NFS를 허용 할 클라이언트를 작성할 수 있는 파일이다. Network File System → 서버의 리소스를 클라이언트가 마운트하여 자기것처럼 쓸 수 있음 ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="Linux2_day10">
+<meta property="og:url" content="http://localhost:4000/Linux2_day10/">
+
+
+  <meta property="og:description" content="NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음 해당 파일은 NFS를 허용 할 클라이언트를 작성할 수 있는 파일이다. Network File System → 서버의 리소스를 클라이언트가 마운트하여 자기것처럼 쓸 수 있음 ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-26T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Linux2_day10/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux2_day10">
+    <meta itemprop="description" content="NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음해당 파일은 NFS를 허용 할 클라이언트를 작성할 수 있는 파일이다.Network File System → 서버의 리소스를 클라이언트가 마운트하여 자기것처럼 쓸 수 있음">
+    <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Linux2_day10
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음
+해당 파일은 NFS를 허용 할 클라이언트를 작성할 수 있는 파일이다.
+Network File System → 서버의 리소스를 클라이언트가 마운트하여 자기것처럼 쓸 수 있음</p>
+
+<p>NFS를 쓰려면 rpcbind(Remote Procedure Call 원격 절차 호출. 또는 portmap이라고 함)패키지가 꼭 필요하다. RPC는 111번 포트를 쓰는데, NFS를 쓰려는 클라이언트가 접속을 요구하면 비어있는 포트를 할당받아 해당 포트로 클라이언트가 접속할 수 있도록 한다. 즉 클라이언트에서 바로 서버로 연결하는 것이 아니고, 이 RPC가 중간자 역할을 한다.
+서비스를 재시작하면 서버에서 비어있는 포트를 할당받는 번호가 계속 바뀌니 어떤 수정사항을 적용시키기 위한 서비스재시작 명령어가 따로 존재한다. 또한 이 중간자를 통해 서버와 클라이언트가 연결을 하니 netstat에도 연결상황은 나오지 않는다. 이것도 별도의 명령어가 존재한다.
+telnet openSSH vnc vsftpd와는 다르게 클라이언트가 접속할 수 있는 디렉토리를 제한할 수 있다.</p>
+
+<p>/etc/exports에 쓸 내용에 대하여.
+[share dir]			[access allow host/network]			(option)
+공유할 디렉토리	     접속을 허용할 호스트/네트워크 대역		  옵션</p>
+
+<p>접속을 허용할 호스트를 적을 때에는 IP주소를 그대로 적으면 되고 네트워크 대역을 적을 경우 대표IP와 subnet mask를 적어주면 된다.</p>
+
+<p>세번째 항목 옵션에 대하여. option</p>
+
+<ul>
+  <li>접근을 허용 할 클라이언트에게 적용할 옵션</li>
+</ul>
+
+<p>option
+ro(기본값)		→ option값 미기입시 자동으로 들어가는 내용. 읽기 전용
+rw			→ 읽고 쓰기</p>
+
+<p>root_squash(기본값)	→ NFS클라이언트에서의 관리자 요청을 NFS서버의 nobody와 같은 익명 UID, GID를 지정하여 관리자 권한으로 접근을 거부
+⇒ squash 으깬다. 클라이언트에서 root계정으로 서버에 접근한 경우 이 클라이언트에 대한 root를 익명계정으로 처리해버림</p>
+
+<p>no_root_squash → root_squash의 반대로 nfs 서버와 nfs클라이언트에서의 관리자 권한으로 접근을 허용
+⇒ 클라이언트에서 root계정으로 서버에 접근시 서버에서도 관리자로서 인정해주겠다.</p>
+
+<p>no_all_squash(기본값) → 관리자를 제외한 NFS서버와 NFS클라이언트에서의 사용자 계정의 UID, GID를 같은 권한으로 일치</p>
+
+<p>all_squash → no_all_squash 와 반대로 nfs클라이언트에서의 모든 사용자 계정의 UID, GID를 nfsnobody 익명계정으로 지정</p>
+
+<p>sync → 디스크 쓰기 실행 후 동기화</p>
+
+<p>이외의 옵션들도 있다. 이와같이 클라이언트에서의 서버 접근을 통제할 수 있다.</p>
+
+<p>일단은 서비스를 Server머신 한대로만 진행하자. 한대가 서버와 클라이언트의 역할을 모두 수행
+vi /etc/exports
+:se nu를 하고 빈줄 생성</p>
+
+<p>아래와 같은 내용처럼 작성을 해주면 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82835839-26eb6980-9f00-11ea-9619-cde19ac449e3.png" alt="image" />
+/nfs_server1이라는 디렉토리를 해당 호스트에 대해 공유할 것이라고 2번째 줄에 작성하였다. 저 주소는 서버IP로서 자기자신의 IP이다. vi편집상태에서 명령어를 실행시키고 그 결과값을 보고싶다면 vi 명령모드에서 ‘:!명령어’를 입력하면 된다.</p>
+
+<p>옵션값은 괄호로 묶으며, 여러개일 경우 쉼표로 구분하여 작성한다.</p>
+
+<p>다만 옵션을 아예 안적는 것은 에러가 난다.
+sync하나라도 적어주자. 아무것도 안쓸 것이라면 sync하나만이라도 적어줘야 한다.</p>
+
+<p>만약 호스트를 더 적고 싶다면 옆에다가 더 쓰면 된다.
+‘공유할디렉토리	호스트1 (옵션1)	호스트2 (옵션2)’</p>
+
+<p>네트워크대역대를 작성할 때 대표IP뿐만 아니라 subnet mask도 적는 이유..
+만약 특정 디렉토리에 대해 192.168.0.0 에 대해 개방하겠다고 하자. 이를 보고 컴퓨터는 이게 192.168.0.0 ~ 192.168.255.255 에 해당하는건지 192.168.0.0 ~ 192.168.0.255 에 해당하는 건지 알 수 있을까?
+그렇지 않다고 본다. 따라서 어디까지가 네트워크 ID인지를 파악가능하게 서브넷마스크를 추가함으로서, 192.168.0.0 에 대해 개방을 했다면 이는 192.168.0.x 에 해당하는 네트워크를 가진 사람들에 대해 개방을 한 것이고 따라서  192.168.0.0 ~ 192.168.0.255까지를 지칭하는 것임을 컴퓨터에게 알릴 수 있다.</p>
+
+<p>2번째 줄로 연습을 해보자
+3번째 줄과 4번째 줄은 주석시키자
+저장 후 종료</p>
+
+<p>여기까지 NFS서비스에 대한 설정파일인 /etc/exports 파일에 대해 건드려보았다. 보통 우리는 특정 서비스에 대한 설정을 바꿨다면 서비스를 재시작해야함을 알고있다.</p>
+
+<p>nfs 서비스 이름은 nfs.service 이다.
+최초실행시 서비스를 한번은 재시작을 해야한다. systemctl is-active nfs.service하면 꺼져있다. (unknown상태임) rpcbind.service는 동작중이다.
+→ 따라서 컴퓨터를 처음 켰을 때에 nfs.service는 꺼져있는 상태이다. 따라서 한번은 시작(재시작) 해주어야 한다. 한번 킨 상태에서 설정을 바꿨다면 이제 systemctl로 서비스재시작을 하지 않는다.(별도의 명령어 사용)</p>
+
+<p>두 서비스를 다 끈 상태에서 nfs.service만을 키면 자동으로 rpcbind도 켜진다..(nfs가 rpcbind를 필요로 하기 때문에 자동으로 같이 서비스 시작시킴)
+만약 둘다 끈 상태에서 rpcbind만 키면 nfs가 자동으로 같이 켜지지는 않는다.</p>
+
+<p>아무튼 두 서비스가 모두 active인 상태로 만들어놓자.
+근데 systemctl -l status nfs.service를 해보면 오류메시지가 뜬다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82835849-2e127780-9f00-11ea-865a-b1c9da3b6502.png" alt="image" />
+에러가 난 상황이다. 
+대충 의미를 해석해보면, 우리가 2번째 줄에 작성했던 /nfs_sever1 부분쪽에 옵션값이 없다고 뜬다. 이 경고를 피하려면 IP주소에 (sync)옵션을 쓰라고 되어있다. → 우리는 옵션을 썼는데?</p>
+
+<p>그리고 우리가 썼던 옵션값인 (rw,no_root_squash,sync)에 호스트이름이 없다고 뜬다. 이를 피하기 위해서 호스트이름에 *을 추가하라고 한다. → 우리는 분명히 호스트이름도 썼었다!</p>
+
+<p>세번째와 네번째 오류문에는 /nfs_server1이라는 디렉토리가 없다는 내용이다.</p>
+
+<p>vi /etc/exports로 들어가보자. 호스트와 옵션값을 붙여서 써야한다! 붙여서 쓰지않고 띄어쓰니 호스트는 호스트대로, 옵션은 옵션대로 따로 노는 상황이 발생하였고.. 호스트에 대해 옵션값이 없다는 오류와 옵션값에 대한 호스트값이 없다는 메시지가 같이 뜬 것이었다!
+따라서 
+[share dir]		<a href="option">access allow host/network</a>
+이렇게 써야한다.</p>
+
+<p>따라서 여러 호스트를 지정하는경우
+“공유할디렉토리	호스트명1(옵션1)	호스트명2(옵션2)”
+이와같이 작성해야만 한다.</p>
+
+<p>:wq로 저장 후 종료</p>
+
+<p>설정값을 다시 바꿨다.. 이미 서비스는 실행중이니 원래대로라면 다른 명령어를 써야하지만 아직 배우지 않았으므로 systemctl restart를 쓰자.
+systemctl restart nfs.service를 하고 systemctl status nfs.service를 해보자. 아직 에러 하나가 더 남아있다.</p>
+
+<p>공유할 디렉토리가 존재하지 않는다는 오류이다.
+ mkdir /nfs_server1을 하고 systemctl restart nfs.service 후에 systemctl status nfs.service를 해보자. 오류가 하나도 뜨지 않는다.</p>
+
+<p>이제 NFS서비스를 사용할 수 있는 상태이고 해당 서비스가 정상적으로 active인 상태이다.</p>
+
+<p>하지만 netstat -atunp | grep nfs 해보면 해당 네트워크 서비스가 보이지 않는다. 즉 netstat으로 확인 불가능
+→ 원래 네트워크 관련 서비스는 netstat명령어로 포트번호도 볼 수 있었고 listen 중인지, 소켓이 연결이 잘 되었는지 등을 볼 수 있었다. 하지만 NFS서비스는 netstat으로 그 상태 및 현황을 확인 할 수가 없다.</p>
+
+<p>rpcinfo</p>
+<ul>
+  <li>rpc 기반의 서비스 테이블 정보 확인</li>
+</ul>
+
+<p>사용형식
+rpcinfo [option]</p>
+
+<p>option
+-p : 등록된 rpc 정보 출력</p>
+
+<p>예를 들어,
+rpcinfo -p
+→ 자기 자신의 rpc 정보 출력</p>
+
+<p>rpcinfo -p 상대방IP
+→ 상대방의 rpc정보 확인</p>
+
+<p>rpcinfo -p를 해보자. print옵션같음. portmapper 포트와 nfs 포트가 나와있다.</p>
+
+<p>항목
+program → 프로그램 번호
+vers → 프로그램 버전
+proto → 프로토콜
+port → 프로그램에 변환된 포트
+service → 프로그램(서비스)명</p>
+
+<p>rpcinfo -p와 rpcinfo -p 내IP 하면 동일한 결과가 출력된다.</p>
+
+<p>참고로, rpcinfo라고만 치면 항목 중 port가 안나오고 address항목이 뜬다.
+-p옵션이 port옵션인건가?</p>
+
+<p>systemctl restart로 서비스 자체를 재시작하는게 아닌, NFS서비스에 대한 설정값을 재 적용하는 명령어에 대해 알아보자</p>
+
+<p>exportfs</p>
+<ul>
+  <li>nfs 서버에서 export(수출, 내보내기) 된 디렉토리 정보를 보여주는 명령어</li>
+  <li>fs는 filesystem. 파일시스템을 내보내겠다</li>
+</ul>
+
+<p>사용형식
+exportfs [option]</p>
+
+<p>option
+-a : /etc/exports 파일에 나열된 모든 디렉토리를 반출(all)
+-r : /etc/exports 파일에 나열된 모든 디렉토리를 재반출(re)
+-v : 각 디렉토리 반출 또는 반출해제할 때 디렉토리명을 출력(사전점검. verbose)</p>
+
+<p>현재 exportfs -r 을 하면 이상이 없다.
+rm -rf /nfs_server1을 하고나서 exportfs -a 또는 exportfs -r 을 치면 오류가 발생한다.
+다시 디렉토리를 만들고 exportfs -r을 쓰자</p>
+
+<p>처음 서비스를 시작할 때는 systemctl을 쓰면 되고 수정사항이 생긴다면 exportfs를 쓰자
+exportfs -v 를 쓰면 설정값을 볼 수 있다.</p>
+
+<p>여기까지는 서비스를 제공하는  nfs서버가 해야하는 일이었다.</p>
+
+<p>지금부터는 nfs Client가 하는 일
+Server머신에서 새로운 터미널을 띄우자. 이제 이 터미널은 NFS 클라이언트이다.</p>
+
+<p>사용형식
+mount [option] argument(옵션에 대한 인자값) 접속할서버IP주소:공유디렉토리(서버) 마운트포인트(클라이언트)</p>
+
+<p>option
+-t : 마운트할 타입</p>
+
+<p>argument(인자값)
+nfs</p>
+
+<p>새로 켰던 터미널창에 mount -t nfs 192.168.52.149:/nfs_server1 /nfs_client1
+쳐보자.</p>
+
+<p>오류가 뜬다. 마운트포인트가 존재하지 않아서이다. mkdir /nfs_client1 로 생성해주자
+그리고 mount -t nfs 192.168.52.149:/nfs_server1 /nfs_client1를 입력하면 오류가 뜨지 않는다.
+df -h 또는 mount | tail -1 을 해보면 마운트가 된 것을 확인 할 수 있다. mount명령어로 결과를 확인하면 조금 더 자세한 결과값을 확인 할 수 있다.</p>
+
+<p>nfs클라이언트에서 ls -l /nfs_client1 로 내용을 확인한 것은 nfs 서버에서도 ls -l /nfs_server1로 똑같이 볼 수 있다. 클라이언트에서 /nfs_client1를 확인한 것은 사실 /nfs_server1을 확인한 것이다.</p>
+
+<p>클라이언트에서 touch /nfs_client1/helloserver를 하면 서버에서도 ls -l /nfs_server1로 확인 할 수 있다.</p>
+
+<p>Server머신의 클라이언트터미널에서 df -h 를 해보자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82835857-379bdf80-9f00-11ea-89fa-d3cc084bf6fc.png" alt="image" />
+맨 위 파랑색이 서버의 장치이다.
+클라이언트는 해당 서버의 장치에서 최상위디렉토리 하위의 디렉토리인 /nfs_server1을 자신의 디렉토리인 /nfs_client1에 마운트를 하였다.</p>
+
+<p>그런데 두개의 용량이 같다!</p>
+
+<p>서버의 최상위 전체를 클라이언트에게 제공해준것이나 다름없다.
+쓰게 한 것은 /nfs_server1과 용량을 제공해준 것인데 클라이언트에서는 마운트를 하면서 마구 내용을 넣을 수 있게 됨.
+이를테면 C드라이브 하위의 ‘/공유’ 디렉토리를 제공해줬는데 클라이언트에서는 해당 디렉토리에 서버의 C드라이브 용량만큼의 파일을 집어넣을 수 있게 되어버렸음. 어찌보면 당연하다. ‘공유’디렉토리는 C드라이브 하위에 있는 것이니까..</p>
+
+<p>이에 대한 해결법은 몇가지가 있다. NFS를 통해 특정디렉토리를 공유하면 그 디렉토리가 속해있는 파티션의 전체용량을 해당 디렉토리에서 다 잡아먹을 수 있는 상황이다. 따라서 파티션을 더 분할 할 수도 있다. 하지만 우리는 이미 파티션분할을 모두 해놓아버린 상황이다.</p>
+
+<p>따라서 장치를 더 추가해서 해당 장치에 파티션을 분할한 뒤 파일시스템을 만들고, 내가 공유하고자 하는 용량만큼의 파티션에 대해서만 NFS서비스를 제공하면 된다.</p>
+
+<p>client머신을 끄자.
+실습
+nfs 실습은 클라이언트에서 작업하세요. 스냅샷을 돌려주세요. 
+(클라이언트 1대입니다. 2대가 아닙니다. Server는 사용하지 않음)
+→ Client머신에서 server와 client를 모두 구동하는 실습</p>
+
+<p>nfs server</p>
+
+<p>HDD (SCSI, 1GB) : 100(이걸 사용), 200, 300, 400 → 4개의 파티션으로 분할(단위는 Mbyte)
+⇒ 이 중 NFS로서 공유가능하게 할 파티션은 100MByte용량을 지닌 파티션
+nfs service 설정(설정할 때 호스트 방식으로 해보세요. 옵션은 자유롭게)
+auto mount 설정</p>
+
+<p>nfs client</p>
+
+<p>nfs server가 공유한 디렉터리를 마운트 하여 사용
+nfs client가 자신의 mountpoint에 파일이나 디렉터리를 생성하여 nfs server와 공유되는지 확인</p>
+
+<p>먼저 클라이언트를 끈다. 
+Edit this virtual machine을 통해 하드디스크 1GB를 추가하고 클라이언트 머신을 킨다.
+fdisk -l 로 새로 추가된 장치명을 확인한다. → /dev/sdb
+fdisk /dev/sdb 를 통해 장치에 대한 파티션 생성창 진입
+네개의 파티션을 생성해준다. 네개만 만들면 되니까 전부 주파티션으로 만들어주어도 된다.(또는 주파티션 3개에 Extended를 만들고 논리파티션을 하나 만들어주어도 된다.)
+w를 통해 저장 후 종료하는 것을 잊지 말자…</p>
+
+<p>파일시스템을 만들어주자. mkfs.xfs /dev/sdb1 또는 mkfs -t xfs /dev/sdb1 로 만들어 줄 수 있다.</p>
+
+<p>나는 각각의 파티션을 /100 /200 /300 /400 에 마운트시킬것이다. 파티션의 용량과 일치하도록.
+따라서 우선 mkdir /100 /200 /300 /400 을 한다.
+그리고 vi /etc/fstab으로 들어간다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82835872-3ec2ed80-9f00-11ea-850b-23672b066a6e.png" alt="image" />
+위와 같이 내용을 추가해주었다.
+:wq로 저장 후 종료.
+아직은 마운트가 되지 않은 상황이다. /100 /200 /300 /400 은 아직 /dev/sda 에 존재하는 상황임. 마운트를 일일히 시켜주면 이제 다음부터는 자동마운트이므로 신경써주지 않아도 된다. 또는 mount -a 로 한번에 마운트시켜주자. /etc/fstab 에 적은 defaults 값 덕분에 해당 명령어로 마운트 자동으로 활성화가 가능하다.
+→ 마운트가 됐는지는 df -h 또는 mount명령어로 확인하자.</p>
+
+<p>이제 vi /etc/exports 로 들어가자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82835882-44b8ce80-9f00-11ea-9dab-0d3dacbf7f48.png" alt="image" />
+위와같은 내용을 추가해주었다.
+/100 디렉토리에 대해 ‘Client머신’이 접근가능하도록 하였으며 각각의 옵션값들을 넣어주었다.</p>
+
+<p>vi 편집상태에서 ip주소 확인 할 때 “:!명령어” 를 쓰면 되는데 ifconfig가 존재하지 않는다. 즉 net-tool이 안깔려있는 상황.. ip addr을 써서 확인하였다.</p>
+
+<p>만약 옵션값 중 no_root_squash를 안넣는다면 root_squash가 되어버리고, 클라이언트에서 root계정으로 해당 서버 디렉토리 접근하려 할 때 익명계정이 되어버려 해당 디렉토리에 대해 어떤 파일을 쓸 수 가 없다.(접근거부당함. 익명이라서 그런듯)
+지금은 root계정으로 서버로서의 NFS를 구동시키면서 동시에 클라이언트 입장에서 접근을 또 해야하므로 해당 옵션을 꼭 넣어주어야 한다. 그래야 클라이언트입장에서 파일을 쓰고 서버에서 확인을 할 수 있다.</p>
+
+<p>:wq로 저장 후 종료.</p>
+
+<p>systemctl restart nfs.service하면 해당 유닛을 찾을 수 없다고 나온다. 이 상태에서는 mount를 시켜도 마운트 타입인 nfs에 대해 알 수 없다는 메시지가 나온다. 이는 Client머신에 nfs패키지가 설치되어있지 않아서 뜨는 오류이다.
+rpm -qa|grep nfs 해보면 아무것도 나오지 않는다. 따라서 yum install nfs* 로 패키지를 설치해주자. 그리고 rpm -qa|grep nfs 를 하면 설치한 패키지들을 확인 할 수 있다.
+(근데 패키지가 있지 않았음에도 불구하고 /etc/exports는 이미 존재했었네?)
+systemctl is-active nfs.service 를 해보면 서비스가 unknow 상태이다. 이 상태에서는 exportfs명령어를 써도 명령어가 실행되지 않는다.
+systemctl restart nfs.service로 서비스 재시작을 하자. 
+systemctl is-active nfs.service와 systemctl is-active rpcbind로 서비스가 켜져있는지 확인하자. 그리고 혹시 모르니까 exportfs -r 로 /etc/exports의 내용을 한번 더 적용시켜주자.</p>
+
+<p>이제 서버로서의 모든 준비는 끝났다.(Client머신에서 Client머신으로의 접속이므로 방화벽설정도 필요 없다)</p>
+
+<p>클라이언트입장에서 진행하자.
+일단 마운트포인트 디렉토리를 만든다. mkdir /Client100
+mount -t nfs 192.168.0.14:/100 /Client100
+확인은 df -h 또는 mount 명령어로 하자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82835899-4d110980-9f00-11ea-9d4a-45dfae34c779.png" alt="image" /></p>
+
+<p>이제 클라이언트 입장에서 touch /Client100/helloserver 하면 ls -l /Client100 으로는 당연히 해당 파일이 있는 것을 확인 할 수 있다.</p>
+
+<p>서버입장에서 ls -l /100 을 해보면 해당 helloserver파일이 존재하는 것을 확인할 수 있다.</p>
+
+<p>이로서 NFS서비스 실습을 완료하였음.</p>
+
+<p>다만 궁금한점은 서버에서 제공하는 이 디렉토리에 대해 여러 사용자가 접근 하려 하는 경우 동시에 사용이 가능한지, 그리고 그 경우에 nfs에 대한 포트번호는 그대로 하나만 쓰고 있는 것인지. 또, 디렉토리 내부의 내용들은 시시각각 동기화되어 전부 반영이 되고 각각의 클라이언트에서도 그 결과를 확인할 수 있는가.(그리고 그 옵션은 sync 덕분인건가)
+→ systemctl restart nfs.service해도 포트는 그대로 2049인거같긴 하다..</p>
+
+<p>이렇게 클라이언트에서 파일을 업로드하거나 하면 소유권과 같은 부분은 어떻게 작동하는가. 다른 클라이언트가 해당 파일을 삭제하거나 할 수도 있는가. 익명일 때에는 또 어떠한가. 서버의 관리자는 다 삭제 가능한가? 그리고 no_root_squash를 했을 때 클라이언트의 root계정은 서버의 root계정과 동일한권한을 쥐게 되는 것인가. 물론 특정 디렉토리에만 마운트하여 접근가능하게 해놓았기 때문에 그 NFS 디렉토리에 대해서만 서버의 root와 같게 되는건지..등</p>
+
+<p>자동마운트를 해놓는 이유
+만약 자동마운트를 해놓지 않으면 서버를 껐다 키면 해당 /100 디렉토리는 마운트가 해제되어있을 것이다.
+그러면 /etc/exports에는 해당 /100 디렉토리를 공유하도록 해놓았는데.. 이 상태에서 nfs 서비스를 켜버리면 결국 또 루트디렉토리의 전체용량을 공유해버리게 됨.. 게다가 기존에 있던 내용을 볼 수도 없음. 따라서 이러한 실수를 미연에 방지하기 위해서 자동마운트 설정을 해주는 것으로 보인다.</p>
+
+<p>Server - Client 머신간 NFS 통신</p>
+
+<p>먼저 서버머신을 끈다. 그리고 Edit this virtual machine을 통해서 하드디스크를 1GB짜리로 하나 추가한다. 서버머신을 키고 fdisk -l 로 새로 추가한 하드디스크가 인식이 되는지와 해당 하드디스크의 이름을 확인하자. /dev/sdb일 것이다.</p>
+
+<p>fdisk /dev/sdb로 해당 장치 파티션 생성으로 진입한다.
+우리가 만들고자 하는 파티션은 네개이므로 주파티션으로만 네개를 만들면 된다.
+다 만들면 p로 테이블 print하여 파티션 네개가 만들어졌는지를 확인하자. 그리고 반드시 w명령어로 저장 후 종료하자</p>
+
+<p>이제 파일시스템을 만들 때이다. mkfs.xfs /dev/sdb1 또는 mkfs -t xfs /dev/sdb1로 네개의 파티션 모두 파일시스템을 만들어주자.(포맷)</p>
+
+<p>파티션 네개의 각각의 용량은 100, 200, 300, 400 이므로 나는 각각의 /dev/sdb 장치를 /100 /200 /300 /400 에다가 마운트를 시킬 것이다. 따라서 mkdir명령어로 각각의 디렉토리를 만들자.</p>
+
+<p>vi /etc/exports 로 서버의 NFS설정파일로 들어가자.
+/100	192.168.52.122(rw,no_root_squash_sync) ← 제공할 클라이언트의 IP이다. no_all_squash 쓰니까 나중에 서비스재시작? exportfs -r 입력시? 오류가 뜸.. 기본값이라서 그런건가</p>
+
+<p>근데 현재는 내가 추가한 장치가 /100에 마운트되어있는 상태가 아니므로 /dev/sda 의 /100을 공유하려는 상황과 동일하다.</p>
+
+<p>vi /etc/fstab으로 들어가서 자동마운트 설정을 하자
+/dev/sdb1	/100	xfs	defaults	0 0 으로 만들고 저장 후 종료 (다른 파티션에 대해서도 추가를 해도 됨)</p>
+
+<p>mount -a 로 자동올마운트 시키자</p>
+
+<p>systemctl restart nfs.service를 하고 혹시 모르니 exportfs -r을 해주자.
+systemctl status nfs.service로 오류문제가 있는지 확인하자. 또 systemctl is-active rpcbind.service로 RPC가 켜져있는지도 확인하면 좋다.</p>
+
+<p>그럼 이제 하드디스크의 /dev/sdb1 이 /100에 마운트가 된 것이며 이를 Client에 제공할 준비가 다 된 것이다.</p>
+
+<p>이제 클라이언트에서 mount명령어를 통해 서버의 파일시스템을 마운트하면 된다. 먼저 마운트포인트 디렉토리를 생성한다. mkdir /my100</p>
+
+<p>mount -t nfs 192.168.52.149:/100 /my100 입력하면 nfs타입에 대한 오류메시지가 뜬다. 
+이는 nfs패키지가 설치되어있지 않은 것이다. Client머신에도 NFS서비스는 실행되어있어야 하지 않나?(아니면 실행되어있지 않아도 그냥 mount로 nfs서비스를 이용 가능한가. rpcbind는 어차피 서버쪽에서 신경 쓸 부분이니까 클라이언트에서는 생각 안해줘도 되겠다만..) 무튼 systemctl is-active nfs.service하면 해당 서비스 유닛 찾지 못했다고 뜬다… rpm -qa | grep nfs 로 패키지 유무 확인 후 yum install nfs*로 패키지를 설치하자.</p>
+
+<p>패키지를 다 설치한 후에 다시 Client를 통해 접속을 시도하려 하면 커서가 깜빡거릴 뿐 접속이 되지 않는다.</p>
+
+<p>방화벽설정을 해야해서임. 서버의 터미널에서 먼저 rpcinfo 또는 rpcinfo -p명령어를 쳐보자. portmapper와 nfs 포트번호를 볼 수 있다.
+근데 방화벽 설정창에 들어가보면 이미 서비스명으로 포트포워딩이 가능하도록 되어있다. rpcbind라는 이름의 서비스가 있는데 이를 개방해주자. 이것만 개방해서는 안된다. nfs와 nfs3(?)또한 개방해주고 클라이언트에서 mount -t nfs 192.168.52.149:/100 /my100 하면 마운트가 잘 되는 것을 확인 할 수 있다. 
+→ 직접 포트포워딩을 해도 잘 될 것 같긴 하다.</p>
+
+<p>이제 Client머신에서 생성한 파일을 Server머신에서도 확인할 수 있다.
+그리고 서버에서 제공하고자 했던 100Mbyte의 크기를 지닌 /dev/sdb1을 /100이라는 이름으로 서버에 마운트 제공을 잘 해주게 되었다. 클라이언트에서 df -h 로 확인해보면 된다.</p>
+
+<p>⇒ 이건 최종실습때 할 것이었음…</p>
+
+<p>Client 머신에서 서버와 클라이언트 역할을 모두 수행하게 했었을 때에 대하여..</p>
+
+<p>나중에 Client머신이 꺼졌다 켜져도 다시 nfs가 작동되어 자동연결되게 하려면 서버입장에서 해당 서비스를 자동 켜지게 해야하나. firewall-cmd –permanent 로? /dev/sdb 장치에 대한 자동마운트는 해놨으니 상관은 없고..</p>
+
+<p>근데 클라이언트입장에서는 서버의 장치를 자동마운트 시켜야하는데 그걸 어떻게 auto로 돌리는가
+클라이언트입장에서 /etc/fstab 에다가 서버의 장치명을 쓰고 자신의 디렉토리명을 써서 구동이 가능한가?</p>
+
+<p>무튼 하나의 머신에서 서버와 클라이언트를 동시에 구동하니.. reboot시 안켜지는 상황이 발생한다..
+부팅시 로딩하는 과정에서 ESC눌러보면 /etc/fstab에는 넣지도 않았던 /Client100에 대해서 찾고있음… 뭐지; umount시키면 재부팅 잘 된다고 한다.
+클라이언트 입장에서는 umount /Client100 하면 되는데(또는 ‘umount 서버IP:/서버디렉토리’로도 가능할까) 서버입장에서는 강제 마운트해제 어떻게 시키는걸까</p>
+
+<p>무튼 마운팅된 과정은 아래와 같음
+/dev/sdb1 → /100 → /Client100</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-26T00:00:00+09:00">May 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Linux2_day10%20http%3A%2F%2Flocalhost%3A4000%2FLinux2_day10%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FLinux2_day10%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FLinux2_day10%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/Linux2_day1/" class="pagination--pager" title="Linux2_day1
+">Previous</a>
+    
+    
+      <a href="/Linux2_day11/" class="pagination--pager" title="Linux2_day11
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day8/" rel="permalink">Linux_day8
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty접속 안됐으나 VMware 가상네트워크설정에서 NAT에 있어서 두가지 체크사항 건드리니까 다시 됨. 한가지만 체크되어있었는데 먼저 체크 푼 다음에 설정창 껐다가 다시 키고, 체크사항 두개 다시 체크한 뒤에 설정창 끔.  OS GUI에서도 네트워크 설정부분 껐다가 켰다. 아...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day7/" rel="permalink">Linux_day7
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.
+한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???
+간결하면서도 강력한 기능을 제공
+GUI...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day6/" rel="permalink">Linux_day6
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">논리연산자
+이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
+a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
+a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

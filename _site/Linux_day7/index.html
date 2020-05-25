@@ -1,0 +1,885 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux_day7 - 개발 끄적끄적</title>
+<meta name="description" content="vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다. 한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가??? 간결하면서도 강력한 기능을 제공 GUI환경이 아니라 TUI환경에서 사용 Windows 에서의 기본 프로그램인 메모장과 비슷하다. → 윈도우가 이 것을 토대로 삼았을지도? ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="Linux_day7">
+<meta property="og:url" content="http://localhost:4000/Linux_day7/">
+
+
+  <meta property="og:description" content="vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다. 한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가??? 간결하면서도 강력한 기능을 제공 GUI환경이 아니라 TUI환경에서 사용 Windows 에서의 기본 프로그램인 메모장과 비슷하다. → 윈도우가 이 것을 토대로 삼았을지도? ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-26T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Linux_day7/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux_day7">
+    <meta itemprop="description" content="vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???간결하면서도 강력한 기능을 제공GUI환경이 아니라 TUI환경에서 사용Windows 에서의 기본 프로그램인 메모장과 비슷하다. → 윈도우가 이 것을 토대로 삼았을지도?">
+    <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Linux_day7
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.
+한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???
+간결하면서도 강력한 기능을 제공
+GUI환경이 아니라 TUI환경에서 사용
+Windows 에서의 기본 프로그램인 메모장과 비슷하다. → 윈도우가 이 것을 토대로 삼았을지도?</p>
+
+<p>vi를 GUI환경에서도 돌릴 수 있나 터미널창 말고 윈도우의 메모장처럼</p>
+
+<p>리눅스에서도 문서편집기가 많기는 한데 이 vi는 유닉스때부터 쓰여오던 것 → 가장 간결하고 편하고 강력해서 인기가 많았었던 듯 하다.</p>
+
+<p>즉! 문서 편집기</p>
+
+<p>준비물
+/backup/grub.cfg  → 이전에 cp 해놨던거임. 실제파일을 건드리면 어찌될지 모르니까.. 사본으로 테스트해보자</p>
+
+<p>사용형식
+vi
+→ 그냥 vi만 치면 편집할 문서를 생성(빈 문서 생성) → 그냥 메모장프로그램 킨 것과 비슷한 것 같다. 아무것도 없는 빈 문서 상태</p>
+
+<p>vi치긴 했는데 조금 발전된버전인VIM이네. 그리고 레드햇닷컴쪽에서 나온 프로그램인거같은데 그러면 우분투같은 곳에는 vi 없으려나?? 다른 프로그램 있으려나</p>
+
+<p>vi를 쓸 때에는 키보드만으로 작업가능. :q 를 치면 빠져나가는 명령어 → 그냥 바로 빠져나가면 아무 파일도 생성되지 않는 듯. → 마치 그냥 메모장 켰다가 그냥 끄는 것과 같다고 보면 될 것 같다. 아무파일도 생성되지 않는다.</p>
+
+<p>뭘 작성했다면 저장해야하고 그 저장을 수행 할 때 파일이 생성되는 듯 하다. 저장안하고 그냥 나가거나 그러면 파일생성은 안되는 것으로 보인다.</p>
+
+<p>즉.. 저장은 필수..</p>
+
+<p>예전에 키보드에 있어서 방향키와 숫자키패드쪽은 없었다. vi는 그래서 키보드 왼쪽부분으로 작동되도록 만들어져 있음. (오른쪽도 작동하기는 함)</p>
+
+<p>vi 파일명
+→ 편집할 파일을 지정(지정하게 되고 열게 됨)
+vi &lt; 파일명  → 요런거 가능할까? 
+해봤는데 이 꺽쇠쓰는건 이상하게 작동된다. cat같은거에서는 되는데 vi는 안되네</p>
+
+<p>vi는 모드형으로서 세가지 모드가 있다. 단순히 텍스트를 보는 명령모드와 텍스트를 직접적으로 수정하거나 쓰는 입력모드, 그리고 찾기, 찾아바꾸기등의 도구를 쓰는 실행모드가 있다.</p>
+
+<p>명령모드
+vi의 기본모드(vi 파일명 입력하면 기본적으로 되는 모드)
+Enter키를 누를 필요없이 키보드 키 하나하나 키를 누르면 바로 동작
+R을 누르면 하단에 –REPLACE– 표시가 되면서 기존의 내용을 수정할 수 있음 → 이거 엄연히 말하면 입력모드 아닌가??</p>
+
+<p>ls -l /backup 으로 grub.cfg 파일이 있는지 우선 확인
+vi /backup/grub.cfg</p>
+
+<p>마우스 커서로는 아무것도 되지 않음 → 이런!</p>
+
+<p>커서 이동
+h : 왼쪽 ←
+j : 아래 ↓
+k : 위 ↑
+l : 오른쪽 →</p>
+
+<p>j와 k키는 less 명령어에서도 똑같이 작동하는 명령어이다. more에는 해당 키가 없었던 걸로 기억.. q키는 빠져나가는 키였고.. 어찌보면 저 more과 less는 딱 명령모드로서 보는 부분만 있었다고도 볼 수 있을 것 같다. 편집은 불가능하고 그냥 볼 수만 있는 명령어</p>
+
+<p>키보드 방향키로도 움직이긴 하네
+백스페이스와 스페이스키로도 움직여짐.. 엔터키로도 움직여짐
+선생님은 게임같은거 키를 hjkl로 맞춰서 연습 하셨다고 함 ex)메탈슬러그 등
+리눅스2에서 vi많이 쓴다. 각종 설정파일들 수정 등</p>
+
+<p>커서이동(단어 단위)
+w, W : 다음 단어의 처음으로 이동	forWard?
+b, B : 이전 단어의 처음으로 이동 	Back
+e, E : 다음 단어의 마지막으로 이동 	End</p>
+
+<p>소문자상태로 키를 누르면 특수문자, 특수기호 인식함. 특수기호도 단어 하나로 인식</p>
+
+<p>대문자로 작업시 절대로 Caps Lock키를 누르고 사용하지 말고 Shift키를 누르면서 작업 → Caps Lock키 켜져있어도 작동은 하는데..?
+→ 그게 아니라 다른 방식으로 작동하니까 이런 말씀을 하신 듯 하다.</p>
+
+<p>대문자상태로 키를 누르면 특수문자, 특수기호를 개별 단어로서 인식하지 않음.
+즉, 공백을 기준으로만 단어를 구분하여 이동할 수 있게 한다. 훨씬 빠르게 휙휙 이동할 수 있긴 하다.</p>
+
+<p>커서이동 (행 단위)
+0(숫자) : 현재 커서가 있는 행의 맨 처음으로 이동(Windows에서의 home키와 비슷. 실제로 home키로도 작동)
+$ : 현재 커서가 있는 행의 맨 마지막으로 이동(Windows에서의 End키와 비슷)</p>
+
+<p>아무키나 막 누르니 편집모드로 들어가져서 글이 써짐.. –INSERT–
+ESC누르니 빠져나와짐</p>
+
+<p>커서이동(문서 단위)
+gg : 전체 내용에서 맨 처음으로 이동
+G : 전체 내용에서 맨 마지막으로 이동</p>
+
+<p>커서이동(화면, 창 크기 단위)
+H : 현재 화면(창) 크기에서 처음으로 이동 high
+M : 현재 화면(창) 크기에서 중간 middle
+L : 현재 화면(창) 크기에서 마지막 low</p>
+
+<p>입력모드가 아니여도 명령모드에서 편집을 수행할 수 있는 키들</p>
+
+<p>x : 현재 커서에 있는 문자를 삭제(Windows에서의 Delete키와 비슷. Delete키도 작동함)
+X : 현재 커서 이전에 있는 문자를 삭제(Windows에서의 Backspace키와 비슷. Backspace키를 누르면 이전글자로 커서가 이동될 뿐 삭제가 되지는 않는다.)
+→ 제거하기는 하는데 줄이 당겨지지는 않음</p>
+
+<p>dd : 한줄 삭제(잘라내기) → 줄당김 된다. 커서가 있는 행을 통째로 제거
+줄수 + dd : 현재 커서 위치에서 커서가 있는 행을 포함하여 지정한 줄 수만큼 삭제</p>
+
+<p>yy : 한 줄 복사. 커서가 있는 한 행을 통째로 복사
+줄 수 + yy : 지정한 줄 수만큼 복사 → 3줄 이상 복사부터 lines yanked(홱 잡아당기다) 메시지 나옴</p>
+
+<p>p : 현재 커서 아랫줄에 붙여넣기(끼워넣음) → 붙여넣기paste
+P : 현재 커서 위에 붙여넣기</p>
+
+<p>dd로 잘라내기를 해도 p또는 P로 붙여넣기 하는건 한번만 되는게 아니라 계속 할 수 있긴 하네.</p>
+
+<p>p나 P로 붙여넣기를 수행하면 커서는 새로 생긴 행쪽으로 이동함. 여러 행을 복사해서 붙여넣었다면 붙여넣기 한 문단의 가장 첫번째 행 가장 앞쪽으로 이동.</p>
+
+<p>u → 뭐지.. 되돌리기! 뭔가 변경되었던 사항들 갯수들이 뜨는 것 같은데.. 시간이랑
+undo</p>
+
+<p>ctrl + r : 되살리기
+redo</p>
+
+<p>i → insert모드. 빠져나오는건 ESC</p>
+
+<p>R : 하단에 –REPLACE– 가 표시. 대체하다, 교체하다. →  기존 내용을 수정할 수 있음
+참고로 빠져나올 때에는 ESC키를 누르자.
+윈도우에서의 insert키를 누른것과 동일하다. 기존내용이 지워지면서 새로운 글자 입력 가능</p>
+
+<p>키보드의 insert키를 누르면 insert모드와 replace모드 진입가능. 삽입모드와 대체모드</p>
+
+<p>:q! → 강제로 빠져나오기. 저장하지 않고 빠져나오기</p>
+
+<p>입력모드(INSERT)
+명령모드에서 입력모드로 전환 할 때에는 a, i, o 등의 키를 누름</p>
+
+<p>입력모드에서 명령모드로 전환할 때는 ESC키를 누름</p>
+
+<p>입력모드들어가면 명령모드에서 썼던 키 작동 안함</p>
+
+<p>i : 커서는 고정되며 그 왼쪽에 글이 서진다. 하단에 –INSERT– 표시
+현재 커서 왼쪽에 삽입
+insert</p>
+
+<p>a : 하단에 –INSERT– 표시. 현재커서가 우측으로 한칸 이동. 기존 커서 우측에 추가
+append → 커서가 한칸 오른쪽으로 이동한 뒤 i키를 누른 것과 같은 효과가 발생한다.</p>
+
+<p>o : 빈 줄 생성. 엔터가 아님. 하단에 –INSERT– 표시. 현재 커서 아래 줄에 빈 줄을 생성 → o를 누르면 빈 줄이 생성되면서 자동으로 글을 작성할 수 있는 상태가 됨. 커서는 새로생긴 빈 줄 가장 앞쪽으로 이동된다.</p>
+
+<p>O : 하단에 –INSERT– 표시. 현재 커서 위에 빈 줄 생성 → 커서 윗줄에 빈 행을 하나 만들고 그 행의 가장 앞쪽으로 커서가 이동되면서 글을 작성할 수 있는 상태가 된다.</p>
+
+<p>I 현재 줄 맨 왼쪽에 글 쓰기 → 커서가 맨 왼쪽으로 이동하면서 맨 왼쪽에 글을 쓸 수 있는 상태가 됨
+A 현재 줄 맨 오른쪽에 글 쓰기 → 커서 맨 오른쪽으로 이동하면서 맨 오른쪽에 글을 쓸 수 있는 상태가 됨</p>
+
+<p>실행모드
+명령모드에서 실행모드로 전환할 때는 /, ?, : 등을 누름. 백스페이스키 누르면 다시 돌아감</p>
+
+<p>실행모드에서 명령모드로 전환할 때는 ESC키를 누름 → 뭔가가 실행 된 상태에서 돌아갈 때 쓰는 방법일 듯. 실행모드로 들어가 창 맨 밑줄에 뭐 작성하다가 실행은 안하고 그냥 돌아가려고 한다면 백스페이스 누르면 돌아가게 됨. ESC를 이용해서 돌아가려면 두번 누르면 된다.</p>
+
+<p>입력모드에서 실행모드로 또는 실행모드에서 입력모드로 전환할 수 없기 때문에 반드시 명령모드를 거쳐서 전환해야 함</p>
+
+<p>검색
+/ : 어떤 찾을 이름을 위에서부터 검색하고 n키를 누르면 위에서 아래로 찾으며 N키를 누르면 아래에서 위로 찾음. 기본적으로는 위에서 아래로 먼저 검색.
+n은 next? 그리고 약간 vi 전체적 폼이.. 소문자는 아래쪽을 의미하는거같고 대문자는 위쪽으로 작동되게 만들어진 것 같다. o로 빈줄 생성하는 것도 그렇고..</p>
+
+<p>사용형식
+/찾을 이름 입력 후 enter
+n키 또는 N키 누름
+파일의 맨 끝에 도달한 경우 또 n을 누르면 다시 파일의 처음부터 찾게 되고 빨강경고창 뜸
+검색이 파일의 맨 마지막에 도달하였으며 다시 처음부터 진행합니다
+N키를 누르다가 파일 맨 처음에 도달한 뒤 또 N을 누른 경우에도 파일의 맨 끝부터 다시 찾게 되며 파일의 맨 처음에 도달하였으며 맨 끝부분부터 다시 진행한다는 메시지 나온다.</p>
+
+<p>빠져나오려면 /키 다시입력하거나 ? 또는 : 입력
+/ 누르면 바로 빠져나오고 ?또는 : 는 실행모드 명령어 작성으로 넘어가게 됨
+그리고 백스페이스나 ESC키 이용</p>
+
+<p>하다보니까 알았는데 . 온점키는 이전에 작동시킨 명령을 또 작동시키는거고,,
+쉬프트를 누른채로 쉼표나 온점을 눌러서 꺽쇠 &lt; &gt; 작동시키면 커서쪽의 문자가 탭크기만큼 이동하는 것 같다.. 이렇듯 많은 기능들이 있긴 하네</p>
+
+<p>? : 어떤 찾을 이름을 아래에서부터 검색하고 n키를 누르면 아래에서 위로 찾으며 N키를 누르면 위에서 아래로 찾음</p>
+
+<p>사용형식
+?찾을이름 입력 후 enter
+n키 또는 N키 누름</p>
+
+<p>바꾸기(치환) → 윈도우 메모장의 찾아바꾸기</p>
+
+<p>사용형식
+:줄번호s/기존내용/바꿀내용
+→ 지정한 줄번호에 있는 기존내용을 바꿀 내용으로 바꾸기</p>
+
+<p>:11s/then/where
+→ 이후 커서는 바뀐 행의 가장 앞부분으로 이동</p>
+
+<p>하나의 줄에 해당 단어가 여러개라면 맨 앞의 것만 바꾼다.
+즉 여러개라면 여러번 입력해야한다.
+이럴때에는..
+:줄번호s/기존내용/바꿀내용/g
+→ 지정한 줄에 기존내용이 2개 이상 있을 경우 바꿀내용으로 모두 바꾸기</p>
+
+<p>:11,14s/then/where</p>
+
+<p>:줄번호,줄번호s/기존내용/바꿀내용
+:10,25s 라고 쓰면 10번째줄과 25번째줄만 바뀌는게 아니다. 10 ~ 25번째줄 모두에서 해당하는 단어를 찾아서 찾은 행의 첫번째 단어들만 바뀐다. g를 붙이면? 해당하는 줄의 모든 것을 바꾸기
+→ 줄 번호부터 줄 번호까지 기존내용을 바꿀내용으로 바꾸기(각 줄의 첫번째 단어만)</p>
+
+<p>전체 다 바꿔버리기..</p>
+
+<p>:%s/기존내용/바꿀내용
+→ 파일의 전체 내용에서 기존내용을 바꿀 내용으로 바꾸기
+줄번호를 쓰는 것 대신 쓴 %가 의미하는건 전체 내용이라는 기호?</p>
+
+<p>:%s/then/where/g
+바뀐 갯수와 바뀐 줄 수 나옴
+혹시 몰라서 g를 쓰셨다고는 했는데 g안쓰면 전체 내용중에서 각 행의 맨 앞단어만 바뀌는거 아닐까? →그렇네. g안붙이니까 전체대상으로 바꾸기는 하는데 첫번째것만 바꾸게 되네. g붙이면 진짜 전부다 바꿔버리게 된다.</p>
+
+<p>shell 명령어
+vi모드에 들어가면 bash쉘 명령어를 칠 수가 없고 밖으로 나갔다가 vi로 들어왔다가.. 불편</p>
+
+<p>사용형식
+vi를 종료하는게 아니라 잠시 멈추는 방법</p>
+
+<p>:!
+→ vi를 잠시 중단하고 프롬프트(작업환경)를 확인
+엔터를 치면 다시 vi로 돌아옴</p>
+
+<p>:! 명령어 [옵션] 대상
+→ vi를 잠시 중단하고 명령어를 수행, 수행결과값을 확인</p>
+
+<p>:! ls -l 
+:! ls -l /backup
+뭐 이런식으로 쓰면 된다.
+기존에 쉘 상에서 썼던 명령어들 그냥 쓰면 됨.</p>
+
+<p>:! ifconfig 를 쳐보자. 엄청 많이 나온다. 내용이..
+현재는 GUI에서 작업하므로 스크롤을 이동시키면서 볼 수 있지만 진짜 TUI에서는 그럴 수 없으니 :! ifconfig | head -2 등 사용 → 이렇게 기존에 썼던 명령어들을 쓸 수 있으니 vi를 쓰는 와중에도 명령어를 다양하게 활용해서 쓰면 된다.</p>
+
+<p>:.! 명령어 → 콜론 + 온점 + 느낌표
+→ 현재 작업중이던 커서쪽에 명령어 수행결과를 삽입. 명령어 결과를 바로 기입하고자 할 때 사용한다.
+:!로 보고 다시 쓰고 :!로 보고 다시 쓸 필요없이..
+명령어 수행 결과값을 현재 편집하고 있는 파일 내용 안에 삽입</p>
+
+<p>현재 커서 위치부터 삽입을 수행한다. 즉 기존내용이 사라지면서 삽입됨
+현재 커서 위치부터 삽입하기 때문에 기존 내용이 사라질 수 있으므로 반드시 빈 줄을 생성해서 거기서 작업 → 안날라가게는 못하나
+빈줄생성은 o키 또는 O키였다.</p>
+
+<p>창 분할
+GUI는 창 따로 되지만.. TUI는..</p>
+
+<p>사용형식
+ctrl+wn  → 여러번 누르니까 창 여러개 생기네..</p>
+
+<p>커서 창 간 이동
+사용형식
+ctrl + ww</p>
+
+<p>:q → 종료. 하나의 창으로 돌아옴. 새롭게 연 창부터 순서대로 닫는다.</p>
+
+<p>vi에서만 창분할 가능? → 일반 터미널창에서는 동작 안하네.
+그리고 사용해 보면 창이 빈문서 하나와 기존문서로 나오는데 빈문서 끄고 터미널창 못띄우나
+터미널창과 vi를 동시에..</p>
+
+<p>파일 관련
+:q → 종료(원본을 수정하지 않았거나 수정한 후 저장을 완료한 경우)
+저장하지 않고 :q를 입력하면 저장하지 않았다는 경고문이 뜬다. 이럴 때 함부로 저장하면 큰일날수도. 무엇을 바꿨는지 확인하자</p>
+
+<p>:q! → 강제종료. 내용저장안함(원본을 수정했는데 뭐가 바뀌었는지 모르거나 저장을 할 수 없는 경우에 쓴다.) → 저장을 할 수 없는 경우가 있나?</p>
+
+<p>:w → 저장(write)
+입력해보면 화면 맨 밑에
+/backup/grub.cfg 156L 5068C written
+뭐 위와 같은 메시지가 뜨는데 저장경로가 뜨고 156Line 즉 156줄이 저장되었으며 파일용량이 5068이라고 한다. 사실 저 뒤의 C는 Character의 약자인거같다.
+즉 5068글자가 쓰였으며 한 글자당 1바이트일테니 5068바이트로 저장된 것 같다.
+ls -l 로 보이는 용량은 바이트가 단위인가보다..</p>
+
+<p>:wq → 저장과 동시에 종료</p>
+
+<p>:e 파일명 → vi를 종료하지 않고 다른 파일을 바로 열기
+지정한 파일을 불러옴(Windows에서 메모장 내 파일열기와 비슷)
+→ 기존에 수정하던 내용은 저장을 해야 열 수 있다. 아니면 :e! 파일명 이렇게 해도 되는데 이건 기존에 열려있던 파일의 변경내용은 저장하지 않고 다른 파일을 여는 거라고 보면 된다.</p>
+
+<p>:enew → vi종료 하지 않고 빈문서 만들어 열기. 빈문서 열기 (Windows에서 새로 만들기와 비슷)
+역시나 기존의 파일이 수정된 경우 저장해야 사용할 수 있는 명령어이다. :enew! 쓰면 기존 파일의 수정내용 저장하지 않고 빈문서 만들기로서 작동한다.</p>
+
+<p>파일 및 실행 관련</p>
+
+<p>:w » 파일명
+→ 현재 편집하고 있는 파일의 내용을 지정한 파일에 추가 저장</p>
+
+<p>그냥 꺽쇠쓴다면? &gt; 하나만 → 현재 편집하고 있는 파일의 내용을 지정한 파일에 저장(단 이때 지정한 파일에 작성된 것이 있다면 모두 제거하고 저장) 일줄 알았으나 이런 명령어는 없는 것 같다.</p>
+
+<p>touch testfile
+vi /backup/grub.cfg
+:w » testfile
+을 수행하면 내용이 testfile에 저장됨.</p>
+
+<p>지정한 파일에 용량이 0이면 추가 저장되고 이미 내용이 있으면 이어서 추가됨</p>
+
+<p>:f → 정보(information)
+커서가 있는 위치의 정보 나옴.
+작업중인 파일의 절대경로 및 커서가 몇번째 행에 있는지, 어느 열(col)에 있는지 등
+작업중이던 파일이 뭔지 모를때나 그럴 때 사용</p>
+
+<p>:줄번호r 파일명
+→ 현재 편집하고 있는 파일내용안에 지정한 파일의 내용을 삽입.
+이 때, 내가 입력한 줄번호 다음줄에 삽입이 된다. 빈 줄을 굳이 생성하지 않아도 된다. 기존내용은 뒤로 밀림
+맨 첫번째줄에 내용 추가하려면 :0r 이라고 해야겠네? → ㅇㅇ 작동한다.</p>
+
+<p>→ :.! 명령어  이건 기존내용을 제거하면서 삽입하는 거였음</p>
+
+<p>:줄번호r! 명령어 [option] 파일명
+→ 현재 편집하고 있는 파일 내용안에 명령어 수행 결과값이 삽입. 입력한 줄 번호 다음줄에 삽입이 되며 기존내용은 뒤로 밀린다.
+참고로 :.! 명령어와 비슷.. → 빈줄생성 안하면 기존내용이 삭제되며 삽입됨</p>
+
+<p>기타(etc)
+:set number
+→ 현재 편집하고 있는 파일의 줄 앞에 번호를 생성(줄 번호 생성)
+참고로 줄여서 사용가능
+예를 들어 :se nu 라고 입력 가능</p>
+
+<p>:set nonumber
+→ 현재 편집하고 있는 파일의 줄 앞에 번호를 생성하지 않음
+줄여서 사용 가능하다.
+:se nonu</p>
+
+<p>:set nu 라고도 할 수 있고
+:set nonu 뭐 이런식으로 써도 작동한다.</p>
+
+<p>putty로 종료
+init 0
+halt
+poweroff
+shutdown -h now</p>
+
+<p>리부팅
+init 6
+reboot
+shutdown -r now</p>
+
+<p>shutdown 명령어는 시간설정 가능?
+다른것들은?
+그리고 윈도우 + r 키에서 나오는 실행창에서도 되는 것 같던데</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-26T00:00:00+09:00">May 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Linux_day7%20http%3A%2F%2Flocalhost%3A4000%2FLinux_day7%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FLinux_day7%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FLinux_day7%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/Linux_day6/" class="pagination--pager" title="Linux_day6
+">Previous</a>
+    
+    
+      <a href="/Linux_day8/" class="pagination--pager" title="Linux_day8
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day8/" rel="permalink">Linux_day8
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty접속 안됐으나 VMware 가상네트워크설정에서 NAT에 있어서 두가지 체크사항 건드리니까 다시 됨. 한가지만 체크되어있었는데 먼저 체크 푼 다음에 설정창 껐다가 다시 키고, 체크사항 두개 다시 체크한 뒤에 설정창 끔.  OS GUI에서도 네트워크 설정부분 껐다가 켰다. 아...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day6/" rel="permalink">Linux_day6
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">논리연산자
+이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
+a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
+a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Linux_day5/" rel="permalink">Linux_day5
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty 를 통해 root계정으로 로그인하고 cd ~itbank 틸드사용하여 itbank 홈계정으로 이동하기
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,4 @@
+I"�<p>emp	dept
+차수(degree)		8	3	-&gt; desc 테이블명;
+기수(대응수, 카디널리티)	14	4	-&gt; select count(*) from 테이블명; 으로 개수만 보면 됨</p>
+:ET
