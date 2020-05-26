@@ -324,11 +324,11 @@ rpm -qa | grep bind 로 named 서비스 패키지 설치 유무 확인 → 4개�
 
 <p>vi /etc/named.conf 로 named서비스 환경설정으로 진입. :se nu로 줄번호를 표시하자</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836851-63b86000-9f02-11ea-868b-3fc8c97ddb27.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836851-63b86000-9f02-11ea-868b-3fc8c97ddb27.png" alt="image" />  <br />
 13줄 : ‘나’ 라는 네임서버에 접근가능한 사람을 누구든지로 지정
 19줄 : ‘나’라는 네임서버에 질문가능한 사람을 누구든지로 지정</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836868-6adf6e00-9f02-11ea-8515-52d6b9dfa09a.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836868-6adf6e00-9f02-11ea-8515-52d6b9dfa09a.png" alt="image" />   <br />
 31줄 : 재귀는 불허용으로 설정</p>
 
 <p>:wq로 저장 후 종료</p>
@@ -336,8 +336,8 @@ rpm -qa | grep bind 로 named 서비스 패키지 설치 유무 확인 → 4개�
 <p>vi /etc/named.rfc1912.zones 로 내가 관리하는 네트워크 영역(zone)에 대해 작성해주자
 :se nu로 줄번호를 만들어주고, 정방향영역만 만들어줄 것이다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836872-6fa42200-9f02-11ea-945e-f8db415b78a5.png" alt="image" />
-내가 관리하는 도메인은 jinhong.com 이라는 도메인 네트워크 영역입니다를 표시해주었다.
+<p><img src="https://user-images.githubusercontent.com/39452092/82836872-6fa42200-9f02-11ea-945e-f8db415b78a5.png" alt="image" />   <br />
+내가 관리하는 도메인은 jinhong.com 이라는 도메인 네트워크 영역입니다를 표시해주었다.   <br />
 ‘나’라는 타입은 1차 네임서버이므로 type master
 이 영역에 대한 상세파일인 zone 파일의 이름은 jinhong.for.zone이라고 지정
 2차 네임서버에서의 업데이트를 위한 접근은 일단 아무것도 적지 않았다.(2차 네임서버 IP작성 필요)
@@ -346,7 +346,7 @@ rpm -qa | grep bind 로 named 서비스 패키지 설치 유무 확인 → 4개�
 <p>이제 zone파일을 작성하자.
 vi 로 새 문서 생성</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836878-759a0300-9f02-11ea-974e-12f046903349.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836878-759a0300-9f02-11ea-974e-12f046903349.png" alt="image" />     <br />
 1줄 : Time To Live 값은 1주일로 지정
 2줄 : @ Origin 즉, jinhong.com에 대한 관리주체를 기입한다. 관리주체는 ns1.jinhong.com 이며 SOA로 관리권한을 모두 위임한다. 이후에는 관리자 이메일 지정.
 3줄 : serial 값(버전) 작성
@@ -365,7 +365,7 @@ vi 로 새 문서 생성</p>
 <p>이제 해당 도메인을 찾아가려고 할 때 내 네임서버를 먼저 보도록 하자.
 vi /etc/resolv.conf 로 들어가서</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836886-7d59a780-9f02-11ea-8cee-32a5e27c0e79.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836886-7d59a780-9f02-11ea-8cee-32a5e27c0e79.png" alt="image" />   <br />
 내 IP를 맨 위에 추가
 :wq로 저장 후 종료</p>
 
@@ -383,7 +383,7 @@ mail.내이름.com
 
 <p>vi /var/named/jinhong.for.zone 을 한 뒤에 호스트부분에 추가적 기입해주자</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836893-834f8880-9f02-11ea-86d3-74a7e1cef11c.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836893-834f8880-9f02-11ea-86d3-74a7e1cef11c.png" alt="image" />    <br />
 :wq로 저장 후 종료
 혹시모르니까 systemctl restart named.service하고 nslookup 한 뒤에 위의 여러 FQDN을 쳐보자. 다 하나의 IP로 나오게 된다. 잘 됨</p>
 
@@ -401,7 +401,7 @@ nslookup
 
 <p>일단 vi /var/named/jinhong.for.zone 으로 들어간 뒤 :se nu 로 줄번호 생성</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836899-89456980-9f02-11ea-8cab-88bf2e2c20fc.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836899-89456980-9f02-11ea-8cab-88bf2e2c20fc.png" alt="image" />     <br />
 위와같이 11줄과 12줄을 추가해보았다. :wq로 저장 후 종료
 systemctl restart named.service한 뒤에 nslookup으로 확인 → 잘 된다.
 즉 네임서버 자체를 여러개 둔 것이다. (1차만 여러개 둔 방식인 듯)
@@ -416,57 +416,57 @@ ko.내이름.com		canonical name = www.내이름.com</p>
 
 <p>일단 vi /var/named/jinhong.for.zone으로 들어가고 :se nu를 하자</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836912-92363b00-9f02-11ea-83d4-de35c3b2f701.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836912-92363b00-9f02-11ea-83d4-de35c3b2f701.png" alt="image" />     <br />
 호스트쪽 맨 마지막에 위와같이 작성해줌
 :wq로 저장 후 종료
 systemctl restart named.service 하니까 오류가 뜬다. systemctl -l status named.service로 확인해보니</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836922-99f5df80-9f02-11ea-8a6e-d5994395206f.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836922-99f5df80-9f02-11ea-8a6e-d5994395206f.png" alt="image" />     <br />
 어디에 오류가 뜬건지 모르겠음.. 무튼 위에 작성한 ko 호스트부분에서 오류가 발생한 것으로 보인다..</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836932-a1b58400-9f02-11ea-9bd9-3455d180b664.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836932-a1b58400-9f02-11ea-9bd9-3455d180b664.png" alt="image" />      <br />
 이렇게 작성해줘도 오류</p>
 
 <p>vi /var/named/jinhong.for.zone으로 들어간 뒤 :se nu를 한다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836937-a712ce80-9f02-11ea-9e25-24f604366942.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836937-a712ce80-9f02-11ea-9e25-24f604366942.png" alt="image" />  <br />
 위와 같이 바꾸어보았다 :wq로 저장 후 종료
 systemctl restart named.service하니까 문제는 없다.
 nslookup 으로 확인</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836948-af6b0980-9f02-11ea-96a6-be2c641c95d4.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836948-af6b0980-9f02-11ea-96a6-be2c641c95d4.png" alt="image" />  <br />
 … 내 네임서버에서 못찾고 kt에서 찾네..
 다시 vi /var/named/jinhong.for.zone으로 들어가서 :se nu</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836959-b560ea80-9f02-11ea-9e86-1e56189de439.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836959-b560ea80-9f02-11ea-9e86-1e56189de439.png" alt="image" />   <br />
 이번엔 위와같이 작성하고 :wq로 저장 후 종료
 이번에도 systemctl restart named.service하니까 오류뜨네.. 흠
 리소스 레코드 CNAME에 대해 어떤 방식으로 써야하는거지</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836971-bb56cb80-9f02-11ea-804a-261eb50dab82.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836971-bb56cb80-9f02-11ea-804a-261eb50dab82.png" alt="image" />   <br />
 이래도 오류..</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836978-c14cac80-9f02-11ea-9ef0-e140286ef7b3.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836978-c14cac80-9f02-11ea-9ef0-e140286ef7b3.png" alt="image" />  <br />
 오류</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836983-c6116080-9f02-11ea-8b7b-f6e713f30deb.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836983-c6116080-9f02-11ea-8b7b-f6e713f30deb.png" alt="image" />  <br />
 이래도 오류다</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836996-cdd10500-9f02-11ea-964b-904c84372621.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836996-cdd10500-9f02-11ea-964b-904c84372621.png" alt="image" />  <br />
 이래도 오류다..</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837002-d3c6e600-9f02-11ea-996b-ee1a2f6ae708.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837002-d3c6e600-9f02-11ea-996b-ee1a2f6ae708.png" alt="image" />  <br />
 역시나 오류</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837012-d9bcc700-9f02-11ea-8bb8-8ddd5dfe6fea.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837012-d9bcc700-9f02-11ea-8bb8-8ddd5dfe6fea.png" alt="image" />  <br />
 오류</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837016-dfb2a800-9f02-11ea-8987-84ab443c9d6e.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837016-dfb2a800-9f02-11ea-8987-84ab443c9d6e.png" alt="image" />  <br />
 오류</p>
 
 <p>풀이</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837024-e50ff280-9f02-11ea-9b27-35c9d1a40a74.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837024-e50ff280-9f02-11ea-9b27-35c9d1a40a74.png" alt="image" />   <br />
 systemctl restart named.service 후에 nslookup으로 확인해보면 잘 나온다.
 즉, ko.jinhong.com 에 대해 www를 참조하라는 의미 비슷
 →  ko.jinhong.com이 www.jinhong.com 에 포함되는 개념인데 그러면 여러 호스트네임들이 사실은 하나의 호스트네임을 가리키고 있는경우 쓸 수 있는 것 같다.
@@ -476,13 +476,13 @@ systemctl restart named.service 후에 nslookup으로 확인해보면 잘 나온
 <p>Canonical Name을 설정한다는 것은 기존에 있는 것을 이용하는 것이다.
 호스트네임 작성 후 그것을 인터넷에 연결하겠다는 의미인 IN써준 뒤에 CNAME과 그 값을 써주면 된다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837028-ea6d3d00-9f02-11ea-973f-97be1fa2f4c1.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837028-ea6d3d00-9f02-11ea-973f-97be1fa2f4c1.png" alt="image" />   <br />
 19줄처럼 써도 되고 20줄처럼 써도 된다
 → 거의 근접하게 나도 갔었는데 ㅠㅠ root도메인에 해당하는 . 을 안써서 안됐었음</p>
 
 <p>참고사항</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837037-f0fbb480-9f02-11ea-8ba5-77a09d389652.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837037-f0fbb480-9f02-11ea-8ba5-77a09d389652.png" alt="image" />    <br />
 여기서 네임서버부분 작성해줄 때 굳이 ns1 이라는 부분을 작성해주지 않아도 된다고 한다.
 그냥 호스트작성해주는 부분에서 추가해줘도 된다고 함
 그러면 SOA로 jinhong.com 에 모든 권한 두고 9번째 줄에서 그걸 jinhong.com이라고 또 지정해준 뒤에 10번째 줄에서 그 IP를 192.168.52.149라고 적으면, 14번째 줄에서 그 IP에 해당하는 호스트가 ns1임이 증명이 되니까 그런건가</p>
@@ -508,7 +508,7 @@ jinhong.com이라는 zone은 있으니 해당 zone파일을 찾아보고, 그 �
 <p>또한 allow-transfer { any; }; 항목을 추가해야한다. → 파일을 가져갈 수 있게끔?
 역시나 any대신에 2차 네임서버의 IP값을 직접 추가해줘도 된다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837055-feb13a00-9f02-11ea-9c6c-eb304183ea33.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837055-feb13a00-9f02-11ea-9c6c-eb304183ea33.png" alt="image" />   <br />
 위와같이 작성하면 이제 다른 네임서버들쪽(또는 내 2차네임서버)에서 내 네임서버로 접근해서 파일을 가져갈 수 있고(transfer) 업데이트를 위해 접근할 수 있다.(update)
 :wq로 저장 후 종료
 systemctl restart named.service로 서비스 재시작해야한다.</p>
@@ -519,7 +519,7 @@ rpm -qa | grep bind 하면 2개만 설치되어있는 상태이므로 yum instal
 
 <p>Server에서 작업한 것처럼 우선 /etc/named.conf 파일을 작업</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837064-04a71b00-9f03-11ea-8daa-042be61a7c57.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837064-04a71b00-9f03-11ea-8daa-042be61a7c57.png" alt="image" />   <br />
 :wq로 저장 후 종료
 → 네임서버로서의 설정을 하였다. 외부접근을 허용함</p>
 
@@ -536,7 +536,7 @@ masters { Server의 IP주소; };
 <p>/var/named/slaves 라는 보조네임서버전용 zone파일 보관 디렉토리가 있다. 해당 디렉토리 하위에 zone파일이 생기도록 해줘야한다. 이름은 역시나 자유.
 allow-update를 쓰는 것이 아니라 1차네임서버(Master DNS)가 무엇인지를 작성해주어야 한다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837079-0a9cfc00-9f03-11ea-8fe5-118cc188c27c.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837079-0a9cfc00-9f03-11ea-8fe5-118cc188c27c.png" alt="image" />    <br />
 :wq로 저장 후 종료</p>
 
 <p>zone파일은 서버에서 받아와서 저 이름으로 slaves 디렉토리 하위에 저장할 것이다.</p>
@@ -563,12 +563,12 @@ masterfile-format text;   → masterDNS 로부터 받아온 파일의 포맷을 
 
 <p>client머신에서 vi /etc/named.rfc1912.zones로 들어간 뒤에</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837092-1092dd00-9f03-11ea-9c91-fe757cfbad17.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837092-1092dd00-9f03-11ea-9c91-fe757cfbad17.png" alt="image" />   <br />
 :wq로 저장 후 종료</p>
 
 <p>systemctl restart named.service로 재시작 한 후에 cat /var/named/slaves/jh.for.slave.zone 해보자</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837097-15579100-9f03-11ea-882b-60f6fc28305f.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837097-15579100-9f03-11ea-882b-60f6fc28305f.png" alt="image" />     <br />
 1차네임서버에서 난 root라고만 썼는데 자동으로 저 포맷으로 바뀌어있다.(이메일형식)</p>
 
 <p>→ service를 restart하면 서버에서 다시 파일을 받아오나보다. restart 안해두면 알아서 저 refresh 시간에 맞춰서 파일을 다시 가져올 것 같음</p>

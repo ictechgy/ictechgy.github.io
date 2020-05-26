@@ -421,7 +421,7 @@ HostID		 IN 	PTR 	FQDN
 <p>vi로 새 문서를 만들고
 :1r! cat /var/named/kgitbank.for.zone 으로 정방향 영역 값을 그대로 불러오고 맨 마지막 줄만 수정을 진행한다. (또는 기존 정방향영역 파일을 복사시킨다음에 수정을 진행해도 된다)</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836597-c2310e80-9f01-11ea-8c02-e403d0c75278.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836597-c2310e80-9f01-11ea-8c02-e403d0c75278.png" alt="image" />   <br />
 → 여기서 @ origin은 192.168.52.x를 의미할 것이다.
 맨 마지막줄에 149 	IN	PTR	ns1.kgitbank.co.kr. 이라고 작성한 부분에서 149라고 쓴 것은 결국 이 zone파일은 192.168.52.x에 대해 쓴 것이므로 192.168.52.149를 의미하게 되므로 이에 일치하는 네임서버 자체 도메인주소를 FQDN으로 쓰게 된 것인가</p>
 
@@ -439,13 +439,13 @@ http://library.gabia.com/contents/domain/4152 참고</p>
 이를테면 naver.com도 자신들만의 DNS를 가지고 있어서 사용자가 HostName부분을 www로 입력해서 왔는지, blog로 왔는지, kin으로 왔는지에 따라 www.naver.com, kin.naver.com, blog.naver.com 에 대한 IP결과값을 달리 보내준다. (같은 네트워크 ID이지만 HostID는 다를 것)
 이를 그림으로 표현해보면 다음과 같다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836610-c9f0b300-9f01-11ea-9eef-ec3082a9da05.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836610-c9f0b300-9f01-11ea-9eef-ec3082a9da05.png" alt="image" />   <br />
 수업시간에 named.conf와 named.rfc1912.zones를 건드려서 한 것은 우리 스스로를 DNS서버로 만든 것이다. ns1.kgitbank.co.kr이라는 네임서버.</p>
 
 <p>그리고 zone을 만들었다. 내가 관리하는 그 영역을 정해준 것이다. /etc/named.rfc1912.conf파일에 zone “kgitbank.co.kr” 이라고 한 것은 나 ns1.kgitbank.co.kr이 관리하는 그 영역은 kgitbank.co.kr 이라는 네트워크범위라는 것이다.
 그리고 실질적인 zone파일을 만들었다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836625-d248ee00-9f01-11ea-9fb3-3b06ac1333a7.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836625-d248ee00-9f01-11ea-9fb3-3b06ac1333a7.png" alt="image" />    <br />
 파일을 다시 한번 보자. 11줄을 기준으로 그 위는 NameServer에 대한 것을 적어주는 것이라고 했다. 즉 나에대한 정보를 적는 부분이다. zone을 관리하는 ‘나 ns1.kgitbank.co.kr’에 대한 정보말이다. 2줄에서는 SOA를 통해 나 스스로에게 권한을 모두 주고 root뒤의 괄호 안에는 2차네임서버와의 어떤 관계값을 적어놓았다. 9줄 10줄에서는 ‘나’에 대한 정보를 그대로 적어놓았다.</p>
 
 <p>그리고 11줄 아래부터는 Host에 대한 정보를 적어주는 것이라고 하였었다.
@@ -465,7 +465,7 @@ video	IN	A	192.168.52.151
 그리고 zone파일에서는.. 해당 zone에 대한 관리주체는 그대로 ‘나’ ns1.kgitbank.co.kr이므로 1~10줄까지는 모두 동일하게 작성하면 된다.
 이제 12번째 줄부터 이 네트워크에 속한 호스트들을 적어주면 되는데, 당연히 IP에 대해 도메인으로 바꿔주는 부분을 만들고 있으므로 HostID에 대한 FQDN을 작성해주면 된다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836641-daa12900-9f01-11ea-81d8-ec8696d2cc0a.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836641-daa12900-9f01-11ea-81d8-ec8696d2cc0a.png" alt="image" />   <br />
 이 zone파일은 192.168.52.x 영역에 대한 파일이므로 여기서 맨 마지막에 
 149	IN	PTR	ns1.kgitbank.co.kr이라고 작성한 것은 결국 192.168.52.149에 대한 정보를 작성한 줄이라고 볼 수 있다. 나라는 네임서버 또한 192.168.52.x의 네트워크에 속해있다고 볼 수 있다.</p>
 
@@ -476,7 +476,7 @@ video	IN	A	192.168.52.151
 (zone파일에서 SOA를 통해)
 → type master라는건 나 자체에 대한 것을 쓴 것이라고 보면 될 듯(내가 곧 1차 네임서버 ns1.kgitbank.co.kr)</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836649-e12fa080-9f01-11ea-8ccf-237067bdfe52.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836649-e12fa080-9f01-11ea-8ccf-237067bdfe52.png" alt="image" />   <br />
 우리는 여기에서 ISP네임서버를 구축하는것이고.. zone이라는 것은 저 가비아 네임서버를 지정하는 것일까 아니면 gabia.com이라는 사이트에 대한 것을 만드는 것일까
 → 이 그림으로 친다면 우리는 ns.gabia.com이라는 저 네임서버를 만든 것이고 gabia.com이라는 네트워크에 속해있는 host들을 zone이라는 파일로 관리하는 것이다. (gabia.com이라는 도메인에 속해있는 host들을 관리)</p>
 
@@ -501,7 +501,7 @@ systemctl restart named.service
 
 <p>vi /etc/named.conf로 들어가보니 재귀허용부분이 아무것도 안적혀 있었다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836683-f60c3400-9f01-11ea-9e55-bb17ab9d49c3.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836683-f60c3400-9f01-11ea-9e55-bb17ab9d49c3.png" alt="image" />    <br />
 yes 또는 no로 지정 후 서비스를 다시 시작시켜주면 된다.</p>
 
 <p>또 오류가 떴는데</p>
@@ -534,8 +534,8 @@ Domain Name입력 또는 FQDN 입력
 <p>따라서 우리는 질문을 하는 상대를 먼저 바꿔야한다.
 /etc/resolv.conf를 설정해야함</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836704-02908c80-9f02-11ea-8a4e-9acf297d2b70.png" alt="image" />
-어떤 도메인에 대한 IP값을 요청했을 시 우리 스스로에게 먼저 물어보도록 지정해주자.
+<p><img src="https://user-images.githubusercontent.com/39452092/82836704-02908c80-9f02-11ea-8a4e-9acf297d2b70.png" alt="image" />   <br />
+어떤 도메인에 대한 IP값을 요청했을 시 우리 스스로에게 먼저 물어보도록 지정해주자. 
 :wq로 저장 후 종료</p>
 
 <p>위와같이 작성하면 이제 kgitbank.co.kr 에 대해 접속하려하거나 질의한 경우 우리 스스로에게 먼저 물어보게 된다. 우리 또한 네임서버이므로 작동가능하며 우리 스스로의 zone파일을 보게 됨.
@@ -543,15 +543,15 @@ Domain Name입력 또는 FQDN 입력
 
 <p>그리고 다시 nslookup으로 kgitbank.co.kr에 대한 IP값을 물어보자</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836713-0a503100-9f02-11ea-869c-ea849e529c2c.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836713-0a503100-9f02-11ea-869c-ea849e529c2c.png" alt="image" />  <br />
 잘 나온다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836718-120fd580-9f02-11ea-9e95-3e8e1e07bd63.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836718-120fd580-9f02-11ea-9e95-3e8e1e07bd63.png" alt="image" />  <br />
 위와같이 물어보면 먼저 zone 중에서 kgitbank.co.kr에 해당하는 zone을 찾고 그 파일 내에서 호스트 부분 중 ns1에 해당하는 부분을 보게 됨.</p>
 
 <p>만약 첫번째 네임서버에 물어봤는데 답이 안오면 두번째 네임서버에게 물어봄(kt)</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836731-189e4d00-9f02-11ea-8330-3172efad699a.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836731-189e4d00-9f02-11ea-8330-3172efad699a.png" alt="image" />  <br />
 역방향으로 물어본것도 잘 작동해야 한다.
 192.168.52.149를 입력했는데 zone중 192.168.52 에 해당하는게 있는지 보고 그 zone파일 내부에서 호스트에 해당하는 부분이 149인 것을 찾아 그 도메인 값을 반환.</p>
 
@@ -571,7 +571,7 @@ Domain Name입력 또는 FQDN 입력
 
 <p>vi /etc/named.conf 로 named 서비스 설정 들어가서 :se nu</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836740-1f2cc480-9f02-11ea-965d-dd495125fd57.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836740-1f2cc480-9f02-11ea-965d-dd495125fd57.png" alt="image" />   <br />
 listen하는 상태에서 접근가능하게 할 IP부분 any; 로 변경 및 allow-query(질의를 가능하게 할 IP설정)도 any; 로 변경
 recursion은 yes로 그냥 둠(질의의 재귀,반복)
 :wq로 저장 후 종료</p>
@@ -581,7 +581,7 @@ recursion은 yes로 그냥 둠(질의의 재귀,반복)
 
 <p><img src="https://user-images.githubusercontent.com/39452092/82836750-2522a580-9f02-11ea-9fb7-d8e888fe12c7.png" alt="image" /></p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836759-29e75980-9f02-11ea-91bf-fd21b4e91773.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836759-29e75980-9f02-11ea-91bf-fd21b4e91773.png" alt="image" />   <br />
 lineage.com이라는 도메인네트워크 영역은 192.168.52.x 네트워크에 속한다고 가정한다.
 (나는 lineage.com에 대한 DNS서버)</p>
 
@@ -590,14 +590,14 @@ lineage.com이라는 도메인네트워크 영역은 192.168.52.x 네트워크�
 <p>실질적인 zone파일을 만들자. vi로 새 문서 생성
 :se nu</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836771-3075d100-9f02-11ea-9043-0bb816e56633.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836771-3075d100-9f02-11ea-9043-0bb816e56633.png" alt="image" />   <br />
 나또한 lineage.com이라는 도메인네트워크에 속하는 하나의 호스트라고 보고 12번째 줄을 작성하였다. (ns1.lineage.com - 192.168.52.122)
 :w /var/named/lineage.for.zone으로 저장</p>
 
 <p>vi로 새문서 하나 더 생성(역방향)
 :1r! cat /var/named/lineage.for.zone으로 이전 값 불러오기</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836778-35d31b80-9f02-11ea-915b-28fad29d038c.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836778-35d31b80-9f02-11ea-915b-28fad29d038c.png" alt="image" />   <br />
 12번째 줄에 역으로 FQDN써줄 때 맨 뒤에 .은 안붙여도 된다.
 :wq /var/named/lineage.rev.zone 으로 저장 후 종료</p>
 
@@ -605,7 +605,7 @@ lineage.com이라는 도메인네트워크 영역은 192.168.52.x 네트워크�
 
 <p>vi /etc/resolv.conf 후 :se nu</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836790-3bc8fc80-9f02-11ea-9aee-ac1c6991fd3a.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836790-3bc8fc80-9f02-11ea-9aee-ac1c6991fd3a.png" alt="image" />   <br />
 :wq로 저장 후 종료</p>
 
 <p>이제 서비스 재시작해보자
@@ -625,10 +625,10 @@ lineage.com 입력, ns1.lineage.com 입력
 
 <p>아.. /etc/named.rfc1912.zones에서</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836813-471c2800-9f02-11ea-9369-360bd6cc32ef.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836813-471c2800-9f02-11ea-9369-360bd6cc32ef.png" alt="image" />   <br />
 이게 아니라</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836821-4d120900-9f02-11ea-9591-4750373d308e.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836821-4d120900-9f02-11ea-9591-4750373d308e.png" alt="image" />   <br />
 이다.</p>
 
 <p>잘 된다.</p>

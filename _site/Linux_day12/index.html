@@ -329,46 +329,48 @@
   </li>
 </ul>
 
-<p>먼저 필요한 내용들을 만들어주도록 한다.
-[root@localhost itbank]# groupadd leagueoflegends
-[root@localhost itbank]# mkdir /over
-[root@localhost itbank]# mkdir /fifa
-[root@localhost itbank]# cp -r /etc/skel /fifa/online4  → 또는 디렉토리 online4까지 직접 만들고 skel디렉토리 하위의 파일들을 online4디렉토리 하위에 전부 복사시켜도 된다. 다만 그렇게 한다면 cp할 때
-cp -r /etc/skel/. /fifa/online4 이런식으로 하면 된다.(<em>을 쓰는건 숨김파일을 지정해주지 못하고 .</em>을 쓰면 해당 디렉토리와 상위디렉토리까지 통째로 지정하는 방식이 되므로 주의)
-[root@localhost itbank]# ls -l /fifa/online4
-합계 0
-drwxr-xr-x. 2 root root  6  5월 25 09:17 public_html
-drwx——. 2 root root 17  5월 25 09:17 user9
--rw-r–r–. 1 root root  0  5월 25 09:17 younghoon
-[root@localhost itbank]# mkdir /fifa/online4/starcraft
-[root@localhost itbank]# touch /fifa/online4/.dungeon_fighter
-[root@localhost itbank]# ls -al /fifa/online4
-합계 12
-drwxr-xr-x. 6 root root 168  5월 25 09:18 .
-drwxr-xr-x. 3 root root  21  5월 25 09:17 ..
--rw-r–r–. 1 root root  18  5월 25 09:17 .bash_logout
--rw-r–r–. 1 root root 193  5월 25 09:17 .bash_profile
--rw-r–r–. 1 root root 231  5월 25 09:17 .bashrc
--rw-r–r–. 1 root root   0  5월 25 09:18 .dungeon_fighter
-drwxr-xr-x. 4 root root  39  5월 25 09:17 .mozilla
-drwxr-xr-x. 2 root root   6  5월 25 09:17 public_html
-drwxr-xr-x. 2 root root   6  5월 25 09:18 starcraft
-drwx——. 2 root root  17  5월 25 09:17 user9
--rw-r–r–. 1 root root   0  5월 25 09:17 younghoon
-[root@localhost itbank]# rm -rf /fifa/online4/user9
-[root@localhost itbank]# rm -rf /fifa/online4/public_html
-[root@localhost itbank]# rm -rf /fifa/online4/younghoon
-→ 내가 만든 별도의 skel디렉토리 하위에 다른게 있어서 잠시 제거
-[root@localhost itbank]# ls -la /fifa/online4
-합계 12  → 합계 계산할 때 상위디렉토리 .. 의 내용까지 합쳐서 나오는건가
-정확히 이 합계가 의미하는것은? 총 용량?
-drwxr-xr-x. 4 root root 119  5월 25 09:19 .
-drwxr-xr-x. 3 root root  21  5월 25 09:17 ..
--rw-r–r–. 1 root root  18  5월 25 09:17 .bash_logout
--rw-r–r–. 1 root root 193  5월 25 09:17 .bash_profile
--rw-r–r–. 1 root root 231  5월 25 09:17 .bashrc
--rw-r–r–. 1 root root   0  5월 25 09:18 .dungeon_fighter
-drwxr-xr-x. 4 root root  39  5월 25 09:17 .mozilla
+<p>먼저 필요한 내용들을 만들어주도록 한다.</p>
+
+<p>[root@localhost itbank]# groupadd leagueoflegends <br />
+[root@localhost itbank]# mkdir /over <br />
+[root@localhost itbank]# mkdir /fifa <br />
+[root@localhost itbank]# cp -r /etc/skel /fifa/online4  → 또는 디렉토리 online4까지 직접 만들고 skel디렉토리 하위의 파일들을 online4디렉토리 하위에 전부 복사시켜도 된다. 다만 그렇게 한다면 cp할 때 <br />
+cp -r /etc/skel/. /fifa/online4 이런식으로 하면 된다.(<em>을 쓰는건 숨김파일을 지정해주지 못하고 .</em>을 쓰면 해당 디렉토리와 상위디렉토리까지 통째로 지정하는 방식이 되므로 주의) <br />
+[root@localhost itbank]# ls -l /fifa/online4 <br />
+합계 0 <br />
+drwxr-xr-x. 2 root root  6  5월 25 09:17 public_html <br />
+drwx——. 2 root root 17  5월 25 09:17 user9 <br />
+-rw-r–r–. 1 root root  0  5월 25 09:17 younghoon <br />
+[root@localhost itbank]# mkdir /fifa/online4/starcraft <br />
+[root@localhost itbank]# touch /fifa/online4/.dungeon_fighter <br />
+[root@localhost itbank]# ls -al /fifa/online4 <br />
+합계 12 <br />
+drwxr-xr-x. 6 root root 168  5월 25 09:18 . <br />
+drwxr-xr-x. 3 root root  21  5월 25 09:17 .. <br />
+-rw-r–r–. 1 root root  18  5월 25 09:17 .bash_logout <br />
+-rw-r–r–. 1 root root 193  5월 25 09:17 .bash_profile <br />
+-rw-r–r–. 1 root root 231  5월 25 09:17 .bashrc <br />
+-rw-r–r–. 1 root root   0  5월 25 09:18 .dungeon_fighter <br />
+drwxr-xr-x. 4 root root  39  5월 25 09:17 .mozilla <br />
+drwxr-xr-x. 2 root root   6  5월 25 09:17 public_html <br />
+drwxr-xr-x. 2 root root   6  5월 25 09:18 starcraft <br />
+drwx——. 2 root root  17  5월 25 09:17 user9 <br />
+-rw-r–r–. 1 root root   0  5월 25 09:17 younghoon <br />
+[root@localhost itbank]# rm -rf /fifa/online4/user9 <br />
+[root@localhost itbank]# rm -rf /fifa/online4/public_html <br />
+[root@localhost itbank]# rm -rf /fifa/online4/younghoon <br />
+→ 내가 만든 별도의 skel디렉토리 하위에 다른게 있어서 잠시 제거</p>
+
+<p>[root@localhost itbank]# ls -la /fifa/online4 <br />
+합계 12  → 합계 계산할 때 상위디렉토리 .. 의 내용까지 합쳐서 나오는건가 <br />
+정확히 이 합계가 의미하는것은? 총 용량? <br />
+drwxr-xr-x. 4 root root 119  5월 25 09:19 . <br />
+drwxr-xr-x. 3 root root  21  5월 25 09:17 .. <br />
+-rw-r–r–. 1 root root  18  5월 25 09:17 .bash_logout <br />
+-rw-r–r–. 1 root root 193  5월 25 09:17 .bash_profile <br />
+-rw-r–r–. 1 root root 231  5월 25 09:17 .bashrc <br />
+-rw-r–r–. 1 root root   0  5월 25 09:18 .dungeon_fighter <br />
+drwxr-xr-x. 4 root root  39  5월 25 09:17 .mozilla <br />
 drwxr-xr-x. 2 root root   6  5월 25 09:18 starcraft</p>
 
 <p>[root@localhost itbank]# useradd -d /over/watch -mk /fifa/online4 -u 2018 -g leagueoflegends -c suddenattack battlegrounds
@@ -421,16 +423,16 @@ groupadd a &amp;&amp; useradd ~~~
 <p>집에서 useradd하다가 중간에 -g 옵션 뒤에 argument쓰는데, 스펠링 하나 잘못썼었음. 생성됐을라나 하고 봤는데 생성이 안됐네. 문법에 맞게는 잘 썼는데 작동 안함. 모든 사용자는 적어도 하나의 그룹에는 포함되어야하는 그런 규칙이 있어서 작동을 안한건가?
 보통은 문법에 맞게만 쓰면 생성은 무조건 되는데..</p>
 
-<p>정리
-[root@localhost itbank]# userdel -r battlegrounds
-[root@localhost itbank]# tail -1 /etc/passwd
-itbank:x:1000:1000:dust:/home/itbank:/bin/bash
-[root@localhost itbank]# tail -2 /etc/group
-itbank:x:1000:
-leagueoflegends:x:1001:  → battlegrounds사용자와는 다른 것. 삭제되지 않은 상태
-[root@localhost itbank]# groupdel leagueoflegends → 이 때 이름은 1001을 쓸 수는 없다. 1001이라고 쓰면 말 그대로 1001이라는 그룹명을 찾을뿐.. 
-[root@localhost itbank]# tail -1 /etc/group
-itbank:x:1000:
+<p>정리 <br />
+[root@localhost itbank]# userdel -r battlegrounds <br />
+[root@localhost itbank]# tail -1 /etc/passwd  <br />
+itbank:x:1000:1000:dust:/home/itbank:/bin/bash  <br />
+[root@localhost itbank]# tail -2 /etc/group  <br />
+itbank:x:1000:  <br />
+leagueoflegends:x:1001:  → battlegrounds사용자와는 다른 것. 삭제되지 않은 상태  <br />
+[root@localhost itbank]# groupdel leagueoflegends → 이 때 이름은 1001을 쓸 수는 없다. 1001이라고 쓰면 말 그대로 1001이라는 그룹명을 찾을뿐..   <br />
+[root@localhost itbank]# tail -1 /etc/group  <br />
+itbank:x:1000:  <br />
 [root@localhost itbank]# rm -rf /over /fifa  → 홈디렉토리쪽과 skel제거</p>
 
 <p>rm -rf /home/test → 홈에 test디렉토리 있으면 제거하기</p>
@@ -468,25 +470,11 @@ drwxr-xr-x. 3 root root 40  5월 24 11:21 /home
 <p>r w x	→ 7
 r w - 	→ 6 
 r - x	→ 5
-r - -	→ 4</p>
-<ul>
-  <li>w x	→ 3</li>
-  <li>w -	→ 2</li>
-  <li>
-    <ul>
-      <li>x	→ 1</li>
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li>
-        <ul>
-          <li>→ 0</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+r - -	→ 4
+- w x	→ 3
+- w -	→ 2
+- - x	→ 1
+- - -	→ 0</p>
 
 <p>허가권은 8진수이다. (0부터 7까지 숫자의 갯수는 8개이다.)
 10진수가 0 ~ 9까지 10개의 숫자가 있듯이</p>
@@ -589,15 +577,9 @@ r w - r - - - w -  	           →    		r  w  x  -  w  x  -  -  -</p>
 특수허가권은 numeric으로 안바뀐다.
 몇몇 파일이나 디렉토리에서 특수허가권에 해당하는 것들이 있다. 그런 경우 numeric으로 안되니까 symbolic으로 처리</p>
 
-<ul>
-  <li>
-    <ul>
-      <li>x  -  w  -  -  w  x → -  -  x  -  w  -  r  -  -   (123이 124로 변경)
+<p><code class="highlighter-rouge">-  -  x  -  w  -  -  w  x → -  -  x  -  w  -  r  -  -   (123이 124로 변경)</code>
 chmod o+r,o-w,o-x
-chmod 124</li>
-    </ul>
-  </li>
-</ul>
+chmod 124</p>
 
 <p>numeric은 변함이 없는 부분도 그대로 쳐야하긴 함(1과 2에 해당하는 부분도)
 하지만 symbolic은 변하는 부분에만 집중 할 수 있다.</p>
@@ -621,8 +603,8 @@ chmod 124</li>
 [root@localhost itbank]# chmod u-r,u-w,g-r,o-r testfile2
 [root@localhost itbank]# ls -l
 합계 0
-———-. 1 root root 0  5월 25 11:42 testfile1
-———-. 1 root root 0  5월 25 11:42 testfile2</p>
+-———. 1 root root 0  5월 25 11:42 testfile1
+-———. 1 root root 0  5월 25 11:42 testfile2</p>
 
 <p>현재 두 파일은 순수파일이고 문서파일이기는 한데 그 누구도 읽고 쓸 수 없는 상태</p>
 
@@ -630,12 +612,12 @@ chmod 124</li>
 [root@localhost itbank]# ls -l
 합계 0
 -r–r–r–. 1 root root 0  5월 25 11:42 testfile1 → 순수문서파일, 모든사용자 읽기만 가능
-———-. 1 root root 0  5월 25 11:42 testfile2
+-———. 1 root root 0  5월 25 11:42 testfile2
 [root@localhost itbank]# chmod 753 testfile1
 [root@localhost itbank]# ls -l
 합계 0
 -rwxr-x-wx. 1 root root 0  5월 25 11:42 testfile1 → 문서파일이었는데 실행파일이 되어부렀네
-———-. 1 root root 0  5월 25 11:42 testfile2</p>
+-———. 1 root root 0  5월 25 11:42 testfile2</p>
 
 <p>→ 실행파일 실행시키면 우찌 될라나.. 커맨드라인에서 testfile1 그냥 치니까 명령을 찾을 수 없다고 뜬다. ls같은 명령어도 사실 /usr/bin/ls 파일을 실행시키는건데 환경변수로 되어있어 어디서나 실행시키는 명령어이다. testfile1은 현재 커맨드라인이 해당 파일이 있는 위치에 있으므로 그냥도 실행시킬 수 있을텐데 아무 기능도 하지 않는 실행파일이라서 bash 쉘이 제대로 못받아들이는 듯?</p>
 

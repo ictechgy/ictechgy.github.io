@@ -480,7 +480,7 @@ chmod go+w /everyone 또는 chmod 777 /everyone</p>
 
 <p>useradd badman
 passwd badman 로 비밀번호 생성
-→ useradd -p <code class="highlighter-rouge">openssl passwd [비밀번호]</code> username
+→ useradd -p `openssl passwd [비밀번호]` username
 위의 방식은 암호화 단계가 낮다.
 useradd -p [비밀번호] username 으로도 생성은 가능한 듯 보인다. 이렇게 하면 /etc/shadow에 비밀번호가 암호화되지 않은 상태로 들어가는 듯 하다. 또한 로그인도 제대로 되지 않는다고 한다.</p>
 

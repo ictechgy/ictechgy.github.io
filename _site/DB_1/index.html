@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Database_1 - 개발 끄적끄적</title>
-<meta name="description" content="emp	dept 차수(degree)		8	3	-&gt; desc 테이블명; 기수(대응수, 카디널리티)	14	4	-&gt; select count(*) from 테이블명; 으로 개수만 보면 됨 ">
+<meta name="description" content="본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다. ">
 
 
   <meta name="author" content="JJanghong">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://localhost:4000/DB_1/">
 
 
-  <meta property="og:description" content="emp	dept 차수(degree)		8	3	-&gt; desc 테이블명; 기수(대응수, 카디널리티)	14	4	-&gt; select count(*) from 테이블명; 으로 개수만 보면 됨 ">
+  <meta property="og:description" content="본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다. ">
 
 
 
@@ -281,7 +281,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Database_1">
-    <meta itemprop="description" content="emp	dept차수(degree)		8	3	-&gt; desc 테이블명;기수(대응수, 카디널리티)	14	4	-&gt; select count(*) from 테이블명; 으로 개수만 보면 됨">
+    <meta itemprop="description" content="본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.">
     <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
     
 
@@ -296,7 +296,7 @@
 
 
 
-  52 minute read
+  53 minute read
 
 </p>
           
@@ -305,104 +305,99 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>emp	dept
-차수(degree)		8	3	-&gt; desc 테이블명;
+        <h1 id="본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</h1>
+
+<p>emp	dept 테이블에 대하여</p>
+
+<p>차수(degree)		8	3	-&gt; desc 테이블명; 
 기수(대응수, 카디널리티)	14	4	-&gt; select count(*) from 테이블명; 으로 개수만 보면 됨</p>
 
-<ol>
-  <li>
-    <p>사원, 부서테이블의 경우의 수를 보이시오(카티션 프로덕트)
-select *
+<h3 id="1-사원-부서테이블의-경우의-수를-보이시오카티션-프로덕트">1. 사원, 부서테이블의 경우의 수를 보이시오(카티션 프로덕트)</h3>
+<p>select *
 from emp, dept;</p>
 
-    <p>EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC       <br />
-———- ———- ——— ———- ——– ———- ———- ———- ———- ————– ————-
-   7839 KING       PRESIDENT            81/11/17       5000                    10         10 ACCOUNTING     NEW YORK    <br />
-   7566 JONES      MANAGER         7839 81/04/02       2975                    20         10 ACCOUNTING     NEW YORK    <br />
-   7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         10 ACCOUNTING     NEW YORK    <br />
-   7782 CLARK      MANAGER         7839 81/06/09       2450                    10         10 ACCOUNTING     NEW YORK    <br />
-   7902 FORD       ANALYST         7566 81/12/03       3000                    20         10 ACCOUNTING     NEW YORK    <br />
-   7369 SMITH      CLERK           7902 80/12/17        800                    20         10 ACCOUNTING     NEW YORK    <br />
-   7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         10 ACCOUNTING     NEW YORK    <br />
-   7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         10 ACCOUNTING     NEW YORK    <br />
-   7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         10 ACCOUNTING     NEW YORK    <br />
-   7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         10 ACCOUNTING     NEW YORK    <br />
-   7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         10 ACCOUNTING     NEW YORK    <br />
-   7876 ADAMS      CLERK           7788 83/05/12       1100                    20         10 ACCOUNTING     NEW YORK    <br />
-   7900 JAMES      CLERK           7698 81/12/03        950                    30         10 ACCOUNTING     NEW YORK    <br />
-   7934 MILLER     CLERK           7782 82/01/23       1300                    10         10 ACCOUNTING     NEW YORK    <br />
-   7839 KING       PRESIDENT            81/11/17       5000                    10         20 RESEARCH       DALLAS      <br />
-   7566 JONES      MANAGER         7839 81/04/02       2975                    20         20 RESEARCH       DALLAS      <br />
-   7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         20 RESEARCH       DALLAS      <br />
-   7782 CLARK      MANAGER         7839 81/06/09       2450                    10         20 RESEARCH       DALLAS      <br />
-   7902 FORD       ANALYST         7566 81/12/03       3000                    20         20 RESEARCH       DALLAS      <br />
-   7369 SMITH      CLERK           7902 80/12/17        800                    20         20 RESEARCH       DALLAS      <br />
-   7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         20 RESEARCH       DALLAS      <br />
-   7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         20 RESEARCH       DALLAS      <br />
-   7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         20 RESEARCH       DALLAS      <br />
-   7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         20 RESEARCH       DALLAS      <br />
-   7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         20 RESEARCH       DALLAS      <br />
-   7876 ADAMS      CLERK           7788 83/05/12       1100                    20         20 RESEARCH       DALLAS      <br />
-   7900 JAMES      CLERK           7698 81/12/03        950                    30         20 RESEARCH       DALLAS      <br />
-   7934 MILLER     CLERK           7782 82/01/23       1300                    10         20 RESEARCH       DALLAS      <br />
-   7839 KING       PRESIDENT            81/11/17       5000                    10         30 SALES          CHICAGO     <br />
-   7566 JONES      MANAGER         7839 81/04/02       2975                    20         30 SALES          CHICAGO     <br />
-   7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         30 SALES          CHICAGO     <br />
-   7782 CLARK      MANAGER         7839 81/06/09       2450                    10         30 SALES          CHICAGO     <br />
-   7902 FORD       ANALYST         7566 81/12/03       3000                    20         30 SALES          CHICAGO     <br />
-   7369 SMITH      CLERK           7902 80/12/17        800                    20         30 SALES          CHICAGO     <br />
-   7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         30 SALES          CHICAGO     <br />
-   7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         30 SALES          CHICAGO     <br />
-   7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         30 SALES          CHICAGO     <br />
-   7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         30 SALES          CHICAGO     <br />
-   7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         30 SALES          CHICAGO     <br />
-   7876 ADAMS      CLERK           7788 83/05/12       1100                    20         30 SALES          CHICAGO     <br />
-   7900 JAMES      CLERK           7698 81/12/03        950                    30         30 SALES          CHICAGO     <br />
-   7934 MILLER     CLERK           7782 82/01/23       1300                    10         30 SALES          CHICAGO     <br />
-   7839 KING       PRESIDENT            81/11/17       5000                    10         40 OPERATIONS     BOSTON      <br />
-   7566 JONES      MANAGER         7839 81/04/02       2975                    20         40 OPERATIONS     BOSTON      <br />
-   7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         40 OPERATIONS     BOSTON      <br />
-   7782 CLARK      MANAGER         7839 81/06/09       2450                    10         40 OPERATIONS     BOSTON      <br />
-   7902 FORD       ANALYST         7566 81/12/03       3000                    20         40 OPERATIONS     BOSTON      <br />
-   7369 SMITH      CLERK           7902 80/12/17        800                    20         40 OPERATIONS     BOSTON      <br />
-   7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         40 OPERATIONS     BOSTON      <br />
-   7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         40 OPERATIONS     BOSTON      <br />
-   7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         40 OPERATIONS     BOSTON      <br />
-   7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         40 OPERATIONS     BOSTON      <br />
-   7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         40 OPERATIONS     BOSTON      <br />
-   7876 ADAMS      CLERK           7788 83/05/12       1100                    20         40 OPERATIONS     BOSTON      <br />
-   7900 JAMES      CLERK           7698 81/12/03        950                    30         40 OPERATIONS     BOSTON      <br />
-   7934 MILLER     CLERK           7782 82/01/23       1300                    10         40 OPERATIONS     BOSTON</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC          ---------- ---------- --------- ---------- -------- ---------- ---------- ---------- ---------- -------------- -------------
+  7839 KING       PRESIDENT            81/11/17       5000                    10         10 ACCOUNTING     NEW YORK      
+  7566 JONES      MANAGER         7839 81/04/02       2975                    20         10 ACCOUNTING     NEW YORK      
+  7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         10 ACCOUNTING     NEW YORK      
+  7782 CLARK      MANAGER         7839 81/06/09       2450                    10         10 ACCOUNTING     NEW YORK      
+  7902 FORD       ANALYST         7566 81/12/03       3000                    20         10 ACCOUNTING     NEW YORK      
+  7369 SMITH      CLERK           7902 80/12/17        800                    20         10 ACCOUNTING     NEW YORK      
+  7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         10 ACCOUNTING     NEW YORK      
+  7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         10 ACCOUNTING     NEW YORK      
+  7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         10 ACCOUNTING     NEW YORK      
+  7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         10 ACCOUNTING     NEW YORK      
+  7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         10 ACCOUNTING     NEW YORK      
+  7876 ADAMS      CLERK           7788 83/05/12       1100                    20         10 ACCOUNTING     NEW YORK      
+  7900 JAMES      CLERK           7698 81/12/03        950                    30         10 ACCOUNTING     NEW YORK      
+  7934 MILLER     CLERK           7782 82/01/23       1300                    10         10 ACCOUNTING     NEW YORK      
+  7839 KING       PRESIDENT            81/11/17       5000                    10         20 RESEARCH       DALLAS        
+  7566 JONES      MANAGER         7839 81/04/02       2975                    20         20 RESEARCH       DALLAS        
+  7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         20 RESEARCH       DALLAS        
+  7782 CLARK      MANAGER         7839 81/06/09       2450                    10         20 RESEARCH       DALLAS        
+  7902 FORD       ANALYST         7566 81/12/03       3000                    20         20 RESEARCH       DALLAS        
+  7369 SMITH      CLERK           7902 80/12/17        800                    20         20 RESEARCH       DALLAS        
+  7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         20 RESEARCH       DALLAS        
+  7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         20 RESEARCH       DALLAS        
+  7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         20 RESEARCH       DALLAS        
+  7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         20 RESEARCH       DALLAS        
+  7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         20 RESEARCH       DALLAS        
+  7876 ADAMS      CLERK           7788 83/05/12       1100                    20         20 RESEARCH       DALLAS        
+  7900 JAMES      CLERK           7698 81/12/03        950                    30         20 RESEARCH       DALLAS        
+  7934 MILLER     CLERK           7782 82/01/23       1300                    10         20 RESEARCH       DALLAS        
+  7839 KING       PRESIDENT            81/11/17       5000                    10         30 SALES          CHICAGO       
+  7566 JONES      MANAGER         7839 81/04/02       2975                    20         30 SALES          CHICAGO       
+  7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         30 SALES          CHICAGO       
+  7782 CLARK      MANAGER         7839 81/06/09       2450                    10         30 SALES          CHICAGO       
+  7902 FORD       ANALYST         7566 81/12/03       3000                    20         30 SALES          CHICAGO       
+  7369 SMITH      CLERK           7902 80/12/17        800                    20         30 SALES          CHICAGO       
+  7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         30 SALES          CHICAGO       
+  7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         30 SALES          CHICAGO       
+  7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         30 SALES          CHICAGO       
+  7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         30 SALES          CHICAGO       
+  7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         30 SALES          CHICAGO       
+  7876 ADAMS      CLERK           7788 83/05/12       1100                    20         30 SALES          CHICAGO       
+  7900 JAMES      CLERK           7698 81/12/03        950                    30         30 SALES          CHICAGO       
+  7934 MILLER     CLERK           7782 82/01/23       1300                    10         30 SALES          CHICAGO       
+  7839 KING       PRESIDENT            81/11/17       5000                    10         40 OPERATIONS     BOSTON        
+  7566 JONES      MANAGER         7839 81/04/02       2975                    20         40 OPERATIONS     BOSTON        
+  7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         40 OPERATIONS     BOSTON        
+  7782 CLARK      MANAGER         7839 81/06/09       2450                    10         40 OPERATIONS     BOSTON        
+  7902 FORD       ANALYST         7566 81/12/03       3000                    20         40 OPERATIONS     BOSTON        
+  7369 SMITH      CLERK           7902 80/12/17        800                    20         40 OPERATIONS     BOSTON        
+  7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         40 OPERATIONS     BOSTON        
+  7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         40 OPERATIONS     BOSTON        
+  7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         40 OPERATIONS     BOSTON        
+  7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         40 OPERATIONS     BOSTON        
+  7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         40 OPERATIONS     BOSTON        
+  7876 ADAMS      CLERK           7788 83/05/12       1100                    20         40 OPERATIONS     BOSTON        
+  7900 JAMES      CLERK           7698 81/12/03        950                    30         40 OPERATIONS     BOSTON        
+  7934 MILLER     CLERK           7782 82/01/23       1300                    10         40 OPERATIONS     BOSTON        
+</code></pre></div></div>
 
 <p>-&gt; degree 는 11, 카디널리티는 56이 나온다. 경우의 수가 나옴.
 차수는 차수의합이, 기수는 기수의 곱이 나오게 된다.</p>
 
-<ol>
-  <li>
-    <p>사원, 부서테이블의 모든 것을 보이시오. (조인)
-select *
+<h3 id="2-사원-부서테이블의-모든-것을-보이시오-조인">2. 사원, 부서테이블의 모든 것을 보이시오. (조인)</h3>
+<p>select *
 from emp join dept on emp.deptno = dept.deptno;</p>
 
-    <p>EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC       <br />
-———- ———- ——— ———- ——– ———- ———- ———- ———- ————– ————-
-   7839 KING       PRESIDENT            81/11/17       5000                    10         10 ACCOUNTING     NEW YORK    <br />
-   7566 JONES      MANAGER         7839 81/04/02       2975                    20         20 RESEARCH       DALLAS      <br />
-   7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         30 SALES          CHICAGO     <br />
-   7782 CLARK      MANAGER         7839 81/06/09       2450                    10         10 ACCOUNTING     NEW YORK    <br />
-   7902 FORD       ANALYST         7566 81/12/03       3000                    20         20 RESEARCH       DALLAS      <br />
-   7369 SMITH      CLERK           7902 80/12/17        800                    20         20 RESEARCH       DALLAS      <br />
-   7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         30 SALES          CHICAGO     <br />
-   7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         30 SALES          CHICAGO     <br />
-   7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         30 SALES          CHICAGO     <br />
-   7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         20 RESEARCH       DALLAS      <br />
-   7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         30 SALES          CHICAGO     <br />
-   7876 ADAMS      CLERK           7788 83/05/12       1100                    20         20 RESEARCH       DALLAS      <br />
-   7900 JAMES      CLERK           7698 81/12/03        950                    30         30 SALES          CHICAGO     <br />
-   7934 MILLER     CLERK           7782 82/01/23       1300                    10         10 ACCOUNTING     NEW YORK</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC          ---------- ---------- --------- ---------- -------- ---------- ---------- ---------- ---------- -------------- -------------
+  7839 KING       PRESIDENT            81/11/17       5000                    10         10 ACCOUNTING     NEW YORK      
+  7566 JONES      MANAGER         7839 81/04/02       2975                    20         20 RESEARCH       DALLAS        
+  7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         30 SALES          CHICAGO       
+  7782 CLARK      MANAGER         7839 81/06/09       2450                    10         10 ACCOUNTING     NEW YORK      
+  7902 FORD       ANALYST         7566 81/12/03       3000                    20         20 RESEARCH       DALLAS        
+  7369 SMITH      CLERK           7902 80/12/17        800                    20         20 RESEARCH       DALLAS        
+  7499 ALLEN      SALESMAN        7698 81/02/20       1600        300         30         30 SALES          CHICAGO       
+  7521 WARD       SALESMAN        7698 81/02/22       1250        500         30         30 SALES          CHICAGO       
+  7654 MARTIN     SALESMAN        7698 81/09/28       1250       1400         30         30 SALES          CHICAGO       
+  7788 SCOTT      ANALYST         7566 82/04/09       3000                    20         20 RESEARCH       DALLAS        
+  7844 TURNER     SALESMAN        7698 81/09/08       1500          0         30         30 SALES          CHICAGO       
+  7876 ADAMS      CLERK           7788 83/05/12       1100                    20         20 RESEARCH       DALLAS        
+  7900 JAMES      CLERK           7698 81/12/03        950                    30         30 SALES          CHICAGO       
+  7934 MILLER     CLERK           7782 82/01/23       1300                    10         10 ACCOUNTING     NEW YORK    
+</code></pre></div></div>
 
 <p>select *
 from emp e join dept d on e.deptno = d.deptno;	-&gt; 테이블 별칭 부여</p>
@@ -433,30 +428,26 @@ from emp join dept using(deptno);</p>
 from emp e, dept d
 where e.deptno = d.deptno;	-&gt; 예전 조인문장. 결과는 동등조인과 같게 나온다. 현재는 쓰이지 않는다.</p>
 
-<ol>
-  <li>
-    <p>사번, 사원명, 부서번호, 부서명을 보이시오.
-select empno, ename, deptno, dname
+<h3 id="3-사번-사원명-부서번호-부서명을-보이시오">3. 사번, 사원명, 부서번호, 부서명을 보이시오.</h3>
+<p>select empno, ename, deptno, dname
 from emp join dept using (deptno);</p>
 
-    <p>EMPNO ENAME          DEPTNO DNAME      <br />
-———- ———- ———- ————–
-   7839 KING               10 ACCOUNTING   <br />
-   7566 JONES              20 RESEARCH     <br />
-   7698 BLAKE              30 SALES        <br />
-   7782 CLARK              10 ACCOUNTING   <br />
-   7902 FORD               20 RESEARCH     <br />
-   7369 SMITH              20 RESEARCH     <br />
-   7499 ALLEN              30 SALES        <br />
-   7521 WARD               30 SALES        <br />
-   7654 MARTIN             30 SALES        <br />
-   7788 SCOTT              20 RESEARCH     <br />
-   7844 TURNER             30 SALES        <br />
-   7876 ADAMS              20 RESEARCH     <br />
-   7900 JAMES              30 SALES        <br />
-   7934 MILLER             10 ACCOUNTING</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO DNAME         ---------- ---------- ---------- --------------
+  7839 KING               10 ACCOUNTING     
+  7566 JONES              20 RESEARCH       
+  7698 BLAKE              30 SALES          
+  7782 CLARK              10 ACCOUNTING     
+  7902 FORD               20 RESEARCH       
+  7369 SMITH              20 RESEARCH       
+  7499 ALLEN              30 SALES          
+  7521 WARD               30 SALES          
+  7654 MARTIN             30 SALES          
+  7788 SCOTT              20 RESEARCH       
+  7844 TURNER             30 SALES          
+  7876 ADAMS              20 RESEARCH       
+  7900 JAMES              30 SALES          
+  7934 MILLER             10 ACCOUNTING     
+</code></pre></div></div>
 
 <p>동등조인을 해야한다면
 select empno, ename, deptno, dname
@@ -478,13 +469,11 @@ from	(select empno, ename, deptno <br />
         	from emp) e join dept d using(deptno);
 이렇게 사용하는 것이 더 낫다. 여기서는 테이블 별칭을 부여하지 않아줘도 된다.</p>
 
-<ol>
-  <li>급여가 1000 이상인 사원들에 대해 사번, 사원명, 급여, 부서번호, 부서명을 보이시오.
-1) emp 테이블에서 먼저 급여가 1000 이상인 사원들에 대한 정보를 얻는다
+<h3 id="4-급여가-1000-이상인-사원들에-대해-사번-사원명-급여-부서번호-부서명을-보이시오">4. 급여가 1000 이상인 사원들에 대해 사번, 사원명, 급여, 부서번호, 부서명을 보이시오.</h3>
+<p>1) emp 테이블에서 먼저 급여가 1000 이상인 사원들에 대한 정보를 얻는다
 select empno, ename, sal, deptno
 from emp
-where sal&gt;=1000;</li>
-</ol>
+where sal&gt;=1000;</p>
 
 <p>2) from 절에 subquery 넣고 join
 select empno, ename, sal, deptno, dname
@@ -510,72 +499,63 @@ from
 
 <p>여기서도 딱히 중복되는 열은 없으므로 테이블 별칭은 부여 안해줘도 된다.</p>
 
-<ol>
-  <li>
-    <p>사번, 사원명, 급여, 보너스, 급여 + 보너스(열별칭 tot), 부서명을 보이시오
-select empno, ename, sal, comm, nvl(sal, 0) + nvl(comm, 0) tot, dname
+<h3 id="5--사번-사원명-급여-보너스-급여--보너스열별칭-tot-부서명을-보이시오">5.  사번, 사원명, 급여, 보너스, 급여 + 보너스(열별칭 tot), 부서명을 보이시오</h3>
+<p>select empno, ename, sal, comm, nvl(sal, 0) + nvl(comm, 0) tot, dname
 from emp join dept using(deptno);</p>
 
-    <p>EMPNO ENAME             SAL       COMM        TOT DNAME      <br />
-———- ———- ———- ———- ———- ————–
-  7839 KING             5000                  5000 ACCOUNTING   <br />
-  7566 JONES            2975                  2975 RESEARCH     <br />
-  7698 BLAKE            2850                  2850 SALES        <br />
-  7782 CLARK            2450                  2450 ACCOUNTING   <br />
-  7902 FORD             3000                  3000 RESEARCH     <br />
-  7369 SMITH             800                   800 RESEARCH     <br />
-  7499 ALLEN            1600        300       1900 SALES        <br />
-  7521 WARD             1250        500       1750 SALES        <br />
-  7654 MARTIN           1250       1400       2650 SALES        <br />
-  7788 SCOTT            3000                  3000 RESEARCH     <br />
-  7844 TURNER           1500          0       1500 SALES        <br />
-  7876 ADAMS            1100                  1100 RESEARCH     <br />
-  7900 JAMES             950                   950 SALES        <br />
-  7934 MILLER           1300                  1300 ACCOUNTING</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM        TOT DNAME         ---------- ---------- ---------- ---------- ---------- --------------
+  7839 KING             5000                  5000 ACCOUNTING     
+  7566 JONES            2975                  2975 RESEARCH       
+  7698 BLAKE            2850                  2850 SALES          
+  7782 CLARK            2450                  2450 ACCOUNTING     
+  7902 FORD             3000                  3000 RESEARCH       
+  7369 SMITH             800                   800 RESEARCH       
+  7499 ALLEN            1600        300       1900 SALES          
+  7521 WARD             1250        500       1750 SALES          
+  7654 MARTIN           1250       1400       2650 SALES          
+  7788 SCOTT            3000                  3000 RESEARCH       
+  7844 TURNER           1500          0       1500 SALES          
+  7876 ADAMS            1100                  1100 RESEARCH       
+  7900 JAMES             950                   950 SALES          
+  7934 MILLER           1300                  1300 ACCOUNTING    
+</code></pre></div></div>
 
 <p>이 경우에 특별한 조건이 없으므로 처음부터 조인을 하고 검색해도 된다.</p>
 
-<ol>
-  <li>
-    <p>사번, 사원명, 입사일자, 부서명, 위치를 보이시오.
-select empno, ename, hiredate, dname, loc
+<h3 id="6-사번-사원명-입사일자-부서명-위치를-보이시오">6. 사번, 사원명, 입사일자, 부서명, 위치를 보이시오.</h3>
+<p>select empno, ename, hiredate, dname, loc
 from emp join dept using(deptno);</p>
 
-    <p>EMPNO ENAME      HIREDATE DNAME          LOC       <br />
-———- ———- ——– ————– ————-
-   7839 KING       81/11/17 ACCOUNTING     NEW YORK    <br />
-   7566 JONES      81/04/02 RESEARCH       DALLAS      <br />
-   7698 BLAKE      81/05/01 SALES          CHICAGO     <br />
-   7782 CLARK      81/06/09 ACCOUNTING     NEW YORK    <br />
-   7902 FORD       81/12/03 RESEARCH       DALLAS      <br />
-   7369 SMITH      80/12/17 RESEARCH       DALLAS      <br />
-   7499 ALLEN      81/02/20 SALES          CHICAGO     <br />
-   7521 WARD       81/02/22 SALES          CHICAGO     <br />
-   7654 MARTIN     81/09/28 SALES          CHICAGO     <br />
-   7788 SCOTT      82/04/09 RESEARCH       DALLAS      <br />
-   7844 TURNER     81/09/08 SALES          CHICAGO     <br />
-   7876 ADAMS      83/05/12 RESEARCH       DALLAS      <br />
-   7900 JAMES      81/12/03 SALES          CHICAGO     <br />
-   7934 MILLER     82/01/23 ACCOUNTING     NEW YORK</p>
-  </li>
-  <li>
-    <p>급여가 1000 미만이거나 3000 초과인 사원들에 대해 사번, 사원명, 급여, 부서번호를 보이시오.
-select empno, ename, sal, deptno
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE DNAME          LOC          ---------- ---------- -------- -------------- -------------
+  7839 KING       81/11/17 ACCOUNTING     NEW YORK      
+  7566 JONES      81/04/02 RESEARCH       DALLAS        
+  7698 BLAKE      81/05/01 SALES          CHICAGO       
+  7782 CLARK      81/06/09 ACCOUNTING     NEW YORK      
+  7902 FORD       81/12/03 RESEARCH       DALLAS        
+  7369 SMITH      80/12/17 RESEARCH       DALLAS        
+  7499 ALLEN      81/02/20 SALES          CHICAGO       
+  7521 WARD       81/02/22 SALES          CHICAGO       
+  7654 MARTIN     81/09/28 SALES          CHICAGO       
+  7788 SCOTT      82/04/09 RESEARCH       DALLAS        
+  7844 TURNER     81/09/08 SALES          CHICAGO       
+  7876 ADAMS      83/05/12 RESEARCH       DALLAS        
+  7900 JAMES      81/12/03 SALES          CHICAGO       
+  7934 MILLER     82/01/23 ACCOUNTING     NEW YORK      
+</code></pre></div></div>
+
+<h3 id="7-급여가-1000-미만이거나-3000-초과인-사원들에-대해-사번-사원명-급여-부서번호를-보이시오">7. 급여가 1000 미만이거나 3000 초과인 사원들에 대해 사번, 사원명, 급여, 부서번호를 보이시오.</h3>
+<p>select empno, ename, sal, deptno
 from emp
 where sal not between 1000 and 3000;</p>
 
-    <p>EMPNO ENAME             SAL     DEPTNO
-———- ———- ———- ———-
-   7839 KING             5000         10 
-   7369 SMITH             800         20 
-   7900 JAMES             950         30</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO ---------- ---------- ---------- ----------
+  7839 KING             5000         10 
+  7369 SMITH             800         20 
+  7900 JAMES             950         30 
+</code></pre></div></div>
 
-<p>7-1. 부서명과 같이 보이시오
-select empno, ename, sal, deptno, dname
+<h3 id="7-1-부서명과-같이-보이시오">7-1. 부서명과 같이 보이시오</h3>
+<p>select empno, ename, sal, deptno, dname
 from (select empno, ename, sal, deptno
 	from emp
 	where sal not between 1000 and 3000) e join dept using (deptno);</p>
@@ -586,23 +566,19 @@ from (select empno, ename, sal, deptno
   7900 JAMES             950         30 SALES         
 </code></pre></div></div>
 
-<ol>
-  <li>
-    <p>사원명에 s를 포함하는 사원들에 대해 부서번호별로 사원수, 급여평균을 보이시오.
-select deptno, count(*) cnt, avg(nvl(sal, 0)) avgsal
+<h3 id="8-사원명에-s를-포함하는-사원들에-대해-부서번호별로-사원수-급여평균을-보이시오">8. 사원명에 s를 포함하는 사원들에 대해 부서번호별로 사원수, 급여평균을 보이시오.</h3>
+<p>select deptno, count(*) cnt, avg(nvl(sal, 0)) avgsal
 from emp
 where lower(ename) like ‘%s%’
 group by deptno;</p>
 
-    <p>DEPTNO        CNT     AVGSAL
-———- ———- ———-
-     30          1        950 
-     20          4    1968.75</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL ---------- ---------- ----------
+    30          1        950 
+    20          4    1968.75 
+</code></pre></div></div>
 
-<p>8-1. 부서명과 같이 보이시오
-select deptno, cnt, avgsal, dname	-&gt; 메인쿼리에서는 alias를 보는 것이므로 이 열별칭들을 사용해주기만 하면 된다. 또 집단함수를 쓰는 것은 불가능. 
+<h3 id="8-1-부서명과-같이-보이시오">8-1. 부서명과 같이 보이시오</h3>
+<p>select deptno, cnt, avgsal, dname	-&gt; 메인쿼리에서는 alias를 보는 것이므로 이 열별칭들을 사용해주기만 하면 된다. 또 집단함수를 쓰는 것은 불가능. 
 from (select deptno, count(*) cnt, avg(nvl(sal, 0)) avgsal	 
 	from emp
 	where lower(ename) like ‘%s%’
@@ -615,24 +591,20 @@ from (select deptno, count(*) cnt, avg(nvl(sal, 0)) avgsal
 
 <p>-&gt; 서브쿼리로 만든 임시적인 테이블에 추가적으로 조인해서 사용하는 것임.</p>
 
-<ol>
-  <li>
-    <p>보너스가 지정되지 않은 사원들에 대해 부서번호별로 사원수, 급여합계를 사원수가 3 이상인 것만 보이시오.
-select deptno, count(<em>) cnt, sum(sal) sumsal
+<h3 id="9-보너스가-지정되지-않은-사원들에-대해-부서번호별로-사원수-급여합계를-사원수가-3-이상인-것만-보이시오">9. 보너스가 지정되지 않은 사원들에 대해 부서번호별로 사원수, 급여합계를 사원수가 3 이상인 것만 보이시오.</h3>
+<p>select deptno, count(<em>) cnt, sum(sal) sumsal
 from emp
 where comm is null
 group by deptno
 having count(</em>) &gt;= 3;</p>
 
-    <p>DEPTNO        CNT     SUMSAL
-———- ———- ———-
-     20          5      10875 
-     10          3       8750</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
+    20          5      10875 
+    10          3       8750 
+</code></pre></div></div>
 
-<p>9-1. 부서명과 같이 보이시오. 
-select deptno, cnt, sumsal, dname
+<h3 id="9-1-부서명과-같이-보이시오">9-1. 부서명과 같이 보이시오.</h3>
+<p>select deptno, cnt, sumsal, dname
 from (select deptno, count(<em>) cnt, sum(sal) sumsal
 	from emp
 	where comm is null
@@ -644,8 +616,8 @@ from (select deptno, count(<em>) cnt, sum(sal) sumsal
     10          3       8750 ACCOUNTING     
 </code></pre></div></div>
 
-<p>9-2. 부서명의 오름차순
-select deptno, cnt, sumsal, dname
+<h3 id="9-2-부서명의-오름차순">9-2. 부서명의 오름차순</h3>
+<p>select deptno, cnt, sumsal, dname
 from (select deptno, count(<em>) cnt, sum(sal) sumsal
 	from emp
 	where comm is null
@@ -660,12 +632,10 @@ order by dname asc;</p>
 
 <p>-&gt; order by는 특별한 경우가 아니면 메인쿼리에 써주는 것이 바람직하다. 나온 최종 결과를 정렬하는 것이므로.</p>
 
-<ol>
-  <li>급여가 전체평균급여 이상인 사원들에 대해 사번, 사원명, 급여, 부서명을 보이시오.
-1) 전체평균급여
+<h3 id="10-급여가-전체평균급여-이상인-사원들에-대해-사번-사원명-급여-부서명을-보이시오">10. 급여가 전체평균급여 이상인 사원들에 대해 사번, 사원명, 급여, 부서명을 보이시오.</h3>
+<p>1) 전체평균급여
 select avg(nvl(sal, 0)) avgsal
-from emp;</li>
-</ol>
+from emp;</p>
 
 <p>2)
 select empno, ename, sal, deptno
@@ -694,13 +664,11 @@ from
 
 <p>—&gt; 조인을 함에 있어서 deptno가 필요하단 것에 유의</p>
 
-<ol>
-  <li>급여가 부서번호 30의 급여평균 이상이면서 부서번호 10의 급여평균 이하인 사원들에 대해 부서명을 보이시오.
-1) 부서번호 30의 급여평균
+<h3 id="11-급여가-부서번호-30의-급여평균-이상이면서-부서번호-10의-급여평균-이하인-사원들에-대해-부서명을-보이시오">11. 급여가 부서번호 30의 급여평균 이상이면서 부서번호 10의 급여평균 이하인 사원들에 대해 부서명을 보이시오.</h3>
+<p>1) 부서번호 30의 급여평균
 select avg(nvl(sal, 0)) avgsal
 from emp
-where deptno=30;</li>
-</ol>
+where deptno=30;</p>
 
 <p>2) 부서번호 10의 급여평균
 select avg(nvl(sal, 0)) avgsal2
@@ -754,13 +722,11 @@ from
 
 <p>서브쿼리들을 실행해보면서 줄일 수 있는 것이 있는지 확인해보자.</p>
 
-<ol>
-  <li>부서번호가 사번이 7839와 같은 사원들에 대해 사번, 사원명, 부서명을 보이시오.
-1) 사번이 7839인 사원의 부서번호
+<h3 id="12-부서번호가-사번이-7839와-같은-사원들에-대해-사번-사원명-부서명을-보이시오">12. 부서번호가 사번이 7839와 같은 사원들에 대해 사번, 사원명, 부서명을 보이시오.</h3>
+<p>1) 사번이 7839인 사원의 부서번호
 select deptno
 from emp
-where empno=7839;</li>
-</ol>
+where empno=7839;</p>
 
 <p>2) 해당 사원과 같은 부서번호를 가지는 사원들의 사번과 사원명
 select empno, ename, deptno
@@ -786,12 +752,10 @@ from
   7934 MILLER     ACCOUNTING     
 </code></pre></div></div>
 
-<ol>
-  <li>부서번호별로 사원수, 급여평균을 급여평균이 전체급여평균이상인 것만 부서명과 같이 보이시오. 
-1) 전체급여평균
+<h3 id="13-부서번호별로-사원수-급여평균을-급여평균이-전체급여평균이상인-것만-부서명과-같이-보이시오">13. 부서번호별로 사원수, 급여평균을 급여평균이 전체급여평균이상인 것만 부서명과 같이 보이시오.</h3>
+<p>1) 전체급여평균
 select avg(nvl(sal, 0)) avgsal
-from emp</li>
-</ol>
+from emp</p>
 
 <p>2) 급여평균이 전체급여평균 이상인 사원들에 대한 그룹화
 select deptno, count(*) cnt, avg(nvl(sal, 0)) avgsal
@@ -818,13 +782,11 @@ from
 
 <p>-&gt; 부서번호별로 사원수, 급여평균을 급여가 전체급여평균이상인 것만 부서명과 같이 보이시오 라는 문제와 헷갈리지 말자.</p>
 
-<ol>
-  <li>직무가 salesman 또는 manager인 사원들에 대해 사번, 사원명, 직무, 급여, 부서번호, 부서명을 보이시오
-1)
+<h3 id="14-직무가-salesman-또는-manager인-사원들에-대해-사번-사원명-직무-급여-부서번호-부서명을-보이시오">14. 직무가 salesman 또는 manager인 사원들에 대해 사번, 사원명, 직무, 급여, 부서번호, 부서명을 보이시오</h3>
+<p>1)
 select empno, ename, job, sal, deptno
 from emp
-where lower(job) in (‘salesman’, ‘manager’);</li>
-</ol>
+where lower(job) in (‘salesman’, ‘manager’);</p>
 
 <p>2)
 select empno, ename, job, sal, deptno, dname
@@ -843,13 +805,11 @@ from
   7844 TURNER     SALESMAN        1500         30 SALES          
 </code></pre></div></div>
 
-<ol>
-  <li>부서위치가 dallas인 부서에 근무하는 사원에 대해 직무별로 사원수, 급여합계를 급여합계가 많은 것부터 보이시오
-1)
+<h3 id="15-부서위치가-dallas인-부서에-근무하는-사원에-대해-직무별로-사원수-급여합계를-급여합계가-많은-것부터-보이시오">15. 부서위치가 dallas인 부서에 근무하는 사원에 대해 직무별로 사원수, 급여합계를 급여합계가 많은 것부터 보이시오</h3>
+<p>1)
 select deptno
 from dept
-where lower(loc) = ‘dallas’;</li>
-</ol>
+where lower(loc) = ‘dallas’;</p>
 
 <p>2)
 select job, count(*) cnt, sum(sal) sumsal
@@ -867,24 +827,20 @@ ANALYST            2       6000
 MANAGER            1       2975 
 CLERK              2       1900</p>
 
-<ol>
-  <li>
-    <p>보너스가 지정되지 않은 사원들에 대해 부서번호별로 사원수, 급여합계를 사원수가 3이상인 것만 보이시오
-select deptno, count(<em>) cnt, sum(sal) sumsal
+<h3 id="16-보너스가-지정되지-않은-사원들에-대해-부서번호별로-사원수-급여합계를-사원수가-3이상인-것만-보이시오">16. 보너스가 지정되지 않은 사원들에 대해 부서번호별로 사원수, 급여합계를 사원수가 3이상인 것만 보이시오</h3>
+<p>select deptno, count(<em>) cnt, sum(sal) sumsal
 from emp
 where comm is null
 group by deptno
 having count(</em>) &gt;= 3;</p>
 
-    <p>DEPTNO        CNT     SUMSAL
-———- ———- ———-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
     20          5      10875
-    10          3       8750</p>
-  </li>
-</ol>
+    10          3       8750
+</code></pre></div></div>
 
-<p>16-1. 부서명과 같이
-select deptno, cnt, sumsal, dname
+<h3 id="16-1-부서명과-같이">16-1. 부서명과 같이</h3>
+<p>select deptno, cnt, sumsal, dname
 from
     	(select deptno, count(<em>) cnt, sum(sal) sumsal
     	from emp
@@ -897,9 +853,7 @@ from
     10          3       8750 ACCOUNTING    
 </code></pre></div></div>
 
-<ol>
-  <li>관리자사번이 7839인 사원의 부서번호와 같은 부서번호를 갖는 사원들에 대해 사번, 사원명, 부서명을 보이시오.</li>
-</ol>
+<h3 id="17-관리자사번이-7839인-사원의-부서번호와-같은-부서번호를-갖는-사원들에-대해-사번-사원명-부서명을-보이시오">17. 관리자사번이 7839인 사원의 부서번호와 같은 부서번호를 갖는 사원들에 대해 사번, 사원명, 부서명을 보이시오.</h3>
 
 <p>1)관리자 사번이 7839인 사원의 부서번호
 select distinct deptno
@@ -948,11 +902,9 @@ from
 
 <p>**동등 조인(자기자신 조인, self-join)	-&gt; 자기 자신에 대한 조인에 있어서 기본키와 외래키 열 이름이 다르므로 동등조인을 사용해야 한다. 자연조인 사용불가.</p>
 
-<ol>
-  <li>사번, 사원명, 관리자사번, 관리자사원명 보이시오
-select 사.empno 사번, 사.ename 사원명, 사.mgr 관리자사번, 관.ename 관리자사원명		-&gt; 같은 테이블 2개를 합쳤으므로 그냥 열을 써서는 안되고 어떤 테이블에 대한 것을 보고자 하는 것인지 적어야 한다.
-from emp 사 join emp 관 on 사.mgr=관.empno;					-&gt; 같은 테이블에 대해 역할을 달리 봐야 하므로 별칭을 준다.</li>
-</ol>
+<h3 id="18-사번-사원명-관리자사번-관리자사원명-보이시오">18. 사번, 사원명, 관리자사번, 관리자사원명 보이시오</h3>
+<p>select 사.empno 사번, 사.ename 사원명, 사.mgr 관리자사번, 관.ename 관리자사원명		-&gt; 같은 테이블 2개를 합쳤으므로 그냥 열을 써서는 안되고 어떤 테이블에 대한 것을 보고자 하는 것인지 적어야 한다.
+from emp 사 join emp 관 on 사.mgr=관.empno;					-&gt; 같은 테이블에 대해 역할을 달리 봐야 하므로 별칭을 준다.</p>
 
 <p>-&gt; 위에서 관리자사번은 관.empno를 사용해도 된다.
 열별칭을 마지막에 주는 것을 잊지 말도록 하자.</p>
@@ -975,28 +927,34 @@ from emp 사 join emp 관 on 사.mgr=관.empno;					-&gt; 같은 테이블에 �
 
 <p>—&gt; 사원 중 KING이 빠졌다. 이는 KING에 관리자사번이 존재하지 않기 때문에 JOIN을 수행하는 도중에 해당 레코드를 제외시켰기 때문이다.</p>
 
-<ol>
-  <li>
-    <p>사번, 사원명, 직무, 관리자사번, 관리자사원명, 관리자직무를 보이시오.
-select 사.empno 사번, 사.ename 사원명, 사.job 직무, 관.empno 관리자사번, 관.ename 관리자사원명, 관.job 관리자직무
+<h3 id="19-사번-사원명-직무-관리자사번-관리자사원명-관리자직무를-보이시오">19. 사번, 사원명, 직무, 관리자사번, 관리자사원명, 관리자직무를 보이시오.</h3>
+<p>select 사.empno 사번, 사.ename 사원명, 사.job 직무, 관.empno 관리자사번, 관.ename 관리자사원명, 관.job 관리자직무
 from emp 사 join emp 관 on 사.mgr = 관.empno;</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>사번 사원명        직무             관리자사번 관리자사원명     관리자직무    ---------- ---------- --------- ---------- ---------- ---------   7782 CLARK      MANAGER         7839 KING       PRESIDENT    7698 BLAKE      MANAGER         7839 KING       PRESIDENT    7566 JONES      MANAGER         7839 KING       PRESIDENT    7788 SCOTT      ANALYST         7566 JONES      MANAGER      7902 FORD       ANALYST         7566 JONES      MANAGER      7900 JAMES      CLERK           7698 BLAKE      MANAGER      7844 TURNER     SALESMAN        7698 BLAKE      MANAGER      7654 MARTIN     SALESMAN        7698 BLAKE      MANAGER      7521 WARD       SALESMAN        7698 BLAKE      MANAGER      7499 ALLEN      SALESMAN        7698 BLAKE      MANAGER      7934 MILLER     CLERK           7782 CLARK      MANAGER      7369 SMITH      CLERK           7902 FORD       ANALYST      7876 ADAMS      CLERK           7788 SCOTT      ANALYST   
-</code></pre></div>    </div>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명        직무             관리자사번 관리자사원명     관리자직무    ---------- ---------- --------- ---------- ---------- ---------
+  7782 CLARK      MANAGER         7839 KING       PRESIDENT 
+  7698 BLAKE      MANAGER         7839 KING       PRESIDENT 
+  7566 JONES      MANAGER         7839 KING       PRESIDENT 
+  7788 SCOTT      ANALYST         7566 JONES      MANAGER   
+  7902 FORD       ANALYST         7566 JONES      MANAGER   
+  7900 JAMES      CLERK           7698 BLAKE      MANAGER   
+  7844 TURNER     SALESMAN        7698 BLAKE      MANAGER   
+  7654 MARTIN     SALESMAN        7698 BLAKE      MANAGER   
+  7521 WARD       SALESMAN        7698 BLAKE      MANAGER   
+  7499 ALLEN      SALESMAN        7698 BLAKE      MANAGER   
+  7934 MILLER     CLERK           7782 CLARK      MANAGER   
+  7369 SMITH      CLERK           7902 FORD       ANALYST   
+  7876 ADAMS      CLERK           7788 SCOTT      ANALYST   
+</code></pre></div></div>
 
 <p>—&gt; 역시나 여기에서도 KING은 빠졌다.</p>
 
-<ol>
-  <li>
-    <p>급여가 1000 이상이면서 3000 이하인 사원들에 대해 사번, 사원명, 부서번호, 관리자사번으로 보이시오.
-select empno, ename, deptno, mgr
+<h3 id="20-급여가-1000-이상이면서-3000-이하인-사원들에-대해-사번-사원명-부서번호-관리자사번으로-보이시오">20. 급여가 1000 이상이면서 3000 이하인 사원들에 대해 사번, 사원명, 부서번호, 관리자사번으로 보이시오.</h3>
+<p>select empno, ename, deptno, mgr
 from emp
 where sal between 1000 and 3000;</p>
 
-    <p>EMPNO ENAME          DEPTNO        MGR
-———- ———- ———- ———-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR ---------- ---------- ---------- ----------
   7566 JONES              20       7839
   7698 BLAKE              30       7839
   7782 CLARK              10       7839
@@ -1007,12 +965,11 @@ where sal between 1000 and 3000;</p>
   7788 SCOTT              20       7566
   7844 TURNER             30       7698
   7876 ADAMS              20       7788
-  7934 MILLER             10       7782</p>
-  </li>
-</ol>
+  7934 MILLER             10       7782
+</code></pre></div></div>
 
-<p>20-1. 관리자 사원명과 같이
-select 사.empno 사번, 사.ename 사원명, 사.deptno 부서번호, 사.mgr 관리자사번, 관.ename 관리자사원명
+<h3 id="20-1-관리자-사원명과-같이">20-1. 관리자 사원명과 같이</h3>
+<p>select 사.empno 사번, 사.ename 사원명, 사.deptno 부서번호, 사.mgr 관리자사번, 관.ename 관리자사원명
 from
 	(select empno, ename, deptno, mgr
 	from emp
@@ -1032,25 +989,21 @@ from
   7876 ADAMS              20       7788 SCOTT      
 </code></pre></div></div>
 
-<ol>
-  <li>
-    <p>관리자사번별로 사원수, 급여합계를 관리자명과 같이 보이시오
-1)
+<h3 id="21-관리자사번별로-사원수-급여합계를-관리자명과-같이-보이시오">21. 관리자사번별로 사원수, 급여합계를 관리자명과 같이 보이시오</h3>
+<p>1)
 select mgr, count(*) cou, sum(sal) sumsal
 from emp
 group by mgr</p>
 
-    <p>MGR        CNT     SUMSAL
-———- ———- ———-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        CNT     SUMSAL ---------- ---------- ----------
                 1       5000
   7839          3       8275
   7782          1       1300
   7698          5       6550
   7902          1        800
   7566          2       6000
-  7788          1       1100</p>
-  </li>
-</ol>
+  7788          1       1100
+</code></pre></div></div>
 
 <p>2)
 select 사.mgr, 사.cou, 사.sumsal, 관.ename 관리자명
@@ -1086,13 +1039,11 @@ from
                   1       5000            -&gt; 좌측 외부조인
 </code></pre></div></div>
 
-<ol>
-  <li>부서번호가 20인 사원들에 대해 사번, 사원명, 관리자사번, 관리자사원명을 보이시오.
-1)
+<h3 id="22-부서번호가-20인-사원들에-대해-사번-사원명-관리자사번-관리자사원명을-보이시오">22. 부서번호가 20인 사원들에 대해 사번, 사원명, 관리자사번, 관리자사원명을 보이시오.</h3>
+<p>1)
 select empno, ename, mgr
 from emp
-where deptno=20</li>
-</ol>
+where deptno=20</p>
 
 <p>2)
 select 사.empno 사번, 사.ename 사원명, 사.mgr 관리자사번, 관.ename 관리자사원명
@@ -1109,13 +1060,11 @@ from
   7876 ADAMS            7788 SCOTT      
 </code></pre></div></div>
 
-<ol>
-  <li>직무가 salesman 또는 manager인 사원들에 대해 사번, 사원명, 부서번호, 부서명, 관리자사번, 관리자사원명을 보이시오.
-1)
+<h3 id="23-직무가-salesman-또는-manager인-사원들에-대해-사번-사원명-부서번호-부서명-관리자사번-관리자사원명을-보이시오">23. 직무가 salesman 또는 manager인 사원들에 대해 사번, 사원명, 부서번호, 부서명, 관리자사번, 관리자사원명을 보이시오.</h3>
+<p>1)
 select empno, ename, deptno, mgr
 from emp
-where lower(job) in (‘salesman’, ‘manager’)</li>
-</ol>
+where lower(job) in (‘salesman’, ‘manager’)</p>
 
 <p>2)
 select 사.empno 사번, 사.ename 사원명, 사.deptno 부서번호, dname 부서명, 사.mgr 관리자사번, 관.ename 관리자사원명
@@ -1154,13 +1103,11 @@ from
 
 <p>-&gt; 동등조인 순서 자체는 상관이 없다.</p>
 
-<ol>
-  <li>부서번호, 관리자사번별로 사원수, 급여평균을 부서명과 관리자사원명과 같이 보이시오.
-1)
+<h3 id="24-부서번호-관리자사번별로-사원수-급여평균을-부서명과-관리자사원명과-같이-보이시오">24. 부서번호, 관리자사번별로 사원수, 급여평균을 부서명과 관리자사원명과 같이 보이시오.</h3>
+<p>1)
 select deptno, mgr, count(*) cnt, avg(nvl(sal, 0)) avgsal
-	from emp
-	group by deptno, mgr</li>
-</ol>
+    	from emp
+    	group by deptno, mgr</p>
 
 <p>2)
 select e.deptno, e.mgr, cnt, avgsal, dname, m.ename 관리자사원명
@@ -1181,13 +1128,11 @@ from
     20       7788          1       1100 RESEARCH       SCOTT    
 </code></pre></div></div>
 
-<ol>
-  <li>부서번호 별로 최대급여, 최소급여를 부서명과 같이 보이시오.
-1)
+<h3 id="25-부서번호-별로-최대급여-최소급여를-부서명과-같이-보이시오">25. 부서번호 별로 최대급여, 최소급여를 부서명과 같이 보이시오.</h3>
+<p>1)
 select deptno, max(sal) maxsal, min(sal) minsal
 from emp
-group by deptno</li>
-</ol>
+group by deptno</p>
 
 <p>2)
 select deptno, maxsal, minsal, dname
@@ -1202,13 +1147,11 @@ from
     30       2850        950 SALES        
 </code></pre></div></div>
 
-<ol>
-  <li>보너스가 지정되지 않은 사원들에 대해 사번, 사원명, 부서번호, 부서명, 관리자사번, 관리자사원명을 사번의 내림차순으로 보이시오
-1)
+<h3 id="26-보너스가-지정되지-않은-사원들에-대해-사번-사원명-부서번호-부서명-관리자사번-관리자사원명을-사번의-내림차순으로-보이시오">26. 보너스가 지정되지 않은 사원들에 대해 사번, 사원명, 부서번호, 부서명, 관리자사번, 관리자사원명을 사번의 내림차순으로 보이시오</h3>
+<p>1)
 select empno, ename, deptno, mgr
 from emp
-where comm is null</li>
-</ol>
+where comm is null</p>
 
 <p>2)
 select e.empno, e.ename, e.deptno, e.mgr, dname, m.ename 관리자사원명
@@ -1233,12 +1176,10 @@ order by e.empno desc;</p>
   7369 SMITH              20       7902 RESEARCH       FORD    
 </code></pre></div></div>
 
-<ol>
-  <li>급여가 전체 평균급여 이상인 사원들에 대해 사번, 사원명, 부서번호, 부서명을 보이시오.
-1) 전체 평균급여
+<h3 id="27-급여가-전체-평균급여-이상인-사원들에-대해-사번-사원명-부서번호-부서명을-보이시오">27. 급여가 전체 평균급여 이상인 사원들에 대해 사번, 사원명, 부서번호, 부서명을 보이시오.</h3>
+<p>1) 전체 평균급여
 select avg(nvl(sal, 0))
-from emp</li>
-</ol>
+from emp</p>
 
 <p>2)
 select empno, ename, deptno
@@ -1265,13 +1206,11 @@ from
   7788 SCOTT              20 RESEARCH       
 </code></pre></div></div>
 
-<ol>
-  <li>사원명에 s를 포함하는 사원들에 대해 사번, 사원명, 부서번호, 부서명, 관리자사번, 관리자사원명을 보이시오
-1)
+<h3 id="28-사원명에-s를-포함하는-사원들에-대해-사번-사원명-부서번호-부서명-관리자사번-관리자사원명을-보이시오">28. 사원명에 s를 포함하는 사원들에 대해 사번, 사원명, 부서번호, 부서명, 관리자사번, 관리자사원명을 보이시오</h3>
+<p>1)
 select empno, ename, deptno, mgr
-from emp
-where lower(ename) like ‘%s%’</li>
-</ol>
+    from emp
+    where lower(ename) like ‘%s%’</p>
 
 <p>2)
 select e.empno, e.ename, e.deptno, dname, e.mgr, m.ename 관리자사원명
@@ -1289,13 +1228,11 @@ from
   7876 ADAMS              20 RESEARCH             7788 SCOTT     
 </code></pre></div></div>
 
-<ol>
-  <li>부서위치가 dallas인 부서에 근무하는 사원들에 대해 관리자사번별로 사원수, 급여평균을 관리자사원명과 같이 보이시오.
-1)
+<h3 id="29-부서위치가-dallas인-부서에-근무하는-사원들에-대해-관리자사번별로-사원수-급여평균을-관리자사원명과-같이-보이시오">29. 부서위치가 dallas인 부서에 근무하는 사원들에 대해 관리자사번별로 사원수, 급여평균을 관리자사원명과 같이 보이시오.</h3>
+<p>1)
 select deptno
 from dept
-where lower(loc) = ‘dallas’</li>
-</ol>
+where lower(loc) = ‘dallas’</p>
 
 <p>2)
 select mgr, count(*) cnt, avg(nvl(sal, 0)) avgsal
@@ -1324,15 +1261,13 @@ from
   7839          1       2975 KING      
 </code></pre></div></div>
 
-<ol>
-  <li>급여가 1000이상이면서 3000미만인 사원들에 대해 부서번호별로 사원수, 급여합계를 사원수가 3이상인것만 부서명과 같이 보이시오.
-1)
+<h3 id="30-급여가-1000이상이면서-3000미만인-사원들에-대해-부서번호별로-사원수-급여합계를-사원수가-3이상인것만-부서명과-같이-보이시오">30. 급여가 1000이상이면서 3000미만인 사원들에 대해 부서번호별로 사원수, 급여합계를 사원수가 3이상인것만 부서명과 같이 보이시오.</h3>
+<p>1)
 select deptno, count(<em>) cnt, sum(sal) sumsal
 from emp
 where sal &gt;=1000 and sal &lt; 3000
 group by deptno
-having count(</em>) &gt;= 3</li>
-</ol>
+having count(</em>) &gt;= 3</p>
 
 <p>2)
 select deptno, cnt, sumsal, dname
@@ -1347,13 +1282,11 @@ from
     30          5       8450 SALES          
 </code></pre></div></div>
 
-<ol>
-  <li>급여가 부서번호 30의 급여평균 이상인 사원들에 대해 부서번호, 관리자사번별로 사원수, 급여합계, 급여평균을 급여평균이 전체급여평균이하인 것만 부서명, 관리자 사원명과 같이 보이시오.
-1)부서번호 30의 급여평균
+<h3 id="31-급여가-부서번호-30의-급여평균-이상인-사원들에-대해-부서번호-관리자사번별로-사원수-급여합계-급여평균을-급여평균이-전체급여평균이하인-것만-부서명-관리자-사원명과-같이-보이시오">31. 급여가 부서번호 30의 급여평균 이상인 사원들에 대해 부서번호, 관리자사번별로 사원수, 급여합계, 급여평균을 급여평균이 전체급여평균이하인 것만 부서명, 관리자 사원명과 같이 보이시오.</h3>
+<p>1)부서번호 30의 급여평균
 select avg(nvl(sal, 0))
 from emp
-where deptno=30</li>
-</ol>
+where deptno=30</p>
 
 <p>2)전체급여평균
 select avg(nvl(sal, 0))
@@ -1393,27 +1326,23 @@ from
 <p>** non-equi join (세타조인)
 -&gt; between 이나 in 등으로 별도의 테이블을 불러들이기</p>
 
-<ol>
-  <li>
-    <p>salgrade 테이블의 모든 것을 보이시오.
-select *
+<h3 id="32-salgrade-테이블의-모든-것을-보이시오">32. salgrade 테이블의 모든 것을 보이시오.</h3>
+<p>select *
 from salgrade;</p>
 
-    <p>GRADE      LOSAL      HISAL
-———- ———- ———-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE      LOSAL      HISAL ---------- ---------- ----------
      1        700       1200 
      2       1201       1400 
      3       1401       2000 
      4       2001       3000 
-     5       3001       9999</p>
-  </li>
-  <li>
-    <p>사번, 사원명, 급여, 등급을 보이시오.
-select empno, ename, sal, grade
+     5       3001       9999 
+</code></pre></div></div>
+
+<h3 id="33-사번-사원명-급여-등급을-보이시오">33. 사번, 사원명, 급여, 등급을 보이시오.</h3>
+<p>select empno, ename, sal, grade
 from emp join salgrade on sal between losal and hisal;</p>
 
-    <p>EMPNO ENAME             SAL      GRADE
-———- ———- ———- ———-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL      GRADE ---------- ---------- ---------- ----------
   7369 SMITH             800          1 
   7876 ADAMS            1100          1 
   7900 JAMES             950          1 
@@ -1427,16 +1356,14 @@ from emp join salgrade on sal between losal and hisal;</p>
   7782 CLARK            2450          4 
   7902 FORD             3000          4 
   7788 SCOTT            3000          4 
-  7839 KING             5000          5</p>
-  </li>
-  <li>
-    <p>사번, 사원명, 급여, 등급, 부서번호, 부서명, 관리자사번, 관리자사원명을 보이시오.
-select e.empno, e.ename, e.sal, grade, e.deptno, dept.dname, e.mgr, emp.ename mgrename
+  7839 KING             5000          5 
+</code></pre></div></div>
+
+<h3 id="34-사번-사원명-급여-등급-부서번호-부서명-관리자사번-관리자사원명을-보이시오">34. 사번, 사원명, 급여, 등급, 부서번호, 부서명, 관리자사번, 관리자사원명을 보이시오.</h3>
+<p>select e.empno, e.ename, e.sal, grade, e.deptno, dept.dname, e.mgr, emp.ename mgrename
 from emp e join salgrade on e.sal between losal and hisal
-join dept on e.deptno=dept.deptno
-join emp on e.mgr=emp.empno;</p>
-  </li>
-</ol>
+	join dept on e.deptno=dept.deptno
+	join emp on e.mgr=emp.empno;</p>
 
 <p>-&gt; 13명만 나온다. king이 빠졌다.</p>
 
@@ -1463,13 +1390,11 @@ from emp e join salgrade on e.sal between losal and hisal
   7839 KING             5000          5         10 ACCOUNTING                           
 </code></pre></div></div>
 
-<ol>
-  <li>보너스가 지정된 사원들에 대해 사번, 사원명, 급여, 등급, 부서번호, 부서명을 보이시오.
-1)
+<h3 id="35-보너스가-지정된-사원들에-대해-사번-사원명-급여-등급-부서번호-부서명을-보이시오">35. 보너스가 지정된 사원들에 대해 사번, 사원명, 급여, 등급, 부서번호, 부서명을 보이시오.</h3>
+<p>1)
 select empno, ename, sal, deptno
 from emp
-where comm is not null</li>
-</ol>
+where comm is not null</p>
 
 <p>2)
 select empno, ename, sal, grade, e.deptno, dname
@@ -1486,13 +1411,11 @@ from
   7499 ALLEN            1600          3         30 SALES          
 </code></pre></div></div>
 
-<ol>
-  <li>사원명에 s를 포함하거나 a로 시작되는 사원들에 대해 사번, 사원명, 급여, 등급, 부서번호, 부서명, 관리자사번, 관리자 사원명을 보이시오. 
-1)
+<h3 id="36-사원명에-s를-포함하거나-a로-시작되는-사원들에-대해-사번-사원명-급여-등급-부서번호-부서명-관리자사번-관리자-사원명을-보이시오">36. 사원명에 s를 포함하거나 a로 시작되는 사원들에 대해 사번, 사원명, 급여, 등급, 부서번호, 부서명, 관리자사번, 관리자 사원명을 보이시오.</h3>
+<p>1)
 select empno, ename, sal, deptno, mgr
 from emp
-where lower(ename) like ‘%s%’ or lower(ename) like ‘a%’</li>
-</ol>
+where lower(ename) like ‘%s%’ or lower(ename) like ‘a%’</p>
 
 <p>2)
 select e.empno, e.ename, e.sal, e.deptno, e.mgr, grade, dname, m.ename mgrname
@@ -1512,29 +1435,24 @@ from
   7900 JAMES             950         30       7698          1 SALES          BLAKE      
 </code></pre></div></div>
 
-<ol>
-  <li>
-    <p>등급별로 사원수, 급여평균을 보이시오.
-select grade, count(*) cnt, avg(nvl(sal, 0)) avgsal
+<h3 id="37-등급별로-사원수-급여평균을-보이시오">37. 등급별로 사원수, 급여평균을 보이시오.</h3>
+<p>select grade, count(*) cnt, avg(nvl(sal, 0)) avgsal
 from emp join salgrade on sal between losal and hisal
 group by grade;</p>
 
-    <p>GRADE        CNT     AVGSAL
-———- ———- ———-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE        CNT     AVGSAL ---------- ---------- ----------
      1          3        950 
      2          3 1266.66667 
      4          5       2855 
      5          1       5000 
-     3          2       1550</p>
-  </li>
-  <li>
-    <p>직무가 salesman 또는 manager인 사원들에 대해 등급별로 사원수, 최대급여, 최소급여를 보이시오.
-1)
+     3          2       1550 
+</code></pre></div></div>
+
+<h3 id="38-직무가-salesman-또는-manager인-사원들에-대해-등급별로-사원수-최대급여-최소급여를-보이시오">38. 직무가 salesman 또는 manager인 사원들에 대해 등급별로 사원수, 최대급여, 최소급여를 보이시오.</h3>
+<p>1)
 select sal
 from emp
 where lower(job) in (‘salesman’, ‘manager’)</p>
-  </li>
-</ol>
 
 <p>2)
 select grade, count(*) cnt, max(e.sal) maxsal, min(e.sal) minsal
@@ -1557,14 +1475,12 @@ group by grade;</p>
 
 <p>-&gt; 위의 방식으로도 가능하긴 하다. 먼저 세타조인을 하고 검색하는 방식.</p>
 
-<ol>
-  <li>등급이 3인 사원들에 대해 사번, 사원명, 급여, 부서번호, 부서명을 보이시오.
-1)
+<h3 id="39-등급이-3인-사원들에-대해-사번-사원명-급여-부서번호-부서명을-보이시오">39. 등급이 3인 사원들에 대해 사번, 사원명, 급여, 부서번호, 부서명을 보이시오.</h3>
+<p>1)
 select empno, ename, sal, deptno
 from emp join (select losal, hisal
-                from  salgrade
-                where grade = 3) on sal between losal and hisal</li>
-</ol>
+                    from  salgrade
+                    where grade = 3) on sal between losal and hisal</p>
 
 <p>2)
 select empno, ename, sal, deptno, dname
@@ -1578,12 +1494,10 @@ from
   7844 TURNER           1500         30 SALES          
 </code></pre></div></div>
 
-<ol>
-  <li>급여가 전체평균급여 이상인 사원들에 대해 사번, 사원명, 부서번호, 부서명, 급여, 등급, 관리자사번, 관리자명을 보이시오.
-1)전체평균급여
+<h3 id="40-급여가-전체평균급여-이상인-사원들에-대해-사번-사원명-부서번호-부서명-급여-등급-관리자사번-관리자명을-보이시오">40. 급여가 전체평균급여 이상인 사원들에 대해 사번, 사원명, 부서번호, 부서명, 급여, 등급, 관리자사번, 관리자명을 보이시오.</h3>
+<p>1)전체평균급여
 select avg(nvl(sal, 0))
-from emp</li>
-</ol>
+from emp</p>
 
 <p>2)
 select empno, ename, deptno, sal, mgr
@@ -1611,13 +1525,11 @@ from
   7788 SCOTT              20       3000       7566 RESEARCH       JONES      
 </code></pre></div></div>
 
-<ol>
-  <li>부서번호가 10인 사원들에 대해 사번, 사원명, 급여, 급여등급을 등급의 오름차순으로 보이시오.
-1)
+<h3 id="41-부서번호가-10인-사원들에-대해-사번-사원명-급여-급여등급을-등급의-오름차순으로-보이시오">41. 부서번호가 10인 사원들에 대해 사번, 사원명, 급여, 급여등급을 등급의 오름차순으로 보이시오.</h3>
+<p>1)
 select empno, ename, sal
 from emp
-where deptno=10</li>
-</ol>
+where deptno=10</p>
 
 <p>2)
 select e.empno, e.ename, e.sal, grade
@@ -1633,13 +1545,11 @@ order by grade asc;</p>
   7839 KING             5000          5 
 </code></pre></div></div>
 
-<ol>
-  <li>사번이 7900의 부서와 같은 부서에 근무하는 사원들에 대해 등급별로 사원수, 급여합계를 급여합계가 많은것부터 보이시오.
-1) 사번이 7900인 사원의 부서번호
+<h3 id="42-사번이-7900의-부서와-같은-부서에-근무하는-사원들에-대해-등급별로-사원수-급여합계를-급여합계가-많은것부터-보이시오">42. 사번이 7900의 부서와 같은 부서에 근무하는 사원들에 대해 등급별로 사원수, 급여합계를 급여합계가 많은것부터 보이시오.</h3>
+<p>1) 사번이 7900인 사원의 부서번호
 select deptno
 from emp
-where empno=7900</li>
-</ol>
+where empno=7900</p>
 
 <p>2)
 select sal
@@ -1670,29 +1580,25 @@ order by sumsal desc;</p>
 
 <p>** outer - join(외부조인)</p>
 
-<ol>
-  <li>
-    <p>사번, 사원명, 관리자사번, 관리자 사원명을 보이시오
-select e.empno, e.ename, e.mgr, m.ename mname
+<h3 id="43-사번-사원명-관리자사번-관리자-사원명을-보이시오">43. 사번, 사원명, 관리자사번, 관리자 사원명을 보이시오</h3>
+<p>select e.empno, e.ename, e.mgr, m.ename mname
 from emp e join emp m on e.mgr=m.empno;</p>
 
-    <p>EMPNO ENAME             MGR MNAME   <br />
-———- ———- ———- ———-
-  7782 CLARK            7839 KING    <br />
-  7698 BLAKE            7839 KING    <br />
-  7566 JONES            7839 KING    <br />
-  7788 SCOTT            7566 JONES   <br />
-  7902 FORD             7566 JONES   <br />
-  7900 JAMES            7698 BLAKE   <br />
-  7844 TURNER           7698 BLAKE   <br />
-  7654 MARTIN           7698 BLAKE   <br />
-  7521 WARD             7698 BLAKE   <br />
-  7499 ALLEN            7698 BLAKE   <br />
-  7934 MILLER           7782 CLARK   <br />
-  7369 SMITH            7902 FORD    <br />
-  7876 ADAMS            7788 SCOTT</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
+  7782 CLARK            7839 KING      
+  7698 BLAKE            7839 KING      
+  7566 JONES            7839 KING      
+  7788 SCOTT            7566 JONES     
+  7902 FORD             7566 JONES     
+  7900 JAMES            7698 BLAKE     
+  7844 TURNER           7698 BLAKE     
+  7654 MARTIN           7698 BLAKE     
+  7521 WARD             7698 BLAKE     
+  7499 ALLEN            7698 BLAKE     
+  7934 MILLER           7782 CLARK     
+  7369 SMITH            7902 FORD      
+  7876 ADAMS            7788 SCOTT     
+</code></pre></div></div>
 
 <p>13개 행에 대해서만 나온다. 이는 자기자신조인을 할 때 mgr값이 존재하지 않는 행을 삭제했기 때문.</p>
 
@@ -1777,11 +1683,9 @@ from emp e full join emp m on e.mgr=m.empno ;</p>
 
 <p>-&gt; 위의 두 결과가 합해진 것</p>
 
-<ol>
-  <li>사번, 사원명, 부서번호, 부서명을 보이시오.
-select e.ename, e.empno, e.deptno, d.dname
-from emp e join dept d on e.deptno=d.deptno;</li>
-</ol>
+<h3 id="44-사번-사원명-부서번호-부서명을-보이시오">44. 사번, 사원명, 부서번호, 부서명을 보이시오.</h3>
+<p>select e.ename, e.empno, e.deptno, d.dname
+from emp e join dept d on e.deptno=d.deptno;</p>
 
 <p>ENAME           EMPNO     DEPTNO DNAME       <br />
 ———- ———- ———- ————–
@@ -1867,13 +1771,11 @@ JAMES            7900         30 SALES        <br />
 MILLER           7934         10 ACCOUNTING   <br />
                                  OPERATIONS</p>
 
-<ol>
-  <li>삽입
-insert into emp (empno, ename, deptno)
-values (9999, ‘은하철도’, null);
+<h3 id="45-삽입">45. 삽입</h3>
+<p>insert into emp (empno, ename, deptno)
+	values (9999, ‘은하철도’, null);
 삽입불가. desc emp 해보면 ename의 자료형 크기를 넘는다.
-varchar2(10)의 공간인데 한글은 한 글자당 3바이트를 차지.</li>
-</ol>
+varchar2(10)의 공간인데 한글은 한 글자당 3바이트를 차지.</p>
 
 <p>insert into emp (empno, ename, deptno)
 	values (9999, ‘은하철’, null);
@@ -1974,13 +1876,11 @@ MILLER           7934         10 ACCOUNTING   <br />
 
 <p>rollback;	-&gt; 은하철에 해당하는 레코드 사라짐.</p>
 
-<ol>
-  <li>급여가 1500 이상인 사원들에 대해 사번, 사원명, 급여, 부서번호, 부서명, 등급을 보이시오. (단 사원이 없는 부서도 같이) 
-1)
+<h3 id="46-급여가-1500-이상인-사원들에-대해-사번-사원명-급여-부서번호-부서명-등급을-보이시오-단-사원이-없는-부서도-같이">46. 급여가 1500 이상인 사원들에 대해 사번, 사원명, 급여, 부서번호, 부서명, 등급을 보이시오. (단 사원이 없는 부서도 같이)</h3>
+<p>1)
 select empno, ename, sal, deptno
 from emp
-where sal &gt;= 1500</li>
-</ol>
+where sal &gt;= 1500</p>
 
 <p>2)</p>
 
@@ -2023,16 +1923,14 @@ from	(select empno, ename, sal, deptno
 <p>** union (합집합)
 차수와 domain이 같아야 한다.</p>
 
-<ol>
-  <li>부서번호가 10인 사번, 사원명, 부서번호와 부서번호가 20인 사번, 사원명, 부서번호를 합집합하시오.
-select empno, ename, deptno
+<h3 id="47-부서번호가-10인-사번-사원명-부서번호와-부서번호가-20인-사번-사원명-부서번호를-합집합하시오">47. 부서번호가 10인 사번, 사원명, 부서번호와 부서번호가 20인 사번, 사원명, 부서번호를 합집합하시오.</h3>
+<p>select empno, ename, deptno
 from emp
 where deptno = 10
 union
 select empno, deptno, ename
 from emp
-where deptno = 20;</li>
-</ol>
+where deptno = 20;</p>
 
 <p>SQL 오류: ORA-01790: expression must have same datatype as corresponding expression</p>
 <ol>
@@ -2065,16 +1963,14 @@ where deptno = 20;</p>
 </code></pre></div></div>
 
 <p>**intersect (교집합)</p>
-<ol>
-  <li>부서번호의 10의 직무와 부서번호 20의 직무의 공통직무를 보이시오.
-select job
+<h3 id="48-부서번호의-10의-직무와-부서번호-20의-직무의-공통직무를-보이시오">48. 부서번호의 10의 직무와 부서번호 20의 직무의 공통직무를 보이시오.</h3>
+<p>select job
 from emp
 where deptno = 10
 intersect
 select job
 from emp
-where deptno = 20;</li>
-</ol>
+where deptno = 20;</p>
 
 <h2 id="job">JOB</h2>
 <p>CLERK   <br />
@@ -2090,39 +1986,31 @@ where deptno = 20;
 -&gt; 위와같이 distinct를 써주는 것이 더 낫다.</p>
 
 <p>** minus (차집합) - 교환법칙과 결합법칙 성립하지 않는다.</p>
-<ol>
-  <li>
-    <p>사원이 없는 부서번호를 보이시오.
-select deptno
+<h3 id="49-사원이-없는-부서번호를-보이시오">49. 사원이 없는 부서번호를 보이시오.</h3>
+<p>select deptno
 from dept
 minus
 select distinct deptno
 from emp;</p>
 
-    <h2 id="deptno">DEPTNO</h2>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>40  -&gt; 부서명까지 보고싶다면 조인을 해주도록 하자. (위에서 나온 결과에 대한 조인)
-</code></pre></div>    </div>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO ----------
+    40  -&gt; 부서명까지 보고싶다면 조인을 해주도록 하자. (위에서 나온 결과에 대한 조인)
+</code></pre></div></div>
 
 <p>** 상관질의</p>
-<ol>
-  <li>
-    <p>사원이 존재하지 않는 부서번호, 부서명 
-select deptno, dname
+<h3 id="50-사원이-존재하지-않는-부서번호-부서명">50. 사원이 존재하지 않는 부서번호, 부서명</h3>
+<p>select deptno, dname
 from dept
 where not exists (select *
-    from emp
-    where dept.deptno = emp.deptno);</p>
+		from emp
+		where dept.deptno = emp.deptno);</p>
 
-    <p>DEPTNO DNAME       <br />
-———- ————–
-    40 OPERATIONS</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME          ---------- --------------
+    40 OPERATIONS    
+</code></pre></div></div>
 
-<p>50-1. 사원이 존재하는 부서번호, 부서명
-select deptno, dname
+<h3 id="50-1-사원이-존재하는-부서번호-부서명">50-1. 사원이 존재하는 부서번호, 부서명</h3>
+<p>select deptno, dname
 from dept
 where exists (select *
 		from emp
@@ -2139,9 +2027,7 @@ where exists (select *
 <p>** DDL(데이터정의어)</p>
 <ul>
   <li>create
-    <ol>
-      <li>새로운 사용자를 생성 (DBA 권한 보유자만 가능)</li>
-    </ol>
+    <h3 id="51-새로운-사용자를-생성-dba-권한-보유자만-가능">51. 새로운 사용자를 생성 (DBA 권한 보유자만 가능)</h3>
   </li>
 </ul>
 
@@ -2164,14 +2050,12 @@ GRANT DROP ANY VIEW TO com1 ;
 GRANT CREATE ANY VIEW TO com1 ;
 //시스템 권한 부여 - 뷰 테이블(ALTER 불가능한 테이블)</p>
 
-<ol>
-  <li>테이블 생성	
--&gt; char는 고정길이, varchar2는 가변길이 자료형이다.
+<h3 id="52-테이블-생성">52. 테이블 생성</h3>
+<p>-&gt; char는 고정길이, varchar2는 가변길이 자료형이다.
 char 안에는 몇 글자를 넣든 maximum 바이트로 잡힌다. (읽는 속도가 빠름)
 varchar2는 메모리 절약면에서는 좋으나 읽는 속도가 느리다.
 date는 날짜 자료형이다.
-숫자는 number가 있는데 (7,2) 식으로 쓰면 전체 길이 7에 소수점 아래 2자리까지 허용하는 실수형이 된다.</li>
-</ol>
+숫자는 number가 있는데 (7,2) 식으로 쓰면 전체 길이 7에 소수점 아래 2자리까지 허용하는 실수형이 된다.</p>
 
 <p>create table 학과 (
 	학과번호 char(2) not null,
@@ -2199,14 +2083,12 @@ date는 날짜 자료형이다.
 			references 학과(학과번호)
 );</p>
 
-<ol>
-  <li>테이블 생성하기2
-create table A (
-a1 number(2) not null,
-a2 char(5) null,
-constraint A_pk primary key (a1)
-);</li>
-</ol>
+<h3 id="53-테이블-생성하기2">53. 테이블 생성하기2</h3>
+<p>create table A (
+	a1 number(2) not null,
+	a2 char(5) null,
+	constraint A_pk primary key (a1)
+);</p>
 
 <p>create table B (
 	b1 char(2) not null,
@@ -2219,19 +2101,15 @@ constraint A_pk primary key (a1)
 
 <ul>
   <li>alter
-    <ol>
-      <li>비밀번호 변경(com1을 com11으로)
-alter user com1 identified by com11;</li>
-    </ol>
+    <h3 id="54-비밀번호-변경com1을-com11으로">54. 비밀번호 변경(com1을 com11으로)</h3>
+    <p>alter user com1 identified by com11;</p>
   </li>
 </ul>
 
-<ol>
-  <li>학과테이블에 지도교수명 varchar2(20) null 속성 추가
-alter table 학과 
-add 지도교수명 varchar2(20) null;
-추가 후 desc 학과로 확인</li>
-</ol>
+<h3 id="55-학과테이블에-지도교수명-varchar220-null-속성-추가">55. 학과테이블에 지도교수명 varchar2(20) null 속성 추가</h3>
+<p>alter table 학과 
+	add 지도교수명 varchar2(20) null;
+추가 후 desc 학과로 확인</p>
 
 <p>이름    널        유형         <br />
 —– ——– ———— 
@@ -2249,11 +2127,9 @@ add 지도교수명 varchar2(20) null;
 위치  NOT NULL VARCHAR2(20) 
 -&gt; 현재 레코드가 하나도 존재하지 않기 때문에 not null 속성 추가가 가능함.</p>
 
-<ol>
-  <li>
-    <p>학과테이블의 지도교수명을 varchar2(10)으로 변경
-alter table 학과
-modify 지도교수명 varchar2(10);
+<h3 id="56-학과테이블의-지도교수명을-varchar210으로-변경">56. 학과테이블의 지도교수명을 varchar2(10)으로 변경</h3>
+<p>alter table 학과
+	modify 지도교수명 varchar2(10);
 이름    널        유형         <br />
 —– ——– ———— 
 학과번호 NOT NULL CHAR(2)    <br />
@@ -2262,13 +2138,10 @@ modify 지도교수명 varchar2(10);
 위치  NOT NULL VARCHAR2(20) 
 -&gt; 데이터가 없어서 가능. 데이터가 있는 경우 그 길이가 어찌됐든 크기 축소는 불가능하다. (확장은 가능)
 숫자형을 문자형으로 바꾸는 것도 가능하나 문자형을 숫자형으로 바꾸는 것은 불가능하다..</p>
-  </li>
-  <li>
-    <p>학과 테이블의 위치를 제거
-alter table 학과
-drop column 위치;</p>
-  </li>
-</ol>
+
+<h3 id="57-학과-테이블의-위치를-제거">57. 학과 테이블의 위치를 제거</h3>
+<p>alter table 학과
+	drop column 위치;</p>
 
 <p>이름    널        유형         <br />
 —– ——– ———— 
@@ -2278,12 +2151,10 @@ drop column 위치;</p>
 
 <ul>
   <li>drop
-    <ol>
-      <li>b테이블을 제거 후 a테이블 제거(자식부터 제거)
-drop table b;
+    <h3 id="58-b테이블을-제거-후-a테이블-제거자식부터-제거">58. b테이블을 제거 후 a테이블 제거(자식부터 제거)</h3>
+    <p>drop table b;
 drop table a;
-제거하는 테이블은 하나하나씩 가능하다</li>
-    </ol>
+제거하는 테이블은 하나하나씩 가능하다</p>
   </li>
 </ul>
 
@@ -2299,10 +2170,8 @@ BIN$zTx48GfzRbWLKhcu9tG4wQ==$0 TABLE            <br />
 
 <p>위에 있는 내용은 휴지통내용임. 복구 가능하다.</p>
 
-<ol>
-  <li>복원
-flashback table 테이블명 to before drop;</li>
-</ol>
+<h3 id="59-복원">59. 복원</h3>
+<p>flashback table 테이블명 to before drop;</p>
 
 <p>flashback table a to before drop;
 flashback table b to before drop;</p>
@@ -2365,8 +2234,8 @@ create domain d_학번 number(3);</p>
 
 <p>);</p>
 
-<p>60.
-create table dept (
+<h3 id="60">60.</h3>
+<p>create table dept (
 	deptno number(2) <strong>__</strong><strong>,
 	dname varchar2(20) not null,
 	loc varchar2(10) null,
@@ -2412,11 +2281,9 @@ from tab; 로 확인하도록 하자</p>
 
 <p>** DML (데이터 조작어)
 ** insert</p>
-<ol>
-  <li>기본형
-insert into 테이블명
-values (값,,, );</li>
-</ol>
+<h3 id="61-기본형">61. 기본형</h3>
+<p>insert into 테이블명
+	values (값,,, );</p>
 
 <p>insert into 테이블명 (열이름1, 열이름2 ,,,,)
 	values (값1, 값2,,,,,);</p>
@@ -2428,11 +2295,9 @@ values (값,,, );</li>
 -&gt; A테이블의 데이터를 B테이블로 넣고싶거나 할 때 사용한다. 다중행을 insert 시킬 수 있다.(위의 두 insert는 하나의 튜플만 삽입)
 단, 열의 개수와 도메인이 같아야 한다.</p>
 
-<ol>
-  <li>dept 테이블에 deptno는 10, dname은 컴공, loc는 서울로 데이터를 삽입
-insert into dept
-values (10, ‘컴공’, ‘서울’);</li>
-</ol>
+<h3 id="62-dept-테이블에-deptno는-10-dname은-컴공-loc는-서울로-데이터를-삽입">62. dept 테이블에 deptno는 10, dname은 컴공, loc는 서울로 데이터를 삽입</h3>
+<p>insert into dept
+	values (10, ‘컴공’, ‘서울’);</p>
 
 <p>select *
 from dept; 로 확인.</p>
@@ -2451,32 +2316,26 @@ from dept; 로 확인.</p>
     20 보안                 서울
 </code></pre></div></div>
 
-<ol>
-  <li>
-    <p>emp 테이블에 empno 1000, ename smith, job은 null, deptno 10으로 삽입.
-insert into emp (empno, ename, job, deptno)
-	values (1000, ‘smith’, null, 10);
+<h3 id="63-emp-테이블에-empno-1000-ename-smith-job은-null-deptno-10으로-삽입">63. emp 테이블에 empno 1000, ename smith, job은 null, deptno 10으로 삽입.</h3>
+<p>insert into emp (empno, ename, job, deptno)
+    	values (1000, ‘smith’, null, 10);
 -&gt; 나머지 null이 가능한 열에는 자동으로 null이 들어간다.</p>
-  </li>
-  <li>
-    <p>emp1 테이블에서 급여가 1000 이상인 사원들의 empno, ename, deptno, sal 을 emp 테이블에 삽입해야한다면?
-insert into emp (empno, ename, deptno, sal)
-select empno, ename, deptno, sal
-from emp1
-where sal &gt;= 1000;
+
+<h3 id="64-emp1-테이블에서-급여가-1000-이상인-사원들의-empno-ename-deptno-sal-을-emp-테이블에-삽입해야한다면">64. emp1 테이블에서 급여가 1000 이상인 사원들의 empno, ename, deptno, sal 을 emp 테이블에 삽입해야한다면?</h3>
+<p>insert into emp (empno, ename, deptno, sal)
+	select empno, ename, deptno, sal
+	from emp1
+	where sal &gt;= 1000;
 -&gt; 열의 이름은 다를 수 있겠지만 열의 개수와 도메인은 같아야한다.</p>
-  </li>
-  <li>
-    <p>아래 insert문을 실행한 후 성공 / 실패 여부를 적고 만약 실패한다면 그 이유를 쓰시오.
-select *
+
+<h3 id="65-아래-insert문을-실행한-후-성공--실패-여부를-적고-만약-실패한다면-그-이유를-쓰시오">65. 아래 insert문을 실행한 후 성공 / 실패 여부를 적고 만약 실패한다면 그 이유를 쓰시오.</h3>
+<p>select *
 from dept;</p>
 
-    <p>DEPTNO DNAME                LOC    <br />
-———- ——————– ———-
-    10 컴공                 서울     <br />
-    20 보안                 서울</p>
-  </li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
+    10 컴공                 서울       
+    20 보안                 서울       
+</code></pre></div></div>
 
 <p>select *
 from emp;</p>
@@ -2520,12 +2379,10 @@ SQL 오류: ORA-02291: integrity constraint (COM1.EMP_FK2) violated - parent key
 -&gt; 성공하였다.</p>
 
 <p>** update</p>
-<ol>
-  <li>기본형
-update 테이블명
+<h3 id="66-기본형">66. 기본형</h3>
+<p>update 테이블명
 set 열이름 = 변경할 값,,, ;
--&gt; 테이블의 특정 열 모든 값이 바뀐다.</li>
-</ol>
+-&gt; 테이블의 특정 열 모든 값이 바뀐다.</p>
 
 <p>update 테이블명
 set 열이름 = 변경할 값,,,
@@ -2536,8 +2393,8 @@ where 조건문;
 set 열이름 = subquery,,, 
 where 조건문 (subquery 사용가능);</p>
 
-<p>67.
-update dept
+<h3 id="67">67.</h3>
+<p>update dept
 set loc = ‘incheon’;</p>
 
 <p>select *
@@ -2576,8 +2433,8 @@ from dept;
 
 <p>rollback;</p>
 
-<p>68.
-select *
+<h3 id="68">68.</h3>
+<p>select *
 from dept;</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
@@ -2674,16 +2531,14 @@ where empno = 1000;	-&gt; 실패할 것이다. 1000을 참조하고 있는 자�
 </ol>
 
 <p>** delete</p>
-<ol>
-  <li>기본형
-delete from 테이블명;  -&gt; 테이블의 모든 데이터(튜플)의 삭제. from은 붙여도 되고 안붙여도 된다.(원래는 붙였었음)</li>
-</ol>
+<h3 id="69-기본형">69. 기본형</h3>
+<p>delete from 테이블명;  -&gt; 테이블의 모든 데이터(튜플)의 삭제. from은 붙여도 되고 안붙여도 된다.(원래는 붙였었음)</p>
 
 <p>delete from 테이블명
 where 조건식; 	-&gt; 해당 조건에 해당하는 행만 삭제</p>
 
-<p>70.
-select *
+<h3 id="70">70.</h3>
+<p>select *
 from dept;</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
@@ -2735,15 +2590,13 @@ where empno = 1000;	실패한다. 해당 사원을 참조하고 있는 자식 �
 
 <p>** 가상테이블 (view) -&gt; 보안목적</p>
 
-<ol>
-  <li>emp 테이블에서 deptno가 10인 empno, ename, deptno를 볼 수 있는 emp_view1이라는 view 테이블을 생성하시오.
-create view emp_view1
+<h3 id="71-emp-테이블에서-deptno가-10인-empno-ename-deptno를-볼-수-있는-emp_view1이라는-view-테이블을-생성하시오">71. emp 테이블에서 deptno가 10인 empno, ename, deptno를 볼 수 있는 emp_view1이라는 view 테이블을 생성하시오.</h3>
+<p>create view emp_view1
 as
-select empno, ename, deptno
-from emp
-where deptno=10;
--&gt; view EMP_VIEW1이(가) 생성되었습니다.</li>
-</ol>
+	select empno, ename, deptno
+	from emp
+	where deptno=10;
+-&gt; view EMP_VIEW1이(가) 생성되었습니다.</p>
 
 <p>select *
 from emp_view1;
@@ -2778,8 +2631,8 @@ from emp;</p>
   3000 adms                                            1000                               10 
 </code></pre></div></div>
 
-<p>71-1. emp_view1을 통해 empno 4000, ename view1, deptno 20을 삽입하시오.
-insert into emp_view1
+<h3 id="71-1-emp_view1을-통해-empno-4000-ename-view1-deptno-20을-삽입하시오">71-1. emp_view1을 통해 empno 4000, ename view1, deptno 20을 삽입하시오.</h3>
+<p>insert into emp_view1
 (empno, ename, deptno)
 values (4000, ‘view1’, 20);</p>
 
@@ -2821,13 +2674,11 @@ where deptno=20;
 <p>insert처럼 데이터를 집어 던져넣는방식같은건 가능한데, 그 안의 값을 끄집어내야하는 update나 delete는 안된다..
 select는 당연히 보이는부분에 대해서만 가능할 것이고..</p>
 
-<ol>
-  <li>급여가 1000 이상이면서 3000 이하인 사번, 사원명, 급여, 부서번호를 보이는 emp_view2라는 view를 생성하시오.
-1)
+<h3 id="72-급여가-1000-이상이면서-3000-이하인-사번-사원명-급여-부서번호를-보이는-emp_view2라는-view를-생성하시오">72. 급여가 1000 이상이면서 3000 이하인 사번, 사원명, 급여, 부서번호를 보이는 emp_view2라는 view를 생성하시오.</h3>
+<p>1)
 select empno, ename, sal, deptno
 from emp
-where sal between 1000 and 3000</li>
-</ol>
+where sal between 1000 and 3000</p>
 
 <p>2)
 create or replace view emp_view2
@@ -2837,13 +2688,11 @@ as	select empno, ename, sal, deptno
 
 <p>create or replace로 하면 생성하거나 이미 있는경우 대체한다.</p>
 
-<ol>
-  <li>부서번호가 10인 사번, 사원명, 급여, 부서명을 보이는 emp_view3라는 view를 생성하시오.
-1)
+<h3 id="73-부서번호가-10인-사번-사원명-급여-부서명을-보이는-emp_view3라는-view를-생성하시오">73. 부서번호가 10인 사번, 사원명, 급여, 부서명을 보이는 emp_view3라는 view를 생성하시오.</h3>
+<p>1)
 select empno, ename, sal, deptno
 from emp
-where deptno=10</li>
-</ol>
+where deptno=10</p>
 
 <p>2)
 select empno, ename, sal, dname
@@ -2876,13 +2725,11 @@ EMP_VIEW3                      VIEW             <br />
 
 <p>조인한 뷰 테이블은 create시에 미리 만들어놓은 상태라 이후에 검색할 때에는 단순히 값을 보여주기만 한다. 따라서 속도가 빠르다.</p>
 
-<ol>
-  <li>on delete cascade
-create table b (
-b1 number(2) <strong>__</strong>,
-b2 varchar2(20) not null,
-constraint b_pk primary key(<strong>__</strong>));</li>
-</ol>
+<h3 id="74-on-delete-cascade">74. on delete cascade</h3>
+<p>create table b (
+	b1 number(2) <strong>__</strong>,
+	b2 varchar2(20) not null,
+	constraint b_pk primary key(<strong>__</strong>));</p>
 
 <p>create table a (
 	a1 char(3) <strong>__</strong>,

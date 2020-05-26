@@ -416,7 +416,7 @@ ServerSignature on 이 항목을 추가적으로 작성해주자
 <p>어제 우리는 www에 대한 것도 만들어줬고.. 이 95번째 줄은 우리의 메인페이지에 대한 URL 표시값을 설정해주는 부분이다.</p>
 
 <p>98~100줄 : 서버의 파일시스템에 접근가능함을 설정하는 부분에 대한 설명
-당신 서버의 파일시스템 전체에 대한 접근을 거부해놓으십시오. 밑쪽에 <Directory> 블록을 만듬으로서 당신은 반드시 웹컨텐츠 디렉토리에 대한 접근권한을 예외적으로 허용해놓아야합니다.</Directory></p>
+당신 서버의 파일시스템 전체에 대한 접근을 거부해놓으십시오. 밑쪽에 &lt;Directory&gt; 블록을 만듬으로서 당신은 반드시 웹컨텐츠 디렉토리에 대한 접근권한을 예외적으로 허용해놓아야합니다.</p>
 
 <p>102줄 ~ 105줄은 최상위 디렉토리(/)에 대한 기본 옵션과 권한을 나타내는 설정
 AllowOverride 지시자는 어떻게 접근을 허용할 것인지에 대한 설정으로 설정가능한 값은 none(지정하지 않았음)
@@ -479,10 +479,10 @@ nameserver 192.168.52.149 추가해주고 systemctl restart named.service 해주
 <p>vi /etc/httpd/conf/httpd.conf로 다시 설정 들어가기
 기본 DocumentRoot 설정 줄 아래쪽에 보면</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837171-42a43f00-9f03-11ea-9ec3-6728221893b0.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837171-42a43f00-9f03-11ea-9ec3-6728221893b0.png" alt="image" />  <br />
 위와같이 기본 Document에 대한 접근설정값이 되어있다. 이를 아래와 같이 바꿔주었다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837185-49cb4d00-9f03-11ea-860d-db7b4e1a0201.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837185-49cb4d00-9f03-11ea-860d-db7b4e1a0201.png" alt="image" />  <br />
 이렇게 하고 :wq 한 뒤에 systemctl restart httpd.service하니까 웹브라우저에서 www.jinhong.com 했을 시 기존의 내용에 접근이 잘 된다. (기본 index파일 불러오는 경로가 /var/www/html 이 아닌 /web/server/apache 임에도 불구하고)</p>
 
 <p>⇒ 125번줄의 영어를 해석해봄. Relax access to content within /var/www
@@ -498,7 +498,7 @@ nameserver 192.168.52.149 추가해주고 systemctl restart named.service 해주
 
 <p>vi /etc/httpd/conf/httpd.conf 에서 최상위 /디렉토리 허용에 있어서 all denied 여서 이다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837200-52bc1e80-9f03-11ea-9139-1666c03429b4.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837200-52bc1e80-9f03-11ea-9139-1666c03429b4.png" alt="image" />  <br />
 보안상 6.x에서는 다 허용하던 것을 7에서는 거부해놨다.
 이곳에 대해 granted로 바꾼다면 /web/server/apache 에 접근가능하게 되어 그 하위의 index.html이 잘 뜨게 된다. (6.x에서는 기본적으로 /에 다 접근 가능하니 이 설정을 건드리지 않아도 잘 뜬 것이었음)</p>
 
@@ -507,7 +507,7 @@ nameserver 192.168.52.149 추가해주고 systemctl restart named.service 해주
 이 것 덕분에 / 는 막혀있었지만 /var/www/html 은 접근가능했던 것.
 따라서 이 설정파일에 /web/server/apache 디렉토리에 대한 설정값을 추가해주자</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837212-59e32c80-9f03-11ea-8ee7-9b092d20eecf.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837212-59e32c80-9f03-11ea-8ee7-9b092d20eecf.png" alt="image" />  <br />
 파란색 네모는 꼭 필요한 것은 아니지만 /var/www/html 에 있어서 /var/www 설정이 있었으므로 이와 똑같이 그냥 작성해준 것이다.
 → 정확히 말하자면 기존에는 /var/www 와 /var/www/html 에 대한 접근이 모두 허용되어있었던 상황. 여기서는 /web/server/apache 에 대한 허가만 해줘도 되긴 함</p>
 
@@ -539,10 +539,10 @@ FollowSymLinks 값은 디렉토리 내에 심볼릭 링크(바로가기)파일�
 
 <p>vi /etc/httpd/conf/httpd.conf 로 들어가서</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837218-5fd90d80-9f03-11ea-8c04-1661d2162ccd.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837218-5fd90d80-9f03-11ea-8c04-1661d2162ccd.png" alt="image" />  <br />
 디렉토리가 요구된 경우 아파치가 보여줄 파일을 설정해라??</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837225-65365800-9f03-11ea-95a2-be076bf45754.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837225-65365800-9f03-11ea-95a2-be076bf45754.png" alt="image" />   <br />
 의 내용을 추가해봄.</p>
 
 <p>그리고 touch /web/server/apache/kkakkung.html 을 한 뒤에
@@ -552,7 +552,7 @@ vi /web/server/apache/kkakkung.html 로 내용에 kkakkung 입력했다.
 <p>이 부분 건드리는게 아닌 것 같다.
 → 위의 부분 보니까.. 각 디렉토리별로 띄워줄 기본 파일을 설정하는 부분같다. 지금 index.html로 설정되어있어서 메인페이지 요구시에 index.html 파일을 띄워주는 것으로 보임</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837231-6a93a280-9f03-11ea-9d07-085d4af8e269.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837231-6a93a280-9f03-11ea-9d07-085d4af8e269.png" alt="image" />   <br />
 이렇게 해서 됐는데 선생님은 이 방법 아니라고 하심</p>
 
 <p>흠..</p>
@@ -576,7 +576,7 @@ systemctl restart httpd.service 를 안해도 되나? 무튼 다시 웹브라우
 
 <p>만약 kkakkung 디렉토리만 먼저 만들었을 때 /web/server/apache/kkakkung 디렉토리 하위에 아무것도 없다면 Indexes 옵션에 의해 그 하위에 파일이 어떤 것이 있는지 뜨게 된다. 마치 카이스트나 카카오, 네이버의 ftp 패키지서버를 보는 것처럼.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837240-72534700-9f03-11ea-9b32-9b144788ba11.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837240-72534700-9f03-11ea-9b32-9b144788ba11.png" alt="image" />   <br />
 근데 Indexes 설정은 /web/server/apache에 대해서만 적용했는데 /web/server/apache/kkakkung 에 대해서도 적용되네. 이건 Options 라는 옵션때문인건가? 아니면 그냥 Indexes라는 옵션 자체가 하위에 모두 적용되는건가
 FollowSymLinks 는 심볼릭링크 허용이고.</p>
 

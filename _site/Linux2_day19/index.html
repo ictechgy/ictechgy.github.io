@@ -331,16 +331,16 @@
   <li>모든 응용 프로그램의 데이터베이스를 공용할 수 있도록 관리</li>
 </ul>
 
-<p>●	장점
-1)	데이터의 중복성을 해결
-2)	자료를 공동으로 이용
-3)	데이터의 일관성과 무결성을 유지
+<p>●	장점 <br />
+1)	데이터의 중복성을 해결   <br />
+2)	자료를 공동으로 이용   <br />
+3)	데이터의 일관성과 무결성을 유지   <br />
 4)	데이터를 표준화하고 통합하여 관리</p>
 
-<p>●	단점
-1)	전산화비용이 증가
-2)	대용량 디스크의 집중적인 접근으로 인해 과부하가 발생
-3)	시스템이 복잡하고 파일의 백업과 회복이 어려움
+<p>●	단점  <br />
+1)	전산화비용이 증가  <br />
+2)	대용량 디스크의 집중적인 접근으로 인해 과부하가 발생  <br />
+3)	시스템이 복잡하고 파일의 백업과 회복이 어려움  <br />
 4)	데이터베이스 전문가 부족</p>
 
 <p>RDBMS(Relationship DBMS) - 관계형 데이터베이스 매니지먼트 시스템</p>
@@ -360,13 +360,13 @@
 
 <p>종류로는 데이터 정의언어, 데이터 조작 언어, 데이터 제어 언어가 있음</p>
 
-<p>RDBMS의 장단점
-●	장점
-1)	간결함
-2)	보기 편함
+<p>RDBMS의 장단점  <br />
+●	장점  <br />
+1)	간결함  <br />
+2)	보기 편함  <br />
 3)	다른 데이터베이스로부터의 변환이 용이</p>
 
-<p>●	단점
+<p>●	단점  <br />
 1)	성능이 다소 떨어짐</p>
 
 <p>RDBMS의 종류
@@ -437,7 +437,7 @@ mysql이라는 데이터베이스를 mysql이라는 명령어로 접속.
 
 <p>만약 데이터베이스를 지정하지 않았다면</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837487-2785ff00-9f04-11ea-91ff-3b13358e0863.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837487-2785ff00-9f04-11ea-91ff-3b13358e0863.png" alt="image" /> <br />
 이렇게 뜬다.</p>
 
 <p>현재 날짜와 mariadb 프로그램의 버전을 확인하는 방법
@@ -453,7 +453,7 @@ select version(), current_date; → select 명령어는 어떤 데이터를 추�
 <p>여러 값들이 모여 Table을 구성하고 이 Table이 모인 저장소를 하나의 DataBase라 보면 됨. 그리고 그런 DataBase들을 총체적으로 관리해주는 것이 RDBMS 이다.
 → ex) kgitbank 라는 DataBase에는 여러 영업부가 있으며 각 영업부를 개별 Table로서 관리한다. 그리고 각각의 Table들에는 값들이 존재한다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837497-32409400-9f04-11ea-9b21-703bf3cd7b68.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837497-32409400-9f04-11ea-9b21-703bf3cd7b68.png" alt="image" /> <br />
 이런 Table들이 모여 하나의 DataBase를 이루고, 이런 DataBase들을 총 관리해주는 것이 DBMS 프로그램들이다.</p>
 
 <p>명령어
@@ -623,7 +623,7 @@ select 필드1, 필드2 from 테이블;
 
 <p>아무튼 위의 명령어를 치면</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837517-41bfdd00-9f04-11ea-9376-9b973b468719.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837517-41bfdd00-9f04-11ea-9376-9b973b468719.png" alt="image" /> <br />
 이런 결과가 나온다.
 1~4행까지는 ‘나’ root 에 대한 것이며 password가 지정되지 않은 null값임을 의미하고 있다. 
 5, 6행은 식별불가능한 사용자에 대한 정보이다. 
@@ -678,7 +678,7 @@ delete from 테이블명 where 필드=‘값’;
 
 <p>select host, user, password from user; 했을 때 아래와 같이 식별되지 않은 사용자가 있었다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837529-497f8180-9f04-11ea-85ee-91d801f2e61c.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837529-497f8180-9f04-11ea-85ee-91d801f2e61c.png" alt="image" /> <br />
 저 두 행에 대해 통째로 삭제해보자.</p>
 
 <p>delete from user where user=‘’;
@@ -690,7 +690,7 @@ delete from user where password!=‘알고리즘값?’;</p>
 
 <p>select host, db, user from db; 로 db테이블을 봐보자. 익명사용자에 대한 정보값들만 존재한다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82837537-500df900-9f04-11ea-812c-d99066c88b92.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82837537-500df900-9f04-11ea-812c-d99066c88b92.png" alt="image" /> <br />
 내부 또는 외부 host가 어떤 db와 연결가능한 상태인지 나오며 그 user 이름은 무엇인지 나온다.
  → %값은 외부를 의미. localhost는 내부</p>
 

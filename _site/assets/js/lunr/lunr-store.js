@@ -1,12 +1,12 @@
 var store = [{
         "title": "Database_1",
-        "excerpt":"emp dept 차수(degree) 8 3 -&gt; desc 테이블명; 기수(대응수, 카디널리티) 14 4 -&gt; select count(*) from 테이블명; 으로 개수만 보면 됨 사원, 부서테이블의 경우의 수를 보이시오(카티션 프로덕트) select * from emp, dept; EMPNO ENAME JOB MGR HIREDATE SAL COMM DEPTNO DEPTNO DNAME LOC ———- ———- ——— ———- ——– ———- ———-...","categories": [],
+        "excerpt":"본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다. emp dept 테이블에 대하여 차수(degree) 8 3 -&gt; desc 테이블명; 기수(대응수, 카디널리티) 14 4 -&gt; select count(*) from 테이블명; 으로 개수만 보면 됨 1. 사원, 부서테이블의 경우의 수를 보이시오(카티션 프로덕트) select * from emp, dept; EMPNO ENAME JOB MGR HIREDATE SAL COMM DEPTNO...","categories": [],
         "tags": [],
         "url": "http://localhost:4000/DB_1/",
         "teaser": "http://localhost:4000/assets/images/photo-hangang.jpeg"
       },{
         "title": "Database2",
-        "excerpt":"** 함수 (function) 내장함수 (단일행함수) - 하나의 행에 대해 하나의 결과 값을 return (ex. lower, upper, nvl …) 집단함수 (다중행함수, 그룹함수) - 여러 행에 대해 하나의 결과 값을 return (ex. sum, max, min, count, avg …) ** 내장함수 1) 숫자함수 abs (열이름) - 절댓값을 구하는 함수 floor (열이름) - 해당...","categories": [],
+        "excerpt":"본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다. ** 함수 (function) 내장함수 (단일행함수) - 하나의 행에 대해 하나의 결과 값을 return (ex. lower, upper, nvl …) 집단함수 (다중행함수, 그룹함수) - 여러 행에 대해 하나의 결과 값을 return (ex. sum, max, min, count, avg …) ** 내장함수 1) 숫자함수 abs (열이름) -...","categories": [],
         "tags": [],
         "url": "http://localhost:4000/DB_2/",
         "teaser": "http://localhost:4000/assets/images/photo-hangang.jpeg"

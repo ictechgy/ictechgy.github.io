@@ -1,0 +1,266 @@
+I"Xg<p>scp 실습</p>
+
+<p>준비물
+Server
+관리자로 로그인 후 /test/ssh_down 디렉터리와 /test/ssh_up 디렉터리를 생성
+/test/ssh_down 디렉터리 하위에 testfile숫자 파일을 생성
+(이 때, 숫자는 자신의 IP주소에 4번째 자리를 입력)</p>
+
+<p>Client
+일반 사용자로 로그인 후 자신의 홈 디렉터리 하위에 test숫자file 파일을 생성
+(이 때, 숫자는 자신의 IP주소에 4번째 자리를 입력)
+—————————————————————————
+위 설정이 다 되었으면 
+Client에서 일반 사용자는 Server의 /test/ssh_down 디렉터리 하위에 있는 testfile숫자 파일을 자신의 홈 디렉터리에 복사를 해오고 확인
+그리고 일반 사용자의 홈 디렉터리 하위에 있는 test숫자file 파일을 Server의 /test/ssh_up 디렉터리에 복사를 해주고 확인</p>
+
+<p>ssh접속을 통하지 않고 scp만을 이용하여 (옵션안쓰고) 파일을 전송
+client머신에서 현재 server머신에 파일 업로드가 안됨. server머신의 /test/ssh_up는 쓰기권한이 root한테밖에 없다. 하지만 현재 ssh나 scp로 client에서 server로 접근가능한건 itbank계정밖에 없다.
+→ 파일을 전송시킬 때 목적지경로를 안쓴다면 server에서 itbank의 홈 디렉토리 하위로 파일이 업로드 된다. 이는 client를 통해 itbank로 접속한 상태에서 전송해주는것이므로 당연히 작동하는 명령어가 됨. 지금은 server머신에 itbank계정으로 접속해서 root의 소유 하에 있는 디렉토리 아래에 파일을 넣으려는 것이므로 일반적 방법으로는 되지 않는다.</p>
+
+<p>복사해오기(server → client)
+scp itbank@serverIP:/test/ssh_down/testfile숫자 ./   또는 /home/내계정명
+이렇게 하면 서버머신에 itbank계정으로 접근해서 파일을 가져오려는 것이므로 itbank의 비밀번호를 입력해야한다.
+파일을 가져오면 해당 파일은 client머신에 접속했던 일반사용자 계정의 소유가 된다.</p>
+
+<p>복사해주기(server ← client)
+scp test숫자file itbank@serverIP:/test/ssh_up  먹히지 않는다. 
+itbank사용자의 비밀번호를 요구해서 입력을 하지만, /test/ssh_up의 권한은 root에게만 쓰기권한이 있어서 파일을 넘겨줄 수가 없다.</p>
+
+<p>/test/ssh_down 에 있어서 test 및 ssh_down 디렉토리의 허가권은 755 즉 rwxr-xr-x이다. 즉 itbank를 통해 other로서 접근해서 해당파일을 카피할 수 있고 또 가져올 수도 있다.(이 때 ‘testfile숫자’에 대한 허가권은 상관이 없나?) 이 때 client머신에서는 내 계정으로 접속되어있고 내 홈디렉토리 하위에 복사하는 것인데, 내 홈 디렉토리는 700 rwx—— 이므로 내 소유고, 당연히 가져온 파일을 쓸 수 있다. 따라서 첫번째는 된다.
+(UID와 GID가 같다면 GID가 UID를 따라간다.)</p>
+
+<p>두번째에 있어서.. /test/ssh_up 에서 ssh_up 디렉토리는 허가권이 755이다. rwxr-xr-x이다. UID와 GID는 root이고 client머신에서 itbank를 통해 접근하여 파일을 올려줄 수가 없다. other에 w권한이 없으므로.. 
+→ 따라서 server머신에서 chmod 757 /test/ssh_up 으로 허가권을 변경해주고 client머신에서 다시 scp test숫자file itbank@serverIP:/test/ssh_up 을 하면 파일업로드가 된다.
+⇒ server머신에서 ls -l /test/ssh_up을 해보면 올라온 파일의 UID와 GID는 itbank것으로 올라와있다.</p>
+
+<p>집에서 위 실습 두번째것을 하다가 client에서 IP를 잘못입력했었다. 192.168.x.x를 입력해야하는데 192.169.x.x를 입력함.. C클래스에서 사설IP구간은 192.168.x.x 이므로 나는 공인IP에 대해 파일을 전송시키려 한 것이 되었다..바깥으로 파일을 전송시키려 하게 된 걸까? 만약 내 공유기 하위에서 쓰이지 않고있는 사설IP를 입력했다면.. 당연히 존재하지 않는 기기이므로 전송이 되지 않았을 것이고.. 혹시나 공유기를 빠져나가 공인IP쪽을 바라본다고 하더라도 이 사설IP부분은 쓰지 않기로 약속했으니 목적지 기기는 존재하지 않는다.</p>
+
+<p>U-mask에 있어서 일반 디렉토리는 022, 홈디렉토리는 077로 되어있다.</p>
+
+<p>setUID, setGID, sticky bit
+UID와 GID를 바꾸는 것은 chown이며 이 SetUID및 SetGID는 파일이 실행될 때 누구의 권한으로 파일에 접근하게 할 것인지를 설정할 수 있다. SetUID를 하면 모든 사용자는 일반적으로 파일에 대해 파일의 소유자처럼 접근할 수 있다. SetGID를 하면 모든 사용자는 파일에 대해 그룹소유자처럼 접근할 수 있다. SetUID는 numeric으로는 4xxx 이며 SetGID는 2xxx 이다. 권한을 부여할 시 기존 파일이나 디렉토리에 x가 없었다면 S가 붙고, x가 있었다면 s가 붙는다. 제거는 numeric으로 안될 경우 symbolic방식으로 제거한다.
+→ 만약 other권한에 권한이 아무것도 없다면 SetUID가 설정되어있더라도 해당 파일 및 디렉토리에 소유자처럼 접근하는 것은 불가능하다.</p>
+
+<p>sticky bit는 모든 사용자가 쓰고 접근할 수 있지만 삭제는 본인것만 삭제 가능하다.(관리자는 모두 삭제 가능) 기호로는 other권한에 x가 있었다면 t, 없었다면 T를 쓴다. numeric으로는 1xxx 를 쓴다.</p>
+
+<p>sftp(Secure FTP)</p>
+<ul>
+  <li>일반적인 ftp 서비스는 암호화 통신을 하지 않으므로 보안상 좋지 않음</li>
+  <li>ssh 서비스에 내장되어있는 sftp는 암호화 통신을 하므로 안전하게 파일을 업로드, 다운로드 할 수 있다.</li>
+</ul>
+
+<p>사용형식
+sftp [option] 계정명@접속할IP주소</p>
+
+<p>업로드는 put
+다운로드는 get</p>
+
+<p>sftp 실습</p>
+
+<p>준비물
+Server
+관리자로 로그인 후 /test/sftp_down 디렉터리와 /test/sftp_up 디렉터리를 생성
+/test/sftp_down 디렉터리 하위에 test숫자 파일을 생성
+(이 때, 숫자는 자신의 IP주소에 4번째 자리를 입력)</p>
+
+<p>Client
+일반 사용자로 로그인 후 자신의 홈 디렉터리 하위에 숫자test 파일을 생성
+(이 때, 숫자는 자신의 IP주소에 4번째 자리를 입력)
+—————————————————————————
+위 설정이 다 되었으면 Client에서 일반 사용자는 Server의 /test/sftp_down 디렉터리 하위에 있는 test숫자 파일을 자신의 홈 디렉터리 하위에 다운로드하고 확인
+그리고 자신의 홈 디렉터리 하위에 있는 숫자test 파일을 Server의 /test/sftp_up 디렉터리 하위에 업로드 해주기</p>
+
+<p>server머신 (192.168.52.149)
+mkdir /test/sftp_down /test/sftp_up
+touch /test/sftp_down/test149</p>
+
+<p>client머신 (192.168.52.122)
+touch 122test
+sftp itbank@serverIP 입력 후 itbank계정에 대한 비밀번호 입력
+get /test/sftp_down/test149 ./ (또는 cd /test/sftp_down 한 뒤에 get test149 만 칠 수도 있다. 목적지디렉토리를 쓰지 않으면 현재 작업중이던 client 디렉토리로 오게 된다. 보내는 것도 마찬가지이다. 보내는 것도 목적지를 쓰지 않으면 접근하기 위해 사용한 계정의 홈 디렉토리로 보내지게 된다. 기본적으로 처음 접근시에 해당 계정의 홈 디렉토리가 최초접근위치일 것이므로. 만약 경로를 바꿨다면, 목적지 안 쓴 경우 해당 경로로 전송 됨)
+put 122test /test/sftp_up → 그냥은 먹히지 않는다. ftp로 현재 server머신에 itbank계정으로 접근한 상태인데 파일을 올리려는 디렉토리에 대해 쓰기권한이 없기 때문에..
+따라서 server머신에서 chmod 757 /test/sftp_up 을 하고 다시 입력하면 정상 작동한다.
+(또는 ftp 접속한 후에 cd /test/sftp_up 을 하고나서 put 122test 를 할 수도 있다)
+→ 파일을 다운받아오는건 내 client계정의 소유권으로 바뀌고 파일을 업로드하는건 접근한 계정것으로 바뀐다.</p>
+
+<p>client에서 rm -rf * 으로 모든 파일 삭제
+server에서 rm -rf /test로 디렉토리 통째로 삭제</p>
+
+<p>세번째 원격 서비스</p>
+
+<p>vnc(Virtual Network Computing)</p>
+<ul>
+  <li>오픈소스인 vnc는 Windows Server의 Terminal Service 와 비슷한 기능을 가지고 있음</li>
+  <li>플랫폼(OS)을 가리지 않음</li>
+  <li>telnet과 ssh같은 TUI환경이 아닌, GUI환경(그래픽)을 제공함</li>
+  <li>팀뷰어나 네이트온원격서비스같은 프로그램</li>
+  <li>RFB(Remote Frame Buffer Protocol)프레임 버퍼 레벨에서 동작함</li>
+  <li>OS와 상관없이 모든 OS에서 프레임 단위로 통신</li>
+  <li>원격으로 다른 컴퓨터를 제어하고 키보드와 마우스를 입력하면 그대로 전달</li>
+</ul>
+
+<p>패키지 확인
+server 머신에서 tigervnc 패키지 설치 유무를 rpm으로 확인. rpm -qa | grep tigervnc → 기본적으로는 2개가 깔려있긴 하다.
+이미 설치되어있는 것으로는 부족함. 패키지명은 tigervnc로 시작하므로 yum으로 추가 설치
+yum install tigervnc* 로 설치 후 rpm -qa | grep tigervnc | nl 로 7개 설치 확인</p>
+
+<p>tigervnc 서비스명은 vncserver@.service
+systemctl restart vncservice@.service 를 통해 vncserver@.service를 재시작하려고 하는 경우 에러가 출력된다. 이유는 별도의 설정을 한 뒤에 작업을 해야한다.</p>
+
+<p>/usr/lib/systemd/system/vncserver@.service 라는 것이 있다. 
+참고로 CentOS 6.x 이하에서는 /etc/sysconfig/vncservers 가 원본파일(7에서도 이곳에 이 파일이 있는데 열어보면 새 위치를 알려준다)</p>
+
+<p>예를 들어, /usr/lib/systemd/system/vncserver@.service 를 /etc/systemd/system/vncserver@:세션번호.service 이름으로 바꾸어서 복사를 한 뒤에 복사한 /etc/systemd/system/vncserver@:세션번호.service 파일 설정 한 뒤에 vncserver@:세션번호.service를 재시작해야함 
+즉, 원본파일을 세션번호 붙여서 복사시킨다음에 복사한 사본파일에서 설정을 진행한 뒤에 서비스 재시작을 해야한다.
+→ 복잡하네</p>
+
+<p>위 작업은 별도의 사용자 계정으로 vnc를 사용하기 위해서 작업</p>
+
+<p>현재 이 방식으로 하는 경우 제대로 화면이 나오지 않는 등의 문제가 있다고 한다. 
+→ /lib/systemd/system/vncserver@.service 를 /etc/systemd/system/vncserver@:1.service로 cp시킨다음에 systemctl restart vncserver@:1.service 하니까 오류뜬다. status로 봤는데 무슨말인지.. 그래서 vi /etc/systemd/system/vncserver@:1.service 로 들어가보니 뭐 바꾸라해서 바꾸고.. systemctl daemon-reload 와 systemctl enable vncserver@:1.service 하고서는 vncviewer SERVERIP 입력했는데도 안된다.. 쩝</p>
+
+<p>우리는 vncserver(명령어)를 사용하여 작업!</p>
+
+<p>vnc는 IP주소만치는게 아니라 세션번호도 써야한다. 그래야 접속가능하다.
+(telnet과 ssh는 IP주소만을 이용했었다. 물론 포트개방도 했다)</p>
+
+<p><img src="https://user-images.githubusercontent.com/39452092/82835526-3d44f580-9eff-11ea-88c0-6867b1cba17c.png" alt="image" /></p>
+
+<p>내 계정의 패스워드를 두번 치기
+보기전용모드에 대한 패스워드설정 질문이 있는데, n을 입력
+기본 스타트업 스크립트 파일과 기본설정파일이 생성되며, 시작에 대한 값들이 xstartup에 있다고 메시지가 뜬다. 또 로그파일이 저장되는 파일명도 알려준다.
+→ 세션이 생성된 것이다. 이전에는 홈디렉토리에 존재하지 않았던 .vnc 디렉토리가 생성되어있다. 접속한 사용자의 홈디렉토리 하위에 생성되는 듯 하다.
+⇒ 집에서는 아까 수동으로 서비스시작시키려고 했다보니까 이미 .vnc 디렉토리가 존재하긴 했다.</p>
+
+<p>이제 홈디렉토리 하위에는 .vnc 라는 숨겨진 디렉토리가 생성되었다. 어떤 계정이든 vncserver를 치면 자신 계정의 홈 디렉토리 하위에 .vnc가 생긴다.</p>
+
+<p>vncserver를 실행하면 현재 로그인한 사용자 계정의 홈 디렉터리 하위에 .vnc 디렉토리가 자동생성되며 그 하위에 해당 관련 여러 파일들이 들어있음</p>
+
+<p>ls -l .vnc/ 를 입력해서 .vnc 디렉토리 하위의 파일들을 살펴보자</p>
+
+<p>~/.vnc/config
+→ vnc 기본 설정 파일(해상도 등)</p>
+
+<p>~/.vnc/hostname:세션번호.log
+→ vnc 접속시 관련 로그(기록)를 저장할 파일</p>
+
+<p>~/.vnc/hostname:세션번호.pid
+→ vnc 실행시 사용할 Process ID가 저장된 파일
+cat ~/.vnc/hostname*.pid 입력해보면 5341 이라는 PID가 있음을 알 수 있다. 비어있는 PID값이 들어가게 된다.</p>
+
+<p>~/.vnc/passwd
+→ vnc 접속시 사용할 비밀번호가 저장되어있는 파일(참고로 위 파일을 삭제했다거나 비밀번호가 기억나지 않으면 vncpasswd 명령어를 사용하면 다시 생성되며 혹은 새로운 비밀번호를 설정할 수 있음</p>
+
+<p>~/.vnc/xstartup
+→ vnc 실행 스크립트 파일(cat 명령어로 내부 내용을 보자. 버전마다 해당 파일의 내용이나 줄 수가 많이 다르다. 5.x에서는 해당 파일에 대한 설정을 바꿔야 하는 경우도 존재)</p>
+
+<p>참고로, CentOS 5.x 에서는 unset SESSION_MANAGER와 exec /etc/X11/xinit/xinitrc 항목 맨 앞에 ‘#(주석)’을 반드시 제거해야 함
+CentOS 6.x와 7.x에서는 이미 ‘#(주석)’이 없으므로 손댈 필요가 없어졌음</p>
+
+<p>접속하는 명령어는 따로 있다.
+사용형식(vnc 접속방법) ⇒ vncserver 명령어로 세션이 생성되어있는 시스템을 대상으로 접속가능하다. 
+1)	vncviewer 접속할 IP 주소:세션명 → VNC Authentication 창이 뜸<br />
+→  상대방의 세션명? ㅇㅇ 상대방의 IP주소 및 상대방의 vnc 세션명
+2)	vncviewer 입력 후 Enter. VNC Viewer 창이 띄워진다. 거기서 Options, Load, Save As 등등의 항목이 생기므로 별도로 설정을 할 수 있다. 접속하기 위해서 VNC Server 라는 입력창이 있음. 그 입력창에 접속할 IP주소:세션번호 → Connect를 누름 → VNC Authentication 창이 뜸 → Password 입력창에 해당 접속할 비밀번호를 입력 → OK</p>
+
+<p>vncviewer를 입력해보자.
+Option중에 Misc라는 항목이 있는데 다른 vncviewer창을 또 띄운다면 이전 창을 끄게 할지 말지를 설정할 수 있다.(체크 해제되어있는 경우 다른 사용자가 vnc를 통해 동일 세션으로 접근하려 하는 경우 이전의 내 창은 꺼지게 된다)
+telnet이나 ssh에 비해 속도는 느리다.</p>
+
+<p>→ VNC Authentication 단계에서 입력하는 비밀번호는 상대방 컴퓨터의 접속되어있는 계정 비밀번호를 입력하는게 아니라 passwd에 있는 비밀번호를 입력하는 것으로 보인다. 그렇다면 처음에 vncserver명령어를 통해 입력했던 비밀번호는 이 비밀번호를 설정했던 것 같다.</p>
+
+<p>접속해제법
+켜진 창을 x하는 것은 창만을 끈 것이고 확실하게 접속을 끊는 법</p>
+
+<p>vnc 접속해제</p>
+
+<p>사용형식
+1)	현재 열려있는 세션 종료
+vncserver -kill :세션번호
+일단 이전 환경에서 터미널창을 하나 더 키고 netstat -atunp 를 쳐보면 vnc서비스 및 vncviewer 서비스가 실행되고 있음을 알 수 있다.
+ <img src="https://user-images.githubusercontent.com/39452092/82835541-4df56b80-9eff-11ea-84a7-ed8d98c4f687.png" alt="image" /></p>
+
+<p>해석해보자면 Xvnc 서비스는 3627이라는 PID값을 가지고 내 리눅스에서 5901이라는 포트를 통해 실행되고 있다. 이 포트로 접근한 상대방은 192.168.0.15:49332 이며 49332 포트를 이용하여 내 Xvnc 소켓에 접근했다는 것을 알 수 있다.
+그 위의 vncviewer 서비스를 보자. 49332포트값을 가지고 있으며 이를 통해 192.168.0.15:5901 이라는 곳의 소켓과 통신하고 있음을 알 수 있다. 
+즉 내가 나와 통신하고 있다는 것을 알 수 있다.
+→ 다른 사람과 통신하고 싶다면 vncviewer만 있으면 될거고.. 다른사람이 내 컴퓨터에 접근하게 하려면 vncserver로 세션을 생성시켜야 할 것이다. 또 상대방이 내 컴퓨터에 접근 했을 때 화면을 공유하고 같이 보려면 나도 vncviewer를 켜야하므로 vncserver로 세션생성은 물론 vncviewer로 나 자신의 화면 또한 켜야한다. 그렇게 같은 세션을 공유한 상태로 화면을 공유할 수 있는 것 같다. 
+vncviewer로 상대방의 서비스에 접근 할 때 상대방의 컴퓨터에는 Xvnc 서비스가 활성화되어있어야 하는 것으로 보인다.(vncserver명령어를 통해) 
+마찬가지로 상대방이 내 컴퓨터에 접근하려면 나는 Xvnc서비스가 실행되어있어야 하고 상대방이 vncviewer를 통해 접근 가능할 것이다.</p>
+
+<p>또 한가지는.. 터미널에서 vncviewer를 실행시켜서 다른 사람의 컴퓨터에 접근하고 있다면 이 터미널창은 일시적으로 쓰지는 못하는 것 같다.</p>
+
+<p>이전 터미널과 같은 환경에서 다시 터미널을 키고 vncserver -kill :1 을 입력하자(-kill과 콜론사이에 띄어쓰기 하나 꼭 있어야 한다. 그리고 세션번호를 모르겠다면 켜져있는 vncviewer의 제목표시줄 보면 세션번호가 나와있다) 이러면 뷰어가 종료가 된다. 
+→ 종료되는 PID보면 3627이 종료가 되네.. 물론 netstat -atunp를 보면 vncviewer서비스또한 사라져 있다.</p>
+
+<p>다시 vncviewer serverIP:세션번호 입력하면 연결이 안된다.
+→ 지금 Xvnc또한 사라진 상태니까 당연한 것 같다. vncviewer를 실행시켜도 그걸 받아줄 Xvnc가 존재하지 않는 상태임..
+ 다시 vncserver를 입력하자. 이러면 PID 새 값을 부여받아서 다시 실행시킬 수 있다. 
+→ 명령어 입력후에 netstat -atunp 입력해보면 새로운 PID값을 받은 Xvnc 서비스가 실행되어있음을 볼 수 있다. 즉 연결받아주는 놈이 Xvnc 서비스이다. 
+세션번호는 문제가 있는 것이 아니므로 그대로 1번임</p>
+
+<p>vncviewer ServerIP:세션번호 를 통해 다시 접속을 하자.</p>
+
+<p>2)	현재 동작중인 서비스 종료 killall
+-프로세스 이름으로 프로세스를 종료</p>
+
+<p>사용형식
+killall [option] [signal] 프로세스명(서비스명)</p>
+
+<p>예를 들어,
+killall -9 Xvnc
+-9는 강제종료를 의미한다. Xvnc는 vnc의 서비스명이다. 
+⇒ 다른 터미널창을 켜서 저 명령어를 입력해서 실행시키면 된다. 근데 왜 그냥 kill이 아닌 killall인걸까?</p>
+
+<p>이번에도 vnc서비스 자체를 끈 것이므로 vncviewer ServerIP:세션번호 는 먹히지 않는다.
+다시 실행하려면 vncserver를 입력해야한다.
+→ 그런데 vncserver를 다시 입력해서 Xvnc서비스를 실행시키면 세션이 2번이 나온다.세션 1번이 /tmp/.X1-lock 에 남아있어 1번을 쓸 수가 없게 된다. 
+따라서 vncviewer를 입력해서 세션을 2번으로 바꿔서 접속해야 한다.
+⇒ 다시 1번을 쓰고 싶다면 임시저장된 파일을 제거하면 가능함</p>
+
+<p>종료방법에서  ‘vncserver -kill :세션번호’는 세션을 정상 종료한 것이고 이번에는 vnc서비스를 강제 종료시킨 것이다. 그래서 세션번호에 대해 사라지지 않고 그대로 남아있는 듯 하다.</p>
+
+<p>뷰어창을 x를 하는 것은 그냥 창만 끄는 것이므로 다시 vncviewer serverIP:세션번호 로 다시 접속 할 수 있다. → 즉 x를 눌러 끈 것은 vncviewer 서비스만을 종료한 것이다.</p>
+
+<p>끄는 방법에 있어서 1번은 세션종료, 2번은 서비스종료이다.
+→ 정확히 말하자면 x버튼을 눌러 끄는 것은 vncviewer서비스만을 종료하는 것</p>
+
+<p>‘vncserver -kill :세션번호’를 통한 종료는 vncserver를 통해 만든 세션값과 이 세션에 대한 Xvnc 서비스를 종료시키는 것(이에 따라 이 Xvnc에 연결되어있던 vncviewer또한 종료되버리는 것으로 보인다.) 또한 세션에 대한 파일도 삭제시켜주는 것으로 보임</p>
+
+<p>‘killall -9 서비스명’ 은 해당 서비스를 강제종료시키는 것으로 보인다. Xvnc를 강제종료시켰으니 이에 연결되어있던 vncviewer는 당연히 종료되고.. 다만 세션에 대한 기존 파일을 제거할 시간을 주지 않아 이전 세션파일이 존재하고, 이에따라 다음 세션 생성시 다음 숫자로 생성이 되는 것 같다.</p>
+
+<p>즉 이를 통해 알 수 있는 것은.. vncviewer를 쓰기 위해서는 vncserver로 세션을 활성화시켜야 한다는 것과, 그 다음에 다른 컴퓨터에 접속하기 위해서는 vncviewer를 켜야 한다는 것이다. 만약에 vncserver -kill 명령어로 세션을 종료시킨다면 이는 정상적으로 해당 세션을 종료시킨 것이므로 세션파일이 제거가 되나 killall은 강제종료이므로 해당 세션파일이 남아있다.(수동제거 필요)
+→ 혹시나 해서 세션1에 대해 killall로 강제종료한 상태에서(1번 세션파일은 남아있는 상태) vncserver -kill :1 을 입력해보았다. 그랬더니 이미 해당세션은 삭제된 상태이긴 한데.. 각종 1번세션파일 남은것들을 제거해준다. 이 상태에서 vncserver를 다시 입력하니까 1번세션으로 생성이 된다.. 오오</p>
+
+<p>vncviewer 창을 x만 하면 Xvnc세션은 살아있는 상태이다. 이 상태에서 vncserver를 계속 입력하면 다음 세션값으로 계속 만들어진다. 따라서 여러 세션값으로 접속이 가능하게 된다.
+이전의 세션값을 지우고 싶다면 해당 세션에 대한 파일을 제거해야 하며 /tmp/.X11-unix 에서 지우고자 하는 세션파일을 또 지워야 한다. 또 로그파일에서 제거를 해야함. X0 파일은 지우면 안된다. 기본값으로 존재하는 것임</p>
+
+<p>/tmp 하위에 있는 .X숫자-lock 파일 및 /tmp/.X11-unix 하위의 X숫자 파일 지우고, ‘~/.vnc/localhost:세션번호.log’ 파일 및 pid 파일 제거해야함 → 이 log파일과 pid파일은 어차피 제거해도 vncserver를 통해 새 세션 생성시 자동으로 다시 생성될 것이다.
+→ 근데 이 방법 말고 그냥 ‘vncserver -kill :세션번호’ 입력하면 기존 세션것 안지워졌으면 제거해준다.</p>
+
+<p>세션을 생성하면 세션에 대해 /tmp 하위에 .X세션번호-lock 파일 및 /tmp/.X11-unix 디렉토리 하위에 X세션번호 파일이 생긴다. 또 홈디렉토리의 .vnc 디렉토리 하위에도 해당 세션에 대한 log파일 및 pid파일이 생긴다.</p>
+
+<p>윈도우에서 vnc를 통해 리눅스로 접근해보자</p>
+
+<p>공유파일에 있는 vncviewer.exe를 개인폴더에 붙여넣기.
+더블클릭하여 실행 → 설정을 할 것이면 설정을 하고 서버IP와 세션번호를 입력해야한다. 이 때 리눅스 서버에 해당 세션이 살아있어야 접속할 수 있으니 주의하자
+→ 에러가 뜬다. 방화벽 포트 열어줘야 한다. 외부 OS인 윈도우에서 리눅스에 접근하려는 것이므로 리눅스에서 포트를 개방해주어야 윈도우에서 접근 할 수 있다.
+→ 이래서 DMZ 설정 포트포워딩이 보안에 취약할 수 있다는 거구나. 공유기를 통해 포트제한을 걸어둔 것을 다 여는 DMZ 포트포워딩!</p>
+
+<p>리눅스의 터미널창에서 firewall-config 입력하고 방화벽에서 public 아래로 내리다보면 vnc-server항목이 있다. 해당 항목 체크하고 윈도우에서 다시 vncviewer를 통해 리눅스에 접근하려 하면 잘 된다.</p>
+
+<p>다만 vncviewer를 통해 켜진 화면과 리눅스 OS자체에서의 화면은 공유되는 것이 아니다. 
+또한 리눅스에서 세션을 1번과 2번에 대해 만들어 놓았을 때 vncviewer를 통해 각각의 개별 세션에 접근한 경우에도 화면은 공유되어있지 않다.
+→ 같은 세션에 대해 접근을 한 경우에만 화면이 공유가 된다.</p>
+
+<p>선생님이 내 컴퓨터에 접속하고, 나도 윈도우에서 vncviewer를 켜서 내 서버에 접속함.(당연히 Misc에서 같은 세션에 대해 동시접근이 되도록 창 안꺼지는 설정을 해 두었다. 이제 리눅스 OS와는 별개로 세션 하나에 선생님과 내가 같이 접속해 있는 상태이다) 이 상태는 선생님과 내가 내 서버에 접속한 상태이다. 여기서 내가 터미널창을 통해 vncviewer 접속으로 왼쪽사람의 리눅스서버에 접속을 했다. 물론 왼쪽사람도 vncviewer를 따로 켜서 자기 자신의 리눅스에 대해 접속을 한 상태이다. 당연히 내가 접속한 세션과 동일한 세션으로. 덩달아 선생님도 왼쪽사람에 대한 세션에 접근한 상태가 되어버렸다. 내 세션창에 대해서는 나와 선생님이 권한이 있으며, 왼쪽사람의 세션창에 대해서는 선생님,나,왼쪽사람 세명이 권한이 있다. 이 상태에서 내가 접근한 왼쪽사람의 터미널창에 reboot을 하면 옆사람의 리눅스서버가 꺼진다.
+다만 같은 vncviewer에서만 같이 움직이는 현상이 생긴다.(같은 세션) 예를들어 vncviewer에서 뭘 해도 vmware리눅스서버의 창에서는 아무것도 안되는것처럼 보일뿐이다. vncviewer가 2개 이상일 때, 그리고 같은 세션에 접근한 상태일 때 같이 움직이는 현상이 보인다.</p>
+
+<p>vncserver를 통해 3번 이상의 세션이 만들어진 경우 별도 포트를 추가해야한다. 즉, 기존의 방화벽 서비스를 체크하는 것으로는 외부에서 접근이 되지 않는다. vnc포트가 원래 5800 5900 6000이 있는데 5900이 기본이다. 5900+세션번호 를 포트로 따로 추가를 해야한다.</p>
+
+<p>방화벽을 client머신에서 설정하는 법..에 대해서 할 것이다. 즉 tui에서의 방화벽설정!</p>
+
+<p>선생님 파일 지우심 ㅠㅠ</p>
+
+<p>근데 tui환경에 대해 vnc하면 ..소용이 없는거겠지? 물론 접속 되겠지만 키보드만 칠 수 있을 테니까..</p>
+:ET

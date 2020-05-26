@@ -308,7 +308,7 @@
         <p>실습</p>
 
 <p>Server머신에서 systemctl enable nfs.service 를 하였음에도 불구하고 재부팅한 후에 systemctl is-active nfs.service 를 하면 unknown으로 나온다. 왜지
-Client머신에서는 systemctl enable autofs.service하면 재부팅해도 autofs서비스 켜져있는데
+Client머신에서는 systemctl enable autofs.service하면 재부팅해도 autofs서비스 켜져있는데 <br />
 → 말이 unknown이지 사실은 실행되어있는 상태이다. Server머신에서 reboot한 상태에서 systemctl is-active nfs.service하면 unknown이긴 한데, Client머신에서 df -h 를 하면 nfs서비스에 대한 연결은 되어있는 것으로 나온다.(Server머신을 끈 경우 Client에서 df -h 하면 먹통됨. Server머신을 키면 먹힌다.) 아무튼 Server머신에서 unknown나온 상태에서 Client머신을 통해 touch /Client100/helloserver11을 하면 오류가 생기지 않고 해당 파일이 생긴다. 서버에서도 ls -l /100 을 하면 해당 파일이 생겨 있는 것을 확인 할 수 있다. 이 때에도 Server머신에서 systemctl is-active nfs.service 를 해보면 여전히 unknown이다. 결국 모를뿐 사실 실행되고있는 것이다. systemctl status nfs.service해보면 켜져있음을 볼 수 있으며 다시 systemctl is-active nfs.service를 해보면 active로 나온다.</p>
 
 <p>맨 마지막부분에 있어서 Server머신의 장치를 Client머신에서 autofs설정이 아닌 /etc/fstab으로 자동 마운트설정하는 문제가 있었다.
@@ -335,7 +335,7 @@ autofs로 설정을 하면 Server가 꺼져있어도 Client머신은 정상부�
 ls -l /misc 해보니 Client200 과 Client300디렉토리 잘 보인다. 
 ls -l /misc/Client200 을 해보니 잠시 먹통이 되었다가</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836151-0c65c000-9f01-11ea-9ff2-942f2558d524.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836151-0c65c000-9f01-11ea-9ff2-942f2558d524.png" alt="image" />  <br />
 이런 메시지가 뜬다. 즉 서버의 해당 디렉토리를 못찾아감..</p>
 
 <p>따라서 위험하지 않게 autofs를 쓰는게 좋아보인다.
@@ -544,7 +544,7 @@ touch /0hooni/client3_autofs/server3_hello하려고 하면 read only라고 뜬�
 <p>DNS
 IP는 사람이 기억하기가 어려움. 따라서 사람이 보기 편한 문자로 바꿨다. www.naver.com 도 사실은 특정 ip로 되어있음</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836166-1687be80-9f01-11ea-8eda-6479d8ae1ea4.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836166-1687be80-9f01-11ea-8eda-6479d8ae1ea4.png" alt="image" />   <br />
 mapping을 함.</p>
 
 <p>Network ID는 Domain Name이 되고 Host ID 는 Host Name으로 되었다.</p>
@@ -566,7 +566,7 @@ kin.naver.com 이라는 지식인페이지에서 Host Name은 kin이다.</p>
 그러면 각각의 URL주소들이 다 IP값이 다른건가? 다르다면 Network ID부분은 다 같지만 HostID부분은 다 다를 듯
 (JSP나 Django 에서는 이 부분에 대해 건드린 적이 없었다. URL path부분 즉, 맨 뒷부분쪽만 건드렸었지..)</p>
 
-<p><img src="https://user-images.githubusercontent.com/39452092/82836193-20112680-9f01-11ea-949f-82c9e9286fc9.png" alt="image" />
+<p><img src="https://user-images.githubusercontent.com/39452092/82836193-20112680-9f01-11ea-949f-82c9e9286fc9.png" alt="image" />   <br />
 각각의 네트워크는 Network ID로 구분을 하고 하나의 Network 상에서 각각의 개별 호스트들은 Host ID 로 구분을 한다.</p>
 
 <p>각각의 사이트들은 Domain Name으로 구분을 하고 하나의 Domain상에서 각각의 세부 개별 페이지들은 Host Name으로 구분을 한다.
