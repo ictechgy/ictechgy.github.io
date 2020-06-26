@@ -1,0 +1,762 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux_day14 - 개발 끄적끄적</title>
+<meta name="description" content="사용자 계정의 홈 디렉토리 하위인 /home/itbank 밑에 파일들을 두었었는데 이는 VMware에서 사용자계정의 바탕화면에 파일을 두는 것과 같음 → 그러면 어쨌든 사용자계정의 홈 디렉토리 접근 x권한을 두지 않으면 VMware로도 접속이 불가능 할 것으로 보인다. ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="Linux_day14">
+<meta property="og:url" content="http://localhost:4000/linux/Linux_day14/">
+
+
+  <meta property="og:description" content="사용자 계정의 홈 디렉토리 하위인 /home/itbank 밑에 파일들을 두었었는데 이는 VMware에서 사용자계정의 바탕화면에 파일을 두는 것과 같음 → 그러면 어쨌든 사용자계정의 홈 디렉토리 접근 x권한을 두지 않으면 VMware로도 접속이 불가능 할 것으로 보인다. ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/photo-hangang.jpeg">
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-26T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/linux/Linux_day14/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux_day14">
+    <meta itemprop="description" content="사용자 계정의 홈 디렉토리 하위인 /home/itbank 밑에 파일들을 두었었는데 이는 VMware에서 사용자계정의 바탕화면에 파일을 두는 것과 같음→ 그러면 어쨌든 사용자계정의 홈 디렉토리 접근 x권한을 두지 않으면 VMware로도 접속이 불가능 할 것으로 보인다.">
+    <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Linux_day14
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>사용자 계정의 홈 디렉토리 하위인 /home/itbank 밑에 파일들을 두었었는데 이는 VMware에서 사용자계정의 바탕화면에 파일을 두는 것과 같음
+→ 그러면 어쨌든 사용자계정의 홈 디렉토리 접근 x권한을 두지 않으면 VMware로도 접속이 불가능 할 것으로 보인다.</p>
+
+<p>권한 실습!</p>
+
+<p>소유권 - root:root, root:itbank, itbank:root, itbank:itbank
+허가권 - 755, 570, 375, 455, 001, 010, 234, 273, 135, 705, 507, 316, 770, 644, 027, 500</p>
+
+<p>위에 보이는 허가권과 소유권을 아래에 html 디렉터리에 작업
+대상  /home/itbank/html, /var/www/html
+                                ——                 —–
+		              └————–┘
+		                   동일하게(=같다)
+				→ 소유권과 허가권 두개 다 동일하게 세팅하고 작업</p>
+
+<p>테스트</p>
+
+<ol>
+  <li>
+    <p>ftp 접속 되는가?
+/home/itbank 자체의 속성(x권한)이 바뀌지 않는 한 계속 접속이 가능한 것 아닌가?</p>
+  </li>
+  <li>
+    <p>html 디렉터리 보이는가?
+html 디렉토리 자체가 보이는 것을 묻는 것인지 아니면 하위의 내용이 보이는지 묻는 것인지
+만약 그냥 html 디렉토리가 보이는지를 묻는 것이라면 그건 /home/itbank 에서 itbank의 r권한과 관련이 있는 것이다.
+html 디렉토리 하위의 내용이 보이냐를 묻는 것이라면 그건 html 디렉토리의 r권한에 달려있는 것임</p>
+  </li>
+  <li>
+    <p>html 디렉터리 변경 되는가?
+rename같은걸로 html 디렉토리의 속성을 바꿀 수 있는 것을 묻는 것인지(w) 아니면 해당 디렉토리로 cd가 가능하냐는 것인지(x)
+→ 근데 html디렉토리의 소유자가 root:root 인 상황에서 허가권이 other쪽에 0인 상황임에도 ftp에서 itbank를 통해 접속 했는데 rename을 통해 디렉토리명이 변경이 된다.. 뭐지?</p>
+  </li>
+  <li>
+    <p>index.html 업로드 되는가?
+이 업로드는 어디에? itbank 하위에? 아니면 html 디렉토리 하위에?
+만약 그냥 itbank 홈디렉토리 하위라면 그건 itbank의 w권한에만 상관이 있는 것일테고 html 디렉토리 하위라면 html 디렉토리의 w권한과 관련이 있게 됨</p>
+  </li>
+  <li>
+    <p>Internet Explorer 내용 출력이 되는가?
+단순 인터넷을 통한 접속은 other쪽이고 /var/www/html 의 허가권 중 other쪽의 x 유무에 따라서만 결과가 달라질 것</p>
+  </li>
+</ol>
+
+<p>ftp에서 현재 디렉토리의 하위내용을 ls -l 이나 dir 로 볼 수는 있는데 다른 곳의 값은 보지 못한다?
+ls -l /var 이런 것 불가능?  → 작동 안됨
+ls /var  가능한데.. 디렉토리만 띄워주는 것 같음 → ㄴㄴ 파일도 보인다.</p>
+
+<p>dir /var/www/html 을 하면 html 디렉토리 하위의 것들이 보인다… 즉 dir 명령어 쓰면 하위의 내용들 볼 수 있음. 마치 ls -l 을 쓴 것과 같은 결과가 나온다.</p>
+
+<p>chmod 010 html /var/www/html
+ls -ld html /var/www/html
+한번에 변경하고 한번에 결과값 보기.</p>
+
+<ol>
+  <li>
+    <p>ftp 접속 되는가?
+→ itbank 디렉토리의 x 권한과 관련</p>
+  </li>
+  <li>
+    <p>html 디렉터리 보이는가?
+→ itbank 디렉토리에서 그냥 ls로 html 디렉토리가 보이는지 보라는 것
+즉, itbank 디렉토리의 r권한과 관련. 나는 html 디렉토리 하위의 내용이 보이는 거냐는 것인지 헷갈리기도 했음. 이런 경우 html디렉토리의 r권한과 관련이 있었을 것이다.</p>
+  </li>
+  <li>
+    <p>html 디렉터리 변경 되는가?
+rename이 아니라 cd로 디렉토리로 이동이 가능한지를 묻는 것. 따라서 html디렉토리의 x권한과 관련이 있는 문제이다. 
+(사실 html 디렉토리에 대해 w권한이 그 누구에게 없던 상태임에도 ftp를 통해 접속한 itbank계정이 디렉토리명을 이리저리 rename으로 바꾸는게 가능했다. 마치 w권한이 있는듯이.. 그래서 어라 뭐지? 했었음. w가 없는데도 바뀌네? 하고)</p>
+  </li>
+</ol>
+
+<p>/home/itbank/html 과 /var/www/html 두 디렉토리가 있는데 어디로 이동하든 상관은 없다. 두 html 디렉토리의 허가권과 소유권은 동일하게 맞춰져 있으므로.
+다만 선생님은 /var/www/html로 이동해야한다고 하셨고 그래야 4번의 index.html을 올리고 5번을 볼 수 있다고 하셨다. 하지만 그냥 index.html 은 /var/www/html에 한번만 넣어두고 5번이 확인이 되는지는 따로 확인할 수 있다. 따라서 index.html은 그냥 /home/itbank/html에 업로드 되는지 테스트를 해도 된다.
+다만 내 방식대로 한다면 itbank계정으로 html 디렉토리에 접근이나 index.html 파일업로드를 못했는데 인터넷을 통해 화면을 띄운 경우 화면이 잘 출력될 수도 있다. 원래는 안떠야 할 텐데.. 만약 html 디렉토리 소유권이 itbank:itbank 인데 허가권이 — — rwx 이러한 경우 원래는 파일 업로드를 못 해놨을테니 인터넷을 통해 해당 html 디렉토리 안에 들어간다고 하더라도 index.html 을 찾지 못해서 기본 Testing 123을 출력해야한다. 하지만 내 방식대로라면 이전에 넣어둔 index.html이 보이게 될테니까.. 선생님이 말씀하신 내용대로 하는 것이 나을 것 같다.</p>
+
+<ol>
+  <li>
+    <p>index.html 업로드 되는가?
+html 디렉토리의 w권한과 관련이 있다.</p>
+  </li>
+  <li>
+    <p>Internet Explorer 내용 출력이 되는가?
+/var/www/html 에서 html디렉토리의 other쪽 중 x권한과 index.html 문서파일의 other쪽 r 권한과 관련이 있다. 만약 디렉토리에 대해 x권한을 가지지 못했다면 파일이 내부에 있다고 하더라도 그냥 Testing 123이 뜰 것이고, 내부로 접근은 했지만 파일 자체에 대해 r권한을 획득하지 못한 상태라면 HTTP 403 로그인 필요 메시지가 써져 있는 창을 보게 될 것이다.(other가 아닌 user 또는 group 권한 필요)
+→ 디렉토리에서 other쪽의 r 권한과는 상관이 없다. 디렉토리에서 r은 ls로 파일이 뭐가 있나 그것만 보는 용도의 권한일 뿐이다. 파일에 대한 직접적 r권한이 중요한 것</p>
+  </li>
+</ol>
+
+<p>UID와 GID가 같다면 GID는 없다고 보면 됨. UID가 짱
+— rwx rwx  itbank itbank 라고 한다면 itbank 사용자는 아무런 권한이 없는 것과 같다.
+→ /home/itbank 의 허가권은 rwx — — 이며 소유권은 itbank itbank이다. 그런데 우리는 여기서 itbank계정을 통해 허가권을 볼때 자연스럽게 user쪽 권한만 보았다. 즉 UID와 GID가 같다면 GID쪽은 볼 필요가 없어진다.</p>
+
+<p>어떤 것을 볼 때 우리는 소유권을 먼저 보고 허가권을 봐야한다. 마치 길에 떨어져 있는 돈을 보고 그 돈의 소유권을 생각한뒤에 허가권, 줍느냐 마느냐를 생각하는 것처럼
+(생각하는 과정에 있어 소유권에 대해서 우리는 종종 생략하기도 한다.)</p>
+
+<p>관리자는 모든 허가권을 무시한다. 
+/etc/shadow 는 — — — root root 의 속성을 가지고 있지만 root계정으로는 cat로 파일 내용 read도 가능하고 vi로 write도 가능하다. 허가권만 두고 본다면 아무도 건드릴 수 없는 것처럼 보이지만..</p>
+
+<p>위의 파일을 itbank계정으로 읽거나 수정하려 하면 안된다. cat로 read도 불가능하며 vi로 write도 불가능하다.
+다만 저 파일이 있는지를 볼 수는 있는데(존재여부) 그 이유는 상위디렉토리인 /etc  권한이
+rwx r-x r-x root root 인데 저기에서 other의 r 권한이 있어서 존재하는 것은 ls 로 확인할 수 있었다. x도 있으니 /etc 하위로 들어가는 것도 가능은 하다. /etc 디렉토리에 대해 w는 없으니 새 파일을 넣을 수도 없을 것이고.. /etc 디렉토리 자체에 대해 건드릴 수도 없을 것이다. 내부 파일들의 삭제나 수정 여부에 대해서는 파일들의 w부분을 봐야 할 것</p>
+
+<p>/home/itbank 는 rwx — — itbank itbank 라고 하더라도 root로는 내부로 들어갈 수 있고 값들을 수정 할 수 있다. 일반적인 생각으로는 root 는 소유자도 아니고 그룹에도 없으니 other일테고.. 어떠한 권한도 주어져 있지 않으므로 아무것도 못한다고 생각이 드는데!
+→ 우리는 항상 putty로 로그인해서 cd ~itbank 했었음..</p>
+
+<p>어떤 파일이나 디렉토리에 대해 건드릴 때 그 상위디렉토리에 대한 부분도 신경써야한다.</p>
+
+<p>원래대로 되돌리기
+rm -rf html
+chmod 755 /var/www/html  → rwx r-x r-x
+chown root:root /var/www/html
+rm -rf /var/www/html/index.html
+chmod 700 /home/itbank → rwx — — itbank itbank
+chown itbank:itbank /home/itbank</p>
+
+<p>이제 저번에 삭제했던 사용자와 그에 대한 것들을 복구해보자</p>
+
+<p>준비물
+[root@localhost itbank]# mkdir /jongno
+[root@localhost itbank]# ls -l /jongno
+합계 0</p>
+
+<p>[root@localhost itbank]# useradd user1
+[root@localhost itbank]# useradd user2
+[root@localhost itbank]# useradd -d /jongno/user10 user10
+→ useradd -b /jongno user10 으로 쓸 수 있다.</p>
+
+<p>[root@localhost itbank]# userdel -r user1
+[root@localhost itbank]# userdel -r user2
+[root@localhost itbank]# userdel user10  → /jongno 하위의 홈 디렉토리와 메일파일은 삭제되지 않는다. 해당 디렉토리와 파일의 UID 및 GID 부분은 숫자로서 남게 된다.</p>
+
+<p>이제 ls -l /jongno 를 보면
+drwx——. 3 1003 1003 78  5월 29 11:41 user10
+가 남아있게 된다.</p>
+
+<p>그냥
+chown user10. /jongno/user10
+를 하면 잘못된 사용자라고 뜬다. 해당 사용자도 그룹도 존재하지 않아서.</p>
+
+<p>그럼 일단 사용자부터 다시 만들어야 하는데.. 
+useradd user10 이라고 치게 되면 홈 디렉토리를 /home 하위에 생성하게 되는 것이므로 소용이 없다.</p>
+
+<p>useradd -d /jongno/user10 user10
+useradd: 경고: 홈디렉터리가 이미 있습니다.
+skel 디렉터리에서 파일을 복사하지 않습니다.
+메일함 파일을 만드는 중: 파일이 있습니다</p>
+
+<p>위와 같이 하면 홈디렉토리와 메일파일을 따로 생성하지 않고 유저를 생성한다. 다만 위와같이 한다고 해도 홈디렉토리와 파일의 속성을 보면 UID와 GID쪽은 바뀌어있지 않고 그대로 숫자인 상태이다. 원래의 파일과 디렉토리들의 UID와 GID는 1003인데 새로 만든 user10은 ID값이 1001이기 때문이다. 매칭이 안됨.
+따라서 일일히 다 chown user10. 을 써서 바꿔줘야한다. 특정 디렉토리의 소유권을 바꿔도 그 하위의 것들은 소유권이 바뀌지 않으므로 또 일일히 다 바꿔줘야 한다.</p>
+
+<p>chown user10:user10 /jongno/user10/.* 이라고 치면 숨김파일 바꾸려는 것은 이해하지만 그 상위디렉토리인 /jongno 의 소유권까지 바꾸게 된다..원래 root:root였는데.. 그냥 온점 하나만 쓰던가.. 저렇게 하면 숨김파일이 아닌 것들은 영향을 받지도 않는다. 역시나 .mozilla 디렉토리의 소유권은 바뀌겠지만 그 하위의 파일이나 디렉토리는 바뀌어있지 않을 것이다.
+그렇다고 그냥 * 만 쓰면 숨김파일의 소유권은 바뀌지 않을 것</p>
+
+<p>메일파일도 안바뀌어있을테니 /var/spool/mail 에서 해당 메일파일도 소유권을 바꿔야 함
+메일파일은 mail그룹에 속해있으므로 UID쪽만 바꿔주도록 하자</p>
+
+<p>useradd -u 1003 -d /jongno/user10 user10 으로 한번에 끝낼 수 있음. 이렇게 하면 chown 쓸 필요 없이 기존 홈 디렉토리와 메일파일들 모두 UID와 GID가 user10으로 바뀐다.
+이미 user10을 생성해버렸다면 usermod -u 1003 user10 으로 UID를 바꾸면 된다.</p>
+
+<p>만약 위와같이 해서 user10을 1003이라는 숫자로 만든 경우 다시 usermod -u 1001 user10 으로 UID를 변경하면 홈디렉토리와 메일파일등도 다 따라 올라나? 따라 가겠지? 이제 그 파일과 디렉토리들은 UID와 GID가 어차피 user10이라는 문자일뿐이니까?</p>
+
+<p>그러고 보니 usermod 에서 -d 로 홈디렉토리 경로 바꾼다 해서 실제 위치도 바뀌는건 아니었다. 직접 옮기거나 아니면 -m 옵션 추가 필요</p>
+
+<p>또는 chown 에서 -R 옵션이 있다. 하위의 내용들 소유권까지 전부 다 바꾸는 옵션
+chown -R user10. /jongno/user10 → 잘 작동된다. 하위의 것들까지 전부다 변경
+chown -R user10 /var/spool/mail/user10  → UID만 변경. -R 안써도 되긴 함</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#linux" class="page__taxonomy-item" rel="tag">Linux</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-26T00:00:00+09:00">May 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Linux_day14%20http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux_day14%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux_day14%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux_day14%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/linux/Linux_day13/" class="pagination--pager" title="Linux_day13
+">Previous</a>
+    
+    
+      <a href="/linux/Linux_day15/" class="pagination--pager" title="Linux_day15
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day8/" rel="permalink">Linux_day8
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty접속 안됐으나 VMware 가상네트워크설정에서 NAT에 있어서 두가지 체크사항 건드리니까 다시 됨. 한가지만 체크되어있었는데 먼저 체크 푼 다음에 설정창 껐다가 다시 키고, 체크사항 두개 다시 체크한 뒤에 설정창 끔.  OS GUI에서도 네트워크 설정부분 껐다가 켰다. 아...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day7/" rel="permalink">Linux_day7
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.
+한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???
+간결하면서도 강력한 기능을 제공
+GUI...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day6/" rel="permalink">Linux_day6
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">논리연산자
+이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
+a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
+a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/linux/Linux_day14/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/linux/Linux_day14"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ictechgy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

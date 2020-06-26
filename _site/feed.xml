@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-26T19:17:50+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>An amazing website.</subtitle><author><name>JJanghong</name></author><entry><title type="html">Linux_day9</title><link href="http://localhost:4000/Linux_day9/" rel="alternate" type="text/html" title="Linux_day9" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux_day9</id><content type="html" xml:base="http://localhost:4000/Linux_day9/">&lt;p&gt;디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-26T17:04:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>개인 공부 기록소입니다.</subtitle><author><name>JJanghong</name></author><entry><title type="html">Linux_day9</title><link href="http://localhost:4000/linux/Linux_day9/" rel="alternate" type="text/html" title="Linux_day9" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux_day9</id><content type="html" xml:base="http://localhost:4000/linux/Linux_day9/">&lt;p&gt;디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
 → 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
 결국 rm -r 을 사용해야함&lt;/p&gt;
 
@@ -336,9 +336,9 @@ useradd [option] [argument] 계정명&lt;/p&gt;
 &lt;p&gt;tail -7 /etc/shadow 하면 이전 것들은 다 비밀번호 없음&lt;/p&gt;
 
 &lt;p&gt;사용형식
-useradd -p &lt;code class=&quot;highlighter-rouge&quot;&gt;(악센트)openssl passwd 비밀번호&lt;/code&gt; 계정명&lt;/p&gt;
+useradd -p &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(악센트)openssl passwd 비밀번호&lt;/code&gt; 계정명&lt;/p&gt;
 
-&lt;p&gt;useradd -p &lt;code class=&quot;highlighter-rouge&quot;&gt;openssl passwd 1&lt;/code&gt; user7
+&lt;p&gt;useradd -p &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openssl passwd 1&lt;/code&gt; user7
 악센트 ` 는 꼭 필요하다. 그냥 비번생성불가 → 복잡하다..형식이
 ssl → secure sockets layer&lt;/p&gt;
 
@@ -500,7 +500,7 @@ useradd -mk /jongnoskel/bye user9 → 기본적으로 /etc/skel을 이용하도�
 보니까 -m은 create home이라고 해서 홈디렉토리 생성명령어인데??
 -k가 skel디렉토리 설정하는거고..
 엥?? 홈 디렉토리 지정은 -d였는데.. -m은 홈 디렉토리 하나 새로 생성하는건가 뭐지..
-무튼 이 문제..흠..&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은? → 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다. 결국 rm -r 을 사용해야함</summary></entry><entry><title type="html">Database2</title><link href="http://localhost:4000/DB_2/" rel="alternate" type="text/html" title="Database2" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/DB_2</id><content type="html" xml:base="http://localhost:4000/DB_2/">&lt;h1 id=&quot;본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다&quot;&gt;본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.&lt;/h1&gt;
+무튼 이 문제..흠..&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은? → 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다. 결국 rm -r 을 사용해야함</summary></entry><entry><title type="html">Database2</title><link href="http://localhost:4000/sql/DB_2/" rel="alternate" type="text/html" title="Database2" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/sql/DB_2</id><content type="html" xml:base="http://localhost:4000/sql/DB_2/">&lt;h1 id=&quot;본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다&quot;&gt;본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.&lt;/h1&gt;
 
 &lt;p&gt;** 함수 (function)&lt;/p&gt;
 
@@ -560,7 +560,7 @@ from dual;&lt;/p&gt;
 &lt;p&gt;select empno, ename, sal, round(sal, -2) rousal
 from emp;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL     ROUSAL ---------- ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL     ROUSAL ---------- ---------- ---------- ----------
   7839 KING             5000       5000
   7566 JONES            2975       3000
   7698 BLAKE            2850       2900
@@ -600,7 +600,7 @@ from emp
 group by deptno
 having round(avg(nvl(sal, 0)), -2) &amp;gt;= 2500;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT     SUMSAL     AVGSAL ---------- ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT     SUMSAL     AVGSAL ---------- ---------- ---------- ----------
     10          3       8750 2916.66667
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -611,7 +611,7 @@ from ( select deptno, count(*) cnt, sum(sal) sumsal, avg(nvl(sal, 0)) avgsal
 	group by deptno
 	having round(avg(nvl(sal, 0)), -2) &amp;gt;= 2500 ) join dept using(deptno);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
     10 ACCOUNTING              3       8750 2916.66667
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -621,7 +621,7 @@ from emp
 where lower(ename) like ‘%s%’
 order by tot desc;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL       COMM        TOT ---------- ---------- ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL       COMM        TOT ---------- ---------- ---------- ---------- ----------
   7566 JONES            2975                  3000
   7788 SCOTT            3000                  3000
   7900 JAMES             950                  1000
@@ -759,7 +759,7 @@ from dual&lt;/p&gt;
 from emp
 where substr(empno, 2, 2) in (‘92’, ‘90’, ‘56’);	- substr은 문자함수이므로 ‘‘를 붙여주는 것이 좋다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      LOWERJOB  SAL                                       ---------- ---------- --------- -----------------------------------------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      LOWERJOB  SAL                                       ---------- ---------- --------- -----------------------------------------
   7566 Jones      manager   $2975                                    
   7902 Ford       analyst   $3000                                    
   7900 James      clerk     $950         
@@ -787,7 +787,7 @@ from ( select deptno, count(*) cnt, sum(sal) sumsal, trunc(avg(nvl(sal, 0)), 0) 
 	where length(ename) &amp;gt;= 5
 	group by deptno ) join dept using(deptno);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
     30 SALES                   5       8150       1630
     20 RESEARCH                4       7875       1968
     10 ACCOUNTING              2       3750       1875
@@ -834,7 +834,7 @@ from emp
 where lower(substr(ename, 2, 1)) in (‘a’, ‘l’, ‘o’)
 group by deptno;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT     SUMSAL ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT     SUMSAL ---------- ---------- ----------
     30          5       7900
     20          2       5975
     10          1       2450
@@ -847,7 +847,7 @@ from ( select deptno, count(*) cnt, sum(sal) sumsal
 	where lower(substr(ename, 2, 1)) in (‘a’, ‘l’, ‘o’)
 	group by deptno ) join dept using(deptno);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     SUMSAL ---------- -------------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     SUMSAL ---------- -------------- ---------- ----------
     30 SALES                   5       7900
     20 RESEARCH                2       5975
     10 ACCOUNTING              1       2450
@@ -894,7 +894,7 @@ from emp
 where mod(empno, 2) = 0
 group by deptno;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT     AVGSAL ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT     AVGSAL ---------- ---------- ----------
     30          4       1638
     20          4       2519
     10          2       1875
@@ -907,7 +907,7 @@ from ( select deptno, count(*) cnt, round(avg(nvl(sal, 0)), 0) avgsal
 	where mod(empno, 2) = 0
 	group by deptno ) join dept using(deptno);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     AVGSAL ---------- -------------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT     AVGSAL ---------- -------------- ---------- ----------
     30 sales                   4       1638
     20 research                4       2519
     10 accounting              2       1875
@@ -946,7 +946,7 @@ from emp
 group by deptno
 having lower(substr(max(ename), 3, 1)) &amp;gt;= ‘k’;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT MAXNAME    MINNAME        AVGSAL ---------- ---------- ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO        CNT MAXNAME    MINNAME        AVGSAL ---------- ---------- ---------- ---------- ----------
     30          6 WARD       ALLEN            1567
     10          3 MILLER     CLARK            2917
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -958,7 +958,7 @@ from ( select deptno, count(*) cnt, max(ename) maxname, min(ename) minname, ceil
 	group by deptno
 	having lower(substr(max(ename), 3, 1)) &amp;gt;= ‘k’ ) join dept using(deptno);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT MAXNAME    MINNAME        AVGSAL ---------- -------------- ---------- ---------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DEPTNO DNAME                 CNT MAXNAME    MINNAME        AVGSAL ---------- -------------- ---------- ---------- ---------- ----------
     30 SALES                   6 WARD       ALLEN            1567
     10 ACCOUNTING              3 MILLER     CLARK            2917
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -970,7 +970,7 @@ from ( select deptno, count(*) cnt, max(ename) maxname, min(ename) minname, ceil
 from dual&lt;/p&gt;
 
 &lt;h2 id=&quot;to_number123&quot;&gt;TO_NUMBER(‘123’)&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;         123 
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;         123 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;숫자는 무조건 오른쪽 정렬, 문자는 무조건 왼쪽정렬&lt;/p&gt;
@@ -978,7 +978,7 @@ from dual&lt;/p&gt;
 &lt;p&gt;select ‘123’+’456’,to_number(‘123’)+to_number(‘456’)
 from dual&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'123'+'456' TO_NUMBER('123')+TO_NUMBER('456') ----------- ---------------------------------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'123'+'456' TO_NUMBER('123')+TO_NUMBER('456') ----------- ---------------------------------
     579                               579 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1001,7 +1001,7 @@ from dual;&lt;/p&gt;
 	to_number(substr(empno,1,2) + 10)  c
 from emp;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO    A                                  B                                C ----------   ----------------- -------------------- -------------------------------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO    A                                  B                                C ----------   ----------------- -------------------- -------------------------------
   7369   73                                  83                              83 
   7499   74                                  84                              84 
   7521   75                                  85                              85 
@@ -1075,7 +1075,7 @@ from emp
 where lower(ename) like ‘%s%’
 order by sal desc;		-&amp;gt; saldollar를 쓰지 않은 이유는 해당 값은 원화 표시가 있을 것이기 때문(해도 괜찮긴 하지만 정확하게)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO IENAME     SALDOLLAR          JOBB       ---------- ---------- ------------------ -----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO IENAME     SALDOLLAR          JOBB       ---------- ---------- ------------------ -----------
   7788 Scott                ￦3,000  ANALYST**   
   7566 Jones                ￦2,975  MANAGER**   
   7876 Adams                ￦1,100  CLERK**     
@@ -1199,7 +1199,7 @@ order by to_char(hiredate, ‘d’) asc;&lt;/p&gt;
 
 &lt;p&gt;년월의 요일 순 : order by to_char(hiredate, ‘yyyymmd’) asc;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL HIREDAY                     DEPTNO        MGR ---------- ---------- ---------- ----------------------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL HIREDAY                     DEPTNO        MGR ---------- ---------- ---------- ----------------------- ---------- ----------
   7839 KING             5000 1981-11-17 화요일               10           
   7782 CLARK            2450 1981-06-09 화요일               10       7839
   7902 FORD             3000 1981-12-03 목요일               20       7566
@@ -1218,7 +1218,7 @@ from ( select empno, ename, sal, to_char(hiredate, ‘yyyy-mm-dd day’) hireday
 					join salgrade on e.sal between losal and hisal
 order by to_char(hiredate, ‘d’) asc;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;EEMPNO EENAME           ESAL HIREDAY                    EDEPTNO       EMGR DDNAME         MGRNAME         GRADE ---------- ---------- ---------- ----------------------- ---------- ---------- -------------- ---------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;EEMPNO EENAME           ESAL HIREDAY                    EDEPTNO       EMGR DDNAME         MGRNAME         GRADE ---------- ---------- ---------- ----------------------- ---------- ---------- -------------- ---------- ----------
   7566 JONES            2975 1981-04-02 목요일               20       7839 RESEARCH       KING                4
   7698 BLAKE            2850 1981-05-01 금요일               30       7839 SALES          KING                4
   7782 CLARK            2450 1981-06-09 화요일               10       7839 ACCOUNTING     KING                4
@@ -1232,7 +1232,7 @@ from ( select empno, ename, hiredate, deptno
 	from emp
 	where to_char(hiredate, ‘yyyy/mm’) = ‘1981/02’ ) e join dept using(deptno);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
   7499 ALLEN      81/02/20         30 SALES         
   7521 WARD       81/02/22         30 SALES         
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1268,7 +1268,7 @@ ar          3    $1,700&lt;/p&gt;
 from emp
 where to_char(hiredate, ‘yyyy/mm/dd’) &amp;gt;= ‘1980/07/01’;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO REPENAME   LOJOB     ---------- ---------- ---------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO REPENAME   LOJOB     ---------- ---------- ---------
   7839 king       president
   7566 jone*      manager  
   7698 blake      manager  
@@ -1294,7 +1294,7 @@ where to_char(hiredate, ‘yyyy/mm/dd’) &amp;gt;= ‘1980/07/01’;&lt;/p&gt;
 from emp
 where to_char(hiredate, ‘yyyy ww’) &amp;lt;= ‘1980 20’;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   COU MAXHIREDATE                 MINHIREDATE                 ---------- --------------------------- ---------------------------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   COU MAXHIREDATE                 MINHIREDATE                 ---------- --------------------------- ---------------------------
      0                                                        
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1309,7 +1309,7 @@ from ( select empno, ename, deptno, mgr
 	where to_char(hiredate, ‘yyyy’) &amp;lt;= ‘1982’ ) e join dept d on e.deptno = d.deptno
 					join emp m on e.mgr = m.empno;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME          DEPTNO        MGR DNAME          MGRNAME    ---------- ---------- ---------- ---------- -------------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME          DEPTNO        MGR DNAME          MGRNAME    ---------- ---------- ---------- ---------- -------------- ----------
   7566 JONES              20       7839 RESEARCH       KING      
   7698 BLAKE              30       7839 SALES          KING      
   7782 CLARK              10       7839 ACCOUNTING     KING      
@@ -1345,7 +1345,7 @@ from ( select empno, ename, hiredate, deptno
 	from emp
 	where to_char(hiredate, ‘yyyy/mm’) = ‘1981/02’ ) e join dept using(deptno);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
   7499 ALLEN      81/02/20         30 SALES         
   7521 WARD       81/02/22         30 SALES         
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1429,7 +1429,7 @@ from dual;&lt;/p&gt;
 from dual&lt;/p&gt;
 
 &lt;h2 id=&quot;to_date20191201yyyymmdd-sysdate&quot;&gt;TO_DATE(‘20191201’,’YYYYMMDD’)-SYSDATE&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;                         -131.39581 
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;                         -131.39581 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;select sysdate- to_date(‘20191201’,’yyyymmdd’)
@@ -1570,7 +1570,7 @@ from (	select deptno, to_char(hiredate, ‘yyyy’) yhiredate, count(*) cnt, max
 from emp
 where hiredate &amp;lt; to_date(‘1981/03/01’, ‘yyyy/mm/dd’);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE   WORKDAYS ---------- ---------- -------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE   WORKDAYS ---------- ---------- -------- ----------
   7369 SMITH      80/12/17      13260
   7499 ALLEN      81/02/20      13260
   7521 WARD       81/02/22      13260
@@ -1613,7 +1613,7 @@ order by workmon asc;
 from emp
 where deptno = 30;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE ADDEDHIR ---------- ---------- -------- --------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE ADDEDHIR ---------- ---------- -------- --------
   7698 BLAKE      81/05/01 81/08/09
   7499 ALLEN      81/02/20 81/05/31
   7521 WARD       81/02/22 81/06/02
@@ -1628,7 +1628,7 @@ from emp
 where abs(months_between(sysdate, hiredate)) &amp;gt;= 452
 order by workmon desc;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL       COMM    COMMSAL HIREDATE    WORKMON ---------- ---------- ---------- ---------- ---------- -------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL       COMM    COMMSAL HIREDATE    WORKMON ---------- ---------- ---------- ---------- ---------- -------- ----------
   7369 SMITH             800                   800 80/12/17        472
   7499 ALLEN            1600        300       1900 81/02/20        470
   7521 WARD             1250        500       1750 81/02/22        469
@@ -1664,7 +1664,7 @@ from ( select mgr, to_char(hiredate, ‘yyyy’) hireyear, count(*) cnt, to_char
 	where mod(substr(empno, 2, 1), 2) = 1
 	group by mgr, to_char(hiredate, ‘yyyy’) ) e join emp m on e.mgr = m.empno;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   MGR HIRE        CNT MAXHIREDATE  MINHIREDATE  MGRNAME    ---------- ---- ---------- ------------ ------------ ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   MGR HIRE        CNT MAXHIREDATE  MINHIREDATE  MGRNAME    ---------- ---- ---------- ------------ ------------ ----------
   7698 1981          2 1981/12/03 1 1981/02/22 4 BLAKE     
   7839 1981          2 1981/06/09 2 1981/04/02 1 KING      
   7566 1982          1 1982/04/09 2 1982/04/09 2 JONES     
@@ -1680,7 +1680,7 @@ from emp
 where regexp_like (lower(ename), ‘(am|an|as)’)
 order by sal asc;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL SAL12     HIRED                      HIRE50     ---------- ---------- ---------- --------- -------------------------- ----------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME             SAL SAL12     HIRED                      HIRE50     ---------- ---------- ---------- --------- -------------------------- ----------
   7900 JAMES             950   $11,400 1981-12-03 목요일 49        1986/02/03
   7876 ADAMS            1100   $13,200 1983-05-12 목요일 19        1987/07/12
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1690,7 +1690,7 @@ order by sal asc;&lt;/p&gt;
 from emp
 order by workdayofhiremon asc;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE WORKDAYOFHIREMON ---------- ---------- -------- ----------------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO ENAME      HIREDATE WORKDAYOFHIREMON ---------- ---------- -------- ----------------
   7654 MARTIN     81/09/28                3
   7521 WARD       81/02/22                7
   7499 ALLEN      81/02/20                9
@@ -1733,7 +1733,7 @@ order by cnt desc;&lt;/p&gt;
 from emp
 where hiredate &amp;gt; to_date(‘1980/07/01’, ‘yyyy/mm/dd’);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO REPNAME    LOJOB     ---------- ---------- ---------
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EMPNO REPNAME    LOJOB     ---------- ---------- ---------
   7839 king       president
   7566 jone*      manager  
   7698 blake      manager  
@@ -2291,7 +2291,7 @@ end;&lt;/p&gt;
 
 &lt;p&gt;cursor d1 is&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select sal, replace(lower(job), ' ', '')
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select sal, replace(lower(job), ' ', '')
 
 from emp
 
@@ -2312,7 +2312,7 @@ for update;
 
 &lt;p&gt;loop&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch d1 into vsal, vjob;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch d1 into vsal, vjob;
 
 exit when d1%notfound;
 
@@ -2371,7 +2371,7 @@ exit when d1%notfound;
 
 &lt;p&gt;cursor c1 is&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select *
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select *
 
 from emp
 
@@ -2386,7 +2386,7 @@ where lower(job) = lower(vjob);
 
 &lt;p&gt;loop&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vrow;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vrow;
 
 exit when c1%notfound;
 
@@ -2445,7 +2445,7 @@ SYS.DBMS_OUTPUT.PUT_LINE('보너스' || vrow.comm);
 
 &lt;p&gt;cursor c1 is&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select *
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select *
 
 from emp
 
@@ -2460,7 +2460,7 @@ where sal &amp;gt;= vsal and lower(job) = lower(vjob);
 
 &lt;p&gt;loop&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vrow;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vrow;
 
 exit when c1%notfound;
 
@@ -2523,7 +2523,7 @@ SYS.DBMS_OUTPUT.PUT_LINE('직무' || vrow.job);
 
 &lt;p&gt;cursor c1 is&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select deptno, count(*) cnt, sum(sal) sumsal
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select deptno, count(*) cnt, sum(sal) sumsal
 
 from emp
 
@@ -2544,7 +2544,7 @@ group by deptno;
 
 &lt;p&gt;loop&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vdeptno, vcnt, vsumsal;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vdeptno, vcnt, vsumsal;
 
 exit when c1%notfound;
 
@@ -2591,7 +2591,7 @@ SYS.DBMS_OUTPUT.PUT_LINE('급여합계' || vsumsal);
 
 &lt;p&gt;cursor c1 is&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select deptno, cnt, sumsal, dname
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select deptno, cnt, sumsal, dname
 
 from ( select deptno, count(*) cnt, sum(sal) sumsal
 
@@ -2616,7 +2616,7 @@ from emp
 
 &lt;p&gt;loop&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vdeptno, vcnt, vsumsal, vdname;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fetch c1 into vdeptno, vcnt, vsumsal, vdname;
 
 exit when c1%notfound;
 
@@ -2661,7 +2661,7 @@ SYS.DBMS_OUTPUT.PUT_LINE('부서명' || vdname);
 
 &lt;p&gt;급여합계11200&lt;/p&gt;
 
-&lt;p&gt;부서명ACCOUNTING&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</summary></entry><entry><title type="html">Linux2_day1</title><link href="http://localhost:4000/Linux2_day1/" rel="alternate" type="text/html" title="Linux2_day1" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day1</id><content type="html" xml:base="http://localhost:4000/Linux2_day1/">&lt;p&gt;D드라이브에 내 이름으로 폴더 하나 생성. 1_압축푼거 와 2_직접설치 디렉토리 두개를 추가한다.
+&lt;p&gt;부서명ACCOUNTING&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="SQL" /><summary type="html">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</summary></entry><entry><title type="html">Linux2_day1</title><link href="http://localhost:4000/linux/Linux2_day1/" rel="alternate" type="text/html" title="Linux2_day1" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day1</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day1/">&lt;p&gt;D드라이브에 내 이름으로 폴더 하나 생성. 1_압축푼거 와 2_직접설치 디렉토리 두개를 추가한다.
 주 수업은 1_압축푼거
 서브로는 2_직접설치 → TUI 설치 예정
 2개로 실습을 하는 경우에 또 사용 할 것&lt;/p&gt;
@@ -2845,7 +2845,7 @@ drwxr-xr-x 2 root root 6  7월 11 15:10 /backup
 맨 아래로 이동. G 를 눌러 이동한다. gg는 맨 윗줄
 빈줄을 두개 생성하자. o를 눌러 생성도 가능하고 엔터키를 눌러 생성도 가능하다. 대문자 O는 커서 위에 줄 생성임&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;360 cat &amp;lt;&amp;lt; EOF
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;360 cat &amp;lt;&amp;lt; EOF
 361 set superusers=linux2
 362 password linux2 CentOS_7
 363 EOF
@@ -2866,7 +2866,7 @@ server에 대해 스냅샷 찍자. 우선 poweroff로 종료
 재부팅 -&amp;gt; 그래픽으로 변경
 grub 암호화 설정&lt;/p&gt;
 
-&lt;p&gt;다 전원 끄고 종료&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">D드라이브에 내 이름으로 폴더 하나 생성. 1_압축푼거 와 2_직접설치 디렉토리 두개를 추가한다. 주 수업은 1_압축푼거 서브로는 2_직접설치 → TUI 설치 예정 2개로 실습을 하는 경우에 또 사용 할 것</summary></entry><entry><title type="html">Linux2_day10</title><link href="http://localhost:4000/Linux2_day10/" rel="alternate" type="text/html" title="Linux2_day10" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day10</id><content type="html" xml:base="http://localhost:4000/Linux2_day10/">&lt;p&gt;NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음
+&lt;p&gt;다 전원 끄고 종료&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">D드라이브에 내 이름으로 폴더 하나 생성. 1_압축푼거 와 2_직접설치 디렉토리 두개를 추가한다. 주 수업은 1_압축푼거 서브로는 2_직접설치 → TUI 설치 예정 2개로 실습을 하는 경우에 또 사용 할 것</summary></entry><entry><title type="html">Linux2_day10</title><link href="http://localhost:4000/linux/Linux2_day10/" rel="alternate" type="text/html" title="Linux2_day10" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day10</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day10/">&lt;p&gt;NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음
 해당 파일은 NFS를 허용 할 클라이언트를 작성할 수 있는 파일이다.
 Network File System → 서버의 리소스를 클라이언트가 마운트하여 자기것처럼 쓸 수 있음&lt;/p&gt;
 
@@ -3203,7 +3203,7 @@ systemctl status nfs.service로 오류문제가 있는지 확인하자. 또 syst
 클라이언트 입장에서는 umount /Client100 하면 되는데(또는 ‘umount 서버IP:/서버디렉토리’로도 가능할까) 서버입장에서는 강제 마운트해제 어떻게 시키는걸까&lt;/p&gt;
 
 &lt;p&gt;무튼 마운팅된 과정은 아래와 같음
-/dev/sdb1 → /100 → /Client100&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음 해당 파일은 NFS를 허용 할 클라이언트를 작성할 수 있는 파일이다. Network File System → 서버의 리소스를 클라이언트가 마운트하여 자기것처럼 쓸 수 있음</summary></entry><entry><title type="html">Linux2_day11</title><link href="http://localhost:4000/Linux2_day11/" rel="alternate" type="text/html" title="Linux2_day11" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day11</id><content type="html" xml:base="http://localhost:4000/Linux2_day11/">&lt;p&gt;실습 풀이&lt;/p&gt;
+/dev/sdb1 → /100 → /Client100&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">NFS서비스와 RPCbind에 대해 배웠었으며 /etc/exports를 보고 있었음 해당 파일은 NFS를 허용 할 클라이언트를 작성할 수 있는 파일이다. Network File System → 서버의 리소스를 클라이언트가 마운트하여 자기것처럼 쓸 수 있음</summary></entry><entry><title type="html">Linux2_day11</title><link href="http://localhost:4000/linux/Linux2_day11/" rel="alternate" type="text/html" title="Linux2_day11" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day11</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day11/">&lt;p&gt;실습 풀이&lt;/p&gt;
 
 &lt;p&gt;Client머신에서 NFS Server와 NFS Client를 모두 구동시키고 연결하기.
 장치로 1GB SCSI HDD를 추가하고 이 장치의 파티션을 100, 200, 300, 400Mbyte로 나눈다. 
@@ -3221,8 +3221,8 @@ Client머신에 root로 로그인 한 뒤에 fdisk -l 로 장치 확인&lt;/p&gt
 mkfs.xfs /dev/sdb1 또는 mkfs -t xfs /dev/sdb1 로 모든 파티션에 대해 포맷을 진행하자
 포맷됐는지 확인 하는 것은 blkid명령어로 확인!(파일시스템이 존재한다면 UUID가 나온다)&lt;/p&gt;
 
-&lt;p&gt;nfs서비스를 쓸건데 패키지가 존재하는지를 확인하자. &lt;code class=&quot;highlighter-rouge&quot;&gt;rpm -qa|grep nfs&lt;/code&gt;
-아무것도 나오지 않는다. 따라서 yum install nfs* 로 설치하자. (nfs-utils, nfs4-acl-tools 만을 설치해도 되긴 함) → 의존성파일들도 설치한다고 나오는데 rpcbind도 설치한다고 나온다. rpcbind도 없었던 것임. tcp-wrapper도 있다. 설치를 다 하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;rpm -qa|grep nfs&lt;/code&gt; 로 확인 가능.&lt;/p&gt;
+&lt;p&gt;nfs서비스를 쓸건데 패키지가 존재하는지를 확인하자. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rpm -qa|grep nfs&lt;/code&gt;
+아무것도 나오지 않는다. 따라서 yum install nfs* 로 설치하자. (nfs-utils, nfs4-acl-tools 만을 설치해도 되긴 함) → 의존성파일들도 설치한다고 나오는데 rpcbind도 설치한다고 나온다. rpcbind도 없었던 것임. tcp-wrapper도 있다. 설치를 다 하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rpm -qa|grep nfs&lt;/code&gt; 로 확인 가능.&lt;/p&gt;
 
 &lt;p&gt;vi /etc/exports 로 들어가자.
 [share dir]		&lt;a href=&quot;option&quot;&gt;access allow host/network&lt;/a&gt;
@@ -3461,7 +3461,7 @@ mount | tail -1 하면 /dev/sdb3가 /misc/client300 에 마운트되었다고 �
 사실은 서버의 /dev/sdb3가 /300 에 마운트가 된 상황이고 /300을 클라이언트에서 자신의 /misc/client300 으로 마운트를 한 것 뿐이겠지만… 하나의 머신에서 하니까 중간과정은 다 생략되어버리는 것 같기도 하고..
 → 그렇다.. 명령어를 통해 확인해봤는데 이렇게 나온다.&lt;/p&gt;
 
-&lt;p&gt;그리고 서버입장에서는 /etc/exports를 통해 클라이언트에게 ro 권한으로 접속할 수 있게 했는데 클라이언트에서 /etc/auto.misc 를 통해 rw접근을 하려고 한다면? 서버의 값이 우선일 것 같기는 한데.. 서버에서 rw로 제공을 하는데 클라이언트에서 ro로만 쓰려고 한다면 그냥 ro로만 쓸 수 있을 것 같고..&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">실습 풀이</summary></entry><entry><title type="html">Linux2_day12</title><link href="http://localhost:4000/Linux2_day12/" rel="alternate" type="text/html" title="Linux2_day12" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day12</id><content type="html" xml:base="http://localhost:4000/Linux2_day12/">&lt;p&gt;실습&lt;/p&gt;
+&lt;p&gt;그리고 서버입장에서는 /etc/exports를 통해 클라이언트에게 ro 권한으로 접속할 수 있게 했는데 클라이언트에서 /etc/auto.misc 를 통해 rw접근을 하려고 한다면? 서버의 값이 우선일 것 같기는 한데.. 서버에서 rw로 제공을 하는데 클라이언트에서 ro로만 쓰려고 한다면 그냥 ro로만 쓸 수 있을 것 같고..&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">실습 풀이</summary></entry><entry><title type="html">Linux2_day12</title><link href="http://localhost:4000/linux/Linux2_day12/" rel="alternate" type="text/html" title="Linux2_day12" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day12</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day12/">&lt;p&gt;실습&lt;/p&gt;
 
 &lt;p&gt;Client머신에서 실습.
 HDD 1GB(SCSI) 추가한 뒤 파티션을 100, 200, 300, 400Mbyte로 나눈다. 파일시스템을 만든 뒤 마운트를 진행한다.&lt;/p&gt;
@@ -3816,7 +3816,7 @@ vi /etc/fstab 으로 들어가자.
 원래대로 복구하자.&lt;/p&gt;
 
 &lt;p&gt;vi /etc/fstab에서 이전 내용 제거 후 reboot
-→ 정상부팅 됨. 완료&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">실습</summary></entry><entry><title type="html">Linux2_day13</title><link href="http://localhost:4000/Linux2_day13/" rel="alternate" type="text/html" title="Linux2_day13" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day13</id><content type="html" xml:base="http://localhost:4000/Linux2_day13/">&lt;p&gt;실습&lt;/p&gt;
+→ 정상부팅 됨. 완료&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">실습</summary></entry><entry><title type="html">Linux2_day13</title><link href="http://localhost:4000/linux/Linux2_day13/" rel="alternate" type="text/html" title="Linux2_day13" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day13</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day13/">&lt;p&gt;실습&lt;/p&gt;
 
 &lt;p&gt;Server머신에서 systemctl enable nfs.service 를 하였음에도 불구하고 재부팅한 후에 systemctl is-active nfs.service 를 하면 unknown으로 나온다. 왜지
 Client머신에서는 systemctl enable autofs.service하면 재부팅해도 autofs서비스 켜져있는데 &lt;br /&gt;
@@ -4119,7 +4119,7 @@ www.kgitbank.co.kr. ← 맨 마지막의 온점 (맨뒤에 추가하여 입력�
 회사로 치면 본사와 지사의 개념쯤
 → 나중에 정방향영역, 역방향 영역이라는 것이 존재한다.&lt;/p&gt;
 
-&lt;p&gt;도메인의 동작방식과 구성 등에 대해 볼 것이다.&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">실습</summary></entry><entry><title type="html">Linux2_day14</title><link href="http://localhost:4000/Linux2_day14/" rel="alternate" type="text/html" title="Linux2_day14" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day14</id><content type="html" xml:base="http://localhost:4000/Linux2_day14/">&lt;p&gt;DNS(Domain Name System)&lt;/p&gt;
+&lt;p&gt;도메인의 동작방식과 구성 등에 대해 볼 것이다.&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">실습</summary></entry><entry><title type="html">Linux2_day14</title><link href="http://localhost:4000/linux/Linux2_day14/" rel="alternate" type="text/html" title="Linux2_day14" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day14</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day14/">&lt;p&gt;DNS(Domain Name System)&lt;/p&gt;
 
 &lt;p&gt;도메인 네임 공간&lt;/p&gt;
 &lt;ul&gt;
@@ -4507,7 +4507,7 @@ MX(Mail Exchanger) : 메일 서버를 설정
 CNAME(Canonical Name) : 도메인을 문자로서 별도로 지정(Alias, 별칭)
 PTR(Pointer) : reverse zone(역방향 영역)에서 사용하는 리소스 레코드로서 IP주소(숫자)를 Domain(문자)로 매핑(변환)&lt;/p&gt;
 
-&lt;p&gt;→ 정방향을 설정할 때에는 A라는 것을 이용하고 역방향 설정시에는 PTR을 이용&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">DNS(Domain Name System)</summary></entry><entry><title type="html">Linux2_day15</title><link href="http://localhost:4000/Linux2_day15/" rel="alternate" type="text/html" title="Linux2_day15" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day15</id><content type="html" xml:base="http://localhost:4000/Linux2_day15/">&lt;p&gt;/etc/named.rfc1912.zones에서 
+&lt;p&gt;→ 정방향을 설정할 때에는 A라는 것을 이용하고 역방향 설정시에는 PTR을 이용&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">DNS(Domain Name System)</summary></entry><entry><title type="html">Linux2_day15</title><link href="http://localhost:4000/linux/Linux2_day15/" rel="alternate" type="text/html" title="Linux2_day15" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day15</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day15/">&lt;p&gt;/etc/named.rfc1912.zones에서 
 zone “kgitbank.co.kr” IN {
 	type master;
 	file “kgitbank.for.zone”;
@@ -4833,7 +4833,7 @@ lineage.com 입력, ns1.lineage.com 입력
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/39452092/82836821-4d120900-9f02-11ea-9591-4750373d308e.png&quot; alt=&quot;image&quot; /&gt;   &lt;br /&gt;
 이다.&lt;/p&gt;
 
-&lt;p&gt;잘 된다.&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">/etc/named.rfc1912.zones에서 zone “kgitbank.co.kr” IN { type master; file “kgitbank.for.zone”; allow-update { none; }; };</summary></entry><entry><title type="html">Linux2_day16</title><link href="http://localhost:4000/Linux2_day16/" rel="alternate" type="text/html" title="Linux2_day16" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/Linux2_day16</id><content type="html" xml:base="http://localhost:4000/Linux2_day16/">&lt;p&gt;인터넷에 내 이름으로 도메인입력을 진행해보자
+&lt;p&gt;잘 된다.&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">/etc/named.rfc1912.zones에서 zone “kgitbank.co.kr” IN { type master; file “kgitbank.for.zone”; allow-update { none; }; };</summary></entry><entry><title type="html">Linux2_day16</title><link href="http://localhost:4000/linux/Linux2_day16/" rel="alternate" type="text/html" title="Linux2_day16" /><published>2020-05-26T00:00:00+09:00</published><updated>2020-05-26T00:00:00+09:00</updated><id>http://localhost:4000/linux/Linux2_day16</id><content type="html" xml:base="http://localhost:4000/linux/Linux2_day16/">&lt;p&gt;인터넷에 내 이름으로 도메인입력을 진행해보자
 http://www.jinhong.com 도메인등록이 되어있을 수도 있고 안되어있을 수도 있다.
 → 되어있긴 하다.&lt;/p&gt;
 
@@ -5184,4 +5184,4 @@ CSSL(Client Side Script Language) : html, javascript → 클라이언트에서 �
 &lt;p&gt;참고로, Linux는 웹 서버로 Apache, FTP 서버는 vsftpd를 사용
 Windows Server는 웹 서버로 IIS(Internet Information Service)를 사용하는데, 이 서비스에서 FTP Service도 같이 지원&lt;/p&gt;
 
-&lt;p&gt;내일부터는 웹 서버 패키지 깔고 설정만지면서 작업&lt;/p&gt;</content><author><name>JJanghong</name></author><summary type="html">인터넷에 내 이름으로 도메인입력을 진행해보자 http://www.jinhong.com 도메인등록이 되어있을 수도 있고 안되어있을 수도 있다. → 되어있긴 하다.</summary></entry></feed>
+&lt;p&gt;내일부터는 웹 서버 패키지 깔고 설정만지면서 작업&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Linux" /><summary type="html">인터넷에 내 이름으로 도메인입력을 진행해보자 http://www.jinhong.com 도메인등록이 되어있을 수도 있고 안되어있을 수도 있다. → 되어있긴 하다.</summary></entry></feed>

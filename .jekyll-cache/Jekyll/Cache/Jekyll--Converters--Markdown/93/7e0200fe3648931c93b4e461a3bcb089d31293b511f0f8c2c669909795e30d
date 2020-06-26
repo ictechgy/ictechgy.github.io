@@ -1,4 +1,4 @@
-I"�h<p>실습
+I"�h<p>실습
 아래에 주어진 예제를 작업해보세요
 (조건! 각 번호마다 명령어 한 줄로 작업해주세요)</p>
 
@@ -74,7 +74,7 @@ compress 명령어 → 실제로 존재하는 명령어이다.
 압축해제는 uncompress 또는 compress -d(옵션)을 사용
 압축기법은 압축루틴(알고리즘)을 사용함(특허문제가 있음)</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   2) gzip  GNU zip을 의미 압축률이 compress보다 훨씬 좋음 리눅스의 기본 압축 명령으로 사용되고 있다. Lemple-Ziv 코딩(LZ77)기법을 사용 압축속도가 빠름 아쉬운 점은 압축률이 좋지 않음(compress보다는 좋지만?)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   2) gzip  GNU zip을 의미 압축률이 compress보다 훨씬 좋음 리눅스의 기본 압축 명령으로 사용되고 있다. Lemple-Ziv 코딩(LZ77)기법을 사용 압축속도가 빠름 아쉬운 점은 압축률이 좋지 않음(compress보다는 좋지만?)
 
    3) bzip2(bzip이 있었으나 특허문제로 사용하지 않음) Burrow-Wheeler 블록정렬 텍스트 압축 알고리즘과 허프만(Huffman) 코딩을 사용하고 있음 특히 텍스트 압축에서 두각을 보임 사용형식이 gzip과 비슷함 gzip보다 10~20% 압축률이 좋음(속도면에서는 gzip보다 조금 느림)
 
@@ -84,7 +84,7 @@ compress 명령어 → 실제로 존재하는 명령어이다.
 <p>1~4까지 리눅스전용프로그램(compress, gzip, bzip2, xz)
 5번은 윈도우에서도 사용가능한 프로그램 명령어</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   5) zip (왜 zip인걸까? 무슨 약어인걸까?) 데이터를 압축, 보관하기 위한 파일형식 하나 혹은 여러개의 파일들을 그 크기를 줄여 압축하고 하나로 묶어 저장함 deflate 알고리즘이 가장 많이 사용되고 지원하는 압축 알고리즘 압축해제시 unzip 을 사용함 윈도우 cmd 창에서 zip을 치면 사용설명이 나온다.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   5) zip (왜 zip인걸까? 무슨 약어인걸까?) 데이터를 압축, 보관하기 위한 파일형식 하나 혹은 여러개의 파일들을 그 크기를 줄여 압축하고 하나로 묶어 저장함 deflate 알고리즘이 가장 많이 사용되고 지원하는 압축 알고리즘 압축해제시 unzip 을 사용함 윈도우 cmd 창에서 zip을 치면 사용설명이 나온다.
 </code></pre></div></div>
 
 <p>이 압축프로그램은 리눅스 OS설치시 기본제공인지, 아니면 설치를 따로 한건지..</p>

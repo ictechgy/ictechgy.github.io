@@ -1,4 +1,4 @@
-I"`^<p>디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+I"�^<p>디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
 → 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
 결국 rm -r 을 사용해야함</p>
 
@@ -336,9 +336,9 @@ useradd [option] [argument] 계정명</p>
 <p>tail -7 /etc/shadow 하면 이전 것들은 다 비밀번호 없음</p>
 
 <p>사용형식
-useradd -p <code class="highlighter-rouge">(악센트)openssl passwd 비밀번호</code> 계정명</p>
+useradd -p <code class="language-plaintext highlighter-rouge">(악센트)openssl passwd 비밀번호</code> 계정명</p>
 
-<p>useradd -p <code class="highlighter-rouge">openssl passwd 1</code> user7
+<p>useradd -p <code class="language-plaintext highlighter-rouge">openssl passwd 1</code> user7
 악센트 ` 는 꼭 필요하다. 그냥 비번생성불가 → 복잡하다..형식이
 ssl → secure sockets layer</p>
 

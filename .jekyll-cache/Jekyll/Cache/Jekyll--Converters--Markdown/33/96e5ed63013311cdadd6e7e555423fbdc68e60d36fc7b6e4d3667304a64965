@@ -1,4 +1,4 @@
-I"�_<p>server머신에서 관리자계정으로 접속. 네트워크 설정 진행 할 것</p>
+I"`<p>server머신에서 관리자계정으로 접속. 네트워크 설정 진행 할 것</p>
 
 <p>네트워크 설정(bridged)</p>
 
@@ -112,7 +112,7 @@ Manual로 바꾸었던 것을 Automatic으로 바꾸자. 다만 직접 기입했
 <p>\‘ifcfg-장치명’ 을 편집
 설정파일의 내용중에서 각각의 항목에 대하여.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![image](https://user-images.githubusercontent.com/39452092/82835021-c52a0000-9efd-11ea-9e86-b445c8204211.png)   
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![image](https://user-images.githubusercontent.com/39452092/82835021-c52a0000-9efd-11ea-9e86-b445c8204211.png)   
 </code></pre></div></div>
 
 <p>항목

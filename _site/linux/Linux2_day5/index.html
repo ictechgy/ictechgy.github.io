@@ -1,0 +1,987 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux2_day5 - 개발 끄적끄적</title>
+<meta name="description" content="텔넷 telnet(윈도우 → 리눅스) ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="Linux2_day5">
+<meta property="og:url" content="http://localhost:4000/linux/Linux2_day5/">
+
+
+  <meta property="og:description" content="텔넷 telnet(윈도우 → 리눅스) ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/photo-hangang.jpeg">
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-26T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/linux/Linux2_day5/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux2_day5">
+    <meta itemprop="description" content="텔넷 telnet(윈도우 → 리눅스)">
+    <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Linux2_day5
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  12 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>텔넷 telnet(윈도우 → 리눅스)</p>
+
+<p>telnet을 쓰기 위해 리눅스에서 해당 패키지(telnet)를 설치해주었고, 방화벽에서 포트포워딩을 진행하였으며(서비스항목체크) 해당 서비스항목을 시작해주었다.(systemctl restart telnet.socket)</p>
+
+<p>방화벽설정을 런타임에서 했기때문에 재부팅한 후에는 다시 서비스 포트를 열어줘야 한다.
+터미널창에서 firewall-config 입력하여 방화벽 창을 연다.(CentOS 6.x 이하에서는 system-config-firewall 또는 system-config-firewall-tui)
+public에서 아래로 스크롤 내려서 telnet 서비스 항목을 체크한다.</p>
+
+<p>이후에는 systemctl is-active telnet.socket 또는 systemctl status telnet.socket을 입력하여 해당 서비스가 활성화중인지 보고, 만약 활성화되어있지 않다면 systemctl start telnet.socket으로 서비스를 켜준다. systemctl is-active telnet.socket과 systemctl -l status telnet.socket으로 서비스가 활성화됐는지 확인하자. 그리고 cmd창에서 telnet 입력 후 open리눅스IP 입력하자
+→ 근데 root계정으로 접속이 안된다. 왜?? itbank 계정으로는 접속이 된다. 로그아웃은 logout명령어 입력하면 됨</p>
+
+<p>telnet</p>
+<ul>
+  <li>기본설정으로 인하여 관리자 로그인이 차단되어있다. 즉 윈도우에서 telnet을 이용해 리눅스에 접근을 했지만 root계정으로는 로그인을 하지 못한다.
+→ telnet특성상 보안상 취약하므로 관리자로그인은 막혀있다. 따라서 일반사용자 로그인을 하자.(설정에서 관리자 접속을 허용할 수 있기는 하다.)</li>
+</ul>
+
+<p>일반사용자로 로그인한 이후에 mkdir /test 를 해보자. → 안된다. 어떤 이상한 메시지가 나온다.
+일반사용자로 접근하면 관리는 또 불가능.. 최상위 / 아래에 어떤 파일이나 디렉토리를 만들 수가 없다. 그건 root계정만 가능하지, itbank로 로그인한 이상 자신의 홈디렉토리 하위의 것만 건드릴 수가 있다. 게다가 한글지원도 하지 않아 에러메시지 글자도 깨진다.
+→ 아무튼간 관리자계정이외에 다른 계정이 있어야 텔넷을 통해 로그인이 가능함</p>
+
+<p>이렇게 Window에서 텔넷을 통해 리눅스에 접근한 경우 리눅스 터미널에서 arp(Adress Resolution Protocol)를 쳐보면 윈도우IP와 MAC주소가 나온다.(자기 컴퓨터네트워크에 접속했던 기기 표시하는 명령어)</p>
+
+<p>관리자처럼 계정을 사용하기
+1)	sudo(substitute user do) → 리눅스1시간에 썼었다?? vim 패키지 설치할 때?</p>
+<ul>
+  <li>관리자의 보안 권한과 관련된 프로그램을 구동 할 수 있음
+→ https://ko.wikipedia.org/wiki/Sudo 를 참고하면, 원래는 superuser do 에서 유래했다고 한다. 다만 나중에 프로그램기능이 확장되면서 substitute user do 라는 뜻으로 해석되게 되었다고 한다. substitute는 대체,대용물, 대신하는 사람 이라는 뜻을 가지고 있다. 즉 처음에는 명령어를 슈퍼유저로서 실행시키기 위해 사용되었다가 나중에는 명령어를 다른유저계정으로도 실행시킬 수 있는 기능도 들어가게 된 것 같다.</li>
+</ul>
+
+<p>사용형식
+sudo 명령어
+예를 들면 mkdir /test가 안된다면 sudo mkdir /test 라고 작성해보자
+알수없는 말이 나오기는 하는데 이는, 비밀번호를 입력하라는 것이다. itbank의 비밀번호?
+하지만 입력해도 되지 않는다.</p>
+
+<p>sudo 명령어를 사용시 기본적으로 그냥 사용할 수 없으므로 반드시 /etc/sudoers 설정파일에서 설정을 해야함(관리자가 이러한 권한을 쓸 수 있는 유저를 설정해두어야 함)
+→ 설정을 해 두어야 관리자이외의 다른 계정들이 sudo를 통해 관리자권한으로 명령어를 실행하는 것처럼 만들 수 있다.</p>
+
+<p>/etc/sudoers
+→ sudo의 설정파일</p>
+
+<p>vi /etc/sudoers 를 하고 :se nu 를 치자. :92로 92번째 줄로 이동
+91줄 및 92줄 : 관리자로 어떠한 명령어를 어느 곳에서든지 실행할 수 있게 설정되어있음</p>
+
+<p>설정방법
+계정명 	ALL=(ALL) 	ALL</p>
+
+<p>계정명
+→ 관리자의 권한으로 실행할 계정명(sudo 관리자권한사용을 가능하게 할 계정명)
+ALL
+→ 모든 터미널
+(ALL)
+→ 모든 명령어
+ALL
+→ 모두 실행</p>
+
+<p>93번째 줄을 만들고 itbank  ALL=(ALL)       ALL 입력후 :wq 로 저장하자. 그냥 저장은 안된다. 느낌표를 넣어서 강제저장하자.
+→ ls -l /etc/sudoers로 해당 파일의 권한을 보면 w 권한은 일반적으로 존재하지 않는다. 그만큼 중요한 파일이라는 것이다.</p>
+
+<p>다시 cmd창으로 돌아가서 itbank로 접속한뒤에 sudo mkdir /test 를 입력해보자.
+비밀번호 입력창이 뜨는데 itbank 비밀번호를 입력하면 된다. 생성이 문제없이 됐는지
+ls -ld /test 로 보면 test디렉토리의 UID와 GID가 root로 되어있다.
+→ itbank계정이 sudo를 쓸 수 있도록 권한을 주고 telnet을 통해 itbank로 접속한 상태에서 그냥 mkdir은 안되니까 관리자권한으로 만들 수 있게 sudo mkdir을 진행하였더니 만들어진 디렉토리는 root의 것으로 되어있다.</p>
+
+<p>또, sudo mkdir /test2 를 하면 두번째부터는 비밀번호를 입력하지 않아도 만들어진다.
+→ 이는 마치 윈도우에서 일반사용자로 파일 실행을 ‘관리자권한으로 실행’ 한 것과 동일하다.</p>
+
+<p>2)	su(substitute user)</p>
+<ul>
+  <li>지정한 사용자 계정의 모든 것(환경변수 파일)들을 모두 가지고 옴</li>
+  <li>사용자 계정을 내가 지정한 계정으로 변경
+→ sudo는 관리자권한을 빌려 내 계정상태에서 실행하는 것이었다면(뭐 결국 결과물은 관리자것이 됐지만) su는 아예 그 계정으로 변경하는 것이라고 보면 된다.</li>
+</ul>
+
+<p>사용형식
+su 계정명
+→ 지정한 사용자 계정으로 변경</p>
+
+<p>su
+→ 관리자로 변경</p>
+
+<p>기존 cmd창 접속을 끊고 다시 itbank계정으로 접속
+su 또는 su root를 입력해보자. 암호를 입력하라고 뜬다. 이는 관리자 비밀번호를 입력하라는 것이다. 입력을 성공하면 관리자계정으로 바뀌게 된다.
+whoami 명령어를 입력하면 누구인지도 나오고 프롬프트 및 쉘형태를 보면 root로그인되어있으며 쉘형태도 #이다.
+하지만.. 관리자인거같긴한데 접속경로는 /home/itbank 이다. 진짜 관리자는 아니므로 완벽하게 환경변수를 가져온 것이 아니다.</p>
+
+<p>그럼 어떻게 완벽하게 root로 탈바꿈할 수 있는건가?
+여러 방법이 있지만 그 중 가장 많이 사용하는 방법은..
+su - 계정명 (su - 만 입력하면 관리자계정 의미)
+→ 지정한 사용자 계정으로 변경(환경변수파일까지 완벽하게)</p>
+
+<p>기존의 관리자 계정변경 로그인상태를 exit로 나와 itbank로 돌아온 뒤 su - 를 입력하고 root비밀번호를 입력한다. 그러면 이제 관리자로 완벽하게 접속한 것이다. 접속한 디렉토리도 /root 이다.
+이 상태에서는 mkdir /test3 해보면 잘 된다.</p>
+
+<p>exit 를 한번 하면 관리자계정 연결끊기, 한번 더 쓰면 itbank 연결 끊기. quit로 telnet 끄고 exit로 cmd창 끄기</p>
+
+<p>telnet 말고..두번째 다른 원격서비스 OpenSSH</p>
+
+<p>OpenSSH</p>
+<ul>
+  <li>ssh 프로토콜을 이용하여 암호화된 통신 세션을 컴퓨터 네트워크에 제공하는 컴퓨터 프로그램의 모임</li>
+  <li>telnet, rsh, rlogin 프로그램은 암호화 통신을 하지 않으므로 제 3자에 의하여 sniffing(도둑질, 패킷훔쳐보기) 공격에 노출이 되기 쉽다.</li>
+  <li>이러한 문제점을 해결하고자 개발된 것이 이것이다.</li>
+</ul>
+
+<p>SSH란? Secure Shell</p>
+<ul>
+  <li>공개키 방식의 암호 방식을 사용하여 원격지 시스템에 접근하여 암호화된 메시지를 전송할 수 있는 시스템</li>
+  <li>패킷을 가로챘다 하더라도 해독할 키가 없으면 쉽게 내용을 파악하기가 어려움</li>
+</ul>
+
+<p>암호화 알고리즘(Encryption Algorithm)</p>
+
+<p>1)	대칭형</p>
+<ul>
+  <li>비밀키 암호화 방식이라고도 불림</li>
+  <li>암호화(평문→ 암호화)와 복호화(암호화→ 평문)에 사용되는 키가 동일</li>
+  <li>송신자와 수신자의 키 교환에 있어서 보안에 취약하다는 점이 있음</li>
+  <li>암호화와 복호화의 속도가 빠름</li>
+</ul>
+
+<p>2)	비대칭형</p>
+<ul>
+  <li>공개키 암호화 방식이라고도 불림</li>
+  <li>공개키와 개인키라는 하나의 쌍으로 이루어진 키를 사용</li>
+  <li>일반적인 암호화 통신은 공개키로 전달</li>
+  <li>비밀키 전달 등의 키 교환이 필요하지 않음</li>
+  <li>공개키로 전달받은 것은 자신의 개인키로 해독을 하고 공개키로 보내면 상대방은 상대방의 개인키로 해독을 함</li>
+  <li>암호화와 복호화의 속도는 느림</li>
+  <li>대표적으로 RSA라는 알고리즘이 있다.</li>
+</ul>
+
+<p>SSH 쓰려면 해당 패키지가 설치되어있어야 한다.(마치 telnet쓰려면 해당 패키지 설치했어야 했듯이)
+패키지명은 openssh로 시작함 → rpm -qa|grep openssh 명령어로 확인해보자
+기본적으로 사용할 수 있는 몇개는 깔려있다. 더 깔고 싶다면 yum install openssh*로 설치하자</p>
+
+<p>CentOS7에서는 기본적으로 openssh 패키지가 설치되어있음(telnet은 기본설치되어있지 않은것으로 보아 openssh를 쓰라고 해놓은 것인 듯)
+yum으로 추가 설치 후 rpm -qa | grep openssh |nl 로 8개 있는 것을 확인하자</p>
+
+<p>해당 파일들은 /etc/ssh에 깔린다.
+ls /etc/ssh 해보자. 여러가지 파일이 나온다.</p>
+
+<p>/etc/ssh/ssh_config
+→ openssh의 클라이언트 설정파일</p>
+
+<p>/etc/ssh/sshd_config
+→ openssh의 서버 설정파일
+⇒ 요게 우리가 쓸 파일이다. 우리는 서버니까</p>
+
+<p>cp /etc/ssh/sshd_config /backup
+로 혹시 모르니까 미리 복사 후 vi로 원본파일 건드려보자</p>
+
+<p>vi /etc/ssh/sshd_config
+:se nu 로 넘버링
+앞에 주석이 있는 것들은 설명임</p>
+
+<p>17번째줄로 내려가자</p>
+
+<p>17줄 : 포트번호가 나와있다. ssh서비스의 포트는 22번으로 규약(telnet은 23번이었다)
+주석처리되어있지만 기본으로 설정되어있어서 22번으로 작동함
+→ 굳이 22번으로 안써도 되긴 하다. 보안상 임의의 포트로 변경해서 사용할 수 있다.(포트번호가 22번인걸 모두가 아니까 보안을 위해 다른 번호로 변경해도 됨)</p>
+
+<p>그러면 점유되어있지 않은 다른 포트로 변경해야하는데 충돌 안되게 어떤 포트로?
+/etc/services파일을 보면 나와있다. 다른 터미널을 키고 vi로 켜보자
+15줄 : 0~1023은 Well Known(국제 도메인 관리기구에서 통제) → 다른 서비스들이 약속을 해두었으므로 절대로 쓰면 안됨
+16줄 : 1024 ~ 49151 은 등록 포트(국제 도메인 관리기구에 등록된 포트) → 쓸 수 있는 포트도 있고 쓰면 안되는 포트도 있음
+17줄 : 49152 ~ 65535 는 동적 포트(임시 포트. 어떤 프로세스들에게 임의의 사용가능)</p>
+
+<p>밑으로 더 내리면 서비스에 해당하는 포트들이 다 나와있다. 46번째 줄에 ssh에 대한 포트가 나와있음
+→ 근데 ssh 프로토콜방식이 tcp도 있고 udp도 있네</p>
+
+<p>이제 원래 터미널창으로 돌아와서 17번째 줄 아래에 새 줄을 생성
+Port 50000 을 입력하면 위의 Port 22 는 주석처리되어있으므로 밑의 Port 50000을 보게 된다.
+:wq로 저장 후 종료</p>
+
+<p>설정은 바꿨는데 적용은 안됨. 서비스를 다시 껐다 켜야한다.(이미 켜져있어서 껐다 켜야한다)</p>
+
+<p>일단은 서비스를 껐다 키기전에 포트22번 상태로 접속을 시도해보자
+putty를 키자
+리눅스 IP를 입력하고 Port는 22로 냅두기.
+접속형식은 SSH로 두고 ssh_test라는 이름으로 저장할 것
+창의 모양 항목에서 글씨체를 Consolas 굵게 로 지정
+창의 변환 항목에서 문자셋을 UTF-8로 지정
+SSH의 키교환항목에서 디피-헬만 그룹 교환을 세번째로 지정하자
+그리고 연결을 누르면 잘 접속이 된다.</p>
+
+<p>접속된 상태에서 리눅스 터미널창에서 netstat -atunp | grep sshd를 쳐보자
+그러면 sshd 서비스가 Established가 된 것을 알 수 있다. 
+두번째 항목보면 Local Address쪽에는 리눅스 IP와 포트가 나오고 Foreign Address쪽에는 윈도우의 IP와 포트가 나온다.. (포트가 다르구나)
+→ 즉 putty를 통해 접속을 진행할 때 윈도우에서는 포트를 22번이 아닌 다른 포트를 사용해서(22번은 ssh 자체에 대한 포트일 것이므로.) 리눅스의 22번포트로 접속하였다는 것</p>
+
+<p>exit로 putty를 끄고 리눅스 터미널로 돌아와 systemctl restart sshd.service 를 입력하자
+sshd의 서비스 명은 sshd.service이다.</p>
+
+<p>이제 리눅스에 있어서 ssh로 접근가능한 포트번호는 50000번이다. 
+putty로 재접속 하려고 하면 안된다.</p>
+
+<p>포트를 50000으로 바꾸고 다시 접속시도하자
+그런데도 안됨
+→ 방화벽에서 추가적으로 해당 포트를 또 개방해줘야한다.
+⇒ 이 말은 곧 22번은 미리 포트가 열려있었다는 말임</p>
+
+<p>방화벽설정
+1)	그래픽 환경에서 관리자로 로그인 → 프로그램 → 잡다 → 방화벽
+2)	firewall-config</p>
+
+<p>설정 : 런타임
+포트 → 추가 → 포트/포트범위 : 포트번호 지정, 프로토콜 : tcp → 확인</p>
+
+<p>영구적으로 되어있다면 런타임항목에도 이미 체크가 되어있는 방식임
+그런데 이미 ssh에 대해서는 체크가 되어있다. 즉 이미 22번포트는 열려있었다.(영구적으로 체크되어있으므로 런타임항목에서도 체크가 되어있다. 런타임상태에서 체크를 꺼도 컴퓨터를 껐다 키면 체크가 다시 될 것) 22번에 대해 열려있는 방식일 것
+포트항목에서 50000에 대해 열어주자. 근데 tcp냐 udp냐? netstat에서 tcp로 나와있다.
+tcp항목으로 하고 포트개방 진행</p>
+
+<p>이제 putty에서 접속이 잘 된다.
+netstat -atunp | grep sshd를 다시 리눅스에서 입력해보면 포트번호 또한 바뀌었다는 것을 알 수있다.</p>
+
+<p>다시 포트번호를 22번으로 바꾸자
+vi /etc/ssh/sshd_config 에서 Port 추가했던것을 지우고, firewall-config로 방화벽 켜서 기존 포트 제거, systemctl restart sshd.service로 서비스 재시작 한 뒤에 putty에서 22번포트로 변경하고 접속하면 접속 잘 된다
+이 상태에서 리눅스 터미널에 netstat -atunp | grep sshd 입력하면 포트번호 다시 원래대로 바뀐 것을 확인 할 수 있다.
+→ 집에서는 어쩌다가.. 50000 포트로 접속한 것을 그대로 둔 채로 22번포트로 바꾼뒤 다시 접속을 시켰었다. 그 상태에서 netstat 치니까 50000 쓰는 서비스와 22 쓰는 서비스 두개가 나왔다. 둘다 Established인 상태로. 물론 윈도우에서의 접속포트는 서로 달랐음</p>
+
+<p>vi /etc/ssh/sshd_config 다시 열기</p>
+
+<p>19줄 : ssh서비스에 들을 로컬 호스트 주소를 설정하는 항목</p>
+
+<p>#ListenAddress 0.0.0.0
+→ 모든 IP에 대해 들을 수 있다. 즉 모든 IP주소를 듣겠음</p>
+
+<p>저것을 없애고
+ListenAddress x.x.x.x
+→ 지정한 IP주소를 듣겠음. 즉, 지정한 IP주소에서 접속하는 것만을 허용</p>
+
+<p>⇒ 기본값으로는 어느 컴퓨터이든 ssh를 통해 이 리눅스서버에 접근하는 것을 허용하겠다는 의미이고 저 항목을 조정하여 원하는 컴퓨터에서만 이 서버에 접근가능하도록 설정할 수 있다.</p>
+
+<p>IP를 더 추가하고 싶다면 빈칸 하나 두고 IP주소를 추가 기입하거나 대역대 대표IP를 입력해도 되는 등 추가적 방법이 있다.</p>
+
+<p>22~25는 키와 관련된 것</p>
+
+<p>30~33줄은 syslog 데몬관련 로그레벨을 지정
+INFO → 로그레벨 메시지가 정해지지 않았음
+QUIET → 기록하지 않음
+FATAL → 치명적인 오류
+ERROR, VERBOSE, DEBUS 등등 다른 레벨들이 있다.</p>
+
+<p>37줄 : 지정한 시간내에 로그인하지 않으면 자동으로 접속을 끊을 시간을 지정
+기본값으로 2분</p>
+
+<p>38줄 : ssh를 통해 관리자 로그인 허가 여부. 기본값으로 로그인을 허가하고 있음. 하지만 보안상 좋지 않으므로 허가를 하지 않게 설정하는 것이 좋다. #을 지우고 yes를 no로 바꾸면 이제 putty에서 관리자 로그인이 안된다.
+→ telnet과 반대로 ssh는 root로그인을 기본적으로 허가하고 있다.</p>
+
+<p>39줄 : 로그인을 허용하기 앞서서 파일 모드 및 사용자 계정의 홈 디렉토리 소유권과 원격 호스트의 파일들을 ssh서비스가 체크(점검)할 수 있게 할 것인지에 대한 허용 여부</p>
+
+<p>40줄 : 최대 인증가능 시도.
+기본값으로 6번까지 주어져 있다.
+6번째 입력에도 잘못입력하면 putty창 먹통됨
+0은 기회가 없는 것이다. 무제한이 아니고 아예 계정접속을 못함</p>
+
+<p>41줄 : 최대 연결가능 세션 수. 기본값으로 10이므로 10명의 사람이 접속 가능함</p>
+
+<p>나머지는 키나 보안설정관련 이야기들이다.</p>
+
+<p>105줄 : ssh 로그인 시 /etc/motd 파일(알림 메시지나 주의사항이 적힌 파일)의 내용을 보여줄 것인지에 대한 것
+→ 게임서버에서 처음 접속시 뜨는 motd
+motd란? Massage Of The Day의 약어로서 오늘의 메시지를 의미한다.</p>
+
+<p>106줄 : ssh 로그인 시 지난번 로그인 기록을 보여줄 것인지에 대한 허용
+→ yes라고 되어있는데 이렇게 되어있음으로서 ssh를 통한 원격 로그인시 해당계정에 대해 접속시도가 있었는지, 마지막접속은 언제였는지 등이 putty창에도 뜰 수 있는 것임</p>
+
+<p>116줄 : ssh서비스가 실행될 때 사용하는 Process ID 에 대한 것이 있는 파일을 지정하는 줄
+ssh 서비스가 실행 될 때 사용하는 Process ID를 기록하고 있는 파일을 지정</p>
+
+<p>123줄 : ssh 로그인할 때 광고 메시지를 출력</p>
+
+<p>putty없이 서버에서 서버끼리 접속해보자. (리눅스와 리눅스끼리)</p>
+
+<p>현재 /etc/ssh/sshd_config에서 root접속을 차단하기로 하였다. systemctl restart sshd.service로 서비스 재시작을 하자. 이러면 이제 ssh를 통한 접근에서 root 로그인은 불가능해진다. → putty에서 root 로그인 안됨</p>
+
+<p>OpenSSH 접속하기</p>
+<ul>
+  <li>ssh 명령어를 사용하여 지정한 서버에 접속</li>
+  <li>마치 telnet명령어와 사용형식이 비슷함</li>
+</ul>
+
+<p>client머신에서 root관리자로 접속. rpm -qa|grep openssh로 ssh서비스 설치 확인 
+client에서 server로 접속을 해보자</p>
+
+<p>ifconfig가 안되면 yum install net-tools 필요</p>
+
+<p>사용형식
+1)	ssh [option] 접속할IP주소
+client쪽에서 ssh 192.168.52.149(server머신IP)를 입력했다. 그랬더니 메시지가 나옴
+어떤 계정이든 나오는 메시지이며 yes라고 정확히 입력하자
+root계정의 비밀번호를 입력하라고 나온다. 입력했는데 허가 거부된다. 계속 입력했는데 허가거부된다. 근데 결국 접속은 되네..(아까 설정에서 ssh를 통한 root로그인을 막아놨었다)
+→ 아 접속 되는게 아니라 client계정으로 돌아온 상태</p>
+
+<p>내가 client에서 root로 접속을 했으니 ssh로 server에 접속하는 것도 root로 하게 됨.
+logout을 하고 내 이름으로 id입력 후 itbank 비밀번호 입력해서 내 사용자 계정으로 들어와보자. 이제 다시 ssh serverIP로 접속을 시도하자.
+그러면 내 이름ID로 서버에 접속하려고 한다. 즉, 내 계정명으로 서버에 접속하려고 하는거다.
+Client에 있는 jinhong이라는 이름으로 server에 접속하려고 하게 되는 것.
+server에는 root와 itbank계정만 존재한다. (client에는 root와 jinhong이 존재)</p>
+
+<p>→ 접속 할 때 이용할 사용자 계정을 지정하지 않았으므로 현재 클라이언트에 로그인되어있는 사용자 계정과 동일한 이름으로 상대방쪽에 접속요청을 하게 됨
+⇒ 이렇게 쓰려면 server머신쪽에도 내 이름에 해당하는 계정이 있어야 하며 비밀번호도 알아야한다.</p>
+
+<p>따라서 우리는 server머신에 접속할 때 쓸 계정을 따로 지정해주어야 한다.
+2)	ssh [option] 접속할 IP주소</p>
+
+<p>option
+-l 계정명 : 서버에 로그인할 계정을 지정
+-p 포트번호 : 서버에 접속할 포트를 지정(현재는 22번 기본이니 사용할 필요가 없지만 만약 server쪽에서 포트를 50000으로 ssh를 열어두었다면 써야하는 옵션)</p>
+
+<p>client에 jihong으로 로그인되어있는 상태에서
+ssh -l itbank 192.168.52.149 를 하였다. 접속 잘 된다.</p>
+
+<p>→ ssh 접속 할 때 접속할 상대방의 계정명을 지정하여 접속하는 방식</p>
+
+<p>3)	ssh 계정명@접속할IP주소
+→ 2번과 동일한데 형식이 다름
+E-mail 주소 형식으로 익숙하기 때문에 기억하기 쉬움</p>
+
+<p>logout또는 exit로 나갈 수 있다.</p>
+
+<p>openSSH에 내장된 기능
+scp(Secure Copy) 암호화된 복사</p>
+<ul>
+  <li>일반적인 cp는 암호화 통신을 하지 않기 때문에 보안상 좋지 않음</li>
+  <li>OpenSSH에 지원하는 scp는 암호화 통신을 하기 때문에 안정성을 보장받을 수 있음</li>
+  <li>openssh-clients패키지에 내장되어있음</li>
+  <li>ssh 서비스가 구성되어있는 시스템을 대상으로 원격 복사
+→ 내 서버도 상대방 서버도 ssh가 설치되어있을 때 상대방의 파일을 내 쪽으로 복사하거나 내 파일을 상대방쪽 서버로 복사하는 것</li>
+</ul>
+
+<p>사용형식(복사해오기 : remote → local)
+scp [option] 계정명@접속할IP주소:원본파일위치및파일명 사본파일로 둘 위치</p>
+
+<p>사용형식(복사해주기 : local → remote)
+scp [option] 내쪽원본파일 계정명@접속할IP주소:사본파일로둘위치</p>
+
+<p>scp 실습</p>
+
+<p>준비물
+Server
+관리자로 로그인 후 /test/ssh_down 디렉터리와 /test/ssh_up 디렉터리를 생성
+/test/ssh_down 디렉터리 하위에 testfile숫자 파일을 생성
+(이 때, 숫자는 자신의 IP주소에 4번째 자리를 입력)</p>
+
+<p>Client
+일반 사용자로 로그인 후 자신의 홈 디렉터리 하위에 test숫자file 파일을 생성
+(이 때, 숫자는 자신의 IP주소에 4번째 자리를 입력)
+—————————————————————————
+위 설정이 다 되었으면 
+Client에서 일반 사용자는 Server의 /test/ssh_down 디렉터리 하위에 있는 testfile숫자 파일을 자신의 홈 디렉터리에 복사를 해오고 확인
+그리고 일반 사용자의 홈 디렉터리 하위에 있는 test숫자file 파일을 Server의 /test/ssh_up 디렉터리에 복사를 해주고 확인</p>
+
+<p>server머신
+[root@ljck2 ~]# ls -ld /test
+drwxr-xr-x 2 root root 6  7월 17 13:04 /test
+[root@ljck2 ~]# mkdir /test/ssh_down
+[root@ljck2 ~]# mkdir /test/ssh_up
+[root@ljck2 ~]# touch /test/ssh_down/testfile149</p>
+
+<p>client머신
+touch test122file
+scp itbank@192.168.52.149:/test/ssh_down/testfile149 .
+비밀번호 입력
+ls 로 파일 왔는지 확인 → 확인 됨
+scp test122file itbank@192.168.52.149:/test/ssh_up
+비밀번호 입력
+Permission denied
+→ 계정차이때문인건가. /test자체가 root의 소유라서 관리자계정으로 파일을 업로드해야하는데 지금은 itbank로 접근하여 일반 사용자 계정으로 파일을 주려고 해서?</p>
+
+<p>그렇다고
+scp test122file root@192.168.52.149:/test/ssh_up 라고는 할 수 없다. root를 통한 접속은 막혀있으므로
+→ 해봤는데 역시나 안된다.</p>
+
+<p>혹시나 -f옵션 있나 해서 해봤는데 안됨
+옵션은 안써도 된다고 함
+아니면 동시에 주고받는건가
+아니면.. sudo같은걸 쓰는건가</p>
+
+<p>client머신에서 서버의 파일을 내 홈디렉토리 하위로 scp한 상태이다. ls -l 을 하니까 소유권이 내 client 머신 계정으로 바뀌어있다. 분명히 server머신의 root계정 소유였을텐데.
+따라서 내 test122file의 소유권을 바꾸고 전송시켜보자. 
+client 머신에서 chown root test122file 을 하면 기본적으로 허가거부가 뜬다.
+그렇다고 sudo chown root test122file을 하는 것도 안된다. /etc/sudoers 에서 허가해놓지 않았었다.
+chown itbank test122file 또한 작동하지 않는다.. 유효하지 않은 유저라고 뜸…</p>
+
+<p>어떻게 해야하는걸까?
+server머신의 /test/ssh_up의 허가권을 바꿔서 client머신에서 ‘scp itbank계정’을 통해 업로드가 가능하게 해야하나? 그럴려면 해당 디렉토리에서 허가권을 보고 other부분을 조정해주면 될 것 같은데.. w권한이 있도록..</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#linux" class="page__taxonomy-item" rel="tag">Linux</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-26T00:00:00+09:00">May 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Linux2_day5%20http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux2_day5%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux2_day5%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux2_day5%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/linux/Linux2_day4/" class="pagination--pager" title="Linux2_day4
+">Previous</a>
+    
+    
+      <a href="/linux/Linux2_day6/" class="pagination--pager" title="Linux2_day6
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day8/" rel="permalink">Linux_day8
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty접속 안됐으나 VMware 가상네트워크설정에서 NAT에 있어서 두가지 체크사항 건드리니까 다시 됨. 한가지만 체크되어있었는데 먼저 체크 푼 다음에 설정창 껐다가 다시 키고, 체크사항 두개 다시 체크한 뒤에 설정창 끔.  OS GUI에서도 네트워크 설정부분 껐다가 켰다. 아...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day7/" rel="permalink">Linux_day7
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.
+한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???
+간결하면서도 강력한 기능을 제공
+GUI...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day6/" rel="permalink">Linux_day6
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">논리연산자
+이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
+a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
+a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/linux/Linux2_day5/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/linux/Linux2_day5"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ictechgy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

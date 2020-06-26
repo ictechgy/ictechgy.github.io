@@ -1,4 +1,4 @@
-I"�<h1 id="본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</h1>
+I"�<h1 id="본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</h1>
 
 <p>** 함수 (function)</p>
 
@@ -58,7 +58,7 @@ from dual;</p>
 <p>select empno, ename, sal, round(sal, -2) rousal
 from emp;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     ROUSAL ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     ROUSAL ---------- ---------- ---------- ----------
   7839 KING             5000       5000
   7566 JONES            2975       3000
   7698 BLAKE            2850       2900
@@ -98,7 +98,7 @@ from emp
 group by deptno
 having round(avg(nvl(sal, 0)), -2) &gt;= 2500;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL     AVGSAL ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL     AVGSAL ---------- ---------- ---------- ----------
     10          3       8750 2916.66667
 </code></pre></div></div>
 
@@ -109,7 +109,7 @@ from ( select deptno, count(*) cnt, sum(sal) sumsal, avg(nvl(sal, 0)) avgsal
 	group by deptno
 	having round(avg(nvl(sal, 0)), -2) &gt;= 2500 ) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
     10 ACCOUNTING              3       8750 2916.66667
 </code></pre></div></div>
 
@@ -119,7 +119,7 @@ from emp
 where lower(ename) like ‘%s%’
 order by tot desc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM        TOT ---------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM        TOT ---------- ---------- ---------- ---------- ----------
   7566 JONES            2975                  3000
   7788 SCOTT            3000                  3000
   7900 JAMES             950                  1000
@@ -257,7 +257,7 @@ from dual</p>
 from emp
 where substr(empno, 2, 2) in (‘92’, ‘90’, ‘56’);	- substr은 문자함수이므로 ‘‘를 붙여주는 것이 좋다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      LOWERJOB  SAL                                       ---------- ---------- --------- -----------------------------------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      LOWERJOB  SAL                                       ---------- ---------- --------- -----------------------------------------
   7566 Jones      manager   $2975                                    
   7902 Ford       analyst   $3000                                    
   7900 James      clerk     $950         
@@ -285,7 +285,7 @@ from ( select deptno, count(*) cnt, sum(sal) sumsal, trunc(avg(nvl(sal, 0)), 0) 
 	where length(ename) &gt;= 5
 	group by deptno ) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
     30 SALES                   5       8150       1630
     20 RESEARCH                4       7875       1968
     10 ACCOUNTING              2       3750       1875
@@ -332,7 +332,7 @@ from emp
 where lower(substr(ename, 2, 1)) in (‘a’, ‘l’, ‘o’)
 group by deptno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
     30          5       7900
     20          2       5975
     10          1       2450
@@ -345,7 +345,7 @@ from ( select deptno, count(*) cnt, sum(sal) sumsal
 	where lower(substr(ename, 2, 1)) in (‘a’, ‘l’, ‘o’)
 	group by deptno ) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL ---------- -------------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL ---------- -------------- ---------- ----------
     30 SALES                   5       7900
     20 RESEARCH                2       5975
     10 ACCOUNTING              1       2450
@@ -392,7 +392,7 @@ from emp
 where mod(empno, 2) = 0
 group by deptno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL ---------- ---------- ----------
     30          4       1638
     20          4       2519
     10          2       1875
@@ -405,7 +405,7 @@ from ( select deptno, count(*) cnt, round(avg(nvl(sal, 0)), 0) avgsal
 	where mod(empno, 2) = 0
 	group by deptno ) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     AVGSAL ---------- -------------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     AVGSAL ---------- -------------- ---------- ----------
     30 sales                   4       1638
     20 research                4       2519
     10 accounting              2       1875
@@ -444,7 +444,7 @@ from emp
 group by deptno
 having lower(substr(max(ename), 3, 1)) &gt;= ‘k’;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT MAXNAME    MINNAME        AVGSAL ---------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT MAXNAME    MINNAME        AVGSAL ---------- ---------- ---------- ---------- ----------
     30          6 WARD       ALLEN            1567
     10          3 MILLER     CLARK            2917
 </code></pre></div></div>
@@ -456,7 +456,7 @@ from ( select deptno, count(*) cnt, max(ename) maxname, min(ename) minname, ceil
 	group by deptno
 	having lower(substr(max(ename), 3, 1)) &gt;= ‘k’ ) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT MAXNAME    MINNAME        AVGSAL ---------- -------------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT MAXNAME    MINNAME        AVGSAL ---------- -------------- ---------- ---------- ---------- ----------
     30 SALES                   6 WARD       ALLEN            1567
     10 ACCOUNTING              3 MILLER     CLARK            2917
 </code></pre></div></div>
@@ -468,7 +468,7 @@ from ( select deptno, count(*) cnt, max(ename) maxname, min(ename) minname, ceil
 from dual</p>
 
 <h2 id="to_number123">TO_NUMBER(‘123’)</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         123 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         123 
 </code></pre></div></div>
 
 <p>숫자는 무조건 오른쪽 정렬, 문자는 무조건 왼쪽정렬</p>
@@ -476,7 +476,7 @@ from dual</p>
 <p>select ‘123’+’456’,to_number(‘123’)+to_number(‘456’)
 from dual</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'123'+'456' TO_NUMBER('123')+TO_NUMBER('456') ----------- ---------------------------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'123'+'456' TO_NUMBER('123')+TO_NUMBER('456') ----------- ---------------------------------
     579                               579 
 </code></pre></div></div>
 
@@ -499,7 +499,7 @@ from dual;</p>
 	to_number(substr(empno,1,2) + 10)  c
 from emp;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO    A                                  B                                C ----------   ----------------- -------------------- -------------------------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO    A                                  B                                C ----------   ----------------- -------------------- -------------------------------
   7369   73                                  83                              83 
   7499   74                                  84                              84 
   7521   75                                  85                              85 
@@ -573,7 +573,7 @@ from emp
 where lower(ename) like ‘%s%’
 order by sal desc;		-&gt; saldollar를 쓰지 않은 이유는 해당 값은 원화 표시가 있을 것이기 때문(해도 괜찮긴 하지만 정확하게)</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO IENAME     SALDOLLAR          JOBB       ---------- ---------- ------------------ -----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO IENAME     SALDOLLAR          JOBB       ---------- ---------- ------------------ -----------
   7788 Scott                ￦3,000  ANALYST**   
   7566 Jones                ￦2,975  MANAGER**   
   7876 Adams                ￦1,100  CLERK**     
@@ -697,7 +697,7 @@ order by to_char(hiredate, ‘d’) asc;</p>
 
 <p>년월의 요일 순 : order by to_char(hiredate, ‘yyyymmd’) asc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL HIREDAY                     DEPTNO        MGR ---------- ---------- ---------- ----------------------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL HIREDAY                     DEPTNO        MGR ---------- ---------- ---------- ----------------------- ---------- ----------
   7839 KING             5000 1981-11-17 화요일               10           
   7782 CLARK            2450 1981-06-09 화요일               10       7839
   7902 FORD             3000 1981-12-03 목요일               20       7566
@@ -716,7 +716,7 @@ from ( select empno, ename, sal, to_char(hiredate, ‘yyyy-mm-dd day’) hireday
 					join salgrade on e.sal between losal and hisal
 order by to_char(hiredate, ‘d’) asc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EEMPNO EENAME           ESAL HIREDAY                    EDEPTNO       EMGR DDNAME         MGRNAME         GRADE ---------- ---------- ---------- ----------------------- ---------- ---------- -------------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EEMPNO EENAME           ESAL HIREDAY                    EDEPTNO       EMGR DDNAME         MGRNAME         GRADE ---------- ---------- ---------- ----------------------- ---------- ---------- -------------- ---------- ----------
   7566 JONES            2975 1981-04-02 목요일               20       7839 RESEARCH       KING                4
   7698 BLAKE            2850 1981-05-01 금요일               30       7839 SALES          KING                4
   7782 CLARK            2450 1981-06-09 화요일               10       7839 ACCOUNTING     KING                4
@@ -730,7 +730,7 @@ from ( select empno, ename, hiredate, deptno
 	from emp
 	where to_char(hiredate, ‘yyyy/mm’) = ‘1981/02’ ) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
   7499 ALLEN      81/02/20         30 SALES         
   7521 WARD       81/02/22         30 SALES         
 </code></pre></div></div>
@@ -766,7 +766,7 @@ ar          3    $1,700</p>
 from emp
 where to_char(hiredate, ‘yyyy/mm/dd’) &gt;= ‘1980/07/01’;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO REPENAME   LOJOB     ---------- ---------- ---------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO REPENAME   LOJOB     ---------- ---------- ---------
   7839 king       president
   7566 jone*      manager  
   7698 blake      manager  
@@ -792,7 +792,7 @@ where to_char(hiredate, ‘yyyy/mm/dd’) &gt;= ‘1980/07/01’;</p>
 from emp
 where to_char(hiredate, ‘yyyy ww’) &lt;= ‘1980 20’;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   COU MAXHIREDATE                 MINHIREDATE                 ---------- --------------------------- ---------------------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   COU MAXHIREDATE                 MINHIREDATE                 ---------- --------------------------- ---------------------------
      0                                                        
 </code></pre></div></div>
 
@@ -807,7 +807,7 @@ from ( select empno, ename, deptno, mgr
 	where to_char(hiredate, ‘yyyy’) &lt;= ‘1982’ ) e join dept d on e.deptno = d.deptno
 					join emp m on e.mgr = m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR DNAME          MGRNAME    ---------- ---------- ---------- ---------- -------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR DNAME          MGRNAME    ---------- ---------- ---------- ---------- -------------- ----------
   7566 JONES              20       7839 RESEARCH       KING      
   7698 BLAKE              30       7839 SALES          KING      
   7782 CLARK              10       7839 ACCOUNTING     KING      
@@ -843,7 +843,7 @@ from ( select empno, ename, hiredate, deptno
 	from emp
 	where to_char(hiredate, ‘yyyy/mm’) = ‘1981/02’ ) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
   7499 ALLEN      81/02/20         30 SALES         
   7521 WARD       81/02/22         30 SALES         
 </code></pre></div></div>
@@ -927,7 +927,7 @@ from dual;</p>
 from dual</p>
 
 <h2 id="to_date20191201yyyymmdd-sysdate">TO_DATE(‘20191201’,’YYYYMMDD’)-SYSDATE</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                         -131.39581 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                         -131.39581 
 </code></pre></div></div>
 
 <p>select sysdate- to_date(‘20191201’,’yyyymmdd’)
@@ -1068,7 +1068,7 @@ from (	select deptno, to_char(hiredate, ‘yyyy’) yhiredate, count(*) cnt, max
 from emp
 where hiredate &lt; to_date(‘1981/03/01’, ‘yyyy/mm/dd’);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE   WORKDAYS ---------- ---------- -------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE   WORKDAYS ---------- ---------- -------- ----------
   7369 SMITH      80/12/17      13260
   7499 ALLEN      81/02/20      13260
   7521 WARD       81/02/22      13260
@@ -1111,7 +1111,7 @@ order by workmon asc;
 from emp
 where deptno = 30;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE ADDEDHIR ---------- ---------- -------- --------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE ADDEDHIR ---------- ---------- -------- --------
   7698 BLAKE      81/05/01 81/08/09
   7499 ALLEN      81/02/20 81/05/31
   7521 WARD       81/02/22 81/06/02
@@ -1126,7 +1126,7 @@ from emp
 where abs(months_between(sysdate, hiredate)) &gt;= 452
 order by workmon desc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM    COMMSAL HIREDATE    WORKMON ---------- ---------- ---------- ---------- ---------- -------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM    COMMSAL HIREDATE    WORKMON ---------- ---------- ---------- ---------- ---------- -------- ----------
   7369 SMITH             800                   800 80/12/17        472
   7499 ALLEN            1600        300       1900 81/02/20        470
   7521 WARD             1250        500       1750 81/02/22        469
@@ -1162,7 +1162,7 @@ from ( select mgr, to_char(hiredate, ‘yyyy’) hireyear, count(*) cnt, to_char
 	where mod(substr(empno, 2, 1), 2) = 1
 	group by mgr, to_char(hiredate, ‘yyyy’) ) e join emp m on e.mgr = m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR HIRE        CNT MAXHIREDATE  MINHIREDATE  MGRNAME    ---------- ---- ---------- ------------ ------------ ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR HIRE        CNT MAXHIREDATE  MINHIREDATE  MGRNAME    ---------- ---- ---------- ------------ ------------ ----------
   7698 1981          2 1981/12/03 1 1981/02/22 4 BLAKE     
   7839 1981          2 1981/06/09 2 1981/04/02 1 KING      
   7566 1982          1 1982/04/09 2 1982/04/09 2 JONES     
@@ -1178,7 +1178,7 @@ from emp
 where regexp_like (lower(ename), ‘(am|an|as)’)
 order by sal asc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL SAL12     HIRED                      HIRE50     ---------- ---------- ---------- --------- -------------------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL SAL12     HIRED                      HIRE50     ---------- ---------- ---------- --------- -------------------------- ----------
   7900 JAMES             950   $11,400 1981-12-03 목요일 49        1986/02/03
   7876 ADAMS            1100   $13,200 1983-05-12 목요일 19        1987/07/12
 </code></pre></div></div>
@@ -1188,7 +1188,7 @@ order by sal asc;</p>
 from emp
 order by workdayofhiremon asc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE WORKDAYOFHIREMON ---------- ---------- -------- ----------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE WORKDAYOFHIREMON ---------- ---------- -------- ----------------
   7654 MARTIN     81/09/28                3
   7521 WARD       81/02/22                7
   7499 ALLEN      81/02/20                9
@@ -1231,7 +1231,7 @@ order by cnt desc;</p>
 from emp
 where hiredate &gt; to_date(‘1980/07/01’, ‘yyyy/mm/dd’);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO REPNAME    LOJOB     ---------- ---------- ---------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO REPNAME    LOJOB     ---------- ---------- ---------
   7839 king       president
   7566 jone*      manager  
   7698 blake      manager  
@@ -1789,7 +1789,7 @@ end;</p>
 
 <p>cursor d1 is</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select sal, replace(lower(job), ' ', '')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select sal, replace(lower(job), ' ', '')
 
 from emp
 
@@ -1810,7 +1810,7 @@ for update;
 
 <p>loop</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch d1 into vsal, vjob;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch d1 into vsal, vjob;
 
 exit when d1%notfound;
 
@@ -1869,7 +1869,7 @@ exit when d1%notfound;
 
 <p>cursor c1 is</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select *
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select *
 
 from emp
 
@@ -1884,7 +1884,7 @@ where lower(job) = lower(vjob);
 
 <p>loop</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vrow;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vrow;
 
 exit when c1%notfound;
 
@@ -1943,7 +1943,7 @@ SYS.DBMS_OUTPUT.PUT_LINE('보너스' || vrow.comm);
 
 <p>cursor c1 is</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select *
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select *
 
 from emp
 
@@ -1958,7 +1958,7 @@ where sal &gt;= vsal and lower(job) = lower(vjob);
 
 <p>loop</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vrow;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vrow;
 
 exit when c1%notfound;
 
@@ -2021,7 +2021,7 @@ SYS.DBMS_OUTPUT.PUT_LINE('직무' || vrow.job);
 
 <p>cursor c1 is</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select deptno, count(*) cnt, sum(sal) sumsal
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select deptno, count(*) cnt, sum(sal) sumsal
 
 from emp
 
@@ -2042,7 +2042,7 @@ group by deptno;
 
 <p>loop</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vdeptno, vcnt, vsumsal;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vdeptno, vcnt, vsumsal;
 
 exit when c1%notfound;
 
@@ -2089,7 +2089,7 @@ SYS.DBMS_OUTPUT.PUT_LINE('급여합계' || vsumsal);
 
 <p>cursor c1 is</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select deptno, cnt, sumsal, dname
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select deptno, cnt, sumsal, dname
 
 from ( select deptno, count(*) cnt, sum(sal) sumsal
 
@@ -2114,7 +2114,7 @@ from emp
 
 <p>loop</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vdeptno, vcnt, vsumsal, vdname;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vdeptno, vcnt, vsumsal, vdname;
 
 exit when c1%notfound;
 

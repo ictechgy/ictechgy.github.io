@@ -1,0 +1,993 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux_day4 - 개발 끄적끄적</title>
+<meta name="description" content="기본 명령어 ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="Linux_day4">
+<meta property="og:url" content="http://localhost:4000/linux/Linux_day4/">
+
+
+  <meta property="og:description" content="기본 명령어 ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/photo-hangang.jpeg">
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-26T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/linux/Linux_day4/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux_day4">
+    <meta itemprop="description" content="기본 명령어">
+    <meta itemprop="datePublished" content="2020-05-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Linux_day4
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>기본 명령어</p>
+
+<p>1)pwd - 현재 작업하고 있는 디렉터리 출력 (present working directory)
+리눅스는 bash쉘에서 현재위치를 기본적으로 알려주기는 하지만 자세하게 보고싶다면 사용하는 명령어. 작업위치의 절대경로가 출력됨
+리눅스에서는 로그인하면 터미널에서 위치는 자신의 홈 디렉터리가 기본경로이다. ~표시
+관리자계정으로 로그인시 pwd치면 /root
+일반사용자계정으로 로그인시 pwd치면 /home/사용자계정명
+Unix에서는 터미널에서 #또는 $만 뜨므로 pwd는 거의 항상 치는 명령어이다.</p>
+
+<p>선생님은 필요할때만 쓰라고 하셨는데 김지윤쌤은 매번 쳐야한다고 하셨었다.</p>
+
+<p>2) cd - 디렉터리 변경(change directoty). GUI처럼 마우스로 내 작업 위치를 옮길 수 없으니 사용</p>
+
+<p>사용형식
+cd 디렉터리
+디렉터리이름을 적는 법에는 절대경로/상대경로가 있다.</p>
+
+<p>상황에 따라 적절한 경로법 사용
+절대경로 - 파일 시스템 전체를 기준으로 파일이나 디렉터리의 절대적인 위치(경로)를 표현하는 것</p>
+
+<p>상대경로 - 현재 작업하고 있는 디렉터리를 기준으로 파일이나 디렉터리의 상대적인 위치를 말함</p>
+
+<p>준비물
+관리자로 로그인
+작업도중 어떠한 오류가 생길지 모르니 우리는 작업을 수행하는 디렉토리를
+/home/itbank에서 진행할 것이다.</p>
+
+<p>mkdir 디렉터리 생성명령어로 디렉터리를 만들자.
+관리자로 로그인했으므로 /root 하위에 폴더가 만들어질 것이다. → ㄴㄴ 명령어로 만들어지는게 최상위디렉터리 하위에 만들어지네. 즉 절대경로로 디렉터리를 생성한 것 같다.
+그냥 mkdir 2 했으면 현재폴더 하위에 만들어지는 것인듯</p>
+
+<p>mkdir /2
+mkdir /2/3
+mkdir /2/3/4
+mkdir /a
+mkdir /a/b
+mkdir/a/b/c</p>
+
+<p>내가 만약 /2/3 이라는 3 디렉터리에 있다면.. 
+4라는 디렉터리로 가고 싶다면 절대경로 →  cd /2/3/4
+거기서 2라는 디렉터리로 가고싶다면 → cd /2
+이제 /a/b 라는 경로로 가고 싶다면 → cd /a/b
+이러한 식으로 절대적인 전체경로를 써주는 것이 절대경로이다. 내 커맨드라인이 어디에 있는지 상관 없이 쓸 수 있다.</p>
+
+<p>상대경로 - 현재 작업하고 있는 디렉터리를 기준으로 움직이는 방법. 내가 어디에 있는지부터 아는 것이 중요하다. pwd를 쳐서 확인하자. 절대경로를 친다면 오타정도만이 오류요인이 될 수 있겠지만 상대경로를 이용한다면 내 커맨드라인이 어디에 있는지에 따라 오류요인이 달라진다.
+내가 만약 /a/b 에 있는데..
+c라는 디렉터리로 가고 싶다면 → cd c 또는 cd ./c  (여기서 온점이 의미하는 것은 현재 디렉터리를 의미하는 특수기호이다. 생략가능하다.)
+이제 /a로 가고싶다면 → cd ../../ 또는 cd ../.. 또는 cd..(cd ../)을 두번쓰기 (..은 상위디렉터리를 의미. 맨 마지막 슬래시는 생략가능하다. 다만 파일명뒤에는 /를 첨가하면 안된다. 디렉터리라면 컴퓨터가 디렉터리인걸 알기 때문에 슬래시를 둬도 되고 안둬도 되고)
+이제 /2/3 이라는 데릭터리로 가고 싶다면 → cd ../2/3</p>
+
+<p>상대경로는 계단이라고 보면 되고 절대경로는 엘리베이터라고 보면 된다.
+상대경로는 내 위치를 기준으로 일일히 다 써줘야하고 절대경로는 내 위치에 구애받지 않고 쓸 수 있다.</p>
+
+<p>cd 연습!
+(조건! 현재 경로는 /root)
+	cd /root
+/root 홈 디렉터리에서 /2/3 디렉터리 절대경로로 이동
+	cd /2/3
+/2/3 디렉터리에서 /2/3/4 디렉터리로 상대경로로 이동
+	cd 4 또는 cd ./4
+/2/3/4 디렉터리에서 /a/b/c 디렉터리 상대경로로 이동
+	cd ../../../a/b/c
+/a/b/c 디렉터리에서 /a 디렉터리 절대경로로 이동
+	cd /a
+/a 디렉터리에서 /home/itbank 홈 디렉터리 상대경로로 이동
+	cd ../home/itbank</p>
+
+<p>cd 디렉터리명 → 지정한 디렉터리로 작업위치 변경</p>
+
+<p>만약에 cd만 쓰게 된다면? 
+→ 현재 로그인한 계정의 홈 디렉터리로 이동 (컴백홈!)</p>
+
+<p>cd ~  → 틸드
+동일하게 로그인한 계정의 홈 디렉터리로 이동</p>
+
+<p>모든 계정은 자신의 홈디렉터리 집에서 시작함(터미널)</p>
+
+<p>cd ~계정명 → 지정한 사용자 계정의 홈 디렉터리로 작업위치를 변경(다만 존재하는 사용자 계정 디렉터리를 지정해줘야함)</p>
+
+<p>ls (list)
+디렉터리 하위의 디렉토리 및 파일 목록 출력
+파일이나 디렉터리 존재 유무 볼 때 쓰면 된다.
+ls /f 를 친 경우, f라는 디렉토리 내부의 항목들을 출력하려고 했는데 f라는 디렉토리가 아예 없으면 해당 파일 또는 디렉터리 없더고 뜸 → 아 f라는건 없구나! 파악
+ls /a 치면 b라는게 뜨니까 아 a는 있구나 그리고 그 안에 b가 있구나 파악 가능</p>
+
+<p>아니면 파일에다 대고 ls를 써도 되긴 하다. 예를들어 a라는 파일이 최상위 하위에 있다고 치면 ls /a  라고 치는 경우 a가 파일이라면 그냥 a에 대한 경로? 같은게 뜨긴 함. 간단한 정보라던지</p>
+
+<p>사용형식
+ls [option]
+ls [option] 디렉터리명</p>
+
+<p>ls / 를 치고 최상위 아래에 뭐가 있는지 보자. ls /etc 를 치면 etc디렉터리 하위의 것들이 출력됨</p>
+
+<p>디렉터리명에 경로를 절대경로명을 써도 되지만 상대경로명을 써도 된다</p>
+
+<p>option</p>
+<ul>
+  <li>l : 자세히</li>
+</ul>
+
+<p>예를 들어 ls -l /home 을 입력하면
+drwx——. 14 itbank itbank 4096  5월 14 09:17 itbank</p>
+
+<p>맨 앞의 d는 디렉터리. -라면 파일, l이라면 심볼릭 링크파일을 의미한다(바로가기)
+b라면 블록파일(하드디스크장치같은 장치에대한) c라면 장치파일이긴한데 캐릭터형으로 구성되어있는? 마우스 키보드등과 같은 장치파일에 대한 것</p>
+
+<p>뒤의 rwx—— 은 허가권을 의미(권한)
+r : 읽기권한, w : 쓰기권한 x : 실행권한
+소유자 - 소유자그룹 - 이외계정 순서대로 권한에 대해 표시한다.</p>
+
+<p>14 → 연결된 링크 갯수(정확히 뭐지? 연결된 링크? 자신과 연결된 링크파일의 숫자 - 의존성)
+?? 심볼릭링크파일을 만드는데 이 itbank 내부에 있는 디렉터리나 파일에 대한 심볼릭 링크파일을 만들면 저 카운트가 올라가는 건가.. 아니면 itbank 자체 디렉터리에 대한 심볼릭 링크갯수를 말하는건가.. 아니면 다른건가?</p>
+
+<p>itbank(왼쪽) → 사용자 계정명(UID : User ID 유저 고유 식별자) - 소유자
+itbank(오른쪽) → 그룹명(GID : Group ID(고유 식별자)) -소유자의 그룹
+UID와 GID를 합쳐서 소유권이라고 함
+기본적으로 ID는 숫자값?인데 사용자가 -l로 보고자 했으니 문자로 출력된다?
+4096 → 용량.. 단위는?
+5월 14 09:17 → 생성(변경)된 날짜와 시간(컴퓨터의 현재연도와 같다면 년도는 생략되고 지난 년도라면 출력)
+합계 4 → 디렉터리 사이즈. -s 로 출력되는 것과 동일(디렉토리 사이즈??? 뭐 4096으로 출력되는거 단위만 다른건가)</p>
+
+<p>-n : 소유권(UID와 GID)의 ID(값)가 숫자로 출력
+ls -n /home 치면 ID쪽 다 1000뜸. 고유한 값이다. 컴퓨터는 이 숫자로 대상에 대한 ID를 파악한다</p>
+
+<p>l은 literal
+n은 number 뭐 이런건가</p>
+
+<p>ls /home/itbank
+ls -a /home/itbank
+-a : 숨김파일과 숨김 디렉터리가 포함되어 같이 출력. GUI였다면 뿌옇게 보이는데.. TUI에서는 파일이나 디렉터리 맨 앞에 .을 넣어 숨김파일이라고 명함
+그럼 우리가 만들때도 앞에 점 붙이면 숨김파일로 만들어지나.. GUI에서도 점 넣으면 숨김파일되나?</p>
+
+<p>-d : 지정한 디렉터리를 출력(자기 자신을 출력해라)
+ls -l /home/itbank   → itbank 하위의 디렉토리 및 파일정보 출력
+ls -ld /home/itbank  → itbank자체의 정보 출력
+어떤 두 디렉터리 자체를 비교하거나 할 때 사용
+ls -l /home 을 한 것과 동일하게 출력되긴 하는데 그냥 이렇게 썼으면 다른 사용자계정에 대한 정보도 보였겠지 
+d는 뭐의 약자인거지</p>
+
+<p>-R : 지정한 디렉터리의 하위 파일이나 디렉터리를 모두 출력
+ls /a
+ls -R /a
+다 까발려지므로 쓰지 못하게 할 때도 있음</p>
+
+<p>-F : 파일의 형식을 기호로 출력
+ls /home/itbank
+ls -F /home/itbank</p>
+
+<p>맨 끝에 /가 붙어있다면 디렉터리를 의미. 맨 끝에 기호가 없으면 파일을 의미
+ls -F /etc/hostname   ← 파일자체를 지목</p>
+
+<p>맨 끝에 @은 심볼릭 링크(바로가기)파일
+ls -F /etc/sysconfig/selinux</p>
+
+<p>참고로 -l옵션과 같이 사용하면 심볼릭 링크파일의 정보와 원본파일을 같이 출력
+ls -Fl /etc/sysconfig/selinux</p>
+
+<p>맨 끝에 *은 실행파일을 의미
+ls -F /usr/bin/ls</p>
+
+<p>man과 –help</p>
+
+<p>man은 메뉴얼</p>
+
+<p>uname이라고 치면 Linux라고만 뜨는데 그럼 uname이 뭐야? 무슨 명령어인거야?
+→ man uname 치면 해당 명령어가 뭔지 나옴</p>
+
+<p>enter : 한줄씩
+spacebar : 화면(창) 크기만큼 출력
+명령어에 대한 메뉴얼이 출력될 때 추가 옵션이 나올 때가 있는데 축약명령어는 -m 바 하나만 쓰고 풀네임 쓸 때는 –machine 바가 두개
+모든 명령어 옵션에 대해서 축약어는 바 하나이고 풀네임은 바 두개인건가</p>
+
+<p>uname 명령어에도 많은 옵션들이 존재하네
+시스템정보를 출력하는 명령어</p>
+
+<p>k : 위로 올리기
+j : 아래로 내리기
+q : 종료</p>
+
+<p>–help는 상세 도움말
+사용 형식
+명령어 –help</p>
+
+<p>uname –help</p>
+
+<p>man uname을 쓴것과 비슷하게 나오네
+다만 –help는 uname 명령어의 옵션기능임</p>
+
+<p>cp - copy
+파일이나 디렉터리 복사 명령어</p>
+
+<p>사용형식
+cp [option] 원본파일 사본파일</p>
+
+<p>준비물
+관리자로 로그인
+mkdir /backup
+cp /etc/inittab /backup
+cp /etc/login.defs /backup
+cp /boot/grub2/grub.cfg /backup
+그리고 ls -l /backup으로 잘 복사됐는지 확인</p>
+
+<p>원본파일부분에는 원본파일의 경로와 파일명 그리고 확장자명까지 써줘야 하는 듯
+사본파일쪽에는 목적지경로를 쓰는데 만약 목적지 경로가 존재하지 않는다면 해당 이름으로 파일을 붙여넣기 하는 듯? (해당 경로가 없네? 아 이건 이 이름으로 붙여넣기 하라는 거구나)</p>
+
+<p>[root@localhost itbank]# 상에서 명령어 진행</p>
+
+<p>cp /backup/grub.cfg /2/grub.cfg
+cp /backup/inittab ../../2                  → 같은 이름으로 복사할 것이라면 이름을 쓰지 않아도 됨
+cp ../../backup/login.defs ../../2/login  → login이라는 디렉터리를 찾다가 없으면 해당 이름으로 붙여넣기 완료하는 듯. 저 디렉토리 있었다면 저 안에 넣었겠지만
+ls -l ../../2</p>
+
+<p>GUI면 붙여넣기 한 후에 이름을 바꿔야하는데 TUI는 붙여넣기 하면서 바꿀 수 있다 → 훨씬 속도가 빠르다?</p>
+
+<p>특징
+원본파일명 그대로 복사할 경우 복사할 경로에 사본 파일명을 생략
+원본파일을 복사할 때 사본파일명을 바꾸어서 복사할 수 있음</p>
+
+<p>이번에는 /2/3 하위에도 cp해보자
+[root@localhost itbank]# ls -l /2/3
+합계 0
+drwxr-xr-x. 2 root root 6  5월 14 09:27 4</p>
+
+<p>[root@localhost itbank]# cp /2/grub.cfg /2/3/grub.cfg
+[root@localhost itbank]# cp /2/inittab ../../2/3
+[root@localhost itbank]# cp ../../2/login ../../2/3/login.defs</p>
+
+<p>[root@localhost itbank]# ls -l ../../2/3</p>
+
+<p>한꺼번에 복사붙여넣기 해보자
+[root@localhost itbank]# ls -l /a
+합계 0
+drwxr-xr-x. 3 root root 15  5월 14 09:27 b
+[root@localhost itbank]# cp /2/3/grub.cfg /2/3/inittab ../../2/3/login.defs /a
+[root@localhost itbank]# ls -l ../../a
+합계 16
+drwxr-xr-x. 3 root root   15  5월 14 09:27 b
+-rw-r–r–. 1 root root 4235  5월 14 11:07 grub.cfg
+-rw-r–r–. 1 root root  511  5월 14 11:07 inittab
+-rw-r–r–. 1 root root 2028  5월 14 11:07 login.defs</p>
+
+<p>맨 마지막이 붙여넣기 경로임.
+만약 존재하지 않는 경로로 붙여넣기 대상점을 지정한다면..? 해당 이름으로 이름이 바뀌려나
+윈도우에서는 같은 이름으로 바꾸려고 하면 괄호안에 숫자넣어서 구분시켜주는데
+이름 못바꾸나?
+→ 이런 경우 이름을 못바꾼다고 하심. 한꺼번에 하는 경우.</p>
+
+<p>전체 전부를 복사붙여넣기 해보자 → 걍 디렉터리 통째로 해도 될 것같고 아니면 *을 쓰나?</p>
+
+<p>이미 파일명이 존재한다면 overwrite 질문이 나옴
+예를 들어 위에서 한꺼번에 cp하는데 login.defs 이름이나 경로를 잘못쓰면 앞의 grub.cfg와 inittab만 복사붙여넣기 되고 login.defs는 복사붙여넣기 안된 상태. 그 상태에서 위의 명령어를 똑같이 써서 다시 수행시키면 덮어씌우기 질문이 나옴. y를 넣으면 붙여넣기를 하는거고 n을 누르면 붙여넣기 안함. 그냥 엔터치면?</p>
+
+<p>[root@localhost itbank]# ls -l /a/b
+합계 0
+drwxr-xr-x. 2 root root 6  5월 14 09:27 c</p>
+
+<p>/a/b 디렉토리 하위에는 현재 c디렉토리만 있는 상태</p>
+
+<p>[root@localhost itbank]# cp /a/* ../../a/b
+cp: omitting directory <code class="language-plaintext highlighter-rouge">/a/b'
+[root@localhost itbank]# cp /a/* ../../a/b
+cp: omitting directory </code>/a/b’
+cp: overwrite <code class="language-plaintext highlighter-rouge">../../a/b/grub.cfg'? n
+cp: overwrite </code>../../a/b/inittab’? n
+cp: overwrite `../../a/b/login.defs’? n</p>
+
+<p>a디렉토리 하위에는 세개의 파일과 b라는 디렉토리가 있었다. 전부를 복사해서 b내부로 다 옮기려고 했는데 b는 cp명령어를 듣지 않음. → 세개의 파일만 복사붙여넣기 됨</p>
+
+<p>디렉터리는 파일처럼 cp로 복사할 수 없음</p>
+
+<p>cp /backup ./   → 불가능 (cp /backup 이라고는 쓸 수 없고 cp /backup . 으로는 쓸 수 있네)
+디렉터리를 복사할 때 파일형식처럼 복사할 수 없으므로 -r 옵션을 사용해야 복사할 수 있음
+cp -r /backup ./</p>
+
+<p>ls -l ./backup
+해보면 내부파일까지 다 복사 붙여넣기된 것을 볼 수 있다. 윈도우에서 폴더째로 복사 붙여넣기 한 것과 동일하게..</p>
+
+<p>만약 cp -r 을 하는데 디렉토리가 아닌 일반 파일을 복사하려고 한다면 어찌 되는거지..
+막 디렉토리와 일반파일과 혼용해서 작성한다면..</p>
+
+<p>생성날짜와 시간은 복사를 할 수 없다
+즉 a라는 파일은 1월에 만들어졌는데 이를 복사 붙여넣기 했다면 현재 개월인 5월로 생성정보가 만들어진다는 뜻</p>
+
+<p>-p 옵션을 사용하면 원본 그대로를 복사할 수 있음(생성시간까지 다)</p>
+
+<p>무슨 약어들이지 도대체..</p>
+
+<p>mv - move
+파일이나 디렉터리를 이동</p>
+
+<p>cp와 사용형식이 동일함
+사용형식
+mv [option] 원본파일 목적지
+목적지명이 있지 않으면 해당 이름으로 이동시키는건가 cp랑 똑같이?</p>
+
+<p>[root@localhost itbank]# ls -l /backup
+합계 16
+-rw-r–r–. 1 root root 4235  5월 14 10:48 grub.cfg
+-rw-r–r–. 1 root root  511  5월 14 10:48 inittab
+-rw-r–r–. 1 root root 2028  5월 14 10:48 login.defs</p>
+
+<p>[root@localhost itbank]# ls -l /2/3/4
+합계 0</p>
+
+<p>/backup 에 있는 세개의 파일을 /2/3/4 빈 공간에 mv시켜보자</p>
+
+<p>[root@localhost itbank]# mv /backup/grub.cfg /2/3/4/grub.cfg
+[root@localhost itbank]# mv /backup/inittab ../../2/3/4
+[root@localhost itbank]# mv ../../backup/login.defs ../../2/3/4/login  → 이름바꾸기 가능</p>
+
+<p>[root@localhost itbank]# ls -l /backup
+합계 0
+다 옮겼으니 아무것도 존재하지 않는다</p>
+
+<p>[root@localhost itbank]# ls -l ../../2/3/4
+합계 16
+-rw-r–r–. 1 root root 4235  5월 14 10:48 grub.cfg
+-rw-r–r–. 1 root root  511  5월 14 10:48 inittab
+-rw-r–r–. 1 root root 2028  5월 14 10:48 login</p>
+
+<p>한번에 옮기기
+mv /2/3/4/grub.cfg /2/3/4/inittab /2/3/4/login /backup
+역시나 한꺼번에 작업하는 것이므로 이름변경 불가능</p>
+
+<p>ls -l /backup ../../2/3/4
+두개의 list한번에 보기 가능</p>
+
+<p><em>을 이용하여 모두다 한번에 옮기기
+[root@localhost itbank]# mv /backup/</em> ../../2/3/4</p>
+
+<p>[root@localhost itbank]# ls -l /backup ../../2/3/4
+../../2/3/4:
+합계 16
+-rw-r–r–. 1 root root 4235  5월 14 10:48 grub.cfg
+-rw-r–r–. 1 root root  511  5월 14 10:48 inittab
+-rw-r–r–. 1 root root 2028  5월 14 10:48 login</p>
+
+<p>/backup:
+합계 0</p>
+
+<p>디렉토리 이동(디렉토리 mv해보기)
+[root@localhost itbank]# ls -ld /backup
+drwxr-xr-x. 2 root root 6  5월 14 11:41 /backup  → /backup디렉토리 정보보기</p>
+
+<p>[root@localhost itbank]# ls -l /backup
+합계 0 → /backup 내부에는 아무것도 없긴 하네</p>
+
+<p>/backup 디렉토리를 /2/3/4 하위로 이동시켜보자</p>
+
+<p>[root@localhost itbank]# mv /backup ../../2/3/4</p>
+
+<p>[root@localhost itbank]# ls -ld /backup
+ls: cannot access /backup: 그런 파일이나 디렉터리가 없습니다
+최상위 아래에 backup이라는 디렉토리는 더이상 존재하지 않는다</p>
+
+<p>[root@localhost itbank]# ls -l ../../2/3/4
+합계 16
+drwxr-xr-x. 2 root root    6  5월 14 11:41 backup
+-rw-r–r–. 1 root root 4235  5월 14 10:48 grub.cfg
+-rw-r–r–. 1 root root  511  5월 14 10:48 inittab
+-rw-r–r–. 1 root root 2028  5월 14 10:48 login</p>
+
+<p>디렉토리 잘 이동됨..</p>
+
+<p>mv명령어는 원본이 이동되므로 조심해서 사용
+디렉터리를 이동할 때는 cp와는 다르게 옵션을 사용하지 않아도 됨. 그냥도 옮겨짐(cp에서는 -r써야 디렉토리 카피 가능. -p쓰면 생성날짜까지 동일하게 카피. perfect인가?)</p>
+
+<p>파일명이나 디렉터리명을 바꿀 때도 사용 가능하다.
+mv /2/3/4/login /2/3/4/login.defs
+ls -l /2/3/4로 확인</p>
+
+<p>mv는 생성날짜와 시간이 바뀌지 않는다. 원본이 이동하는 것이므로..
+cp는 붙여넣기 할 때 옵션 안쓰면 붙여넣기 한 시간으로 생성날짜 만들어짐</p>
+
+<p>원래대로 돌려놓기
+[root@localhost itbank]# mv /2/3/4/grub.cfg /2/3/4/inittab /2/3/4/login.defs /2/3/4/backup
+[root@localhost itbank]# ls -l /2/3/4
+합계 0
+drwxr-xr-x. 2 root root 55  5월 14 11:47 backup</p>
+
+<p>[root@localhost itbank]# ls -l /2/3/4/backup
+합계 16
+-rw-r–r–. 1 root root 4235  5월 14 10:48 grub.cfg
+-rw-r–r–. 1 root root  511  5월 14 10:48 inittab
+-rw-r–r–. 1 root root 2028  5월 14 10:48 login.defs</p>
+
+<p>[root@localhost itbank]# mv /2/3/4/backup ../../
+[root@localhost itbank]# ls -l /backup
+합계 16
+-rw-r–r–. 1 root root 4235  5월 14 10:48 grub.cfg
+-rw-r–r–. 1 root root  511  5월 14 10:48 inittab
+-rw-r–r–. 1 root root 2028  5월 14 10:48 login.defs</p>
+
+<p>exit로 putty 종료 (근데 왜 putty로 하시는거지. 보기 편해서인가 ㅋㅋ)</p>
+
+<p>강의파일 및 IT통합기초파일</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#linux" class="page__taxonomy-item" rel="tag">Linux</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-26T00:00:00+09:00">May 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Linux_day4%20http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux_day4%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux_day4%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flinux%2FLinux_day4%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/linux/Linux_day3/" class="pagination--pager" title="Linux_day3
+">Previous</a>
+    
+    
+      <a href="/linux/Linux_day5/" class="pagination--pager" title="Linux_day5
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day8/" rel="permalink">Linux_day8
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">putty접속 안됐으나 VMware 가상네트워크설정에서 NAT에 있어서 두가지 체크사항 건드리니까 다시 됨. 한가지만 체크되어있었는데 먼저 체크 푼 다음에 설정창 껐다가 다시 키고, 체크사항 두개 다시 체크한 뒤에 설정창 끔.  OS GUI에서도 네트워크 설정부분 껐다가 켰다. 아...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day7/" rel="permalink">Linux_day7
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">vi(Visual Editor) → vi-sual editor. 줄여서 VI Editor 라고도 한다.
+한 줄씩 편집하는 줄 단위 편집기가 아니라 한 화면을 편집하는 비주얼 에디터라는 뜻에서 유래 → 그러면 줄 단위 편집기도 있었다는건가???
+간결하면서도 강력한 기능을 제공
+GUI...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day6/" rel="permalink">Linux_day6
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">논리연산자
+이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
+a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
+a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/linux/Linux_day4/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/linux/Linux_day4"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ictechgy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

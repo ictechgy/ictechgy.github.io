@@ -1,4 +1,4 @@
-I"v}<p>논리연산자
+I"�~<p>논리연산자
 이전시간에 우리는 논리연산자 &amp;&amp;와 ||를 배웠다.
 a &amp;&amp; b → a가 실행되면 b도 실행. a가 실행되지 않으면 b도 미실행
 a || b → a가 실행되면 b는 미실행, a가 미실행되면 b는 실행</p>
@@ -456,7 +456,7 @@ ls -l /tmp/test?  → 복사 잘 됐는지 확인</p>
 	나는 cd로 /down하위로 이동했으므로
 	mkdir test</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>선생님은.. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>선생님은.. 
 mkdir /down/test
 ls -l /down 또는 ls -ld /down/test
 </code></pre></div></div>
@@ -465,7 +465,7 @@ ls -l /down 또는 ls -ld /down/test
 	나는 cd /down했으므로
 	mv test /tmp</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>선생님 : /tmp디렉토리가 있는 것을 아므로..
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>선생님 : /tmp디렉토리가 있는 것을 아므로..
 mv /down/test /tmp
 ls -l /down   → 폴더에서 사라졌는지
 ls -ld /tmp/test → 이동 됐는지
@@ -548,31 +548,31 @@ drwxr-xr-x. 2 root   root        6  5월 16 11:32 test
 <p>→ find /tmp 실행되고 논리연산자 다음에 /down -name “test*” -exec rm {}\; 명령어 따로 본거같은데..</p>
 
 <p>[root@localhost down]# find /tmp “test<em>” -exec rm {} \; &amp;&amp; find /down “test</em>” -exec rm {} \;
-rm: cannot remove <code class="highlighter-rouge">/tmp': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp': 디렉터리입니다
 rm: cannot remove </code>/tmp/.font-unix’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/.ICE-unix': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/.ICE-unix': 디렉터리입니다
 rm: cannot remove </code>/tmp/.XIM-unix’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/.X11-unix': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/.X11-unix': 디렉터리입니다
 rm: cannot remove </code>/tmp/.Test-unix’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/ssh-0A7Lzw7GX7MB': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/ssh-0A7Lzw7GX7MB': 디렉터리입니다
 rm: cannot remove </code>/tmp/.esd-1000’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/test': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/test': 디렉터리입니다
 rm: cannot remove </code>/tmp/.esd-0’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/tracker-extract-files.0': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/tracker-extract-files.0': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-vgauthd              .service-bdSMtk’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-vgauthd              .service-bdSMtk/tmp': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-vgauthd              .service-bdSMtk/tmp': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-chronyd              .service-cmoezL’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-chronyd              .service-cmoezL/tmp': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-chronyd              .service-cmoezL/tmp': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-vmtools              d.service-kjorGd’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-vmtools              d.service-kjorGd/tmp': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-vmtools              d.service-kjorGd/tmp': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-vmtools              d.service-kjorGd/tmp/vmware-root’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-rtkit-d              aemon.service-5ZOWdG': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-rtkit-d              aemon.service-5ZOWdG': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-rtkit-d              aemon.service-5ZOWdG/tmp’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-cups.se              rvice-LvmSxJ': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-cups.se              rvice-LvmSxJ': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-cups.se              rvice-LvmSxJ/tmp’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-httpd.s              ervice-7PWJgb': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-httpd.s              ervice-7PWJgb': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-httpd.s              ervice-7PWJgb/tmp’: 디렉터리입니다
-rm: cannot remove <code class="highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-colord.              service-bJumtV': 디렉터리입니다
+rm: cannot remove <code class="language-plaintext highlighter-rouge">/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-colord.              service-bJumtV': 디렉터리입니다
 rm: cannot remove </code>/tmp/systemd-private-20207bf1355843d3bbd13be310d0fb77-colord.              service-bJumtV/tmp’: 디렉터리입니다
 rm: cannot remove `/tmp/tracker-extract-files.1000’: 디렉터리입니다
 find: ‘test*’: 그런 파일이나 디렉터리가 없습니다</p>

@@ -1,10 +1,10 @@
-I"AD<p>사용자 계정과 그룹 실습</p>
+I"zD<p>사용자 계정과 그룹 실습</p>
 
 <ul>
   <li>
     <p>작업 후의 결과내용</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    User : battlegrounds
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    User : battlegrounds
     UID : 2018
     Group : leagueoflegends(GID는 자유롭게) → GID는 뭐가되든 상관없고 그냥 groups에                                                                                                                                                                          포함시키기만 하면 되는 듯
     SHELL : shell은 자유롭게
@@ -144,7 +144,7 @@ drwxr-xr-x. 3 root root 40  5월 24 11:21 /home
 
 <p>3라고 되어있는 것은 데이터에 접근할 수 있는 하드링크의 갯수를 나타내는 것이라고 보면 되는 것으로 알고 있다. 심볼릭링크는 데이터에 접근할 수 있는 접근자 자체에 재접근하는 파일이라고 보이고.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	          user(Owner)              Group                   Other
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	          user(Owner)              Group                   Other
 
                             2^2   2^1   2^0       2^2  2^1  2^0       2^2   2^1   2^0 d(디렉토리)	       |   r      w       x      |    r      w     x       |    r       w      x -(파일)		       |   4      2      1       |   4      2     1       |    4       2      1
 </code></pre></div></div>
@@ -270,7 +270,7 @@ r w - r - - - w -  	           →    		r  w  x  -  w  x  -  -  -</p>
 특수허가권은 numeric으로 안바뀐다.
 몇몇 파일이나 디렉토리에서 특수허가권에 해당하는 것들이 있다. 그런 경우 numeric으로 안되니까 symbolic으로 처리</p>
 
-<p><code class="highlighter-rouge">-  -  x  -  w  -  -  w  x → -  -  x  -  w  -  r  -  -   (123이 124로 변경)</code>
+<p><code class="language-plaintext highlighter-rouge">-  -  x  -  w  -  -  w  x → -  -  x  -  w  -  r  -  -   (123이 124로 변경)</code>
 chmod o+r,o-w,o-x
 chmod 124</p>
 

@@ -1,4 +1,4 @@
-I"z�<h1 id="본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</h1>
+I"��<h1 id="본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</h1>
 
 <p>emp	dept 테이블에 대하여</p>
 
@@ -9,7 +9,7 @@
 <p>select *
 from emp, dept;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC          ---------- ---------- --------- ---------- -------- ---------- ---------- ---------- ---------- -------------- -------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC          ---------- ---------- --------- ---------- -------- ---------- ---------- ---------- ---------- -------------- -------------
   7839 KING       PRESIDENT            81/11/17       5000                    10         10 ACCOUNTING     NEW YORK      
   7566 JONES      MANAGER         7839 81/04/02       2975                    20         10 ACCOUNTING     NEW YORK      
   7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         10 ACCOUNTING     NEW YORK      
@@ -75,7 +75,7 @@ from emp, dept;</p>
 <p>select *
 from emp join dept on emp.deptno = dept.deptno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC          ---------- ---------- --------- ---------- -------- ---------- ---------- ---------- ---------- -------------- -------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM     DEPTNO     DEPTNO DNAME          LOC          ---------- ---------- --------- ---------- -------- ---------- ---------- ---------- ---------- -------------- -------------
   7839 KING       PRESIDENT            81/11/17       5000                    10         10 ACCOUNTING     NEW YORK      
   7566 JONES      MANAGER         7839 81/04/02       2975                    20         20 RESEARCH       DALLAS        
   7698 BLAKE      MANAGER         7839 81/05/01       2850                    30         30 SALES          CHICAGO       
@@ -100,7 +100,7 @@ from emp e join dept d on e.deptno = d.deptno;	-&gt; 테이블 별칭 부여</p>
 <p>select *
 from emp join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM DNAME          LOC          ---------- ---------- ---------- --------- ---------- -------- ---------- ---------- -------------- -------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM DNAME          LOC          ---------- ---------- ---------- --------- ---------- -------- ---------- ---------- -------------- -------------
     10       7839 KING       PRESIDENT            81/11/17       5000            ACCOUNTING     NEW YORK      
     20       7566 JONES      MANAGER         7839 81/04/02       2975            RESEARCH       DALLAS        
     30       7698 BLAKE      MANAGER         7839 81/05/01       2850            SALES          CHICAGO       
@@ -125,7 +125,7 @@ where e.deptno = d.deptno;	-&gt; 예전 조인문장. 결과는 동등조인과 
 <p>select empno, ename, deptno, dname
 from emp join dept using (deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO DNAME         ---------- ---------- ---------- --------------
   7839 KING               10 ACCOUNTING     
   7566 JONES              20 RESEARCH       
   7698 BLAKE              30 SALES          
@@ -175,7 +175,7 @@ from
 	from emp
 	where sal&gt;=1000) e join dept d using (deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME         ---------- ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME         ---------- ---------- ---------- ---------- --------------
   7839 KING             5000         10 ACCOUNTING     
   7566 JONES            2975         20 RESEARCH       
   7698 BLAKE            2850         30 SALES          
@@ -196,7 +196,7 @@ from
 <p>select empno, ename, sal, comm, nvl(sal, 0) + nvl(comm, 0) tot, dname
 from emp join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM        TOT DNAME         ---------- ---------- ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM        TOT DNAME         ---------- ---------- ---------- ---------- ---------- --------------
   7839 KING             5000                  5000 ACCOUNTING     
   7566 JONES            2975                  2975 RESEARCH       
   7698 BLAKE            2850                  2850 SALES          
@@ -219,7 +219,7 @@ from emp join dept using(deptno);</p>
 <p>select empno, ename, hiredate, dname, loc
 from emp join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE DNAME          LOC          ---------- ---------- -------- -------------- -------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE DNAME          LOC          ---------- ---------- -------- -------------- -------------
   7839 KING       81/11/17 ACCOUNTING     NEW YORK      
   7566 JONES      81/04/02 RESEARCH       DALLAS        
   7698 BLAKE      81/05/01 SALES          CHICAGO       
@@ -241,7 +241,7 @@ from emp join dept using(deptno);</p>
 from emp
 where sal not between 1000 and 3000;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO ---------- ---------- ---------- ----------
   7839 KING             5000         10 
   7369 SMITH             800         20 
   7900 JAMES             950         30 
@@ -253,7 +253,7 @@ from (select empno, ename, sal, deptno
 	from emp
 	where sal not between 1000 and 3000) e join dept using (deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME         ---------- ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME         ---------- ---------- ---------- ---------- --------------
   7839 KING             5000         10 ACCOUNTING     
   7369 SMITH             800         20 RESEARCH       
   7900 JAMES             950         30 SALES         
@@ -265,7 +265,7 @@ from emp
 where lower(ename) like ‘%s%’
 group by deptno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL ---------- ---------- ----------
     30          1        950 
     20          4    1968.75 
 </code></pre></div></div>
@@ -277,7 +277,7 @@ from (select deptno, count(*) cnt, avg(nvl(sal, 0)) avgsal
 	where lower(ename) like ‘%s%’
 	group by deptno) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL DNAME         ---------- ---------- ---------- --------------
     30          1        950 SALES          
     20          4    1968.75 RESEARCH       
 </code></pre></div></div>
@@ -291,7 +291,7 @@ where comm is null
 group by deptno
 having count(</em>) &gt;= 3;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
     20          5      10875 
     10          3       8750 
 </code></pre></div></div>
@@ -304,7 +304,7 @@ from (select deptno, count(<em>) cnt, sum(sal) sumsal
 	group by deptno
 	having count(</em>) &gt;= 3) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME         ---------- ---------- ---------- --------------
     20          5      10875 RESEARCH       
     10          3       8750 ACCOUNTING     
 </code></pre></div></div>
@@ -318,7 +318,7 @@ from (select deptno, count(<em>) cnt, sum(sal) sumsal
 	having count(</em>) &gt;= 3) e join dept using(deptno)
 order by dname asc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME         ---------- ---------- ---------- --------------
     10          3       8750 ACCOUNTING     
     20          5      10875 RESEARCH    
 </code></pre></div></div>
@@ -346,7 +346,7 @@ from
 		(select avg(nvl(sal, 0)) avgsal
 		from emp)) e join dept using (deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL DNAME         ---------- ---------- ---------- --------------
   7839 KING             5000 ACCOUNTING     
   7566 JONES            2975 RESEARCH       
   7698 BLAKE            2850 SALES          
@@ -439,7 +439,7 @@ from
 		from emp
 		where empno=7839)) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      DNAME         ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      DNAME         ---------- ---------- --------------
   7839 KING       ACCOUNTING     
   7782 CLARK      ACCOUNTING     
   7934 MILLER     ACCOUNTING     
@@ -468,7 +468,7 @@ from
 		(select avg(nvl(sal, 0)) avgsal
 		from emp)) e join dept using (deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL DNAME         ---------- ---------- ---------- --------------
     20          5       2175 RESEARCH       
     10          3 2916.66667 ACCOUNTING     
 </code></pre></div></div>
@@ -488,7 +488,7 @@ from
 	from emp
 	where lower(job) in (‘salesman’, ‘manager’)) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              SAL     DEPTNO DNAME         ---------- ---------- --------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      JOB              SAL     DEPTNO DNAME         ---------- ---------- --------- ---------- ---------- --------------
   7566 JONES      MANAGER         2975         20 RESEARCH       
   7698 BLAKE      MANAGER         2850         30 SALES          
   7782 CLARK      MANAGER         2450         10 ACCOUNTING     
@@ -527,7 +527,7 @@ where comm is null
 group by deptno
 having count(</em>) &gt;= 3;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
     20          5      10875
     10          3       8750
 </code></pre></div></div>
@@ -541,7 +541,7 @@ from
     	group by deptno
     	having count(</em>) &gt;= 3) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME          ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME          ---------- ---------- ---------- --------------
     20          5      10875 RESEARCH      
     10          3       8750 ACCOUNTING    
 </code></pre></div></div>
@@ -571,7 +571,7 @@ from
 		from emp
 		where mgr=7839)) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      DNAME         ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      DNAME         ---------- ---------- --------------
   7876 ADAMS      RESEARCH       
   7788 SCOTT      RESEARCH       
   7369 SMITH      RESEARCH       
@@ -602,7 +602,7 @@ from emp 사 join emp 관 on 사.mgr=관.empno;					-&gt; 같은 테이블에 �
 <p>-&gt; 위에서 관리자사번은 관.empno를 사용해도 된다.
 열별칭을 마지막에 주는 것을 잊지 말도록 하자.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명             관리자사번 관리자사원명    ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명             관리자사번 관리자사원명    ---------- ---------- ---------- ----------
   7782 CLARK            7839 KING       
   7698 BLAKE            7839 KING       
   7566 JONES            7839 KING       
@@ -624,7 +624,7 @@ from emp 사 join emp 관 on 사.mgr=관.empno;					-&gt; 같은 테이블에 �
 <p>select 사.empno 사번, 사.ename 사원명, 사.job 직무, 관.empno 관리자사번, 관.ename 관리자사원명, 관.job 관리자직무
 from emp 사 join emp 관 on 사.mgr = 관.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명        직무             관리자사번 관리자사원명     관리자직무    ---------- ---------- --------- ---------- ---------- ---------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명        직무             관리자사번 관리자사원명     관리자직무    ---------- ---------- --------- ---------- ---------- ---------
   7782 CLARK      MANAGER         7839 KING       PRESIDENT 
   7698 BLAKE      MANAGER         7839 KING       PRESIDENT 
   7566 JONES      MANAGER         7839 KING       PRESIDENT 
@@ -647,7 +647,7 @@ from emp 사 join emp 관 on 사.mgr = 관.empno;</p>
 from emp
 where sal between 1000 and 3000;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR ---------- ---------- ---------- ----------
   7566 JONES              20       7839
   7698 BLAKE              30       7839
   7782 CLARK              10       7839
@@ -668,7 +668,7 @@ from
 	from emp
 	where sal between 1000 and 3000) 사 join emp 관 on 사.mgr=관.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명              부서번호      관리자사번 관리자사원명    ---------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명              부서번호      관리자사번 관리자사원명    ---------- ---------- ---------- ---------- ----------
   7782 CLARK              10       7839 KING       
   7698 BLAKE              30       7839 KING       
   7566 JONES              20       7839 KING       
@@ -688,7 +688,7 @@ select mgr, count(*) cou, sum(sal) sumsal
 from emp
 group by mgr</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        CNT     SUMSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        CNT     SUMSAL ---------- ---------- ----------
                 1       5000
   7839          3       8275
   7782          1       1300
@@ -705,7 +705,7 @@ from
 	from emp
 	group by mgr) 사 join emp 관 on 사.mgr = 관.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        COU     SUMSAL 관리자명      ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        COU     SUMSAL 관리자명      ---------- ---------- ---------- ----------
   7839          3       8275 KING       
   7566          2       6000 JONES      
   7698          5       6550 BLAKE      
@@ -722,7 +722,7 @@ from
 	from emp
 	group by mgr) 사 left join emp 관 on 사.mgr = 관.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        COU     SUMSAL 관리자명      ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        COU     SUMSAL 관리자명      ---------- ---------- ---------- ----------
   7839          3       8275 KING       
   7566          2       6000 JONES      
   7698          5       6550 BLAKE      
@@ -745,7 +745,7 @@ from
 	from emp
 	where deptno=20) 사 join emp 관 on 사.mgr = 관.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명             관리자사번 관리자사원명    ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명             관리자사번 관리자사원명    ---------- ---------- ---------- ----------
   7566 JONES            7839 KING       
   7788 SCOTT            7566 JONES      
   7902 FORD             7566 JONES      
@@ -784,7 +784,7 @@ from
 	where lower(job) in (‘salesman’, ‘manager’)) e join dept d on e.deptno = d.deptno 
 					     join emp m on e.mgr = m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명              부서번호 부서명                 관리자사번 관리자사원명    ---------- ---------- ---------- -------------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    사번 사원명              부서번호 부서명                 관리자사번 관리자사원명    ---------- ---------- ---------- -------------- ---------- ----------
   7566 JONES              20 RESEARCH             7839 KING       
   7698 BLAKE              30 SALES                7839 KING       
   7782 CLARK              10 ACCOUNTING           7839 KING       
@@ -810,7 +810,7 @@ from
     	group by deptno, mgr) e join dept d on e.deptno=d.deptno
                         			join emp m on e.mgr=m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        MGR        CNT     AVGSAL DNAME          관리자사원명     ---------- ---------- ---------- ---------- -------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        MGR        CNT     AVGSAL DNAME          관리자사원명     ---------- ---------- ---------- ---------- -------------- ----------
     30       7839          1       2850 SALES          KING      
     10       7782          1       1300 ACCOUNTING     CLARK     
     10       7839          1       2450 ACCOUNTING     KING      
@@ -834,7 +834,7 @@ from
 	from emp
 	group by deptno) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO     MAXSAL     MINSAL DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO     MAXSAL     MINSAL DNAME         ---------- ---------- ---------- --------------
     10       5000       1300 ACCOUNTING     
     20       3000        800 RESEARCH       
     30       2850        950 SALES        
@@ -857,7 +857,7 @@ order by e.empno desc;</p>
 
 <p>—&gt; order by 시 alias를 사용 가능하다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR DNAME          관리자사원명     ---------- ---------- ---------- ---------- -------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR DNAME          관리자사원명     ---------- ---------- ---------- ---------- -------------- ----------
   7934 MILLER             10       7782 ACCOUNTING     CLARK     
   7902 FORD               20       7566 RESEARCH       JONES     
   7900 JAMES              30       7698 SALES          BLAKE     
@@ -890,7 +890,7 @@ from
 		(select avg(nvl(sal, 0))
 		from emp)) e join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO DNAME         ---------- ---------- ---------- --------------
   7839 KING               10 ACCOUNTING     
   7566 JONES              20 RESEARCH       
   7698 BLAKE              30 SALES          
@@ -913,7 +913,7 @@ from
     where lower(ename) like ‘%s%’) e join dept d on e.deptno=d.deptno
                                     join emp m on e.mgr=m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO DNAME                 MGR 관리자사원명     ---------- ---------- ---------- -------------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO DNAME                 MGR 관리자사원명     ---------- ---------- ---------- -------------- ---------- ----------
   7566 JONES              20 RESEARCH             7839 KING      
   7788 SCOTT              20 RESEARCH             7566 JONES     
   7900 JAMES              30 SALES                7698 BLAKE     
@@ -947,7 +947,7 @@ from
             where lower(loc)=’dallas’)
     group by mgr) e join emp m on e.mgr=m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        CNT     AVGSAL 관리자사원명     ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR        CNT     AVGSAL 관리자사원명     ---------- ---------- ---------- ----------
   7566          2       3000 JONES     
   7902          1        800 FORD      
   7788          1       1100 SCOTT     
@@ -971,7 +971,7 @@ from
 	group by deptno
 	having count(</em>) &gt;= 3) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME         ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL DNAME         ---------- ---------- ---------- --------------
     30          5       8450 SALES          
 </code></pre></div></div>
 
@@ -1012,7 +1012,7 @@ from
 		from emp)) e join dept d on e.deptno=d.deptno
 			join emp on e.mgr=emp.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        MGR        CNT     SUMSAL     AVGSAL DNAME          MGRNAME   ---------- ---------- ---------- ---------- ---------- -------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        MGR        CNT     SUMSAL     AVGSAL DNAME          MGRNAME   ---------- ---------- ---------- ---------- ---------- -------------- ----------
     30       7698          1       1600       1600 SALES          BLAKE      
 </code></pre></div></div>
 
@@ -1023,7 +1023,7 @@ from
 <p>select *
 from salgrade;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE      LOSAL      HISAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE      LOSAL      HISAL ---------- ---------- ----------
      1        700       1200 
      2       1201       1400 
      3       1401       2000 
@@ -1035,7 +1035,7 @@ from salgrade;</p>
 <p>select empno, ename, sal, grade
 from emp join salgrade on sal between losal and hisal;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL      GRADE ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL      GRADE ---------- ---------- ---------- ----------
   7369 SMITH             800          1 
   7876 ADAMS            1100          1 
   7900 JAMES             950          1 
@@ -1066,7 +1066,7 @@ from emp e join salgrade on e.sal between losal and hisal
 	join dept on e.deptno=dept.deptno
 	left join emp on e.mgr=emp.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL      GRADE     DEPTNO DNAME                 MGR MGRENAME  ---------- ---------- ---------- ---------- ---------- -------------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL      GRADE     DEPTNO DNAME                 MGR MGRENAME  ---------- ---------- ---------- ---------- ---------- -------------- ---------- ----------
   7782 CLARK            2450          4         10 ACCOUNTING           7839 KING       
   7698 BLAKE            2850          4         30 SALES                7839 KING       
   7566 JONES            2975          4         20 RESEARCH             7839 KING       
@@ -1097,7 +1097,7 @@ from
 	where comm is not null) e join salgrade on e.sal between losal and hisal 
 			join dept d on e.deptno=d.deptno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL      GRADE     DEPTNO DNAME         ---------- ---------- ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL      GRADE     DEPTNO DNAME         ---------- ---------- ---------- ---------- ---------- --------------
   7844 TURNER           1500          3         30 SALES          
   7654 MARTIN           1250          2         30 SALES          
   7521 WARD             1250          2         30 SALES          
@@ -1119,7 +1119,7 @@ from
 							join dept d on e.deptno=d.deptno
 							join emp m on e.mgr=m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO        MGR      GRADE DNAME          MGRNAME   ---------- ---------- ---------- ---------- ---------- ---------- -------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO        MGR      GRADE DNAME          MGRNAME   ---------- ---------- ---------- ---------- ---------- ---------- -------------- ----------
   7566 JONES            2975         20       7839          4 RESEARCH       KING       
   7369 SMITH             800         20       7902          1 RESEARCH       FORD       
   7499 ALLEN            1600         30       7698          3 SALES          BLAKE      
@@ -1133,7 +1133,7 @@ from
 from emp join salgrade on sal between losal and hisal
 group by grade;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE        CNT     AVGSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE        CNT     AVGSAL ---------- ---------- ----------
      1          3        950 
      2          3 1266.66667 
      4          5       2855 
@@ -1155,7 +1155,7 @@ from
 	where lower(job) in (‘salesman’, ‘manager’)) e join salgrade on e.sal between losal and hisal
 group by grade;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE        CNT     MAXSAL     MINSAL ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE        CNT     MAXSAL     MINSAL ---------- ---------- ---------- ----------
      2          2       1250       1250 
      4          3       2975       2450 
      3          2       1600       1500 
@@ -1182,7 +1182,7 @@ from
 	from emp join salgrade on sal between losal and hisal
 	where grade=3) join dept using(deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME         ---------- ---------- ---------- ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME         ---------- ---------- ---------- ---------- --------------
   7499 ALLEN            1600         30 SALES          
   7844 TURNER           1500         30 SALES          
 </code></pre></div></div>
@@ -1210,7 +1210,7 @@ from
 			join dept d on e.deptno=d.deptno
 			join emp m on e.mgr=m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        SAL        MGR DNAME          MGRNAME   ---------- ---------- ---------- ---------- ---------- -------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        SAL        MGR DNAME          MGRNAME   ---------- ---------- ---------- ---------- ---------- -------------- ----------
   7566 JONES              20       2975       7839 RESEARCH       KING       
   7698 BLAKE              30       2850       7839 SALES          KING       
   7782 CLARK              10       2450       7839 ACCOUNTING     KING       
@@ -1232,7 +1232,7 @@ from
 	where deptno=10) e join salgrade on e.sal between losal and hisal
 order by grade asc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EMPNO ENAME             SAL      GRADE ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EMPNO ENAME             SAL      GRADE ---------- ---------- ---------- ----------
   7934 MILLER           1300          2 
   7782 CLARK            2450          4 
   7839 KING             5000          5 
@@ -1264,7 +1264,7 @@ from
 group by grade
 order by sumsal desc;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE        CNT     SUMSAL ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GRADE        CNT     SUMSAL ---------- ---------- ----------
      3          2       3100 
      4          1       2850 
      2          2       2500 
@@ -1277,7 +1277,7 @@ order by sumsal desc;</p>
 <p>select e.empno, e.ename, e.mgr, m.ename mname
 from emp e join emp m on e.mgr=m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
   7782 CLARK            7839 KING      
   7698 BLAKE            7839 KING      
   7566 JONES            7839 KING      
@@ -1298,7 +1298,7 @@ from emp e join emp m on e.mgr=m.empno;</p>
 <p>select e.empno, e.ename, e.mgr, m.ename mname
 from emp e left join emp m on e.mgr=m.empno;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
   7782 CLARK            7839 KING      
   7698 BLAKE            7839 KING      
   7566 JONES            7839 KING      
@@ -1320,7 +1320,7 @@ from emp e left join emp m on e.mgr=m.empno;</p>
 <p>select e.empno, e.ename, e.mgr, m.ename mname
 from emp e right join emp m on e.mgr=m.empno ;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
   7566 JONES            7839 KING      
   7698 BLAKE            7839 KING      
   7782 CLARK            7839 KING      
@@ -1349,7 +1349,7 @@ from emp e right join emp m on e.mgr=m.empno ;</p>
 <p>select e.empno, e.ename, e.mgr, m.ename mname
 from emp e full join emp m on e.mgr=m.empno ;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             MGR MNAME      ---------- ---------- ---------- ----------
   7782 CLARK            7839 KING      
   7698 BLAKE            7839 KING      
   7566 JONES            7839 KING      
@@ -1584,7 +1584,7 @@ from
 	where sal &gt;= 1500) e right join dept d on e.deptno=d.deptno
 			join salgrade on sal between losal and hisal;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME               GRADE ---------- ---------- ---------- ---------- -------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     DEPTNO DNAME               GRADE ---------- ---------- ---------- ---------- -------------- ----------
   7839 KING             5000         10 ACCOUNTING              5
   7566 JONES            2975         20 RESEARCH                4
   7698 BLAKE            2850         30 SALES                   4
@@ -1644,7 +1644,7 @@ where deptno = 20;</p>
 
 <p>-&gt; 열의 순서를 맞춰주도록 하자. 도메인을 맞춰주는 것과 같다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO     DEPTNO ENAME     ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO     DEPTNO ENAME     ---------- ---------- ----------
   7369         20 SMITH      
   7566         20 JONES      
   7782         10 CLARK      
@@ -1686,7 +1686,7 @@ minus
 select distinct deptno
 from emp;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO ----------
     40  -&gt; 부서명까지 보고싶다면 조인을 해주도록 하자. (위에서 나온 결과에 대한 조인)
 </code></pre></div></div>
 
@@ -1698,7 +1698,7 @@ where not exists (select *
 		from emp
 		where dept.deptno = emp.deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME          ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME          ---------- --------------
     40 OPERATIONS    
 </code></pre></div></div>
 
@@ -1709,7 +1709,7 @@ where exists (select *
 		from emp
 		where dept.deptno = emp.deptno);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME          ---------- --------------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME          ---------- --------------
     10 ACCOUNTING    
     20 RESEARCH      
     30 SALES        
@@ -1995,7 +1995,7 @@ from tab; 로 확인하도록 하자</p>
 <p>select *
 from dept; 로 확인.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
     10 컴공                 서울       
 </code></pre></div></div>
 
@@ -2004,7 +2004,7 @@ from dept; 로 확인.</p>
 <p>insert into dept
 	values (20, ‘보안’, ‘서울’);</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
     10 컴공                 서울       
     20 보안                 서울
 </code></pre></div></div>
@@ -2025,7 +2025,7 @@ from dept; 로 확인.</p>
 <p>select *
 from dept;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
     10 컴공                 서울       
     20 보안                 서울       
 </code></pre></div></div>
@@ -2033,7 +2033,7 @@ from dept;</p>
 <p>select *
 from emp;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
   1000 smith                                                                              10 
 </code></pre></div></div>
 
@@ -2130,7 +2130,7 @@ from dept;
 <p>select *
 from dept;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
     10 컴공                 서울       
     20 보안                 서울       
     30 xyz                  busan      
@@ -2139,7 +2139,7 @@ from dept;</p>
 <p>select *
 from emp;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
   1000 smith                                                                              10 
   3000 adms                                                                               10 
   6000 jons                                            1000                               10 
@@ -2234,7 +2234,7 @@ where 조건식; 	-&gt; 해당 조건에 해당하는 행만 삭제</p>
 <p>select *
 from dept;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                LOC       ---------- -------------------- ----------
     10 컴공                 incheon    
     20 computer             seoul      
     33 xyz                  seosan     
@@ -2243,7 +2243,7 @@ from dept;</p>
 <p>select *
 from emp;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
   1000 lulu                                                                               10 
   3000 adms                                            1000                               10 
   6666 jons                                            1000                               10 
@@ -2319,7 +2319,7 @@ between 조인, 자기자신조인, 외부조인</p>
 <p>select *
 from emp;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME                JOB                         MGR        SAL       COMM     DEPTNO ---------- -------------------- -------------------- ---------- ---------- ---------- ----------
   1000 lulu                                                                               10 
   3000 adms                                            1000                               10 
 </code></pre></div></div>
@@ -2558,7 +2558,7 @@ b1   보안</p>
 <p>select *
 from 학생;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    학번 학생명                          학년 학과번호 ---------- -------------------- ---------- ----
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    학번 학생명                          학년 학과번호 ---------- -------------------- ---------- ----
   1000 홍                                   
   2000 kim                             a1   
   4000 jung                          1 a1   

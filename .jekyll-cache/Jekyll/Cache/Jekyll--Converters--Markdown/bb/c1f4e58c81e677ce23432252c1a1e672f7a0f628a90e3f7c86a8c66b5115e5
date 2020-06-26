@@ -1,4 +1,4 @@
-I"�K<p>기본 명령어</p>
+I"�K<p>기본 명령어</p>
 
 <p>1)pwd - 현재 작업하고 있는 디렉터리 출력 (present working directory)
 리눅스는 bash쉘에서 현재위치를 기본적으로 알려주기는 하지만 자세하게 보고싶다면 사용하는 명령어. 작업위치의 절대경로가 출력됨
@@ -257,10 +257,10 @@ drwxr-xr-x. 2 root root 6  5월 14 09:27 c</p>
 <p>/a/b 디렉토리 하위에는 현재 c디렉토리만 있는 상태</p>
 
 <p>[root@localhost itbank]# cp /a/* ../../a/b
-cp: omitting directory <code class="highlighter-rouge">/a/b'
+cp: omitting directory <code class="language-plaintext highlighter-rouge">/a/b'
 [root@localhost itbank]# cp /a/* ../../a/b
 cp: omitting directory </code>/a/b’
-cp: overwrite <code class="highlighter-rouge">../../a/b/grub.cfg'? n
+cp: overwrite <code class="language-plaintext highlighter-rouge">../../a/b/grub.cfg'? n
 cp: overwrite </code>../../a/b/inittab’? n
 cp: overwrite `../../a/b/login.defs’? n</p>
 

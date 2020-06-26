@@ -1,4 +1,4 @@
-I"�r<p>putty 를 통해 root계정으로 로그인하고 cd ~itbank 틸드사용하여 itbank 홈계정으로 이동하기</p>
+I"1s<p>putty 를 통해 root계정으로 로그인하고 cd ~itbank 틸드사용하여 itbank 홈계정으로 이동하기</p>
 
 <p>mkdir - 디렉토리 생성 명령어 make directory</p>
 
@@ -127,7 +127,7 @@ drwxr-xr-x. 2 root root    6  5월 15 09:33 b
 -rw-r–r–. 1 root root 2028  5월 14 11:07 login.defs</p>
 
 <p>[root@localhost itbank]# rm /a/grub.cfg /a/inittab ../../a/login.defs
-rm: remove 일반 파일 <code class="highlighter-rouge">/a/grub.cfg'? y
+rm: remove 일반 파일 <code class="language-plaintext highlighter-rouge">/a/grub.cfg'? y
 rm: remove 일반 파일 </code>/a/inittab’? y
 rm: remove 일반 파일 `../../a/login.defs’? y</p>
 
@@ -207,9 +207,9 @@ ls: cannot access /2/3/4: 그런 파일이나 디렉터리가 없습니다</p>
 -rw-r–r–. 1 root root 2028  5월 14 10:48 login.defs</p>
 
 <p>[root@localhost itbank]# rm -r /backup
-rm: descend into directory <code class="highlighter-rouge">/backup'? y  → 디렉토리 하위로 내려가보겠냐는듯한 물음
+rm: descend into directory <code class="language-plaintext highlighter-rouge">/backup'? y  → 디렉토리 하위로 내려가보겠냐는듯한 물음
 rm: remove 일반 파일 </code>/backup/grub.cfg’? y
-rm: remove 일반 파일 <code class="highlighter-rouge">/backup/inittab'? y
+rm: remove 일반 파일 <code class="language-plaintext highlighter-rouge">/backup/inittab'? y
 rm: remove 일반 파일 </code>/backup/login.defs’? y  → 파일 삭제까지 완료
 rm: remove 디렉토리 `/backup’? y  → 마지막으로 디렉토리까지 삭제하시겠습니까?</p>
 
@@ -230,13 +230,13 @@ TUI는 휴지통도 없음.. 따라서 조심해서 삭제
 [root@localhost itbank]# ls
 공개  다운로드  문서  바탕화면  비디오  사진  서식  음악
 [root@localhost itbank]# rm -r ./*
-rm: remove 디렉토리 <code class="highlighter-rouge">./공개'? y
+rm: remove 디렉토리 <code class="language-plaintext highlighter-rouge">./공개'? y
 rm: remove 디렉토리 </code>./다운로드’? y
-rm: remove 디렉토리 <code class="highlighter-rouge">./문서'? y
+rm: remove 디렉토리 <code class="language-plaintext highlighter-rouge">./문서'? y
 rm: remove 디렉토리 </code>./바탕화면’? y
-rm: remove 디렉토리 <code class="highlighter-rouge">./비디오'? y
+rm: remove 디렉토리 <code class="language-plaintext highlighter-rouge">./비디오'? y
 rm: remove 디렉토리 </code>./사진’? y
-rm: remove 디렉토리 <code class="highlighter-rouge">./서식'? y
+rm: remove 디렉토리 <code class="language-plaintext highlighter-rouge">./서식'? y
 rm: remove 디렉토리 </code>./음악’? y</p>
 
 <p>[root@localhost itbank]# ls

@@ -1,4 +1,4 @@
-I"z-<p>D드라이브에 내 이름으로 폴더 하나 생성. 1_압축푼거 와 2_직접설치 디렉토리 두개를 추가한다.
+I"�-<p>D드라이브에 내 이름으로 폴더 하나 생성. 1_압축푼거 와 2_직접설치 디렉토리 두개를 추가한다.
 주 수업은 1_압축푼거
 서브로는 2_직접설치 → TUI 설치 예정
 2개로 실습을 하는 경우에 또 사용 할 것</p>
@@ -182,7 +182,7 @@ drwxr-xr-x 2 root root 6  7월 11 15:10 /backup
 맨 아래로 이동. G 를 눌러 이동한다. gg는 맨 윗줄
 빈줄을 두개 생성하자. o를 눌러 생성도 가능하고 엔터키를 눌러 생성도 가능하다. 대문자 O는 커서 위에 줄 생성임</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>360 cat &lt;&lt; EOF
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>360 cat &lt;&lt; EOF
 361 set superusers=linux2
 362 password linux2 CentOS_7
 363 EOF

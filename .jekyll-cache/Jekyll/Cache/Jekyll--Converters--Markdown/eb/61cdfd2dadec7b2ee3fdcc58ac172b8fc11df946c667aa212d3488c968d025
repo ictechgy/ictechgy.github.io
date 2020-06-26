@@ -1,4 +1,4 @@
-I";S<p>실습 풀이</p>
+I"aS<p>실습 풀이</p>
 
 <p>Client머신에서 NFS Server와 NFS Client를 모두 구동시키고 연결하기.
 장치로 1GB SCSI HDD를 추가하고 이 장치의 파티션을 100, 200, 300, 400Mbyte로 나눈다. 
@@ -16,8 +16,8 @@ Client머신에 root로 로그인 한 뒤에 fdisk -l 로 장치 확인</p>
 mkfs.xfs /dev/sdb1 또는 mkfs -t xfs /dev/sdb1 로 모든 파티션에 대해 포맷을 진행하자
 포맷됐는지 확인 하는 것은 blkid명령어로 확인!(파일시스템이 존재한다면 UUID가 나온다)</p>
 
-<p>nfs서비스를 쓸건데 패키지가 존재하는지를 확인하자. <code class="highlighter-rouge">rpm -qa|grep nfs</code>
-아무것도 나오지 않는다. 따라서 yum install nfs* 로 설치하자. (nfs-utils, nfs4-acl-tools 만을 설치해도 되긴 함) → 의존성파일들도 설치한다고 나오는데 rpcbind도 설치한다고 나온다. rpcbind도 없었던 것임. tcp-wrapper도 있다. 설치를 다 하면 <code class="highlighter-rouge">rpm -qa|grep nfs</code> 로 확인 가능.</p>
+<p>nfs서비스를 쓸건데 패키지가 존재하는지를 확인하자. <code class="language-plaintext highlighter-rouge">rpm -qa|grep nfs</code>
+아무것도 나오지 않는다. 따라서 yum install nfs* 로 설치하자. (nfs-utils, nfs4-acl-tools 만을 설치해도 되긴 함) → 의존성파일들도 설치한다고 나오는데 rpcbind도 설치한다고 나온다. rpcbind도 없었던 것임. tcp-wrapper도 있다. 설치를 다 하면 <code class="language-plaintext highlighter-rouge">rpm -qa|grep nfs</code> 로 확인 가능.</p>
 
 <p>vi /etc/exports 로 들어가자.
 [share dir]		<a href="option">access allow host/network</a>
