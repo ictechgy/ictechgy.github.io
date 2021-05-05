@@ -1,0 +1,12 @@
+I"�<p>여태까지 나는 ‘<strong>flatMap</strong>을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Error"</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+
+</code></pre></div></div>
+<p>위 코드를 예시로 들어보겠다. 
+이전의 나: “flatMap에서 error를 Observable</p>
+:ET

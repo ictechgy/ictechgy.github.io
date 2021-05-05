@@ -1,0 +1,195 @@
+I"@<p>zip은 대표적인 Observable 병합 연산자이다.</p>
+
+<p>내가 가진 궁금증은 아래와 같다.</p>
+<h2 id="observablezip을-중첩하여-사용하는-것은-가능할까">Observable.zip을 중첩하여 사용하는 것은 가능할까?</h2>
+<p>이를테면 아래와 같이 사용이 가능한 것일까?</p>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
+            <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과1"</span><span class="p">),</span>
+            <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과2"</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"결과값"</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>내부에 있는 Observable.zip에 대해서는 subscribe를 한 것도 아니기 때문에 처음에는 안될 것이라고 생각했다.
+그러나 결과는 달랐다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>결과값 -&gt; subscribed
+중간결과1 -&gt; subscribed
+중간결과1 -&gt; Event next(1)
+중간결과1 -&gt; Event completed
+중간결과1 -&gt; isDisposed
+중간결과2 -&gt; subscribed
+중간결과2 -&gt; Event next(5)
+결과값 -&gt; Event next(6)
+중간결과2 -&gt; Event completed
+결과값 -&gt; Event completed
+결과값 -&gt; isDisposed
+중간결과2 -&gt; isDisposed
+</code></pre></div></div>
+<p><strong>외부에서 subscribe한 것에 대해 내부에 있는 Observable.zip도 subscribe가 되었다.</strong>
+결과로 판단하자면, Observable.zip에 대한 subscribe는 단순히 인자로 들어간 시퀀스들을 바라보면서 값이 오나 안오나 보기만 하는게 아니라
+<strong>내부 인자로 들어간 시퀀스들에 대해 subscribe를 개별적으로 다 한 뒤에 값이 오는지 보는것</strong> 이다.</p>
+
+<h2 id="바깥-observablezip이-dispose되는-시점이-궁금해서-추가적-테스트를-해보았다">바깥 Observable.zip이 dispose되는 시점이 궁금해서 추가적 테스트를 해보았다.</h2>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
+            <span class="n">testRelay</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과1"</span><span class="p">),</span>  
+            <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="p">{</span>    
+                <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과2"</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"결과값"</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>결과값 -&gt; subscribed
+중간결과1 -&gt; subscribed
+중간결과1 -&gt; Event next(1)
+중간결과2 -&gt; subscribed
+중간결과2 -&gt; Event next(5)
+결과값 -&gt; Event next(6)
+중간결과2 -&gt; Event completed
+중간결과2 -&gt; isDisposed
+</code></pre></div></div>
+<p>이번에는 외부 Observable.zip의 첫번째 인자로 종료시점이 정해지지 않은 BehaviorRelay를 넣어줬다. 
+두번째 인자인 Observable.zip(중간결과2)이 complete 후 dispose됐지만 첫번째 인자는 dispose되지 않았고, 따라서 외부 Observable.zip도 dispose되지 않았다.
+즉, <strong>Observable.zip은 subscribe한 내부 Observable 인자들이 모두 종료된 경우에만 disposed된다.</strong></p>
+
+<h2 id="그렇다면-종료되지-않은-하나의-observable-인자에서-계속-데이터를-내보낸다면">그렇다면 종료되지 않은 하나의 Observable 인자에서 계속 데이터를 내보낸다면??</h2>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">randomButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+<span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+
+				<span class="n">_</span> <span class="o">=</span> <span class="n">randomButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span>
+            <span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="k">in</span>
+                <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">testRelay</span><span class="o">.</span><span class="nf">accept</span><span class="p">(</span><span class="kt">Int</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span><span class="o">...</span><span class="mi">100</span><span class="p">))</span>
+            <span class="p">})</span>
+        
+        <span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
+            <span class="n">testRelay</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과1"</span><span class="p">),</span>  
+            <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="p">{</span>    
+                <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과2"</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"결과값"</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+<p>버튼을 하나 만들고, 버튼을 누를 때마다 testRelay에 랜덤한 값을 넘겨주었다. 
+결과는 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>결과값 -&gt; subscribed
+중간결과1 -&gt; subscribed
+중간결과1 -&gt; Event next(1)
+중간결과2 -&gt; subscribed
+중간결과2 -&gt; Event next(5)
+결과값 -&gt; Event next(6)
+중간결과2 -&gt; Event completed
+중간결과2 -&gt; isDisposed
+//버튼을 세번 누른 뒤
+중간결과1 -&gt; Event next(52)
+중간결과1 -&gt; Event next(90)
+중간결과1 -&gt; Event next(28)
+</code></pre></div></div>
+<p>결과를 보면 하나의 Observable인자가 이미 disposed 되었기 때문에 다른 인자에서 데이터를 보낸다고 하더라도 전체 Observable.zip은 동작되지 않는다.</p>
+
+<h2 id="observablezip-인자-하나가-에러를-내보낸다면">Observable.zip 인자 하나가 에러를 내보낸다면??</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let testRelay = BehaviorRelay(value: 1)
+let testRelay2 = BehaviorRelay(value: 2)
+let testRelay3 = BehaviorRelay(value: 3)
+
+_ = Observable.zip(
+            testRelay.debug("testRelay1"),
+            Observable.zip(testRelay2.debug("testRelay2"), testRelay3.debug("testRelay3")) { _, _ in
+                return Observable&lt;Int&gt;.error(TestError.fakeError)
+            }
+            .flatMap { $0 }
+            .debug("중간결과")
+        ) {
+            return $0 + $1
+        }.debug("결과값")
+        .subscribe()
+</code></pre></div></div>
+<p>결과는 아래와 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>결과값 -&gt; subscribed
+testRelay1 -&gt; subscribed
+testRelay1 -&gt; Event next(1)
+중간결과 -&gt; subscribed
+testRelay2 -&gt; subscribed
+testRelay2 -&gt; Event next(2)
+testRelay3 -&gt; subscribed
+testRelay3 -&gt; Event next(3)
+중간결과 -&gt; Event error(fakeError)
+결과값 -&gt; Event error(fakeError)
+Unhandled error happened: fakeError
+결과값 -&gt; isDisposed
+중간결과 -&gt; isDisposed
+testRelay2 -&gt; isDisposed
+testRelay3 -&gt; isDisposed
+testRelay1 -&gt; isDisposed
+</code></pre></div></div>
+<p>flatMap과 같이 Observable.zip에서도 특정 Observable 인자가 error를 내보내면 전체 시퀀스에도 영향을 미치는 것으로 보인다.</p>
+
+<h3 id="error와-관련하여-하나-더-테스트-해보았다">error와 관련하여 하나 더 테스트 해보았다.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let testRelay = BehaviorRelay(value: 1)
+let testRelay2 = BehaviorRelay(value: 2)
+let testRelay3 = BehaviorRelay(value: 3)
+
+_ = Observable.zip(
+            testRelay.debug("testRelay1"),
+            Observable.zip(testRelay2.debug("testRelay2"), testRelay3.debug("testRelay3")) { _, _ in
+                return Observable&lt;Int&gt;.error(TestError.fakeError)
+            }
+            .flatMap { $0 }
+            .debug("중간결과")
+        ) {
+            return $0 + $1
+        }.debug("결과값1")
+        .do(onError: { error in
+            print("중간에 있는 do onError: \(error)")
+        })
+        .flatMap {
+            return Observable.just($0*2)
+        }.debug("결과값2")
+        .subscribe(onNext: { number in
+            print("onNext: \(number)")
+        }, onError: { error in
+            print("onError: \(error)")
+        })
+				
+</code></pre></div></div>
+<p>결과는 아래와 같았다.</p>
+
+<h2 id="외부-observablezip에-take1를-써서-한번-실행-후-종료한다면-내부-observable-인자들은-어떻게-될까">외부 Observable.zip에 take(1)를 써서 한번 실행 후 종료한다면 내부 Observable 인자들은 어떻게 될까?</h2>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">testRelay2</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">testRelay3</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+		
+<span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
+            <span class="n">testRelay</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과1"</span><span class="p">),</span>  
+            <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="n">testRelay2</span><span class="p">,</span> <span class="n">testRelay3</span><span class="p">)</span> <span class="p">{</span>    
+                <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과2"</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"결과값"</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+<p>결과는 아래와 같았다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>결과값 -&gt; subscribed
+중간결과1 -&gt; subscribed
+중간결과1 -&gt; Event next(1)
+중간결과2 -&gt; subscribed
+중간결과2 -&gt; Event next(5)
+결과값 -&gt; Event next(6)
+결과값 -&gt; isDisposed
+중간결과1 -&gt; isDisposed
+중간결과2 -&gt; isDisposed
+</code></pre></div></div>
+<p>즉, 외부에서 시퀀스가 종료됨에 따라 내부 인자 시퀀스들도 종료가 되었다.</p>
+:ET

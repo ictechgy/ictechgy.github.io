@@ -250,4 +250,22 @@ var store = [{
         "tags": [],
         "url": "https://ictechgy.github.io/linux/Linux_day9/",
         "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
+      },{
+        "title": "RxSwift flatMap Operator에 대하여",
+        "excerpt":"여태까지 나는 ‘flatMap을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.) _ = button.rx.tap.debug(\"TAP\") .flatMap { return Observable&lt;Int&gt;.error(TestError.fakeError) }.debug(\"Error\") .subscribe() //여기서 스스로 dispose되는지 확인만 하면 되므로 disposeBag에는 넣지 않았다. enum TestError: Error { case fakeError }...","categories": ["RxSwift"],
+        "tags": [],
+        "url": "https://ictechgy.github.io/rxswift/flatMap/",
+        "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
+      },{
+        "title": "RxSwift zip Operator에 대하여",
+        "excerpt":"zip은 대표적인 Observable 병합 연산자이다. 내가 가진 궁금증은 아래와 같다. Observable.zip을 중첩하여 사용하는 것은 가능할까? 이를테면 아래와 같이 사용이 가능한 것일까? _ = Observable.zip( Observable.just(1).debug(\"중간결과1\"), Observable.zip(Observable.just(2), Observable.just(3)) { return $0 + $1 }.debug(\"중간결과2\") ) { return $0 + $1 }.debug(\"결과값\") .subscribe() 내부에 있는 Observable.zip에 대해서는 subscribe를 한 것도 아니기 때문에...","categories": ["RxSwift"],
+        "tags": [],
+        "url": "https://ictechgy.github.io/rxswift/zip/",
+        "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
+      },{
+        "title": "RxSwift take Operator에 대하여",
+        "excerpt":"flatMap에서 take를 써야하는 경우 단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다. _ = button.rx.tap.debug(\"TAP\") .flatMap { return BehaviorRelay(value: Int.random(in: 0...100)).debug(\"내부 Observable\") }.debug(\"flatMap 이후\") .subscribe() 내부 Observable에 BehaviorRelay를 써줬지만 저 부분에는 다른 Observable들이 충분히 들어올 수 있다. 이를테면 끝나는 시점이 명확히 정해지지 않은 Observable들 (특히 DelegateProxy 관련) 실행 후 버튼을 세번...","categories": ["RxSwift"],
+        "tags": [],
+        "url": "https://ictechgy.github.io/rxswift/take/",
+        "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
       }]

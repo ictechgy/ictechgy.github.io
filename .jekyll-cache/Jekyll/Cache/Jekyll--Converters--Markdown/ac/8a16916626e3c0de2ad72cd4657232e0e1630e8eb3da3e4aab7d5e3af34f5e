@@ -1,0 +1,16 @@
+I"�<p>zip은 대표적인 Observable 병합 연산자이다.</p>
+
+<p>내가 가진 궁금증은 아래와 같다. 
+<strong>Observable.zip을 중첩하여 사용하는 것은 가능할까?</strong>
+이를테면 아래와 같이 사용이 가능한 것일까?</p>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
+            <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과"</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"결과값"</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+:ET

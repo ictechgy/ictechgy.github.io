@@ -1,0 +1,11 @@
+I"�<h2 id="flatmap에서-take를-써야하는-경우">flatMap에서 take를 써야하는 경우</h2>
+<p>단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_ = button.rx.tap.debug("TAP")
+            .flatMap {
+                return BehaviorRelay(value: Int.random(in: 0...100)).debug("내부 Observable")
+            }.debug("flatMap 이후")
+            .subscribe()
+</code></pre></div></div>
+<p>내부 Observable에 BehaviorRelay를 써줬지만 저 부분에는 다른 Observable들이 충분히 들어올 수 있다. 
+이를테면 끝나는 시점이 명확히 정해지지 않은 Observable들 (DelegateProxy</p>
+:ET
