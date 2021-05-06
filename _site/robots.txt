@@ -1,1 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /linux/
+Disallow: /sql/
+
 Sitemap: https://ictechgy.github.io/sitemap.xml

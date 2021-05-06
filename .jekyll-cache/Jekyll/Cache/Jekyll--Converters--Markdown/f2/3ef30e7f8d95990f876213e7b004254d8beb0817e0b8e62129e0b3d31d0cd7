@@ -1,0 +1,12 @@
+I"�<ul class="toc__menu">
+  <li><a href="#observablezip을-중첩하여-사용하는-것은-가능할까">Observable.zip을 중첩하여 사용하는 것은 가능할까?</a></li>
+  <li><a href="#바깥-observablezip이-dispose되는-시점이-궁금해서-추가적-테스트를-해보았다">바깥 Observable.zip이 dispose되는 시점이 궁금해서 추가적 테스트를 해보았다.</a></li>
+  <li><a href="#그렇다면-종료되지-않은-하나의-observable-인자에서-계속-데이터를-내보낸다면">그렇다면 종료되지 않은 하나의 Observable 인자에서 계속 데이터를 내보낸다면??</a></li>
+  <li><a href="#observablezip-인자-하나가-에러를-내보낸다면">Observable.zip 인자 하나가 에러를 내보낸다면??</a>
+    <ul>
+      <li><a href="#error와-관련하여-하나-더-테스트-해보았다">error와 관련하여 하나 더 테스트 해보았다.</a></li>
+    </ul>
+  </li>
+  <li><a href="#외부-observablezip에-take1를-써서-한번-실행-후-종료한다면-내부-observable-인자들은-어떻게-될까">외부 Observable.zip에 take(1)를 써서 한번 실행 후 종료한다면 내부 Observable 인자들은 어떻게 될까?</a></li>
+</ul>
+:ET
