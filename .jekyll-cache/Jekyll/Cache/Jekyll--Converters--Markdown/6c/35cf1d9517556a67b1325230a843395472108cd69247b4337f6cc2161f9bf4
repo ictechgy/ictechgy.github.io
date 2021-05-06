@@ -1,9 +1,0 @@
-I"�<p>zip은 대표적인 Observable 병합 연산자이다.</p>
-
-<p>내가 가진 궁금증은 아래와 같다. 
-<strong>Observable.zip을 중첩하여 사용하는 것은 가능할까?</strong>
-이를테면 아래와 같이 사용이 가능한 것일까?</p>
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Observable</span><span class="o">.</span><span class="n">zip</span>
-
-</code></pre></div></div>
-:ET
