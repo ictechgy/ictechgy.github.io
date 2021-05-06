@@ -1,0 +1,70 @@
+I"<h1 id="flatmap에서-error가-담긴-observable이-반환되는-경우">flatMap에서 error가 담긴 Observable이 반환되는 경우</h1>
+
+<p>여태까지 나는 ‘<strong>flatMap</strong>을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+	<span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>
+	<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
+	<span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+<span class="c1">//여기서 스스로 dispose되는지 확인만 하면 되므로 disposeBag에는 넣지 않았다. </span>
+
+<span class="kd">enum</span> <span class="kt">TestError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">fakeError</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<p>위 코드를 예시로 들어보겠다.  <br />
+이전의 나: “flatMap에서 error를 확정적으로 가지는 Observable을 반환한다고 해도.. 어차피 button에 대한 Observable과는 다른 별도의 시퀀스이니 서로 영향은 없겠네. 버튼 탭할때마다 에러 메시지가 나오려나?”
+내가 예상했던 스트림 전개는 아래와 같았다.</p>
+<pre>
+TAP       --T--------T--------T-----....----&gt;     
+Error     --X-&gt;    --X-&gt;    --X-&gt;   
+</pre>
+
+<p><em>그런데 위의 내 생각은 잘못된 것이었다.</em>   <br />
+<strong>flatMap에서 반환되는 Observable이 error를 지니고 있다면 이는 기존의 시퀀스에도 영향을 미친다.</strong></p>
+<pre>
+TAP        --T-|&gt;      
+Error      --X-&gt;   
+</pre>
+<p>위와같이 말이다.</p>
+
+<p>위의 테스트 코드를 실행한 로그 출력은 아래와 같았다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error -&gt; subscribed
+TAP -&gt; subscribed
+TAP -&gt; Event next(())
+Error -&gt; Event error(fakeError)
+Unhandled error happened: fakeError  //error가 기존 시퀀스에도 영향을 미친다. 
+Error -&gt; isDisposed
+TAP -&gt; isDisposed
+</code></pre></div></div>
+
+<p>참고한 사이트: <a href="https://github.com/ReactiveX/RxSwift/issues/1162">RxSwift Github Issue</a></p>
+
+<h1 id="flatmap-내에서-반환되는-observable이-subscribe-되는-시점">flatMap 내에서 반환되는 Observable이 subscribe 되는 시점</h1>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span><span class="o">...</span><span class="mi">100</span><span class="p">))</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span><span class="o">.</span><span class="nf">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>결과 출력</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flatMap 이후 -&gt; subscribed
+TAP -&gt; subscribed
+//버튼을 누름
+TAP -&gt; Event next(())
+내부 Observable -&gt; subscribed
+내부 Observable -&gt; Event next(34)
+flatMap 이후 -&gt; Event next(34)
+내부 Observable -&gt; isDisposed
+
+</code></pre></div></div>
+<p>flatMap에서 반환되는 Observable은 처음부터 subscribe되는 것이 아니다. 
+본격적으로 스트림이 시작되고 <strong>flatMap이 작동하는 시점에 subscribe된다.</strong></p>
+
+<p><strong>더 중요하게 살펴봐야 할 것은 error 때 와는 다르게 내부 Observable이 dispose됐다고 해서 외부 시퀀스도 dispose되는 것은 아니라는 점.</strong></p>
+
+<p>내부 Observable에 BehaviorRelay를 넣고 take(1)을 해줬는데, Observable.just()를 사용해도 된다. 다만 take를 쓰는 이유를 같이 체크해보고자 사용해보았다.
+<a href="https://ictechgy.github.io/rxswift/take/">take Operator에 대한 글(RxSwift)</a></p>
+:ET

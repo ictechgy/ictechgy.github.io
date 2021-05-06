@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>RxSwift zip Operator에 대하여 - 개발 끄적끄적</title>
+<!-- begin _includes/seo.html --><title>zip Operator에 대하여(RxSwift) - 개발 끄적끄적</title>
 <meta name="description" content="zip은 대표적인 Observable 병합 연산자이다. ">
 
 
@@ -19,7 +19,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="개발 끄적끄적">
-<meta property="og:title" content="RxSwift zip Operator에 대하여">
+<meta property="og:title" content="zip Operator에 대하여(RxSwift)">
 <meta property="og:url" content="https://ictechgy.github.io/rxswift/zip/">
 
 
@@ -282,7 +282,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="RxSwift zip Operator에 대하여">
+    <meta itemprop="headline" content="zip Operator에 대하여(RxSwift)">
     <meta itemprop="description" content="zip은 대표적인 Observable 병합 연산자이다.">
     <meta itemprop="datePublished" content="2021-05-05T00:00:00+09:00">
     
@@ -290,7 +290,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">RxSwift zip Operator에 대하여
+          <h1 id="page-title" class="page__title" itemprop="headline">zip Operator에 대하여(RxSwift)
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -327,8 +327,10 @@
         
         <p>zip은 대표적인 Observable 병합 연산자이다.</p>
 
-<p>내가 가진 궁금증은 아래와 같다.</p>
-<h2 id="observablezip을-중첩하여-사용하는-것은-가능할까">Observable.zip을 중첩하여 사용하는 것은 가능할까?</h2>
+<p>내가 가진 궁금증은 아래와 같다.  <br />
+    </p>
+
+<h1 id="observablezip을-중첩하여-사용하는-것은-가능할까">Observable.zip을 중첩하여 사용하는 것은 가능할까?</h1>
 <p>이를테면 아래와 같이 사용이 가능한 것일까?</p>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
             <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"중간결과1"</span><span class="p">),</span>
@@ -361,7 +363,9 @@
 결과로 판단하자면, Observable.zip에 대한 subscribe는 단순히 인자로 들어간 시퀀스들을 바라보면서 값이 오나 안오나 보기만 하는게 아니라
 <strong>내부 인자로 들어간 시퀀스들에 대해 subscribe를 개별적으로 다 한 뒤에 값이 오는지 보는것</strong> 이다.</p>
 
-<h2 id="바깥-observablezip이-dispose되는-시점이-궁금해서-추가적-테스트를-해보았다">바깥 Observable.zip이 dispose되는 시점이 궁금해서 추가적 테스트를 해보았다.</h2>
+<p> </p>
+
+<h1 id="바깥-observablezip이-dispose되는-시점이-궁금해서-추가적-테스트를-해보았다">바깥 Observable.zip이 dispose되는 시점이 궁금해서 추가적 테스트를 해보았다.</h1>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
@@ -387,7 +391,8 @@
 두번째 인자인 Observable.zip(중간결과2)이 complete 후 dispose됐지만 첫번째 인자는 dispose되지 않았고, 따라서 외부 Observable.zip도 dispose되지 않았다.
 즉, <strong>Observable.zip은 subscribe한 내부 Observable 인자들이 모두 종료된 경우에만 disposed된다.</strong></p>
 
-<h2 id="그렇다면-종료되지-않은-하나의-observable-인자에서-계속-데이터를-내보낸다면">그렇다면 종료되지 않은 하나의 Observable 인자에서 계속 데이터를 내보낸다면??</h2>
+<p> </p>
+<h1 id="그렇다면-종료되지-않은-하나의-observable-인자에서-계속-데이터를-내보낸다면">그렇다면 종료되지 않은 하나의 Observable 인자에서 계속 데이터를 내보낸다면??</h1>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">randomButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
 <span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -423,7 +428,8 @@
 </code></pre></div></div>
 <p>결과를 보면 하나의 Observable인자가 이미 disposed 되었기 때문에 다른 인자에서 데이터를 보낸다고 하더라도 전체 Observable.zip은 동작되지 않는다.</p>
 
-<h2 id="observablezip-인자-하나가-에러를-내보낸다면">Observable.zip 인자 하나가 에러를 내보낸다면??</h2>
+<p> </p>
+<h1 id="observablezip-인자-하나가-에러를-내보낸다면">Observable.zip 인자 하나가 에러를 내보낸다면??</h1>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">testRelay2</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">testRelay3</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
@@ -461,7 +467,8 @@ testRelay1 -&gt; isDisposed
 </code></pre></div></div>
 <p>flatMap과 같이 Observable.zip에서도 특정 Observable 인자가 error를 내보내면 전체 시퀀스에도 영향을 미치는 것으로 보인다.</p>
 
-<h3 id="error와-관련하여-하나-더-테스트-해보았다">error와 관련하여 하나 더 테스트 해보았다.</h3>
+<p> </p>
+<h2 id="error와-관련하여-하나-더-테스트-해보았다">error와 관련하여 하나 더 테스트 해보았다.</h2>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">testRelay2</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">testRelay3</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
@@ -515,7 +522,9 @@ testRelay1 -&gt; isDisposed
 따라서 ‘<strong>중간에 error가 나는 경우</strong> 에 대해 마지막 subscribe에서 처리하는 것’이 가능하다. 
 (중간에 나는 error는 해당 시퀀스부분의 do에서 처리해야 하나 해서 do구문을 넣어주었는데 위 결론에 따르면 중간에 do 구문은 안넣어도 됨)</p>
 
-<h2 id="외부-observablezip에-take1를-써서-한번-실행-후-종료한다면-내부-observable-인자들은-어떻게-될까">외부 Observable.zip에 take(1)를 써서 한번 실행 후 종료한다면 내부 Observable 인자들은 어떻게 될까?</h2>
+<p> </p>
+
+<h1 id="외부-observablezip에-take1를-써서-한번-실행-후-종료한다면-내부-observable-인자들은-어떻게-될까">외부 Observable.zip에 take(1)를 써서 한번 실행 후 종료한다면 내부 Observable 인자들은 어떻게 될까?</h1>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">testRelay</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">testRelay2</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">testRelay3</span> <span class="o">=</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
@@ -584,7 +593,7 @@ testRelay1 -&gt; isDisposed
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=RxSwift+zip+Operator%EC%97%90+%EB%8C%80%ED%95%98%EC%97%AC%20https%3A%2F%2Fictechgy.github.io%2Frxswift%2Fzip%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=zip+Operator%EC%97%90+%EB%8C%80%ED%95%98%EC%97%AC%28RxSwift%29%20https%3A%2F%2Fictechgy.github.io%2Frxswift%2Fzip%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fictechgy.github.io%2Frxswift%2Fzip%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -595,11 +604,11 @@ testRelay1 -&gt; isDisposed
       
   <nav class="pagination">
     
-      <a href="/rxswift/flatMap/" class="pagination--pager" title="RxSwift flatMap Operator에 대하여
+      <a href="/rxswift/flatMap/" class="pagination--pager" title="flatMap Operator에 대하여(RxSwift)
 ">이전</a>
     
     
-      <a href="/rxswift/take/" class="pagination--pager" title="RxSwift take Operator에 대하여
+      <a href="/rxswift/take/" class="pagination--pager" title="take Operator에 대하여(RxSwift)
 ">다음</a>
     
   </nav>
@@ -628,7 +637,7 @@ testRelay1 -&gt; isDisposed
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/rxswift/take/" rel="permalink">RxSwift take Operator에 대하여
+        <a href="/rxswift/take/" rel="permalink">take Operator에 대하여(RxSwift)
 </a>
       
     </h2>
@@ -664,7 +673,7 @@ _ = button.rx.tap.debug("TAP")
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/rxswift/flatMap/" rel="permalink">RxSwift flatMap Operator에 대하여
+        <a href="/rxswift/flatMap/" rel="permalink">flatMap Operator에 대하여(RxSwift)
 </a>
       
     </h2>
@@ -678,7 +687,7 @@ _ = button.rx.tap.debug("TAP")
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">여태까지 나는 ‘flatMap을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)
+    <p class="archive__item-excerpt" itemprop="description">flatMap에서 error가 담긴 Observable이 반환되는 경우
 </p>
   </article>
 </div>

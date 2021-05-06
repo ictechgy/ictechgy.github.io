@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://ictechgy.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ictechgy.github.io/" rel="alternate" type="text/html" /><updated>2021-05-06T20:04:57+09:00</updated><id>https://ictechgy.github.io/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>개인 공부 기록소입니다.</subtitle><author><name>JJanghong</name></author><entry><title type="html">RxSwift take Operator에 대하여</title><link href="https://ictechgy.github.io/rxswift/take/" rel="alternate" type="text/html" title="RxSwift take Operator에 대하여" /><published>2021-05-06T00:00:00+09:00</published><updated>2021-05-06T00:00:00+09:00</updated><id>https://ictechgy.github.io/rxswift/take</id><content type="html" xml:base="https://ictechgy.github.io/rxswift/take/">&lt;h2 id=&quot;flatmap에서-take를-써야하는-경우&quot;&gt;flatMap에서 take를 써야하는 경우&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://ictechgy.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ictechgy.github.io/" rel="alternate" type="text/html" /><updated>2021-05-07T00:07:21+09:00</updated><id>https://ictechgy.github.io/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>개인 공부 기록소입니다.</subtitle><author><name>JJanghong</name></author><entry><title type="html">take Operator에 대하여(RxSwift)</title><link href="https://ictechgy.github.io/rxswift/take/" rel="alternate" type="text/html" title="take Operator에 대하여(RxSwift)" /><published>2021-05-06T00:00:00+09:00</published><updated>2021-05-06T00:00:00+09:00</updated><id>https://ictechgy.github.io/rxswift/take</id><content type="html" xml:base="https://ictechgy.github.io/rxswift/take/">&lt;h1 id=&quot;flatmap에서-take를-써야하는-경우&quot;&gt;flatMap에서 take를 써야하는 경우&lt;/h1&gt;
 &lt;p&gt;단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다.&lt;/p&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -47,7 +47,10 @@ flatMap 이후       -42-----------11-----------81--...--&amp;gt;
 &lt;p&gt;위와 같이 말이다.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;어? 그러면 바깥쪽에 take를 한다면 어떻게 되나요?&lt;/em&gt; -&amp;gt; 아래에서 살펴보자&lt;/p&gt;
-&lt;h3 id=&quot;내부-observable에-take를-안썼다면-언제-disposed될까&quot;&gt;내부 Observable에 take를 안썼다면 언제 disposed될까?&lt;/h3&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;내부-observable에-take를-안썼다면-언제-disposed될까&quot;&gt;내부 Observable에 take를 안썼다면 언제 disposed될까?&lt;/h2&gt;
 &lt;p&gt;그렇다면 내부 Observable 시퀀스들은 언제까지 살아있게 될까? 영원히? 
 그렇지는 않다. 아래의 코드를 살펴보자.&lt;/p&gt;
 
@@ -95,9 +98,10 @@ TAP -&amp;gt; isDisposed
 내부 Observable -&amp;gt; isDisposed
 내부 Observable -&amp;gt; isDisposed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;기존 Observable이 dispose되면 내부에서 살아있던 Observable들도 모두 dispose되는 것을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;기존 Observable이 dispose되면 내부에서 살아있던 Observable들도 모두 dispose되는 것을 알 수 있다. 
+    &lt;/p&gt;
 
-&lt;h3 id=&quot;외부에다가-take를-쓴다면&quot;&gt;외부에다가 take를 쓴다면?&lt;/h3&gt;
+&lt;h2 id=&quot;외부에다가-take를-쓴다면&quot;&gt;외부에다가 take를 쓴다면?&lt;/h2&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                 &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;내부 Observable&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -118,9 +122,10 @@ flatMap 이후 -&amp;gt; isDisposed
 TAP -&amp;gt; isDisposed
 내부 Observable -&amp;gt; isDisposed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;외부 Observable자체가 dispose된 후 마지막으로 내부 Observable이 종료되었다.&lt;/p&gt;
+&lt;p&gt;외부 Observable자체가 dispose된 후 마지막으로 내부 Observable이 종료되었다. 
+    &lt;/p&gt;
 
-&lt;h3 id=&quot;내부-observable들이-살아있을-때-해당-내부-observable들에-데이터가-생긴다면-이게-작동에-영향을-미칠까&quot;&gt;내부 Observable들이 살아있을 때 해당 내부 Observable들에 데이터가 생긴다면 이게 작동에 영향을 미칠까?&lt;/h3&gt;
+&lt;h2 id=&quot;내부-observable들이-살아있을-때-해당-내부-observable들에-데이터가-생긴다면-이게-작동에-영향을-미칠까&quot;&gt;내부 Observable들이 살아있을 때 해당 내부 Observable들에 데이터가 생긴다면 이게 작동에 영향을 미칠까?&lt;/h2&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
 &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -155,7 +160,10 @@ flatMap 이후 -&amp;gt; Event next(62)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;내부 Observable이 살아있는 경우 첫번째 버튼을 탭하지 않았음에도 두번째 버튼 탭에 따라 동작이 되는 것을 확인할 수 있다. 
 이는 원치 않는 동작을 일으킬 가능성이 있다.&lt;/p&gt;
-&lt;h2 id=&quot;take의-위치에-따라-결과가-달라질까&quot;&gt;take의 위치에 따라 결과가 달라질까?&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;take의-위치에-따라-결과가-달라질까&quot;&gt;take의 위치에 따라 결과가 달라질까?&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;take가 위쪽에 위치한 경우&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -211,7 +219,9 @@ TAP              --T--|&amp;gt;
 내부 Observerable --1--|&amp;gt;  -2--|&amp;gt; 
 flatMap 이후      --1--|&amp;gt;
 &lt;/pre&gt;
-&lt;h2 id=&quot;take를-여러번-쓰는-경우&quot;&gt;take를 여러번 쓰는 경우&lt;/h2&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;take를-여러번-쓰는-경우&quot;&gt;take를 여러번 쓰는 경우&lt;/h1&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;flatMap 이전&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
@@ -231,47 +241,59 @@ flatMap 이후 -&amp;gt; isDisposed
 flatMap 이전 -&amp;gt; isDisposed
 내부 Observable -&amp;gt; isDisposed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;flatMap 이후 부분에서 dispose됨에 따라 모든 Observable이 dispose되었다.&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="RxSwift" /><summary type="html">flatMap에서 take를 써야하는 경우 단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다. _ = button.rx.tap.debug(&quot;TAP&quot;) .flatMap { return BehaviorRelay(value: Int.random(in: 0...100)).debug(&quot;내부 Observable&quot;) }.debug(&quot;flatMap 이후&quot;) .subscribe() 내부 Observable에 BehaviorRelay를 써줬지만 저 부분에는 다른 Observable들이 충분히 들어올 수 있다. 이를테면 끝나는 시점이 명확히 정해지지 않은 Observable들 (특히 DelegateProxy 관련)</summary></entry><entry><title type="html">RxSwift flatMap Operator에 대하여</title><link href="https://ictechgy.github.io/rxswift/flatMap/" rel="alternate" type="text/html" title="RxSwift flatMap Operator에 대하여" /><published>2021-05-05T00:00:00+09:00</published><updated>2021-05-05T00:00:00+09:00</updated><id>https://ictechgy.github.io/rxswift/flatMap</id><content type="html" xml:base="https://ictechgy.github.io/rxswift/flatMap/">&lt;p&gt;여태까지 나는 ‘&lt;strong&gt;flatMap&lt;/strong&gt;을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)&lt;/p&gt;
+&lt;p&gt;flatMap 이후 부분에서 dispose됨에 따라 모든 Observable이 dispose되었다.&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="RxSwift" /><summary type="html">flatMap에서 take를 써야하는 경우 단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다. _ = button.rx.tap.debug(&quot;TAP&quot;) .flatMap { return BehaviorRelay(value: Int.random(in: 0...100)).debug(&quot;내부 Observable&quot;) }.debug(&quot;flatMap 이후&quot;) .subscribe() 내부 Observable에 BehaviorRelay를 써줬지만 저 부분에는 다른 Observable들이 충분히 들어올 수 있다. 이를테면 끝나는 시점이 명확히 정해지지 않은 Observable들 (특히 DelegateProxy 관련)</summary></entry><entry><title type="html">flatMap Operator에 대하여(RxSwift)</title><link href="https://ictechgy.github.io/rxswift/flatMap/" rel="alternate" type="text/html" title="flatMap Operator에 대하여(RxSwift)" /><published>2021-05-05T00:00:00+09:00</published><updated>2021-05-05T00:00:00+09:00</updated><id>https://ictechgy.github.io/rxswift/flatMap</id><content type="html" xml:base="https://ictechgy.github.io/rxswift/flatMap/">&lt;h1 id=&quot;flatmap에서-error가-담긴-observable이-반환되는-경우&quot;&gt;flatMap에서 error가 담긴 Observable이 반환되는 경우&lt;/h1&gt;
+
+&lt;p&gt;여태까지 나는 ‘&lt;strong&gt;flatMap&lt;/strong&gt;을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;TestError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fakeError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;TestError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fakeError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;내부 Observable&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;flatMap 이후&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//여기서 스스로 dispose되는지 확인만 하면 되므로 disposeBag에는 넣지 않았다. &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//여기서는 스스로 dispose되는지 확인만 하면 되므로 굳이 disposeBag에는 넣지 않았다. &lt;/span&gt;
 
 &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TestError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fakeError&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;위 코드를 예시로 들어보겠다.  &lt;br /&gt;
-이전의 나: “flatMap에서 error를 확정적으로 가지는 Observable을 반환한다고 해도.. 어차피 button에 대한 Observable과는 다른 별도의 시퀀스이니 서로 영향은 없겠네. 버튼 탭할때마다 에러 메시지가 나오려나?”&lt;/p&gt;
+이전의 나: “flatMap에서 error를 확정적으로 가지는 Observable을 반환한다고 해도.. 어차피 button에 대한 Observable과는 다른 별도의 시퀀스이니 서로 영향은 없겠네. 버튼 탭할때마다 에러 메시지가 나오려나?”
+내가 예상했던 스트림 전개는 아래와 같았다.&lt;/p&gt;
 &lt;pre&gt;
-TAP       --T--------T--------T-----....----&amp;gt;     
-Error     --X-&amp;gt;    --X-&amp;gt;    --X-&amp;gt;   
+TAP             --T--------T--------T-----....----&amp;gt;     
+내부 Observable  --X-&amp;gt;    --X-&amp;gt;    --X-&amp;gt; 
+flatMap 이후     --X-&amp;gt;    --X-&amp;gt;    --X-&amp;gt;
 &lt;/pre&gt;
+&lt;p&gt;flatMap 이후에 대한 스트림이 끊긴다고는 하더라도 TAP 부분에 있는 기존 시퀀스는 안끊기고 계속 살아있을 것으로 생각했다.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;그런데 위의 내 생각은 잘못된 것이었다.&lt;/em&gt;   &lt;br /&gt;
 &lt;strong&gt;flatMap에서 반환되는 Observable이 error를 지니고 있다면 이는 기존의 시퀀스에도 영향을 미친다.&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;
-TAP        --T-|&amp;gt;      
-Error      --X-&amp;gt;   
+TAP             --T-|&amp;gt;      
+내부 Observable  --X-&amp;gt;
+flatMap 이후     --X-&amp;gt;
 &lt;/pre&gt;
 &lt;p&gt;위와같이 말이다.&lt;/p&gt;
 
 &lt;p&gt;위의 테스트 코드를 실행한 로그 출력은 아래와 같았다.&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error -&amp;gt; subscribed
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;flatMap 이후 -&amp;gt; subscribed
 TAP -&amp;gt; subscribed
+//탭 버튼을 누름
 TAP -&amp;gt; Event next(())
-Error -&amp;gt; Event error(fakeError)
+내부 Observable -&amp;gt; subscribed
+내부 Observable -&amp;gt; Event error(fakeError)
+flatMap 이후 -&amp;gt; Event error(fakeError)
 Unhandled error happened: fakeError  //error가 기존 시퀀스에도 영향을 미친다. 
-Error -&amp;gt; isDisposed
+flatMap 이후 -&amp;gt; isDisposed
 TAP -&amp;gt; isDisposed
+내부 Observable -&amp;gt; isDisposed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;참고한 사이트: &lt;a href=&quot;https://github.com/ReactiveX/RxSwift/issues/1162&quot;&gt;RxSwift Github Issue&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;flatmap-내에서-반환되는-observable이-subscribe-되는-시점&quot;&gt;flatMap 내에서 반환되는 Observable이 subscribe 되는 시점&lt;/h2&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;flatmap-내에서-반환되는-observable이-subscribe-되는-시점&quot;&gt;flatMap 내에서 반환되는 Observable이 subscribe 되는 시점&lt;/h1&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TAP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                 &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;내부 Observable&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -291,13 +313,17 @@ flatMap 이후 -&amp;gt; Event next(34)
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;flatMap에서 반환되는 Observable은 처음부터 subscribe되는 것이 아니다. 
-본격적으로 스트림이 시작되고 flatMap이 작동하는 시점에 subscribe된다.&lt;/p&gt;
+본격적으로 스트림이 시작되고 &lt;strong&gt;flatMap이 작동하는 시점에 subscribe된다.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;내부 Observable에 BehaviorRelay를 넣고 take(1)을 해줬는데, Observable.just()를 사용해도 된다. 다만 take를 쓰는 이유를 같이 체크해보고자 사용해보았다.
-&lt;a href=&quot;https://ictechgy.github.io/rxswift/take/&quot;&gt;RxSwift take Operator에 대하여&lt;/a&gt;&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="RxSwift" /><summary type="html">여태까지 나는 ‘flatMap을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)</summary></entry><entry><title type="html">RxSwift zip Operator에 대하여</title><link href="https://ictechgy.github.io/rxswift/zip/" rel="alternate" type="text/html" title="RxSwift zip Operator에 대하여" /><published>2021-05-05T00:00:00+09:00</published><updated>2021-05-05T00:00:00+09:00</updated><id>https://ictechgy.github.io/rxswift/zip</id><content type="html" xml:base="https://ictechgy.github.io/rxswift/zip/">&lt;p&gt;zip은 대표적인 Observable 병합 연산자이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;더 중요하게 살펴봐야 할 것은 error 때 와는 다르게 정상 작동이 된 경우 기존(전체) 시퀀스가 종료되지 않는다는 점이다.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;내가 가진 궁금증은 아래와 같다.&lt;/p&gt;
-&lt;h2 id=&quot;observablezip을-중첩하여-사용하는-것은-가능할까&quot;&gt;Observable.zip을 중첩하여 사용하는 것은 가능할까?&lt;/h2&gt;
+&lt;p&gt;내부 Observable에 BehaviorRelay를 넣고 take(1)을 해줬는데, 사실 Observable.just()를 사용해도 된다. 다만 take를 쓰는 이유를 같이 체크해보고자 사용해보았다.
+&lt;a href=&quot;https://ictechgy.github.io/rxswift/take/&quot;&gt;take Operator에 대한 글(RxSwift)&lt;/a&gt;&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="RxSwift" /><summary type="html">flatMap에서 error가 담긴 Observable이 반환되는 경우</summary></entry><entry><title type="html">zip Operator에 대하여(RxSwift)</title><link href="https://ictechgy.github.io/rxswift/zip/" rel="alternate" type="text/html" title="zip Operator에 대하여(RxSwift)" /><published>2021-05-05T00:00:00+09:00</published><updated>2021-05-05T00:00:00+09:00</updated><id>https://ictechgy.github.io/rxswift/zip</id><content type="html" xml:base="https://ictechgy.github.io/rxswift/zip/">&lt;p&gt;zip은 대표적인 Observable 병합 연산자이다.&lt;/p&gt;
+
+&lt;p&gt;내가 가진 궁금증은 아래와 같다.  &lt;br /&gt;
+    &lt;/p&gt;
+
+&lt;h1 id=&quot;observablezip을-중첩하여-사용하는-것은-가능할까&quot;&gt;Observable.zip을 중첩하여 사용하는 것은 가능할까?&lt;/h1&gt;
 &lt;p&gt;이를테면 아래와 같이 사용이 가능한 것일까?&lt;/p&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
             &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;just&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;중간결과1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
@@ -330,7 +356,9 @@ flatMap 이후 -&amp;gt; Event next(34)
 결과로 판단하자면, Observable.zip에 대한 subscribe는 단순히 인자로 들어간 시퀀스들을 바라보면서 값이 오나 안오나 보기만 하는게 아니라
 &lt;strong&gt;내부 인자로 들어간 시퀀스들에 대해 subscribe를 개별적으로 다 한 뒤에 값이 오는지 보는것&lt;/strong&gt; 이다.&lt;/p&gt;
 
-&lt;h2 id=&quot;바깥-observablezip이-dispose되는-시점이-궁금해서-추가적-테스트를-해보았다&quot;&gt;바깥 Observable.zip이 dispose되는 시점이 궁금해서 추가적 테스트를 해보았다.&lt;/h2&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;바깥-observablezip이-dispose되는-시점이-궁금해서-추가적-테스트를-해보았다&quot;&gt;바깥 Observable.zip이 dispose되는 시점이 궁금해서 추가적 테스트를 해보았다.&lt;/h1&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
@@ -356,7 +384,8 @@ flatMap 이후 -&amp;gt; Event next(34)
 두번째 인자인 Observable.zip(중간결과2)이 complete 후 dispose됐지만 첫번째 인자는 dispose되지 않았고, 따라서 외부 Observable.zip도 dispose되지 않았다.
 즉, &lt;strong&gt;Observable.zip은 subscribe한 내부 Observable 인자들이 모두 종료된 경우에만 disposed된다.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;그렇다면-종료되지-않은-하나의-observable-인자에서-계속-데이터를-내보낸다면&quot;&gt;그렇다면 종료되지 않은 하나의 Observable 인자에서 계속 데이터를 내보낸다면??&lt;/h2&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;h1 id=&quot;그렇다면-종료되지-않은-하나의-observable-인자에서-계속-데이터를-내보낸다면&quot;&gt;그렇다면 종료되지 않은 하나의 Observable 인자에서 계속 데이터를 내보낸다면??&lt;/h1&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;@IBOutlet&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;randomButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
@@ -392,7 +421,8 @@ flatMap 이후 -&amp;gt; Event next(34)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;결과를 보면 하나의 Observable인자가 이미 disposed 되었기 때문에 다른 인자에서 데이터를 보낸다고 하더라도 전체 Observable.zip은 동작되지 않는다.&lt;/p&gt;
 
-&lt;h2 id=&quot;observablezip-인자-하나가-에러를-내보낸다면&quot;&gt;Observable.zip 인자 하나가 에러를 내보낸다면??&lt;/h2&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;h1 id=&quot;observablezip-인자-하나가-에러를-내보낸다면&quot;&gt;Observable.zip 인자 하나가 에러를 내보낸다면??&lt;/h1&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -430,7 +460,8 @@ testRelay1 -&amp;gt; isDisposed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;flatMap과 같이 Observable.zip에서도 특정 Observable 인자가 error를 내보내면 전체 시퀀스에도 영향을 미치는 것으로 보인다.&lt;/p&gt;
 
-&lt;h3 id=&quot;error와-관련하여-하나-더-테스트-해보았다&quot;&gt;error와 관련하여 하나 더 테스트 해보았다.&lt;/h3&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;h2 id=&quot;error와-관련하여-하나-더-테스트-해보았다&quot;&gt;error와 관련하여 하나 더 테스트 해보았다.&lt;/h2&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -484,7 +515,9 @@ testRelay1 -&amp;gt; isDisposed
 따라서 ‘&lt;strong&gt;중간에 error가 나는 경우&lt;/strong&gt; 에 대해 마지막 subscribe에서 처리하는 것’이 가능하다. 
 (중간에 나는 error는 해당 시퀀스부분의 do에서 처리해야 하나 해서 do구문을 넣어주었는데 위 결론에 따르면 중간에 do 구문은 안넣어도 됨)&lt;/p&gt;
 
-&lt;h2 id=&quot;외부-observablezip에-take1를-써서-한번-실행-후-종료한다면-내부-observable-인자들은-어떻게-될까&quot;&gt;외부 Observable.zip에 take(1)를 써서 한번 실행 후 종료한다면 내부 Observable 인자들은 어떻게 될까?&lt;/h2&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;외부-observablezip에-take1를-써서-한번-실행-후-종료한다면-내부-observable-인자들은-어떻게-될까&quot;&gt;외부 Observable.zip에 take(1)를 써서 한번 실행 후 종료한다면 내부 Observable 인자들은 어떻게 될까?&lt;/h1&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;testRelay3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BehaviorRelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;

@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>RxSwift flatMap Operator에 대하여 - 개발 끄적끄적</title>
-<meta name="description" content="여태까지 나는 ‘flatMap을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.) ">
+<!-- begin _includes/seo.html --><title>flatMap Operator에 대하여(RxSwift) - 개발 끄적끄적</title>
+<meta name="description" content="flatMap에서 error가 담긴 Observable이 반환되는 경우 ">
 
 
   <meta name="author" content="JJanghong">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="개발 끄적끄적">
-<meta property="og:title" content="RxSwift flatMap Operator에 대하여">
+<meta property="og:title" content="flatMap Operator에 대하여(RxSwift)">
 <meta property="og:url" content="https://ictechgy.github.io/rxswift/flatMap/">
 
 
-  <meta property="og:description" content="여태까지 나는 ‘flatMap을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.) ">
+  <meta property="og:description" content="flatMap에서 error가 담긴 Observable이 반환되는 경우 ">
 
 
 
@@ -282,15 +282,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="RxSwift flatMap Operator에 대하여">
-    <meta itemprop="description" content="여태까지 나는 ‘flatMap을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)">
+    <meta itemprop="headline" content="flatMap Operator에 대하여(RxSwift)">
+    <meta itemprop="description" content="flatMap에서 error가 담긴 Observable이 반환되는 경우">
     <meta itemprop="datePublished" content="2021-05-05T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">RxSwift flatMap Operator에 대하여
+          <h1 id="page-title" class="page__title" itemprop="headline">flatMap Operator에 대하여(RxSwift)
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -311,53 +311,66 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
               <ul class="toc__menu">
+  <li><a href="#flatmap에서-error가-담긴-observable이-반환되는-경우">flatMap에서 error가 담긴 Observable이 반환되는 경우</a></li>
   <li><a href="#flatmap-내에서-반환되는-observable이-subscribe-되는-시점">flatMap 내에서 반환되는 Observable이 subscribe 되는 시점</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>여태까지 나는 ‘<strong>flatMap</strong>을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)</p>
+        <h1 id="flatmap에서-error가-담긴-observable이-반환되는-경우">flatMap에서 error가 담긴 Observable이 반환되는 경우</h1>
+
+<p>여태까지 나는 ‘<strong>flatMap</strong>을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
             <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span>
-            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Error"</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
             <span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
-<span class="c1">//여기서 스스로 dispose되는지 확인만 하면 되므로 disposeBag에는 넣지 않았다. </span>
+<span class="c1">//여기서는 스스로 dispose되는지 확인만 하면 되므로 굳이 disposeBag에는 넣지 않았다. </span>
 
 <span class="kd">enum</span> <span class="kt">TestError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
         <span class="k">case</span> <span class="n">fakeError</span>
     <span class="p">}</span>
 </code></pre></div></div>
 <p>위 코드를 예시로 들어보겠다.  <br />
-이전의 나: “flatMap에서 error를 확정적으로 가지는 Observable을 반환한다고 해도.. 어차피 button에 대한 Observable과는 다른 별도의 시퀀스이니 서로 영향은 없겠네. 버튼 탭할때마다 에러 메시지가 나오려나?”</p>
+이전의 나: “flatMap에서 error를 확정적으로 가지는 Observable을 반환한다고 해도.. 어차피 button에 대한 Observable과는 다른 별도의 시퀀스이니 서로 영향은 없겠네. 버튼 탭할때마다 에러 메시지가 나오려나?”
+내가 예상했던 스트림 전개는 아래와 같았다.</p>
 <pre>
-TAP       --T--------T--------T-----....----&gt;     
-Error     --X-&gt;    --X-&gt;    --X-&gt;   
+TAP             --T--------T--------T-----....----&gt;     
+내부 Observable  --X-&gt;    --X-&gt;    --X-&gt; 
+flatMap 이후     --X-&gt;    --X-&gt;    --X-&gt;
 </pre>
+<p>flatMap 이후에 대한 스트림이 끊긴다고는 하더라도 TAP 부분에 있는 기존 시퀀스는 안끊기고 계속 살아있을 것으로 생각했다.</p>
 
 <p><em>그런데 위의 내 생각은 잘못된 것이었다.</em>   <br />
 <strong>flatMap에서 반환되는 Observable이 error를 지니고 있다면 이는 기존의 시퀀스에도 영향을 미친다.</strong></p>
 <pre>
-TAP        --T-|&gt;      
-Error      --X-&gt;   
+TAP             --T-|&gt;      
+내부 Observable  --X-&gt;
+flatMap 이후     --X-&gt;
 </pre>
 <p>위와같이 말이다.</p>
 
 <p>위의 테스트 코드를 실행한 로그 출력은 아래와 같았다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error -&gt; subscribed
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flatMap 이후 -&gt; subscribed
 TAP -&gt; subscribed
+//탭 버튼을 누름
 TAP -&gt; Event next(())
-Error -&gt; Event error(fakeError)
+내부 Observable -&gt; subscribed
+내부 Observable -&gt; Event error(fakeError)
+flatMap 이후 -&gt; Event error(fakeError)
 Unhandled error happened: fakeError  //error가 기존 시퀀스에도 영향을 미친다. 
-Error -&gt; isDisposed
+flatMap 이후 -&gt; isDisposed
 TAP -&gt; isDisposed
+내부 Observable -&gt; isDisposed
 </code></pre></div></div>
 
 <p>참고한 사이트: <a href="https://github.com/ReactiveX/RxSwift/issues/1162">RxSwift Github Issue</a></p>
 
-<h2 id="flatmap-내에서-반환되는-observable이-subscribe-되는-시점">flatMap 내에서 반환되는 Observable이 subscribe 되는 시점</h2>
+<p> </p>
+
+<h1 id="flatmap-내에서-반환되는-observable이-subscribe-되는-시점">flatMap 내에서 반환되는 Observable이 subscribe 되는 시점</h1>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
             <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
                 <span class="k">return</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span><span class="o">...</span><span class="mi">100</span><span class="p">))</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span><span class="o">.</span><span class="nf">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -377,10 +390,12 @@ flatMap 이후 -&gt; Event next(34)
 
 </code></pre></div></div>
 <p>flatMap에서 반환되는 Observable은 처음부터 subscribe되는 것이 아니다. 
-본격적으로 스트림이 시작되고 flatMap이 작동하는 시점에 subscribe된다.</p>
+본격적으로 스트림이 시작되고 <strong>flatMap이 작동하는 시점에 subscribe된다.</strong></p>
 
-<p>내부 Observable에 BehaviorRelay를 넣고 take(1)을 해줬는데, Observable.just()를 사용해도 된다. 다만 take를 쓰는 이유를 같이 체크해보고자 사용해보았다.
-<a href="https://ictechgy.github.io/rxswift/take/">RxSwift take Operator에 대하여</a></p>
+<p><strong>더 중요하게 살펴봐야 할 것은 error 때 와는 다르게 정상 작동이 된 경우 기존(전체) 시퀀스가 종료되지 않는다는 점이다.</strong></p>
+
+<p>내부 Observable에 BehaviorRelay를 넣고 take(1)을 해줬는데, 사실 Observable.just()를 사용해도 된다. 다만 take를 쓰는 이유를 같이 체크해보고자 사용해보았다.
+<a href="https://ictechgy.github.io/rxswift/take/">take Operator에 대한 글(RxSwift)</a></p>
 
         
       </section>
@@ -419,7 +434,7 @@ flatMap 이후 -&gt; Event next(34)
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=RxSwift+flatMap+Operator%EC%97%90+%EB%8C%80%ED%95%98%EC%97%AC%20https%3A%2F%2Fictechgy.github.io%2Frxswift%2FflatMap%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=flatMap+Operator%EC%97%90+%EB%8C%80%ED%95%98%EC%97%AC%28RxSwift%29%20https%3A%2F%2Fictechgy.github.io%2Frxswift%2FflatMap%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fictechgy.github.io%2Frxswift%2FflatMap%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -434,7 +449,7 @@ flatMap 이후 -&gt; Event next(34)
 ">이전</a>
     
     
-      <a href="/rxswift/zip/" class="pagination--pager" title="RxSwift zip Operator에 대하여
+      <a href="/rxswift/zip/" class="pagination--pager" title="zip Operator에 대하여(RxSwift)
 ">다음</a>
     
   </nav>
@@ -463,7 +478,7 @@ flatMap 이후 -&gt; Event next(34)
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/rxswift/take/" rel="permalink">RxSwift take Operator에 대하여
+        <a href="/rxswift/take/" rel="permalink">take Operator에 대하여(RxSwift)
 </a>
       
     </h2>
@@ -499,7 +514,7 @@ _ = button.rx.tap.debug("TAP")
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/rxswift/zip/" rel="permalink">RxSwift zip Operator에 대하여
+        <a href="/rxswift/zip/" rel="permalink">zip Operator에 대하여(RxSwift)
 </a>
       
     </h2>

@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>RxSwift take Operator에 대하여 - 개발 끄적끄적</title>
+<!-- begin _includes/seo.html --><title>take Operator에 대하여(RxSwift) - 개발 끄적끄적</title>
 <meta name="description" content="flatMap에서 take를 써야하는 경우 단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다. _ = button.rx.tap.debug(&quot;TAP&quot;)             .flatMap {                 return BehaviorRelay(value: Int.random(in: 0...100)).debug(&quot;내부 Observable&quot;)             }.debug(&quot;flatMap 이후&quot;)             .subscribe()  내부 Observable에 BehaviorRelay를 써줬지만 저 부분에는 다른 Observable들이 충분히 들어올 수 있다.  이를테면 끝나는 시점이 명확히 정해지지 않은 Observable들 (특히 DelegateProxy 관련) ">
 
 
@@ -19,7 +19,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="개발 끄적끄적">
-<meta property="og:title" content="RxSwift take Operator에 대하여">
+<meta property="og:title" content="take Operator에 대하여(RxSwift)">
 <meta property="og:url" content="https://ictechgy.github.io/rxswift/take/">
 
 
@@ -282,7 +282,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="RxSwift take Operator에 대하여">
+    <meta itemprop="headline" content="take Operator에 대하여(RxSwift)">
     <meta itemprop="description" content="flatMap에서 take를 써야하는 경우단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다._ = button.rx.tap.debug(&quot;TAP&quot;)            .flatMap {                return BehaviorRelay(value: Int.random(in: 0...100)).debug(&quot;내부 Observable&quot;)            }.debug(&quot;flatMap 이후&quot;)            .subscribe()내부 Observable에 BehaviorRelay를 써줬지만 저 부분에는 다른 Observable들이 충분히 들어올 수 있다. 이를테면 끝나는 시점이 명확히 정해지지 않은 Observable들 (특히 DelegateProxy 관련)">
     <meta itemprop="datePublished" content="2021-05-06T00:00:00+09:00">
     
@@ -290,7 +290,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">RxSwift take Operator에 대하여
+          <h1 id="page-title" class="page__title" itemprop="headline">take Operator에 대하여(RxSwift)
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -325,7 +325,7 @@
             </nav>
           </aside>
         
-        <h2 id="flatmap에서-take를-써야하는-경우">flatMap에서 take를 써야하는 경우</h2>
+        <h1 id="flatmap에서-take를-써야하는-경우">flatMap에서 take를 써야하는 경우</h1>
 <p>단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다.</p>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
             <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
@@ -374,7 +374,10 @@ flatMap 이후       -42-----------11-----------81--...--&gt;
 <p>위와 같이 말이다.</p>
 
 <p><em>어? 그러면 바깥쪽에 take를 한다면 어떻게 되나요?</em> -&gt; 아래에서 살펴보자</p>
-<h3 id="내부-observable에-take를-안썼다면-언제-disposed될까">내부 Observable에 take를 안썼다면 언제 disposed될까?</h3>
+
+<p> </p>
+
+<h2 id="내부-observable에-take를-안썼다면-언제-disposed될까">내부 Observable에 take를 안썼다면 언제 disposed될까?</h2>
 <p>그렇다면 내부 Observable 시퀀스들은 언제까지 살아있게 될까? 영원히? 
 그렇지는 않다. 아래의 코드를 살펴보자.</p>
 
@@ -422,9 +425,10 @@ TAP -&gt; isDisposed
 내부 Observable -&gt; isDisposed
 내부 Observable -&gt; isDisposed
 </code></pre></div></div>
-<p>기존 Observable이 dispose되면 내부에서 살아있던 Observable들도 모두 dispose되는 것을 알 수 있다.</p>
+<p>기존 Observable이 dispose되면 내부에서 살아있던 Observable들도 모두 dispose되는 것을 알 수 있다. 
+    </p>
 
-<h3 id="외부에다가-take를-쓴다면">외부에다가 take를 쓴다면?</h3>
+<h2 id="외부에다가-take를-쓴다면">외부에다가 take를 쓴다면?</h2>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
             <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
                 <span class="k">return</span> <span class="kt">BehaviorRelay</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span><span class="o">...</span><span class="mi">100</span><span class="p">))</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>
@@ -445,9 +449,10 @@ flatMap 이후 -&gt; isDisposed
 TAP -&gt; isDisposed
 내부 Observable -&gt; isDisposed
 </code></pre></div></div>
-<p>외부 Observable자체가 dispose된 후 마지막으로 내부 Observable이 종료되었다.</p>
+<p>외부 Observable자체가 dispose된 후 마지막으로 내부 Observable이 종료되었다. 
+    </p>
 
-<h3 id="내부-observable들이-살아있을-때-해당-내부-observable들에-데이터가-생긴다면-이게-작동에-영향을-미칠까">내부 Observable들이 살아있을 때 해당 내부 Observable들에 데이터가 생긴다면 이게 작동에 영향을 미칠까?</h3>
+<h2 id="내부-observable들이-살아있을-때-해당-내부-observable들에-데이터가-생긴다면-이게-작동에-영향을-미칠까">내부 Observable들이 살아있을 때 해당 내부 Observable들에 데이터가 생긴다면 이게 작동에 영향을 미칠까?</h2>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">testSubject</span><span class="p">:</span> <span class="kt">BehaviorSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt">BehaviorSubject</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
         
 <span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
@@ -482,7 +487,10 @@ flatMap 이후 -&gt; Event next(62)
 </code></pre></div></div>
 <p>내부 Observable이 살아있는 경우 첫번째 버튼을 탭하지 않았음에도 두번째 버튼 탭에 따라 동작이 되는 것을 확인할 수 있다. 
 이는 원치 않는 동작을 일으킬 가능성이 있다.</p>
-<h2 id="take의-위치에-따라-결과가-달라질까">take의 위치에 따라 결과가 달라질까?</h2>
+
+<p> </p>
+
+<h1 id="take의-위치에-따라-결과가-달라질까">take의 위치에 따라 결과가 달라질까?</h1>
 <p><strong>take가 위쪽에 위치한 경우</strong></p>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
             <span class="o">.</span><span class="nf">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -538,7 +546,9 @@ TAP              --T--|&gt;
 내부 Observerable --1--|&gt;  -2--|&gt; 
 flatMap 이후      --1--|&gt;
 </pre>
-<h2 id="take를-여러번-쓰는-경우">take를 여러번 쓰는 경우</h2>
+<p> </p>
+
+<h1 id="take를-여러번-쓰는-경우">take를 여러번 쓰는 경우</h1>
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">from</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
             <span class="o">.</span><span class="nf">take</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이전"</span><span class="p">)</span>
             <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
@@ -597,7 +607,7 @@ flatMap 이전 -&gt; isDisposed
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=RxSwift+take+Operator%EC%97%90+%EB%8C%80%ED%95%98%EC%97%AC%20https%3A%2F%2Fictechgy.github.io%2Frxswift%2Ftake%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=take+Operator%EC%97%90+%EB%8C%80%ED%95%98%EC%97%AC%28RxSwift%29%20https%3A%2F%2Fictechgy.github.io%2Frxswift%2Ftake%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fictechgy.github.io%2Frxswift%2Ftake%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -608,7 +618,7 @@ flatMap 이전 -&gt; isDisposed
       
   <nav class="pagination">
     
-      <a href="/rxswift/zip/" class="pagination--pager" title="RxSwift zip Operator에 대하여
+      <a href="/rxswift/zip/" class="pagination--pager" title="zip Operator에 대하여(RxSwift)
 ">이전</a>
     
     
@@ -640,7 +650,7 @@ flatMap 이전 -&gt; isDisposed
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/rxswift/zip/" rel="permalink">RxSwift zip Operator에 대하여
+        <a href="/rxswift/zip/" rel="permalink">zip Operator에 대하여(RxSwift)
 </a>
       
     </h2>
@@ -673,7 +683,7 @@ flatMap 이전 -&gt; isDisposed
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/rxswift/flatMap/" rel="permalink">RxSwift flatMap Operator에 대하여
+        <a href="/rxswift/flatMap/" rel="permalink">flatMap Operator에 대하여(RxSwift)
 </a>
       
     </h2>
@@ -687,7 +697,7 @@ flatMap 이전 -&gt; isDisposed
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">여태까지 나는 ‘flatMap을 통해 반환되는 Observable이 기존 시퀀스에는 전혀 영향을 미치지 않는다.’라고 생각해왔다. (왜그랬는지는 모르겠다. 아마도 처음에 어렵다고 느껴서 나 혼자서 이렇게 정의내렸던 것 같다.)
+    <p class="archive__item-excerpt" itemprop="description">flatMap에서 error가 담긴 Observable이 반환되는 경우
 </p>
   </article>
 </div>

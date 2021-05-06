@@ -1,0 +1,12 @@
+I"�<ul class="toc__menu">
+  <li><a href="#flatmap에서-take를-써야하는-경우">flatMap에서 take를 써야하는 경우</a>
+    <ul>
+      <li><a href="#내부-observable에-take를-안썼다면-언제-disposed될까">내부 Observable에 take를 안썼다면 언제 disposed될까?</a></li>
+      <li><a href="#외부에다가-take를-쓴다면">외부에다가 take를 쓴다면?</a></li>
+      <li><a href="#내부-observable들이-살아있을-때-해당-내부-observable들에-데이터가-생긴다면-이게-작동에-영향을-미칠까">내부 Observable들이 살아있을 때 해당 내부 Observable들에 데이터가 생긴다면 이게 작동에 영향을 미칠까?</a></li>
+    </ul>
+  </li>
+  <li><a href="#take의-위치에-따라-결과가-달라질까">take의 위치에 따라 결과가 달라질까?</a></li>
+  <li><a href="#take를-여러번-쓰는-경우">take를 여러번 쓰는 경우</a></li>
+</ul>
+:ET
