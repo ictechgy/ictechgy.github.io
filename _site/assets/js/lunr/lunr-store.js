@@ -268,4 +268,10 @@ var store = [{
         "tags": [],
         "url": "https://ictechgy.github.io/rxswift/take/",
         "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
+      },{
+        "title": "signal과 driver 그리고 error handling에 대하여(RxSwift)",
+        "excerpt":"이 글을 읽기 전 eungding님의 블로그와 Rhyno님의 블로그글을 참고해보자.   Signal과 Driver? Signal과 Driver는 메인쓰레드에서의 동작을 보장하고 error를 반환하지 않는다. 그런데 나는 ‘error를 반환하지 않는다는 것’이 에러가 난 것에 대해 스트림 종료 방지를 해준다는 의미로 처음에 받아들였다. 그래서 특정 Observable 뒤에 asSignal이나 asDriver를 써주면 해당 Observable에서 error가 난다고 하더라도 전체적인...","categories": ["RxSwift"],
+        "tags": [],
+        "url": "https://ictechgy.github.io/rxswift/error/",
+        "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
       }]

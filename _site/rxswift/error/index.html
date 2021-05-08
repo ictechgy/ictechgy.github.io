@@ -1,0 +1,821 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>signal과 driver 그리고 error handling에 대하여(RxSwift) - 개발 끄적끄적</title>
+<meta name="description" content="이 글을 읽기 전 eungding님의 블로그와 Rhyno님의 블로그글을 참고해보자. ">
+
+
+  <meta name="author" content="JJanghong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="개발 끄적끄적">
+<meta property="og:title" content="signal과 driver 그리고 error handling에 대하여(RxSwift)">
+<meta property="og:url" content="https://ictechgy.github.io/rxswift/error/">
+
+
+  <meta property="og:description" content="이 글을 읽기 전 eungding님의 블로그와 Rhyno님의 블로그글을 참고해보자. ">
+
+
+
+  <meta property="og:image" content="https://ictechgy.github.io/assets/images/photo-hangang.jpeg">
+
+
+
+
+
+  <meta property="article:published_time" content="2021-05-08T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://ictechgy.github.io/rxswift/error/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "dev blog",
+      "url": "https://ictechgy.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="개발 끄적끄적 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          개발 끄적끄적
+          <span class="site-subtitle">개발공부</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/"></a>
+            </li><li class="masthead__menu-item">
+              <a href="">연도별</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/"></a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/photo-avatar.jpeg" alt="JJanghong" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">JJanghong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>공부중입니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ictechgy@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="signal과 driver 그리고 error handling에 대하여(RxSwift)">
+    <meta itemprop="description" content="이 글을 읽기 전 eungding님의 블로그와 Rhyno님의 블로그글을 참고해보자.">
+    <meta itemprop="datePublished" content="2021-05-08T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">signal과 driver 그리고 error handling에 대하여(RxSwift)
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 분 소요
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#signal과-driver">Signal과 Driver?</a>
+    <ul>
+      <li><a href="#flatmap에-적용해보기">flatMap에 적용해보기</a></li>
+      <li><a href="#추가-테스트-1">추가 테스트 1</a></li>
+      <li><a href="#추가-테스트-2">추가 테스트 2</a></li>
+      <li><a href="#추가-테스트-3">추가 테스트 3</a></li>
+    </ul>
+  </li>
+  <li><a href="#정리">정리</a></li>
+  <li><a href="#참고하면-좋은-사이트">참고하면 좋은 사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>이 글을 읽기 전 <a href="https://eunjin3786.tistory.com/75">eungding님의 블로그</a>와 <a href="https://jcsoohwancho.github.io/2019-08-09-RxSwift%EA%B8%B0%EC%B4%88-Driver-&amp;-Signal/">Rhyno님의 블로그</a>글을 참고해보자.</p>
+
+<p> </p>
+
+<h1 id="signal과-driver">Signal과 Driver?</h1>
+<p>Signal과 Driver는 메인쓰레드에서의 동작을 보장하고 error를 반환하지 않는다. 
+그런데 나는 ‘error를 반환하지 않는다는 것’이 에러가 난 것에 대해 스트림 종료 방지를 해준다는 의미로 처음에 받아들였다. 그래서 특정 Observable 뒤에 asSignal이나 asDriver를 써주면 해당 Observable에서 error가 난다고 하더라도 전체적인 스트림은 종료가 되지 않을 것이라고 생각했다.</p>
+
+<p>그래서 몇가지 테스트를 진행해보았다.</p>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="k">let</span> <span class="nv">publishSubject</span><span class="p">:</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="p">()</span>
+        
+<span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span>
+		<span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span>
+				<span class="n">publishSubject</span><span class="o">.</span><span class="nf">onError</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span>
+		<span class="p">})</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">publishSubject</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"PublishSubject"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+        <span class="c1">//과연 스트림은 끊기지 않고 계속 유지될까?</span>
+				
+<span class="kd">enum</span> <span class="kt">TestError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="n">fakeError</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>버튼을 탭하는 경우 publishSubject로 error가 넘어가도록 했고 이를 미리 subscribe(emit)해준 스트림에서 받도록 세팅해두었다.
+결과는 아래와 같았다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Signal -&gt; subscribed
+PublishSubject -&gt; subscribed
+//버튼을 탭했고 publishSubject로 error가 넘어감
+PublishSubject -&gt; Event error(fakeError)
+Signal -&gt; Event next(0)
+Signal -&gt; Event completed
+Signal -&gt; isDisposed
+PublishSubject -&gt; isDisposed
+</code></pre></div></div>
+<p><strong>시퀀스가 모두 disposed됐고 스트림이 종료되었다.</strong>
+Signal이든 Driver이든 Observable에 error가 있는 경우 시퀀스의 종료를 막아주는 것은 아니었다. 다만 에러가 난 경우 이를 이후에 어떻게 처리할 것인지를 설정할 수 있을 뿐.</p>
+
+<p> </p>
+
+<h2 id="flatmap에-적용해보기">flatMap에 적용해보기</h2>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">secondButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">secondButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+		<span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>
+		<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+</code></pre></div></div>
+<p>버튼을 탭하는 경우 flatMap에서 error가 들어가있는 Observable이 반환되도록 설정하였다.</p>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Signal 이후 -&gt; subscribed
+flatMap 이후 -&gt; subscribed
+TAP -&gt; subscribed
+//버튼 탭
+TAP -&gt; Event next(())
+내부 Observable -&gt; subscribed
+내부 Observable -&gt; Event error(fakeError)
+flatMap 이후 -&gt; Event error(fakeError)
+Signal 이후 -&gt; Event next(0)
+Signal 이후 -&gt; Event completed
+Signal 이후 -&gt; isDisposed
+flatMap 이후 -&gt; isDisposed
+TAP -&gt; isDisposed
+내부 Observable -&gt; isDisposed
+</code></pre></div></div>
+<p>역시 마찬가지로 전체 스트림은 모두 종료되었으며 Signal은 에러에 대한 후속처리만 담당해 준 것을 볼 수 있었다.</p>
+
+<p> </p>
+
+<h2 id="추가-테스트-1">추가 테스트 1</h2>
+<p>asSignal을 위로 올리면 어떻게 될까?</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">thirdButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">thirdButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="p">())</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asObservable</span><span class="p">()</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이전"</span><span class="p">)</span>
+		<span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>
+		<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flatMap 이후 -&gt; subscribed
+flatMap 이전 -&gt; subscribed
+Signal -&gt; subscribed
+TAP -&gt; subscribed
+//버튼 탭
+TAP -&gt; Event next(())
+Signal -&gt; Event next(())
+flatMap 이전 -&gt; Event next(())
+내부 Observable -&gt; subscribed
+내부 Observable -&gt; Event error(fakeError)
+flatMap 이후 -&gt; Event error(fakeError)
+Unhandled error happened: fakeError
+flatMap 이후 -&gt; isDisposed
+flatMap 이전 -&gt; isDisposed
+Signal -&gt; isDisposed
+TAP -&gt; isDisposed
+내부 Observable -&gt; isDisposed
+</code></pre></div></div>
+<p>모든 시퀀스는 disposed되었고 전체 스트림이 종료되었다.</p>
+
+<p> </p>
+
+<h2 id="추가-테스트-2">추가 테스트 2</h2>
+
+<p>이번에는 throw를 써보았다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">fourthButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">fourthButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+		<span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+				<span class="k">throw</span> <span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span>
+		<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"map 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+</code></pre></div></div>
+<p>map operator 내  <span style="color:black"><code class="language-plaintext highlighter-rouge">throw TestError.fakeError</code></span> 라고 쓴 부분을 <span style="color:black"><code class="language-plaintext highlighter-rouge">return TestError.fakeError</code></span>라고 쓰는 경우 밑의 <span style="color:black"><code class="language-plaintext highlighter-rouge">.asSignal(onErrorJustReturn: 0)</code></span>부분에서 오류가 발생한다.  <br />
+오류 메시지:  <span style="color:red"><code class="language-plaintext highlighter-rouge">Cannot convert value of type 'Int' to expected argument type 'ViewController.TestError'</code></span> <br />
+map을 통해 반환되는 데이터 타입인 TestError와 asSignal에서 오류에 대해 리턴해주는 0이라는 값 데이터 타입이 서로 맞지 않다는 것. <br />
+이 경우 <span style="color:black"><code class="language-plaintext highlighter-rouge">return TestError.fakeError</code></span>에 맞춰 asSignal부분을 <span style="color:black">.asSignal(onErrorJustReturn: TestError.fakeError)`</span>라고 써주면 에러는 사라진다. 하지만 오류에 대해서 또 오류를 내보낸다면 asSignal을 쓰는 이유가 없어지니..  <br />
+내 추측이긴 하지만 map에서 return으로 오류를 반환 시 오류로 인식하지 못하고 하나의 데이터로 인식하는 것으로 보인다.</p>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Signal 이후 -&gt; subscribed
+map 이후 -&gt; subscribed
+TAP -&gt; subscribed
+//버튼 탭
+TAP -&gt; Event next(())
+map 이후 -&gt; Event error(fakeError)
+Signal 이후 -&gt; Event next(0)
+Signal 이후 -&gt; Event completed
+Signal 이후 -&gt; isDisposed
+map 이후 -&gt; isDisposed
+TAP -&gt; isDisposed
+</code></pre></div></div>
+<p>모든 시퀀스가 disposed되었고 전체 스트림이 종료되었다.</p>
+
+<p> </p>
+
+<h2 id="추가-테스트-3">추가 테스트 3</h2>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">fifthButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="k">let</span> <span class="nv">observable</span><span class="p">:</span> <span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="k">throw</span> <span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span>
+<span class="p">}</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">fifthButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+		<span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="k">try</span> <span class="nf">observable</span><span class="p">()</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>  
+		<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="p">())</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>실행 결과는 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Signal 이후 -&gt; subscribed
+flatMap 이후 -&gt; subscribed
+TAP -&gt; subscribed
+//버튼 탭
+TAP -&gt; Event next(())
+flatMap 이후 -&gt; Event error(fakeError)
+Signal 이후 -&gt; Event next(())
+Signal 이후 -&gt; Event completed
+Signal 이후 -&gt; isDisposed
+flatMap 이후 -&gt; isDisposed
+TAP -&gt; isDisposed
+</code></pre></div></div>
+<p>“내부 Observable”이라고 표기한 debug메시지가 뜨지 않았다는 점이 특이하다.
+아마도 throw로 에러가 나와서 그런 것일 듯. (정상적으로 Observable을 받았다면 메시지가 띄워졌을 것이다.)</p>
+
+<p>정상적으로 Observable을 받은 경우에는 아래와 같이 메시지가 뜬다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//observable 클로에서 Observable.just(())를 return 하는 경우
+TAP -&gt; Event next(())
+내부 Observable -&gt; subscribed
+내부 Observable -&gt; Event next(())
+flatMap 이후 -&gt; Event next(())
+Signal 이후 -&gt; Event next(())
+내부 Observable -&gt; Event completed
+내부 Observable -&gt; isDisposed
+</code></pre></div></div>
+
+<p> </p>
+
+<h1 id="정리">정리</h1>
+<p>signal과 driver가 error를 return하지 않는다고 해서 스트림이 종료되는 것을 막아주는 것은 아니다. error를 handling해서 스트림이 종료되지 않게 하는 것은 별개의 문제. 보통 <strong>catch나 catchAndReturn등</strong> 을 이용한다. <br />
+error는 Observable 안에서 onError()가 호출됨에 따라 넘어올 수도 있지만 throw를 통해 넘어올 수도 있다. <br />
+(throw의 경우 어떻게 작성해서 써야할까? Observable.create 내에서는 직접적으로 throw가 불가능한데..)</p>
+
+<p> </p>
+
+<h1 id="참고하면-좋은-사이트">참고하면 좋은 사이트</h1>
+<ul>
+  <li><a href="https://github.com/ReactiveX/RxSwift/issues/1162">flatMap과 error handling(RxSwift Github Issues)</a></li>
+  <li><a href="https://github.com/fimuxd/RxSwift/blob/master/Lectures/14_Error%20Handling%20in%20Practice/Ch.14%20Error%20Handling%20in%20Practice.md">Bo-Young PARK(fimuxd)님의 RxSwift 스터디 모임 관련 자료</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#rxswift" class="page__taxonomy-item" rel="tag">RxSwift</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-05-08T00:00:00+09:00">May 8, 2021</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=signal%EA%B3%BC+driver+%EA%B7%B8%EB%A6%AC%EA%B3%A0+error+handling%EC%97%90+%EB%8C%80%ED%95%98%EC%97%AC%28RxSwift%29%20https%3A%2F%2Fictechgy.github.io%2Frxswift%2Ferror%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fictechgy.github.io%2Frxswift%2Ferror%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fictechgy.github.io%2Frxswift%2Ferror%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/rxswift/take/" class="pagination--pager" title="take Operator에 대하여(RxSwift)
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/rxswift/take/" rel="permalink">take Operator에 대하여(RxSwift)
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">flatMap에서 take를 써야하는 경우
+단도직입적으로 말하자면 아래와 같은 경우에는 반드시 써야한다.
+_ = button.rx.tap.debug("TAP")
+            .flatMap {
+                return BehaviorRelay(value: ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/rxswift/zip/" rel="permalink">zip Operator에 대하여(RxSwift)
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">zip은 대표적인 Observable 병합 연산자이다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/rxswift/flatMap/" rel="permalink">flatMap Operator에 대하여(RxSwift)
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">flatMap에서 error가 담긴 Observable이 반환되는 경우
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/photo-hangang.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/linux/Linux_day9/" rel="permalink">Linux_day9
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 분 소요
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">디렉토리 삭제 rmdir은 내부가 비어있는 경우에만 디렉토리 제거 가능 → 안에 파일이 있어도 삭제 할 수 있는 옵션은?
+→ 없다. man rmdir 및 rmdir –help 로 내부 옵션 살폈는데 안에 파일이 있어도 삭제할 수 있는 옵션은 존재하지 않는다.
+결국 rm -r 을 사...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/ictechgy" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 dev blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://ictechgy.github.io/rxswift/error/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/rxswift/error"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ictechgy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

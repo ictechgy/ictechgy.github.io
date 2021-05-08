@@ -1,0 +1,136 @@
+I"T1<p>이 글을 읽기 전 <a href="https://eunjin3786.tistory.com/75">eungding님의 블로그</a>와 <a href="https://jcsoohwancho.github.io/2019-08-09-RxSwift%EA%B8%B0%EC%B4%88-Driver-&amp;-Signal/">Rhyno님의 블로그</a>글을 참고해보자.</p>
+
+<p> </p>
+
+<h1 id="signal과-driver">Signal과 Driver?</h1>
+<p>Signal과 Driver는 메인쓰레드에서의 동작을 보장하고 error를 반환하지 않는다. 
+그런데 나는 ‘error를 반환하지 않는다는 것’이 에러가 난 것에 대해 스트림 종료 방지를 해준다는 의미로 처음에 받아들였다. 그래서 특정 Observable 뒤에 asSignal이나 asDriver를 써주면 해당 Observable에서 error가 난다고 하더라도 전체적인 스트림은 종료가 되지 않을 것이라고 생각했다.</p>
+
+<p>그래서 몇가지 테스트를 진행해보았다.</p>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="k">let</span> <span class="nv">publishSubject</span><span class="p">:</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="p">()</span>
+        
+<span class="n">_</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span>
+		<span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span>
+				<span class="n">publishSubject</span><span class="o">.</span><span class="nf">onError</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span>
+		<span class="p">})</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">publishSubject</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"PublishSubject"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+        <span class="c1">//과연 스트림은 끊기지 않고 계속 유지될까?</span>
+				
+<span class="kd">enum</span> <span class="kt">TestError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="n">fakeError</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>버튼을 탭하는 경우 publishSubject로 error가 넘어가도록 했고 이를 미리 subscribe(emit)해준 스트림에서 받도록 세팅해두었다.
+결과는 아래와 같았다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Signal -&gt; subscribed
+PublishSubject -&gt; subscribed
+//버튼을 탭했고 publishSubject로 error가 넘어감
+PublishSubject -&gt; Event error(fakeError)
+Signal -&gt; Event next(0)
+Signal -&gt; Event completed
+Signal -&gt; isDisposed
+PublishSubject -&gt; isDisposed
+</code></pre></div></div>
+<p><strong>시퀀스가 모두 disposed됐고 스트림이 종료되었다.</strong>
+Signal이든 Driver이든 Observable에 error가 있는 경우 시퀀스의 종료를 막아주는 것은 아니었다. 다만 에러가 난 경우 이를 이후에 어떻게 처리할 것인지를 설정할 수 있을 뿐.</p>
+
+<p> </p>
+
+<h2 id="flatmap에-적용해보기">flatMap에 적용해보기</h2>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">secondButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">secondButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+		<span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>
+		<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+</code></pre></div></div>
+<p>버튼을 탭하는 경우 flatMap에서 error가 들어가있는 Observable이 반환되도록 설정하였다.</p>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Signal 이후 -&gt; subscribed
+flatMap 이후 -&gt; subscribed
+TAP -&gt; subscribed
+//버튼 탭
+TAP -&gt; Event next(())
+내부 Observable -&gt; subscribed
+내부 Observable -&gt; Event error(fakeError)
+flatMap 이후 -&gt; Event error(fakeError)
+Signal 이후 -&gt; Event next(0)
+Signal 이후 -&gt; Event completed
+Signal 이후 -&gt; isDisposed
+flatMap 이후 -&gt; isDisposed
+TAP -&gt; isDisposed
+내부 Observable -&gt; isDisposed
+</code></pre></div></div>
+<p>역시 마찬가지로 전체 스트림은 모두 종료되었으며 Signal은 에러에 대한 후속처리만 담당해 준 것을 볼 수 있었다.</p>
+
+<p> </p>
+
+<h2 id="추가-테스트-1">추가 테스트 1</h2>
+<p>asSignal을 위로 올리면 어떻게 될까?</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">thirdButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">thirdButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="p">())</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asObservable</span><span class="p">()</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이전"</span><span class="p">)</span>
+		<span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">error</span><span class="p">(</span><span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"내부 Observable"</span><span class="p">)</span>
+		<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"flatMap 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">subscribe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flatMap 이후 -&gt; subscribed
+flatMap 이전 -&gt; subscribed
+Signal -&gt; subscribed
+TAP -&gt; subscribed
+//버튼 탭
+TAP -&gt; Event next(())
+Signal -&gt; Event next(())
+flatMap 이전 -&gt; Event next(())
+내부 Observable -&gt; subscribed
+내부 Observable -&gt; Event error(fakeError)
+flatMap 이후 -&gt; Event error(fakeError)
+Unhandled error happened: fakeError
+flatMap 이후 -&gt; isDisposed
+flatMap 이전 -&gt; isDisposed
+Signal -&gt; isDisposed
+TAP -&gt; isDisposed
+내부 Observable -&gt; isDisposed
+</code></pre></div></div>
+<p>모든 시퀀스는 disposed되었고 전체 스트림이 종료되었다.</p>
+
+<p> </p>
+
+<h2 id="추가-테스트-2">추가 테스트 2</h2>
+
+<p>이번에는 throw를 써보았다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">fourthButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">fourthButton</span><span class="o">.</span><span class="n">rx</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"TAP"</span><span class="p">)</span>
+		<span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+				<span class="k">throw</span> <span class="kt">TestError</span><span class="o">.</span><span class="n">fakeError</span>
+		<span class="p">}</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"map 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">asSignal</span><span class="p">(</span><span class="nv">onErrorJustReturn</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Signal 이후"</span><span class="p">)</span>
+		<span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+</code></pre></div></div>
+<p>map operator 내  <span style="color:black"><code class="language-plaintext highlighter-rouge">throw TestError.fakeError</code></span> 라고 쓴 부분을 <span style="color:black"><code class="language-plaintext highlighter-rouge">return TestError.fakeError</code></span>라고 쓰는 경우 밑의 <span style="color:black"><code class="language-plaintext highlighter-rouge">.asSignal(onErrorJustReturn: 0)</code></span>부분에서 오류가 발생한다.  <br />
+오류 메시지:  <span style="color:red"><code class="language-plaintext highlighter-rouge">Cannot convert value of type 'Int' to expected argument type 'ViewController.TestError'</code></span> <br />
+map을 통해 반환되는 데이터 타입인 TestError와 asSignal에서 오류에 대해 리턴해주는 0이라는 값 데이터 타입이 서로 맞지 않다는 것. <br />
+이 경우 <span style="color:black"><code class="language-plaintext highlighter-rouge">return TestError.fakeError</code></span>에 맞춰 asSignal부분을 <span style="color:black">.asSignal(onErrorJustReturn: TestError.fakeError)`</span>라고 써주면 에러는 사라진다. 하지만 오류에 대해서 또 오류를 내보낸다면 asSignal을 쓰는 이유가 없어지니..  <br />
+내 추측이긴 하지만 map에서 return으로 오류를 반환 시 오류로 인식하지 못하고 데이터로 인식하는 것으로 보인다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,484 @@
+I"�h<p>실습
+아래에 주어진 예제를 작업해보세요
+(조건! 각 번호마다 명령어 한 줄로 작업해주세요)</p>
+
+<p>1) /tmp/test 디렉터리는 Sticky Bit를 가지고 있으며 모든 권한을 가지고 있음</p>
+
+<p>2) /tmp/test/test2 파일은 SetUID가 설정되어 있으며 소유자가 모든 권한을 가지고 있고, 그룹은 실행 권한만 가지고 있고, 다른 유저는 읽기와 실행을 가지고 있음(한줄 작업 조건에서 제외)</p>
+
+<p>3) /tmp/test/test3 디렉터리는 SetGID가 설정되어 있으며 소유자가 모든 권한을 가지고 있고, 그룹은 쓰기와 접근 권한을 가지고 있고, 다른 유저는 접근 권한만 가지고 있음</p>
+
+<p>/tmp라는 디렉토리는 기본적으로 존재한다.
+[root@localhost ~]# mkdir /tmp/test
+[root@localhost ~]# ls -ld /tmp/test
+drwxr-xr-x. 2 root root 6  5월 31 09:20 /tmp/test
+[root@localhost ~]# chmod g+w,o+wt /tmp/test
+[root@localhost ~]# ls -ld /tmp/test
+drwxrwxrwt. 2 root root 6  5월 31 09:20 /tmp/test</p>
+
+<p>2)
+[root@localhost ~]# touch /tmp/test/test2
+[root@localhost ~]# ls -l /tmp/test/test2
+-rw-r–r–. 1 root root 0  5월 31 09:21 /tmp/test/test2
+[root@localhost ~]# chmod u+x,u+s,g-r+x,o+x /tmp/test/test2
+[root@localhost ~]# ls -l /tmp/test/test2
+-rws–xr-x. 1 root root 0  5월 31 09:21 /tmp/test/test2
+→ x를 주면서 동시에 s를 주는게 가능하다. 순서를 바꿔도 될까? 또는 그냥 x권한을 주는 과정을 생략하고 바로 s만 줄 수 있을까? 그렇게 하면 x권한은 있는 것으로 되는걸까 아니면 S만 줄 수 있는 상태인걸까
+아무튼간 문서파일에서 실행파일형태로 변하였다.</p>
+
+<p>3)
+[root@localhost ~]# mkdir /tmp/test/test3
+[root@localhost ~]# ls -ld /tmp/test/test3
+drwxr-xr-x. 2 root root 6  5월 31 09:22 /tmp/test/test3
+[root@localhost ~]# chmod g+s,o-r /tmp/test/test3
+[root@localhost ~]# ls -ld /tmp/test/test3
+drwxr-s–x. 2 root root 6  5월 31 09:22 /tmp/test/test3</p>
+
+<p>→ 아 한꺼번에 한줄로만 만들라는거구나
+man mkdir 해보면 mkdir 옵션중에 -m옵션이 있다. chmod를 쓴 것과 같은 mode옵션.
+1)
+mkdir -m 1777 /tmp/test
+ls -ld /tmp/test
+2)
+touch /tmp/test/test2  → 파일 touch에는 허가권 주는 옵션 없나? 없는것 같음. 다른 명령어이면 모를까.. touch에는 없는 것 같다.
+ls -l /tmp/test/test2 → -rw-r–r– root root test2
+chmod u+s+x,g-r+x,o+x /tmp/test/test2  → s와 x 주는 순서가 바뀌어있어도 되나보네. 그냥 s만 주는 건? x를 안준다면 S를 줘야하는거 아닌가 흠…
+ls -l /tmp/test/test2
+3)
+mkdir -m 2731 /tmp/test/test3
+ls -ld /tmp/test/test3</p>
+
+<p>또는 그냥 연계연산자 | 또는 &amp;&amp;로 만들 수도 있지 않을까
+&amp;&amp;연산자 쓰면 작동 한다. 다만 연계연산자 | 로는 작동하지 않는다.
+mkdir a &amp;&amp; chmod 000 a  → 작동
+mkdir b | chmod 000 b → 작동안함. chmod가 mkdir을 받아줄 수 있는 구조가 아닌 듯 하다.</p>
+
+<p>rm -rf /tmp/test로 지우기</p>
+
+<p>압축(Compress)
+옛날 컴퓨터에서.. 데이터는 커져가는데 하드 용량은 적음. 따라서 데이터크기를 줄이기 위해 쓴다.
+파일이나 통신 메시지와 같은 데이터 집합의 기억 영역을 절감하거나, 전송시간을 단축시키기 위하여 → 데이터를 좀더 적은 수의 비트를 사용하여 부호화하는 것을 말한다.(부호화 한 것의 반댓말은 뭐라고 해야하지.. 복호화? 암호화는 아니고..)
+즉! 용량을 줄이기 위해서</p>
+
+<p>요즘은 용량절감의 목적보다는 파일정리의 목적
+여러개의 파일을 하나의 압축파일로 보관 및 관리</p>
+
+<p>Windows에서 압축 프로그램
+대표적으로 알집, 반디집, 7-zip, 빵집, WinRAR 등</p>
+
+<p>Linux에서 압축 프로그램
+compress 명령어 → 실제로 존재하는 명령어이다.
+압축의 조상님
+하나 이상의 파일을 압축 할 때 사용하는 명령어(하나도 압축가능?)
+파일의 확장자는 *.Z  (대문자 Z 확장자. 원래 리눅스에는 확장자 개념이 없지만 프로그램을 쓰다보니 확장자 생김. 왜 Z인걸까)
+압축해제는 uncompress 또는 compress -d(옵션)을 사용
+압축기법은 압축루틴(알고리즘)을 사용함(특허문제가 있음)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   2) gzip  GNU zip을 의미 압축률이 compress보다 훨씬 좋음 리눅스의 기본 압축 명령으로 사용되고 있다. Lemple-Ziv 코딩(LZ77)기법을 사용 압축속도가 빠름 아쉬운 점은 압축률이 좋지 않음(compress보다는 좋지만?)
+
+   3) bzip2(bzip이 있었으나 특허문제로 사용하지 않음) Burrow-Wheeler 블록정렬 텍스트 압축 알고리즘과 허프만(Huffman) 코딩을 사용하고 있음 특히 텍스트 압축에서 두각을 보임 사용형식이 gzip과 비슷함 gzip보다 10~20% 압축률이 좋음(속도면에서는 gzip보다 조금 느림)
+
+   4) xz gzip보다 30%, bzip2보다 15%정도 압축률이 좋다 LZMA(Lemple-Ziv-Marko chain Algorithm)2를 사용함 파일 하나만을 압축하기 위해 설계되었음 → 하나?? 압축 해제시 unxz 또는 xz -d(옵션)을 사용함
+</code></pre></div></div>
+
+<p>1~4까지 리눅스전용프로그램(compress, gzip, bzip2, xz)
+5번은 윈도우에서도 사용가능한 프로그램 명령어</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   5) zip (왜 zip인걸까? 무슨 약어인걸까?) 데이터를 압축, 보관하기 위한 파일형식 하나 혹은 여러개의 파일들을 그 크기를 줄여 압축하고 하나로 묶어 저장함 deflate 알고리즘이 가장 많이 사용되고 지원하는 압축 알고리즘 압축해제시 unzip 을 사용함 윈도우 cmd 창에서 zip을 치면 사용설명이 나온다.
+</code></pre></div></div>
+
+<p>이 압축프로그램은 리눅스 OS설치시 기본제공인지, 아니면 설치를 따로 한건지..</p>
+
+<p>준비물
+cp /backup/* /home/itbank → 숨김파일이 있다면 그건 cp안될 듯
+touch testfile1
+testfile1을 편집하여 내용을 적당히 입력 후 저장
+cp testfile1 testfile2 로 복사</p>
+
+<p>(내용 복사붙여넣기 시 이전내용 드래그한 뒤 마우스 오른쪽 클릭 사용. 화면에 나오지 않는 부분까지 드래그해서 복사하는건 어떻게 하는건지 모르겠다.)</p>
+
+<p>ls -l 했을 시 나오는 목록
+-rw-r–r–. 1 root root   5078  5월 31 09:57 grub.cfg
+-rw-r–r–. 1 root root    511  5월 31 09:57 inittab
+-rw-r–r–. 1 root root   1464  5월 31 09:57 kg
+-rw-r–r–. 1 root root   2028  5월 31 09:57 login.defs
+-rw-r–r–. 1 root root   2116  5월 31 09:57 passwd
+-rw-r–r–. 1 root root 205775  5월 31 09:58 testfile1
+-rw-r–r–. 1 root root 205775  5월 31 09:59 testfile2</p>
+
+<p>용량단위는 아마 바이트? 알파벳 하나당 1바이트, 한글 하나당 2바이트</p>
+
+<p>gzip과 bzip2 압축 프로그램을 써보자.</p>
+
+<p>사용형식(압축하기)
+gzip [option] 파일</p>
+
+<p>gzip testfile1 
+ls -l로 결과를 보면 용량이 줄었고 기존의 파일이 사라짐. 확장자는 .gz</p>
+
+<p>특징
+용량이 줄어듬
+확장자가 생김(gzip은 *.gz)
+파일명 색 변함
+원본파일이 사라짐</p>
+
+<p>bzip2 [option] 파일</p>
+
+<p>bzip2 testfile2
+용량이 더 줄었고 기존의 파일 사라짐. 확장자는 .bz2</p>
+
+<p>용량이 적은 파일일수록 gzip이 우세하다. 즉 파일용량이 적으면 gzip이 더 압축률이 우수하고 용량이 큰 파일이면 bzip2가 더 압축률이 우세하다. bzip2는 텍스트쪽에 특화라니까 알아서 선택해서 쓰면 될 것 같다.</p>
+
+<p>특징
+용량이 줄어듬
+확장자가 생김(bzip2는 *.bz2)
+원본파일 사라짐</p>
+
+<p>압축한 파일을 다시 압축할 수 있을까?
+→ 불가능. 
+gzip testfile1.gz
+gzip: testfile1.gz already has .gz suffix – unchanged</p>
+
+<p>bzip2 testfile2.bz2
+bzip2: Input file testfile2.bz2 already has .bz2 suffix.</p>
+
+<p>이미 압축한 파일을 동일한 압축 프로그램으로 또 다시 압축할 수 없음
+→ 교차하면? .gz파일을 bzip2로 압축하거나 .bz2를 gzip로 압축할 수는 있다.</p>
+
+<p>압축한 파일을 다시 압축한다는건.. 좋지 않다.
+압축한 것은 기존 데이터를 줄인 것. 그 상태에서 또 압축을 한다는건 깨져버린다는 것이다.
+원본이 부셔질 수 있다. 데이터의 손상 가능성 생김</p>
+
+<p>이미 압축한 파일을 다시 압축해서는 안 됨(된다고 하더라도.. 데이터 손상될 수 있음) → 알집에서는 몇번씩 압축한거같기도 한데.. 압축한 것들 모아서 또 압축하고.. 분할압축하고.
+분할압축은 압축 파일이 하나라도 없으면 제대로 압축해제가 안되고.
+근데 용량이 큰건 EGG로 분할압축하는데 압축률이 우수했다. 알고리즘이 다른거겠지</p>
+
+<p>압축 해제</p>
+
+<p>사용형식
+압축을 해제하는 자체 명령어~un~ 또는 기존 명령어에 옵션을 추가</p>
+
+<p>gunzip [option] 파일 (Gnu UnZip)</p>
+
+<p>gunzip testfile1.gz
+→ 압축이 해제됨. 기존의 압축되어있던 .gz파일은 사라진다.</p>
+
+<p>gunzip testfile2.bz2
+gzip: testfile2.bz2: unknown suffix – ignored
+→ 다른 형식은 압축해제 안된다.</p>
+
+<p>bunzip2 [option] 파일</p>
+
+<p>bunzip2 testfile2.bz2
+→ 압축해제 성공. 역시나 기존의 압축되어있던 .bz2는 사라진다.</p>
+
+<p>다시 압축하기
+gzip testfile1
+bzip2 testfile2</p>
+
+<p>이제 기존 명령어에 옵션사용해서 압축을 해제해보자
+gzip [option] 파일
+bzip2 [option] 파일</p>
+
+<p>option
+-d : decompress (압축해제)</p>
+
+<p>gzip -d testfile1.gz
+bzip2 -d testfile2.bz2</p>
+
+<p>다시 또 압축해보자.</p>
+
+<p>gunzip testfile1
+압축 해제시 gzip은 확장자를 생략할 수 있다.
+역시나 gzip -d testfile1로도 쓸 수 있다.</p>
+
+<p>bunzip2 testfile2
+bunzip2: Can’t open input file testfile2: No such file or directory.
+압축 해제시 bzip2는 확장자를 생략할 수 없다.
+역시나 bzip2 -d testfile2 불가능하다.</p>
+
+<p>리눅스에서는 동일한 이름이 존재할 수 없다. 
+두 파일 다 압축되어있는 상태에서.. 
+touch testfile1로 미리 파일을 만들어놓고
+gunzip testfile1을 하면 압축해제가 안된다.
+gunzip testfile1.gz를 하면 기존에 testfile1이 이미 존재하는데 overwrite를 할거냐고 물어본다.</p>
+
+<p>gzip -d testfile1또한 안되고 gzip -d testfile1.gz 하면 덮어씌울거냐 묻는다.</p>
+
+<p>압축해제시 동일한 파일이 존재하면 gzip은 확장자를 생략하면 안되며, 확장자까지 제대로 쓴 경우, 압축 해제시 덮어씌울지를 물어본다.</p>
+
+<p>→ testfile1이 존재하는상태에서 gunzip testfile1로 쓰듯 확장자를 정확히 안쓰면, testfile1.gz를 지정하는게 아니라 저 압축안된 그냥 testfile1파일이 대상이 되서 안되는 것인듯</p>
+
+<p>반대로 해보자. testfile1.gz가 있는 상태에서 testfile1 파일을 gzip으로 압축하려 한다면?
+gzip: testfile1.gz already exists; do you wish to overwrite (y or n)?  압축파일을 덮어씌우기 할거냐고 묻는 군.</p>
+
+<p>touch testfile2로 파일이 이미 존재하는 상태에서
+bunzip2 testfile2(bzip2는 압축해제시 사실 확장자명까지 정확하게 써줘야 하긴 함), bunzip2 testfile2.bz2 든 bzip -d testfile.bz2 다 안된다.
+압축 해제시 동일한 파일이 존재하면 bzip2는 압축해제가 안된다.</p>
+
+<p>하나씩 압축하는건 단일압축
+한번에 다 압축하는건 다중압축</p>
+
+<p>/home/itbank 하위의 모든 파일들을 gzip과 bzip2를 사용하여 다중압축을 해보자.</p>
+
+<p>-rw-r–r–. 1 root root    0  5월 31 15:05   testfile1
+-rw-r–r–. 1 root root  621  5월 31 14:50 testfile1.gz
+-rw-r–r–. 1 root root    0  5월 31 15:07   testfile2
+-rw-r–r–. 1 root root  619  5월 31 14:50 testfile2.bz2
+[root@localhost itbank]# rm -rf testfile?.?z*
+→ 딱 두 압축파일만 삭제하게 됨. 맨 마지막에도 ? 둬도 되려나
+또는 testfile?.  이라고 온점까지만 써도 두 압축파일만 제거 되려나
+사실 물음표는 한자리만 대체하는거긴 한데.. 따라서 testfile<em>.</em>z* 이런식으로 써도 되긴 함</p>
+
+<p>gzip * 을 하니까 다 단일로서 압축이 된다..흠
+옵션을 봐야겠다.</p>
+
+<p>gzip * a  → 모든 파일을 a라는 압축형태로 압축하라고 쓴거긴 한데 사용된 형식은 *모든 파일을 압축하고 a라는 파일도 압축해야하는데 a라는 파일을 못찾았다고 뜸
+gzip: a: No such file or directory</p>
+
+<p>gzip * » a  → 용량이 0인 a라는 파일이 생기고 다른 나머지들은 다 압축이 된 상태
+gzip * &gt; a → 위와 마찬가지로 용량 0인 a파일 생기며 원래것들 다 압축이 된 상태
+gzip * &gt; a.gz → 용량이 0인 a.gz파일이 생기고 전부다 압축이 된듯한 형태로 보임
+다 안된다. 
+a.gz를 따로 만드는식으로 이상하게 됨</p>
+
+<p>gzip -c * &gt; a.gz
+뭔가 되는 것 같은데..</p>
+
+<p>아 *모든 파일을 하나의 파일에 내용을 다 합쳐서 압축은 된다….
+즉 모든 파일들을 하나로 모아 a.gz라는 이름으로 압축함..
+cat test1 test2 … | gzip &gt; a.gz 뭐 이렇게 하는 식?
+모든 내용을 싸그리 하나로 모아서 압축..
+즉 저걸 압축해제하면 기존의 여러 파일들로 압축해제되는게 아니라 기존의 7개 파일들의 내용이 합쳐져 있는 a라는 단일파일로 압축해제가 됨..</p>
+
+<p>사실 gzip과 bzip2로는 다중압축이 불가능하다고 한다..</p>
+
+<p>윈도우는 압축과 보관을 동시에 한다. 압축을 해도 원본은 그대로 남는다
+리눅스는 압축은 압축, 보관은 별개다. 다중압축이 안된다.
+즉 리눅스는 압축이 원본파일 자체를 압축하는 방식</p>
+
+<p>tar 을 써야 한다. 그래야만 다중압축이 된다. 리눅스는 기본적으로 파일만 압축되고 디렉토리는 압축이 안된다. → 디렉토리 압축 불가? 아 진짜 안되네 디렉토리는.</p>
+
+<p>즉 다중압축이라는 것은 원래 파일들을 한 바구니에 넣고 압축을 하는 것이라고 보아야하는 것인가 → 그렇다.
+또는 디렉토리에 넣고 디렉토리 자체를 압축? → 디렉토리 자체 압축은 불가</p>
+
+<p>→ 다중압축이라는게 사실은 그런 것 같다. 여러 파일들을 한 바구니에모아둔 다음에 그 바구니를 압축하는 방식. 윈도우에서는 그런 과정을 자동으로 다 해주는 것 같다. 원본들은 그대로 두고 사본들을 만든다음에 그 사본들을 한 바구니 또는 하나의 서랍장에 넣어두고 그 바구니(서랍장)을 압축하는 방식. 원본삭제는 선택사항</p>
+
+<p>리눅스에서는 압축과 보관이 따로여서 다중압축을 하고싶다면 바구니에 넣는 것도 직접 해야하고 압축하는 것도 직접 해야하는 것으로 보인다. 
+기본적으로 압축은 단일에 대해서만 되며 원본파일 자체를 압축하는 것으로 보인다.</p>
+
+<p>→ 리눅스에서 tar라는 바구니에 파일들을 넣게 되면 원본을 복사해서 사본들을 tar바구니에 넣는 방식이 되는 것 같다. 이제 그 다음에 tar파일을 압축하면 그게 다중압축이 되는 것으로 보인다.</p>
+
+<p>tar(Tape Archive)  카세트테이브같은곳에 보관(archive - 기록, 기록보관소, 보관하다)
+	   ———
+	       └&gt; 보관(바구니)
+tar라는 파일에 내가 원하는 파일들을 넣어두고 tar자체를 압축해야한다.</p>
+
+<p>윈도우는 이미 보관을 하면서 압축을 해주는거고 리눅스는 tar하고 압축을 따로.</p>
+
+<p>압축은 전혀 하지 않으며 단순히 여러개의 파일을 하나로 묶을 때 사용
+백업으로도 사용할 수 있음(보관용도이므로)</p>
+
+<p>사용형식(보관하기)
+tar [option] 아카이브파일명(tar파일) 보관할파일명</p>
+
+<p>option
+옵션을 쓸 때 하이픈을 생략할 수 있다. 다만 생략하여 쓰는 것은 앞에 썼을 때에만 가능하다.
+tar -a가 있다면 tar a 라고 쓸 수 있다.
+단, tar a 아카이브파일명 -b -c 
+→ 아카이브파일명 뒤에 옵션을 쓸 때에는 하이픈을 꼭 써야한다.</p>
+
+<p>c(create) : 아카이브파일을 생성
+f(file) : 아카이브파일을 지정
+v(visual) : 상세한 정보, 과정보기</p>
+
+<p>c와 f는 무조건. v는 선택사항</p>
+
+<p>tar cf grubfile grub.cfg  → 옵션을 쓴 순서에 따라 grubfile이라는 아카이브파일을 create하고 그 바구니에 담길 파일f는 grub.cfg 라는 소리
+-rw-r–r–. 1 root root   5078  5월 31 09:57 grub.cfg
+-rw-r–r–. 1 root root  10240  5월 31 11:01 grubfile  → 바구니 파일</p>
+
+<p>옵션순서대로 쓰지 않은 경우.
+tar cf grub.cfg grubfile
+tar: grubfile: Cannot stat: 그런 파일이나 디렉터리가 없습니다
+tar: Exiting with failure status due to previous errors</p>
+
+<p>즉 대상을 지정할 때에는 옵션 순서대로 작성하도록 한다.</p>
+
+<p>특징
+원본파일이 남아있다.(사본을 만들어 바구니에 투입)
+아카이브파일의 용량이 보관된 파일보다 크다.(바구니라서 보관되어있는 애들보다는 크게 잡히게 된다.) → 압축하면 해결되겠지 빈공간은..
+아카이브 파일이라는 것을 알리기 위해 반드시 아카이브파일명을 확장자처럼 지정해주어야 한다. 예를들어, *.tar 처럼 파일명 지정해야한다. 안해도 상관은 없지만 안해주면 아카이브파일인지를 모른다. 문서파일과 헷갈린다. 실제로 허가권도 문서파일처럼 생겼다.(.tar라는 확장자는 없지만 그냥 구분하기 쉽게 기입하라는 것)
+gzip과 bzip2는 프로그램이므로 확장자가 자동으로 붙지만 이건 확장자를 직접 작성해야한다.</p>
+
+<p>tar cfv grubfile.tar grub.cfg
+grub.cfg  → 어떠한 파일이 들어가는지 v옵션을 통해 보인다.</p>
+
+<p>보관해제
+사용형식
+tar [option] 아카이브파일명</p>
+
+<p>option
+f 옵션은 반드시 사용(아카이브파일 지정)
+v 옵션은 선택사항
+x(extract) : 아카이브 파일 해제</p>
+
+<p>rm -rf grub.cfg  → 원본은 일단 삭제
+[root@localhost itbank]# tar xf grubfile.tar</p>
+
+<p>ls -l 로 확인해보면 tar파일은 그대로 계속 남아있다.
+따라서 계속 쓸 수 있다.</p>
+
+<p>기존파일이 있다면 묻지도 따지지도 않고 그냥 바로 덮어씌워 버린다.. overwrite묻지도 않네</p>
+
+<p>[root@localhost itbank]# tar xf grubfile → 확장자명 생략
+tar: grubfile: Cannot open: 그런 파일이나 디렉터리가 없습니다
+tar: Error is not recoverable: exiting now</p>
+
+<p>→ 확장자명까지 다 제대로 써주도록 하자</p>
+
+<p>특징
+아카이브 파일을 해제할 때 반드시 아카이브 파일명(확장자같은 부분까지) 전부 기입</p>
+
+<p>/home/itbank 하위 파일을 전부 tar에 보관해보자
+tar cfv compressed.tar *
+모든 파일들이 compressed.tar라는 바구니에 담겨지게 된다. 원본은 그대로 존재</p>
+
+<p>압축을 할 때 f옵션에 해당하는 대상파일 지정 시 여러 방식을 쓸 수 있다.
+tar cf ?.tar ~~~</p>
+
+<p>저 ~~부분에 들어갈 수 있는건..
+파일명을 일일히 다 쓰거나.. (상대경로)</p>
+<ul>
+  <li>(상대경로)
+./* (상대경로)
+/home/itbank/* (상대경로)</li>
+</ul>
+
+<p>.을 쓴다면? 디렉토리가 지정이 되려나? itbank디렉토리 자체?
+./. 은?</p>
+
+<p>상대경로로 할 때와 절대경로로 할 때 다르게 담긴다.
+tar cfv sangdae.tar ./*  하위만 보관만 하게 되고 tar를 해제해도 하위의 것만 나온다.</p>
+
+<p>tar cfv juldae.tar /home/itbank/* 을 하게 되면.. 
+home보관되고 itbank 보관되고 그 밑의 파일들이 보관된다. 절대경로 쓴 것까지 전부다 보관
+풀면은 home이 튀어나온다..
+풀린 home안에 itbank가 있고 그 안에 원본 파일들이 있다.
+다만 최상위 / 에 대한 것들은 보관되지 않는다.</p>
+
+<p>만약 /home 밑에 123이라는 단순파일이 있었다면 그 파일은 tar에 보관하지 않는다.
+오직 home/itbank/*만!</p>
+
+<p>게다가 f에 해당하는 대상파일명을 쓰는 부분에서 ./*을 쓴것과 *을 쓴것도 담기는 방식자체가 다르다.</p>
+
+<p>상대경로를 이용하여 tar를 사용하면 현재 디렉토리 하위에 있는 것을 보관
+절대경로를 이용하여 tar를 사용하면 절대경로로 기입한 디렉터리까지(단! 최상위 디렉토리 /는 제외)를 전부 보관</p>
+
+<p>안에 있는 압축파일을 보고싶다면? tar 아카이브 파일안에 있는 파일들의 목록?
+cat 를 쓰면 안의 메모장파일 내용이 보이게 됨…</p>
+
+<p>그 외의 옵션 option
+t(list) : 아카이브 파일에 보관되어 있는 파일의 목록을 출력</p>
+
+<p>tar ft file.tar  → f는 필수. 파일을 지정</p>
+
+<p>tar로 바구니에 담을 때 적은 대상파일 경로명대로 목록이 뜬다.
+./*로 담았다면 파일명들 앞에 ./이 기본적으로 표시되어있고
+*을 쓰면 그냥 파일명만 뜨고..
+절대경로로 썼다면 파일명 앞에 다 home/itbank/ 가 붙어있다.
+→ /가 제외되는 이유는 절대경로로 파일을 담을 때 /자체에 대한 것은 담지 않아서인듯?
+제외 안시키는 옵션도 있는 것 같음. 그냥 이름 앞에 / 붙이도록 하는 옵션</p>
+
+<p>→ 이러면 그냥 tar만들 때 상대경로로 만드는게 마음 편할거같은데. 해당 디렉토리까지 가서..
+괜히 또 상대경로에서 ../../a/b/c/* 이런식으로 대상 지정하면 리스트로 내용 봤을 때 또 저 이름이 붙어있을 것 같고..</p>
+
+<p>tar ftv file.tar → 상세하게 출력
+f : 파일지정
+t : 리스트 출력
+v : 상세하게
+→ 역시나 이렇게 뜨는 파일명 앞에도 내가 작성한 대상경로명이 기본적으로 붙어있음
+./* 했다면 ./ 이.. /home/itbank/* 했다면 home/itbank가 기본적으로 또 붙어있다..</p>
+
+<p>잘못보관된 것을 삭제하고 싶다면?
+-d라는게 여러의미가 있다보니 디테일하게 써야한다. 
+–delete : 아카이브 파일에 보관되어있는 특정 파일을 삭제</p>
+
+<p>tar f file.tar –delete kg
+tar f file.tar –delete ./kg
+tar f file.tar –delete home/itbank/kg 
+보관한대로 적어야한다.
+절대경로로 만든 아카이브에서 파일 하나 지우려고 –delete kg 라고 쓰게 되면 해당 파일이 아카이브에 없다고 뜬다.. → 역시나 그냥 상대경로가 마음편하다.</p>
+
+<p>또는 –delete 를 앞에 적을 수도 있을 것.
+tar –delete inittab f compressed.tar  → 작동안함
+ tar –delete inittab -f compressed.tar</p>
+
+<p>tar –delete kg -f file.tar</p>
+
+<p>f옵션이 뒤에 쓰이므로 하이픈 필수!!
+delete옵션은 풀네임 다 써야할듯 어디에 쓰든간에</p>
+
+<p>삭제할 것이 여러개라면 –delete 뒤에 한칸씩 띄워서 계속 기입</p>
+
+<p>추가보관
+-r (append) : 아카이브 파일에 추가보관. 
+→ 이 때 상대경로나 절대경로를 선택하여 작성 할 수 있다.</p>
+
+<p>tar f file.tar -r ./kg
+c는 처음만들때만 사용하는 create옵션
+f로 역시나 대상파일 지정</p>
+
+<p>f로 아카이브를 지정하고 -r로 뭘 넣을건지 지정.
+[root@localhost itbank]# tar f compressed.tar -r kg
+[root@localhost itbank]# tar f compressed.tar -r ./inittab
+[root@localhost itbank]# tar f compressed.tar -r /home/itbank/passwd
+위 세개 파일 다 compressed.tar 아카이브파일에 잘 들어가는데 들어갈 때 이름이 다 제각각으로 들어간다. tar f compressed.tar –delete 할 때 파일명 또 귀찮게 되버릴 듯 절대경로로 아카이브에 파일을 추가한경우.</p>
+
+<p>게다가 마지막의 저거.. /home/itbank/passwd 저렇게 넣으면 home디렉토리 하위에 itbank하위에 passwd가 있는 형식으로 들어갈 듯.. → 맞다.. 저렇게 넣은 상태에서 tar xfv 해버리면 home디렉토리가 띠용 하고 튀어나온다.</p>
+
+<p>순서는 반대로 
+tar r kg -f compressed.tar 이렇게 쓸 수도 있을 것이다.</p>
+
+<p>이미 담겨있는 파일을 또 외부에서 넣는다면 묻지도 않고 그냥 넣어버리는 식인듯. overwrite.
+넣는것도 그렇고 푸는것도 그렇고 overwrite가 기본인 것 같다.
+→ 아니네 넣는 것은 overwrite가 아니라 똑같은 파일이 두개나 들어가있네???
+기묘하다 기묘해..</p>
+
+<p>tar 실습</p>
+
+<p>/home/itbank 홈 디렉터리 하위에 모든 파일을 basket 아카이브 파일에 보관을 한 뒤 /tar 디렉터리 하위에 풀기</p>
+
+<p>tar cfv basket.tar *
+mkdir /tar
+mv basket.tar /tar
+cd /tar
+tar xfv basket.tar
+또는 압축푸는걸 다른 경로를 지정할 수 있을까</p>
+
+<p>basket.tar를 itbank하위에 그대로 두고
+cd /tar 로 커맨드만 이동.
+tar xfv /home/itbank/basket.tar  목적지를 써주지 않아도 커맨드가 있는 /tar 하위에 잘 만들어진다..</p>
+
+<p>tar xfv basket.tar /tar → 안됨
+tar xfv basket.tar –directory /tar 또는 tar xfv basket.tar -C /tar 를 쓰면 된다.</p>
+
+<p>-C 또는 –directory → 다른 경로에 아카이브를 풀고자 할때 쓴다. 안쓰면 현재 커맨드라인이 있는 곳 하위에 풀림</p>
+
+<p>여러 파일이 tar에 있다면 그 중에서 파일 하나만 뽑아내고 싶다면?
+각각을 처리할 때 처리할지 안할지를 물어보는 -w를 써야하는가?
+–exclude file제외 옵션을?</p>
+
+<p>/tar 하위를 전부 비우고
+tar xfv basket.tar kg -C /tar 했는데 안되네
+현재 디렉토리에서 tar파일 제외하고 전부 지운 다음에
+tar xf basket.tar kg 하니까 kg만 풀린다. 여러개 하고싶다면 아카이브파일명 뒤에 풀고싶은 파일명 쭉 써주면 된다.</p>
+
+<p>다만 -C를 통해 다른 디렉토리에 선택적으로 파일 뿌리는건 안되네</p>
+
+<p>힌트는 tar xfv basket.tar /tar 여기서 얻었다. 원래 이거 basket.tar 안의 내용들을 /tar에 풀려고 그런건데 경고문에는 아카이브에 /tar가 없다고 떴음. 즉 /tar만 선택적으로 풀려고 하는듯한 모습인것 같아서 저걸 이용해봄.. 그랬더니 맞다.</p>
+
+<p>내일은 보관과 압축을 한번에 하는 것을 배울 것이다.
+→ tar로 만들고 gzip이나 bzip2를 해도 되겠지만 tar명령어로 있지 않을까?
+원본제거하는 옵션도 있으려나?</p>
+:ET

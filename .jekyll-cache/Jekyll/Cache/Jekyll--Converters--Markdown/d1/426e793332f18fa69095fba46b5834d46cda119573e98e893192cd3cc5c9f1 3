@@ -1,7 +1,0 @@
-I"�<p>/etc/named.rfc1912.zones에서 
-zone “kgitbank.co.kr” IN {
-	type master;
-	file “kgitbank.for.zone”;
-	allow-update { none; };
-};</p>
-:ET
