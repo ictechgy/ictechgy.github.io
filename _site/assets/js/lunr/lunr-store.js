@@ -274,4 +274,10 @@ var store = [{
         "tags": [],
         "url": "https://ictechgy.github.io/rxswift/error/",
         "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
+      },{
+        "title": "파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)",
+        "excerpt":"  Python Map함수는 중첩이 가능할까? python 내장함수인 map함수는 iterable한 객체를 받아서 각 요소에 함수를 적용하고 map객체(iterable)로 그 결과를 반환한다. 보통 사용자에게서 입력받은 데이터를 특정 형태로 변환하고자 할 때 많이 쓰이며 리스트의 데이터에 적용하는 경우가 대부분이다. 어떤 데이터에 적용을 하든간에 결과 값은 map 객체로 나오며, 이 map객체를 직접 print해서 들여다 볼...","categories": [],
+        "tags": [],
+        "url": "https://ictechgy.github.io/python-map/",
+        "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
       }]

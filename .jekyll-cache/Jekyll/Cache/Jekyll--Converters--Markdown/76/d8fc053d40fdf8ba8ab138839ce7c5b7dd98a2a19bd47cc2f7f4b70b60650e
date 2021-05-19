@@ -1,7 +1,0 @@
-I"<p>이 글을 읽기 전 <a href="https://eunjin3786.tistory.com/75">eungding님의 블로그</a>와 <a href="https://jcsoohwancho.github.io/2019-08-09-RxSwift%EA%B8%B0%EC%B4%88-Driver-&amp;-Signal/">Rhyno님의 블로그</a>글을 참고해보자.</p>
-
-<p> </p>
-
-<h1 id="signal과-driver">Signal과 Driver?</h1>
-<p>Signal과 Driver는 메인쓰레드에서의 동작을 보장하고 error를 반환하지 않는다. 그런데 나는 ‘error를 반환하지 않는다는 것’이 에러가 난 것에 대해 핸들링을 해준다는 의미로 처음에 받아들였다. 그래서 특정 Observable 뒤에 asSignal이나 asDriver를 써주면 해당 Observable에서 error가 난다고 하더라도 전체적인 스트림은 종료가 되지 않을 것이라고 생각했다.</p>
-:ET

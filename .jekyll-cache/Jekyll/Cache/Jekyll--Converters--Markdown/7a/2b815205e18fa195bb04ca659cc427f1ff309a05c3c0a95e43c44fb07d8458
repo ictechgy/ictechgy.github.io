@@ -1,0 +1,100 @@
+I"!<p> </p>
+
+<h1 id="python-map함수는-중첩이-가능할까">Python Map함수는 중첩이 가능할까?</h1>
+
+<p>python에서 내장함수인 map함수는 iterable한 객체를 받아서 각 요소에 함수를 적용하고 map객체(iterator)로 그 결과를 반환한다.</p>
+
+<p>보통 사용자에게서 입력받은 데이터를 특정 형태로 변환하고자 할 때 많이 쓰이며 <strong>리스트</strong>의 데이터에 적용하는 경우가 대부분이다.
+어떤 데이터에 적용을 하든간에 결과 값은 map 객체로 나오며, 이 map객체를 직접 print해서 들여다 볼 수는 없다.<br />
+(next로 하나씩 접근해서 볼 수는 있지만 일반적으로는 list같은 데이터 타입으로 변환하여 보는 경우가 대부분)</p>
+
+<p>내가 궁금했던 것은 이것이다. 
+<strong>“map함수를 통해 반환된 map객체에 바로 또 map함수를 적용할 수 있을까?”</strong></p>
+
+<p>실험한 코드는 아래와 같다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user_input</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">(</span><span class="s">"숫자 여러개 입력: "</span><span class="p">).</span><span class="n">split</span><span class="p">()))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">user_input</span><span class="p">))</span>
+</code></pre></div></div>
+<p>사용자에게서 숫자 값을 여러개 입력받고 이를 연속 두번 map함수로 타입변환을 해준다.
+map객체인 상태로는 출력이 불가능하니 print()에서 list로 변환하여 출력해주었다.</p>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">숫자</span> <span class="n">여러개</span> <span class="n">입력</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">56</span> <span class="mi">253</span>
+
+<span class="p">[</span><span class="s">'1'</span><span class="p">,</span> <span class="s">'56'</span><span class="p">,</span> <span class="s">'253'</span><span class="p">]</span>
+</code></pre></div></div>
+<p>마지막 map에 의해 str로 변환된 것을 볼 수 있다.</p>
+
+<p> </p>
+<h1 id="변환-중간-결과를-볼-수-있도록-테스트-해보았다">변환 중간 결과를 볼 수 있도록 테스트 해보았다.</h1>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">origin_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"숫자 여러개 입력: "</span><span class="p">).</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">int_input</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">origin_input</span><span class="p">)</span>
+<span class="n">str_input</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">int_input</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">origin_input</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">int_input</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">str_input</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">숫자</span> <span class="n">여러개</span> <span class="n">입력</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">56</span> <span class="mi">253</span>
+
+<span class="p">[</span><span class="s">'1'</span><span class="p">,</span> <span class="s">'56'</span><span class="p">,</span> <span class="s">'253'</span><span class="p">]</span> <span class="c1">#original_input
+</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">253</span><span class="p">]</span>       <span class="c1">#int_input
+</span><span class="p">[]</span>                 <span class="c1">#str_input
+</span></code></pre></div></div>
+<p><em><strong>마지막 결과가 왜 안나오는지 모르겠다. map자체는 한번 iterate하면 더 이상 쓰지 못한다.(StopIteration) 하지만 위에서는 int_input을 iterate하기 전에 str_input을 초기화하는데..</strong></em></p>
+<pre>
+위의 구문 중 print(list(int_input))부분을 지우고 실행해보니 print(list(str_input))이 제대로 나왔다. int_input과 str_input의 iterate가 공유되는 것인건가..? 
+더 자세한 확인이 필요할 듯 하다.. 
+</pre>
+
+<p> </p>
+
+<h1 id="map함수를-inputsplit이-아닌-input에다-쓰면-어떻게-될까">map함수를 input().split()이 아닌 input()에다 쓰면 어떻게 될까?</h1>
+<p>input()으로 사용자 입력을 받은 경우  int()같은 함수로 감싸서 형변환 하는 것이 일반적인데 여기에 map()을 써보면 어떨까?</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user_input</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">(</span><span class="s">"숫자 하나 입력: "</span><span class="p">))</span> 
+
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">user_input</span><span class="p">))</span>
+<span class="c1">#print(int(user_input)) error
+</span></code></pre></div></div>
+
+<p>1을 입력한 경우와 123을 입력한 경우를 동시에 살펴보자.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">숫자</span> <span class="n">하나</span> <span class="n">입력</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">숫자</span> <span class="n">하나</span> <span class="n">입력</span><span class="p">:</span> <span class="mi">123</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="c1"># 출력할 때 list로 변환해서 출력하는 대신 print(next(user_input))을 이용한다면?
+</span> <span class="n">숫자</span> <span class="n">하나</span> <span class="n">입력</span><span class="p">:</span> <span class="mi">1</span>
+<span class="mi">1</span>
+
+<span class="n">숫자</span> <span class="n">하나</span> <span class="n">입력</span><span class="p">:</span> <span class="mi">123</span>
+<span class="mi">1</span>
+<span class="s">'''
+</span></code></pre></div></div>
+<p>사용자 입력은 기본적으로 str로 받아들여지는데 이 str도 요소 하나하나에 접근이 가능한 iterable 타입이다. 따라서 위와같은 결과가 나온다.
+실행 코드 중 밑에 있는 int()형변환 출력 구문은 에러가 발생한다. 에러 내용은 아래와 같다.</p>
+<pre>
+<span style="color:red">
+TypeError: int() argument must be a string, a bytes-like object or a number, not 'map'
+</span>
+</pre>
+
+<p> </p>
+<h1 id="결론">결론</h1>
+<ol>
+  <li>map은 중첩이 가능하다.</li>
+  <li>map(int, input())과 map(int, input().split())은 다르다. <br />
+123을 입력한 경우 ‘123’으로 인식하느냐 [‘123’]으로 인식하느냐의 차이라고 보면 될 것 같다.</li>
+</ol>
+
+<p> </p>
+
+<blockquote>
+  <p>참고: <a href="https://wikidocs.net/22803">제대로 파이썬 WikiDocs - map, filter</a></p>
+</blockquote>
+:ET

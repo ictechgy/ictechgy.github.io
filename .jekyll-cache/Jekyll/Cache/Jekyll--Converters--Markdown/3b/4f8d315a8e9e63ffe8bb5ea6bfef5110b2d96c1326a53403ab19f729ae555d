@@ -1,0 +1,34 @@
+I"�<h1 id="python-map함수는-중첩이-가능할까">Python Map함수는 중첩이 가능할까?</h1>
+
+<p>python에서 내장함수인 map함수는 iterable한 객체를 받아서 각 요소에 함수를 적용하고 map객체(iterator)로 그 결과를 반환한다.</p>
+
+<p>보통 사용자에게서 입력받은 데이터를 특정 형태로 변환하고자 할 때 많이 쓰이며 <strong>리스트</strong>의 데이터에 적용하는 경우가 대부분이다.
+어떤 데이터에 적용을 하든간에 결과 값은 map 객체로 나오며, 이 map객체를 직접 print해서 들여다 볼 수는 없다.<br />
+(next로 하나씩 접근해서 볼 수는 있지만 일반적으로는 list같은 데이터 타입으로 변환하여 보는 경우가 대부분)</p>
+
+<p>내가 궁금했던 것은 이것이다. 
+<strong>“map함수를 통해 반환된 map객체에 바로 또 map함수를 적용할 수 있을까?”</strong></p>
+
+<p>실험한 코드는 아래와 같다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user_input</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">(</span><span class="s">"숫자 여러개 입력: "</span><span class="p">).</span><span class="n">split</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">user_input</span><span class="p">))</span>
+</code></pre></div></div>
+<p>사용자에게서 숫자 값을 여러개 입력받고 이를 여러번 map함수로 타입변환을 해준다.
+map객체인 상태로는 출력이 불가능하니 print에서 list로 변환하여 출력해주었다.</p>
+
+<p>결과는 아래와 같다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">숫자</span> <span class="n">여러개</span> <span class="n">입력</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">56</span> <span class="mi">253</span>
+<span class="p">[</span><span class="s">'1'</span><span class="p">,</span> <span class="s">'56'</span><span class="p">,</span> <span class="s">'253'</span><span class="p">]</span>
+</code></pre></div></div>
+<p>마지막 map에 의해 str로 변환된 것을 볼 수 있다.</p>
+
+<p> </p>
+<h2 id="변환-중간-결과를-볼-수-있도록-테스트-해보았다">변환 중간 결과를 볼 수 있도록 테스트 해보았다.</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>참고: <a href="https://wikidocs.net/22803">제대로 파이썬 WikiDocs</a></p>
+</blockquote>
+:ET

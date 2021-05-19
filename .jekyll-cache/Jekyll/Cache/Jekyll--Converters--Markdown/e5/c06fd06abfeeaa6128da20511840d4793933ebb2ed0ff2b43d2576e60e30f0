@@ -1,0 +1,7 @@
+I"<ul class="toc__menu">
+  <li><a href="#python-map함수는-중첩이-가능할까">Python Map함수는 중첩이 가능할까?</a></li>
+  <li><a href="#변환-중간-결과를-볼-수-있도록-테스트-해보았다">변환 중간 결과를 볼 수 있도록 테스트 해보았다.</a></li>
+  <li><a href="#map함수를-inputsplit이-아닌-input에다-쓰면-어떻게-될까">map함수를 input().split()이 아닌 input()에다 쓰면 어떻게 될까?</a></li>
+  <li><a href="#결론">결론</a></li>
+</ul>
+:ET
