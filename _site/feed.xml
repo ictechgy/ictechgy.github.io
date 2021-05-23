@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://ictechgy.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ictechgy.github.io/" rel="alternate" type="text/html" /><updated>2021-05-20T01:02:09+09:00</updated><id>https://ictechgy.github.io/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>개인 공부 기록소입니다.</subtitle><author><name>JJanghong</name></author><entry><title type="html">파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)</title><link href="https://ictechgy.github.io/python-map/" rel="alternate" type="text/html" title="파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)" /><published>2021-05-19T00:00:00+09:00</published><updated>2021-05-19T00:00:00+09:00</updated><id>https://ictechgy.github.io/python-map</id><content type="html" xml:base="https://ictechgy.github.io/python-map/">&lt;p&gt; &lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://ictechgy.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ictechgy.github.io/" rel="alternate" type="text/html" /><updated>2021-05-23T23:37:08+09:00</updated><id>https://ictechgy.github.io/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>개인 공부 기록소입니다.</subtitle><author><name>JJanghong</name></author><entry><title type="html">파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)</title><link href="https://ictechgy.github.io/python-map/" rel="alternate" type="text/html" title="파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)" /><published>2021-05-19T00:00:00+09:00</published><updated>2021-05-19T00:00:00+09:00</updated><id>https://ictechgy.github.io/python-map</id><content type="html" xml:base="https://ictechgy.github.io/python-map/">&lt;p&gt; &lt;/p&gt;
 
 &lt;h1 id=&quot;python-map함수는-중첩이-가능할까&quot;&gt;Python Map함수는 중첩이 가능할까?&lt;/h1&gt;
 
@@ -254,6 +254,13 @@ TAP -&amp;gt; isDisposed
 
 &lt;p&gt; &lt;/p&gt;
 
+&lt;p&gt;비슷한 코드를 &lt;a href=&quot;https://github.com/ReactiveX/RxSwift/blob/main/RxExample/Extensions/CLLocationManager%2BRx.swift&quot;&gt;RxSwift Github - ‘CLLocationManager+Rx’ Example&lt;/a&gt;에서 볼 수 있다.  &lt;br /&gt;
+delegate.methodInvoked의 반환되는 Observable에서 map을 통해 특정 parameter만을 선택하고자 할 때 throwable한 function을 호출하여 형변환을 한다. &lt;br /&gt;
+형변환이 잘 수행되면 원하는 파라미터 값이 시퀀스에 잘 실리지만 형변환에 실패하면 RxCocoaError.castingError가 throw된다. &lt;br /&gt;
+만약 에러가 throw되는 경우 형태는 위와 비슷할 것이다.   &lt;br /&gt;
+&lt;strong&gt;다만 궁금한 것은 ‘에러가 throw되는 경우에 이 것이 Observable의 onError가 호출된 것과 같은 것일까?’ 이다. 시퀀스에 오류가 실린게 맞는걸까? flatMap에서 Observable&amp;lt;&amp;gt;.error가 반환되는 것과 map에서 error가 throw되는 것, 그리고 map에서의 throwable function 호출에 큰 차이가 없는 걸까?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
 &lt;h2 id=&quot;추가-테스트-3&quot;&gt;추가 테스트 3&lt;/h2&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;@IBOutlet&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fifthButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
@@ -296,6 +303,10 @@ Signal 이후 -&amp;gt; Event next(())
 내부 Observable -&amp;gt; Event completed
 내부 Observable -&amp;gt; isDisposed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;여기서 또 궁금한 것은, flatMap은 일반적으로 중첩된 Observable을 하나로 풀어주기 위해 사용하는데 위의 경우 flatMap은 어떻게 작동하냐는 것이다. 위에서 flatMap 내부의 ‘return try observable().debug(“내부 Observable”)’ 는 Observable을 반환하는 것이 아니라 단순히 Error를 throw하기 때문..&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 

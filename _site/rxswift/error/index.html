@@ -298,7 +298,7 @@
 
 
 
-  3 분 소요
+  4 분 소요
 
 </p>
           
@@ -476,6 +476,13 @@ TAP -&gt; isDisposed
 
 <p> </p>
 
+<p>비슷한 코드를 <a href="https://github.com/ReactiveX/RxSwift/blob/main/RxExample/Extensions/CLLocationManager%2BRx.swift">RxSwift Github - ‘CLLocationManager+Rx’ Example</a>에서 볼 수 있다.  <br />
+delegate.methodInvoked의 반환되는 Observable에서 map을 통해 특정 parameter만을 선택하고자 할 때 throwable한 function을 호출하여 형변환을 한다. <br />
+형변환이 잘 수행되면 원하는 파라미터 값이 시퀀스에 잘 실리지만 형변환에 실패하면 RxCocoaError.castingError가 throw된다. <br />
+만약 에러가 throw되는 경우 형태는 위와 비슷할 것이다.   <br />
+<strong>다만 궁금한 것은 ‘에러가 throw되는 경우에 이 것이 Observable의 onError가 호출된 것과 같은 것일까?’ 이다. 시퀀스에 오류가 실린게 맞는걸까? flatMap에서 Observable&lt;&gt;.error가 반환되는 것과 map에서 error가 throw되는 것, 그리고 map에서의 throwable function 호출에 큰 차이가 없는 걸까?</strong></p>
+
+<p> </p>
 <h2 id="추가-테스트-3">추가 테스트 3</h2>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">fifthButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
@@ -518,6 +525,10 @@ Signal 이후 -&gt; Event next(())
 내부 Observable -&gt; Event completed
 내부 Observable -&gt; isDisposed
 </code></pre></div></div>
+
+<p> </p>
+
+<p>여기서 또 궁금한 것은, flatMap은 일반적으로 중첩된 Observable을 하나로 풀어주기 위해 사용하는데 위의 경우 flatMap은 어떻게 작동하냐는 것이다. 위에서 flatMap 내부의 ‘return try observable().debug(“내부 Observable”)’ 는 Observable을 반환하는 것이 아니라 단순히 Error를 throw하기 때문..</p>
 
 <p> </p>
 
