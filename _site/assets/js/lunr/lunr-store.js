@@ -280,4 +280,10 @@ var store = [{
         "tags": [],
         "url": "https://ictechgy.github.io/python-map/",
         "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
+      },{
+        "title": "Swift(스위프트) nil에 대한 기록 with RxSwift",
+        "excerpt":"Swift를 다시 공부하던 도중 기록하면 좋을만한 부분이 있어서 작성한다. Any?, AnyObject? 같은 옵셔널이 아닌 Any, AnyObject 등에는 nil을 직접적으로 넣을 수 없다. 하지만 아래와 같은 경우에는 가능하다. let a: Int? = nil let b: Any = a as Any //syntax error가 뜨지 않는다. 'Any?'로 쓰십시오!라고 뜰 줄 알았는데.. b는 실질적으로...","categories": ["Swift","RxSwift"],
+        "tags": [],
+        "url": "https://ictechgy.github.io/swift/rxswift/Swift-nil/",
+        "teaser": "https://ictechgy.github.io/assets/images/photo-hangang.jpeg"
       }]

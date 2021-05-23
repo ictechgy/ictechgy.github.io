@@ -1,0 +1,3 @@
+I"~<p>systemctl is-active mariadb.service로 서비스 확인 뒤
+systemctl restart mariadb.service로 서비스 시작</p>
+:ET

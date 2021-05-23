@@ -1,0 +1,2163 @@
+I"�<h1 id="본-글은-개인-공부용으로서-스크랩펌복사를-허용하지-않습니다">본 글은 개인 공부용으로서 스크랩/펌/복사를 허용하지 않습니다.</h1>
+
+<p>** 함수 (function)</p>
+
+<p>내장함수 (단일행함수) - 하나의 행에 대해 하나의 결과 값을 return (ex. lower, upper, nvl …)</p>
+
+<p>집단함수 (다중행함수, 그룹함수) - 여러 행에 대해 하나의 결과 값을 return (ex. sum, max, min, count, avg …)</p>
+
+<p>** 내장함수
+1) 숫자함수
+abs (열이름) - 절댓값을 구하는 함수
+floor (열이름) - 해당 숫자보다 같거나 작은 정수 중 가장 큰 정수 (바닥함수)
+ceil (열이름) - 해당 숫자보다 같거나 큰 정수 중 가장 작은 정수 (천장함수)
+round(열이름,자리수) - 자리수를 기준으로 반올림을 하는 함수. 소수점을 0으로 생각한다. 자리수가 1인 경우 소수점 둘째자리에서 반올림하여 첫째자리까지 보겠다는 것이고
+		자리수가 -1인 경우 정수부분 첫째자리(10의 0승자리)를 정수부 둘째자리(10의 1승)에 대하여 반올림 한다.
+		자리수가 0인경우 소수점을 반올림시켜 정수부만 표시.
+trunc(열이름,자리수) - 버림을 의미한다. 해당 자리수에 대한 버림 -&gt; 0인경우 소수점 버림, 1인경우 소수점이하 하나만 빼고 다 버림, -1인 경우 10의 0승자리 수의 버림.
+mod(열이름, 숫자) - 나머지 함수. 나머지값을 구한다. 나누기는 그냥 / 쓰면 됨</p>
+
+<p>round나 trunc는 소수점을 해당 자리수 값만큼 임시 이동시킨 후 원하는 반올림/버림을 진행한 후 다시 원 자리로 소수점을 돌려놓는 방식을 생각하면 쉽다.</p>
+
+<h3 id="1">1.</h3>
+<p>select abs(123), abs(-123), floor(123.567), floor(123.1), ceil(123.123), 
+       ceil(123.567), floor(-123.567), floor(-123.1), ceil(-123.123), ceil(-123.567)
+from dual</p>
+
+<p>ABS(123)  ABS(-123) FLOOR(123.567) FLOOR(123.1) CEIL(123.123) CEIL(123.567) FLOOR(123.567) FLOOR(-123.1) CEIL(-123.123) CEIL(-123.567)
+———- ———- ————– ———— ————- ————- ————– ————- ————– ————–
+       123        123            123          123           124           124            123          -124           -123           -123</p>
+
+<h3 id="2">2.</h3>
+<p>select round(1234.456,0), round(1234.456,1), round(1234.456,-1),
+       round(-1234.456,0), round(-1234.456,1), round(-1234.456,-1)
+from dual;</p>
+
+<p>ROUND(1234.456,0) ROUND(1234.456,1) ROUND(1234.456,-1) ROUND(-1234.456,0) ROUND(-1234.456,1) ROUND(-1234.456,-1)
+—————– —————– —————— —————— —————— ——————-
+             1234            1234.5               1230              -1234            -1234.5               -1230</p>
+
+<h3 id="3">3.</h3>
+<p>select trunc(1234.456,0), trunc(1234.456,1), trunc(1234.456,-1),
+       trunc(-1234.456,0), trunc(-1234.456,1), trunc(-1234.456,-1)
+from dual;</p>
+
+<p>TRUNC(1234.456,0) TRUNC(1234.456,1) TRUNC(1234.456,-1) TRUNC(-1234.456,0) TRUNC(-1234.456,1) TRUNC(-1234.456,-1)
+—————– —————– —————— —————— —————— ——————-
+             1234            1234.4               1230              -1234            -1234.4               -1230</p>
+
+<h3 id="4">4.</h3>
+<p>select mod(120,2), mod(121,2), mod(123,3), mod(123,4)
+from dual;</p>
+
+<p>MOD(120,2) MOD(121,2) MOD(123,3) MOD(123,4)
+———- ———- ———- ———-
+         0          1          0          3</p>
+
+<h3 id="5-사번-사원명-급여-급여십의자리에서-반올림-을-보이시오">5. 사번, 사원명, 급여, 급여(십의자리에서 반올림) 을 보이시오.</h3>
+<p>select empno, ename, sal, round(sal, -2) rousal
+from emp;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL     ROUSAL ---------- ---------- ---------- ----------
+  7839 KING             5000       5000
+  7566 JONES            2975       3000
+  7698 BLAKE            2850       2900
+  7782 CLARK            2450       2500
+  7902 FORD             3000       3000
+  7369 SMITH             800        800
+  7499 ALLEN            1600       1600
+  7521 WARD             1250       1300
+  7654 MARTIN           1250       1300
+  7788 SCOTT            3000       3000
+  7844 TURNER           1500       1500
+
+ EMPNO ENAME             SAL     ROUSAL ---------- ---------- ---------- ----------
+  7876 ADAMS            1100       1100
+  7900 JAMES             950       1000
+  7934 MILLER           1300       1300
+</code></pre></div></div>
+
+<h3 id="6-사번이-짝-홀수별로-사원수-급여합계십의-자리에서-버림-급여평균소숫점-이하-첫째자리에서-반올림을-보이시오">6. 사번이 짝, 홀수별로 사원수, 급여합계,(십의 자리에서 버림), 급여평균(소숫점 이하 첫째자리에서 반올림)을 보이시오.</h3>
+<p>select mod(empno, 2) empno_odd_or_even, count(*) cnt, trunc(sum(nvl(sal,0)), -2) sumsal, round(avg(nvl(sal, 0)),0) avgsal 
+from emp
+group by mod(empno, 2);</p>
+
+<p>교수님
+select mod(empno, 2) modempno, count(*) cou, trunc(sum(sal), -2) truncsumsal, round(avg(nvl(sal,0)), 0) roundavgsal
+from emp
+group by mod(empno, 2);</p>
+
+<p>EMPNO_ODD_OR_EVEN        CNT     SUMSAL     AVGSAL
+—————– ———- ———- ———-
+                1          4       8600       2163
+                0         10      20300       2038</p>
+
+<h3 id="7-부서번호별로-사원수-급여합계-급여평균을-급여평균십의자리에서-반올림이-2500-이상인-것만-보이시오">7. 부서번호별로 사원수, 급여합계, 급여평균을 급여평균(십의자리에서 반올림)이 2500 이상인 것만 보이시오.</h3>
+<p>select deptno, count(*) cnt, sum(sal) sumsal, avg(nvl(sal, 0)) avgsal
+from emp
+group by deptno
+having round(avg(nvl(sal, 0)), -2) &gt;= 2500;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL     AVGSAL ---------- ---------- ---------- ----------
+    10          3       8750 2916.66667
+</code></pre></div></div>
+
+<h3 id="7-1-부서명과-같이">7-1. 부서명과 같이</h3>
+<p>select deptno, dname, cnt, sumsal, avgsal
+from ( select deptno, count(*) cnt, sum(sal) sumsal, avg(nvl(sal, 0)) avgsal
+	from emp
+	group by deptno
+	having round(avg(nvl(sal, 0)), -2) &gt;= 2500 ) join dept using(deptno);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
+    10 ACCOUNTING              3       8750 2916.66667
+</code></pre></div></div>
+
+<h3 id="8-사원명에-s를-포함하는-사원들에-대해-사번-사원명-급여-보너스-급여--보너스열별칭-tot를-tot백의-자리에서-반올림를-내림차순으로-보이시오">8. 사원명에 s를 포함하는 사원들에 대해 사번, 사원명, 급여, 보너스, 급여 + 보너스(열별칭 tot)를 tot(백의 자리에서 반올림)를 내림차순으로 보이시오.</h3>
+<p>select empno, ename, sal, comm, round(nvl(sal, 0) + nvl(comm, 0), -3) tot
+from emp
+where lower(ename) like ‘%s%’
+order by tot desc;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM        TOT ---------- ---------- ---------- ---------- ----------
+  7566 JONES            2975                  3000
+  7788 SCOTT            3000                  3000
+  7900 JAMES             950                  1000
+  7876 ADAMS            1100                  1000
+  7369 SMITH             800                  1000
+</code></pre></div></div>
+
+<p>*내장함수
+2) 문자함수
+upper(열이름) - 모든 문자를 대문자로 변환하여 반환
+lower(열이름) - 모든 문자를 소문자로 변환하여 반환
+initcap (열이름) - 첫 스펠링만 대문자로 변환하여 반환
+length(열이름) - 문자의 수 반환 (단순 글자 수. 영어와 한글 다 한 글자당 한개로 카운트)
+lengthb (열이름) - 문자의 바이트 수 반환(영어는 하나당 1byte, 한글은 3byte 완성형)
+concat (열이름, 열이름) - 두 인자의 값을 합친다. 두 문자를 연결하는 것은 || 로도 가능하지만 ||는 select절에만 사용 가능하다. 따라서 다른 부분에도 사용하고자 하는 경우 concat을 쓰자.
+substr(열이름, 시작위치, 숫자)  - 문자열의 시작위치에서 숫자만큼 잘라서 반환(문자열 인덱스 시작은 1부터)
+substrb(열이름, 시작위치, 숫자) - 문자열의 시작위치byte에서 해당 숫자 byte만큼 잘라서 반환(문자열 인덱스 시작은 1부터, 한글의 경우 두번째 글자는 4byte값이라고 보면 된다. )
+	substr과 substrb는 시작위치에 음수값을 넣을 수있다. -1의 경우 맨 뒷글자를 의미한다. -2의 경우 맨 뒤에서 두번째 글자부터.
+	 (substrb의 경우 이 또한 바이트로 세므로 맨 뒤의 한글 하나를 나타내고자 한다면 -3을 넣어야 한다. 이후에는 -6, -9…)
+	한글의 경우 바이트값을 잘못 읽으면 값이 아예 나오지 않는다. 
+instr(열이름,’찾는문자’,시작위치,숫자) - 문자열에서 찾는 문자를 시작위치부터 찾기 시작해서 숫자값번째가 어느 위치에 있는지 반환. 문자열 자체를 또 찾는 경우 해당 문자열의 가장
+				앞 문자의 위치만을 반환한다. 시작위치에 음수값을 넣을 수 있는데 이는 역방향으로 셈한 부분에서부터 역방향으로(왼쪽으로) 찾기 시작하겠다는 것이다.
+replace(열이름,’찾는문자’,’바꿀문자’) - 찾는 문자 전부를 바꿀 문자로 바꾼다.
+lpad(열이름,총길이,’채울문자’)  - 열 값의 왼쪽에 해당 문자를 채우는데 문자열의 총 길이가 두번째 인수로 넣은 길이가 될 만큼만 채운다.
+rpad(열이름,총길이,’채울문자’) - 열 값의 오른쪽에 해당 문자를 채우는데 문자열의 총 길이가 두번째 인수로 넣은 길이가 될 만큼만 채운다.
+	보통 값의 출력에서 문자는 무조건 왼쪽정렬, 숫자는 무조건 오른쪽 정렬이 기본값인데, 이를 정렬하여 보여주고자 할 때 lpad, rpad를 쓰면 된다.
+ltrim(열이름,’찾는문자’) - 해당 속성의 값에서 찾는 문자에 해당하는 값들이 왼쪽에있는 경우 모두 제거 후 반환 (아무것도 넣지 않은 경우 공백 제거)
+rtrim(열이름,’찾는문자’) - 해당 속성의 값에서 찾는 문자에 해당하는 값들이 오른쪽에있는 경우 모두 제거 후 반환 (아무것도 넣지 않은 경우 공백 제거)
+greatest(열이름,,,,,,) - 들어간 열의 값들 중에서 가장 큰 값을 반환. (뭐 이를테면 하나의 레코드에서 세개의 속성을 비교해서 그 중 하나의 값만을 해당레코드의 대표값으로 쓰고자 하는 경우)
+		 문자의 경우 아스키코드값을 비교한다.
+least(열이름,,,,,,) - 들어간 값들 중에서 가장 작은 값을 반환. 문자의 경우 아스키코드값을 비교한다.</p>
+
+<h3 id="9">9.</h3>
+<p>select upper(‘soongsil’), lower(‘soongsil’), initcap(‘soongsil’)
+from dual;</p>
+
+<p>UPPER(‘SOONGSIL’) LOWER(‘SOONGSIL’) INITCAP(‘SOONGSIL’)
+—————– —————– ——————-
+SOONGSIL          soongsil          Soongsil</p>
+
+<h3 id="10">10.</h3>
+<p>select ename || ‘님’, concat(ename,’님’)
+from emp;</p>
+
+<p>ENAME||’님’  CONCAT(ENAME,’님’)
+———– —————–
+KING님      KING님          <br />
+JONES님     JONES님         <br />
+BLAKE님     BLAKE님         <br />
+CLARK님     CLARK님         <br />
+FORD님      FORD님          <br />
+SMITH님     SMITH님         <br />
+ALLEN님     ALLEN님         <br />
+WARD님      WARD님          <br />
+MARTIN님    MARTIN님        <br />
+SCOTT님     SCOTT님         <br />
+TURNER님    TURNER님        <br />
+ADAMS님     ADAMS님         <br />
+JAMES님     JAMES님         <br />
+MILLER님    MILLER님</p>
+
+<h3 id="11">11.</h3>
+<p>select length(‘soongsil’), lengthb(‘soongsil’), length(‘홍길동’),lengthb(‘홍길동’)
+from dual</p>
+
+<p>LENGTH(‘SOONGSIL’) LENGTHB(‘SOONGSIL’) LENGTH(‘홍길동’) LENGTHB(‘홍길동’)
+—————— ——————- ————- ————–
+                 8                   8             3              9</p>
+
+<h3 id="12">12.</h3>
+<p>select substr(‘soongsil’,1,3), substr(‘soongsil’,2,3), substr(‘soongsil’,-1,3), substr(‘soongsil’,-3,2)
+from dual</p>
+
+<p>SUBSTR(‘SOONGSIL’,1,3) SUBSTR(‘SOONGSIL’,2,3) SUBSTR(‘SOONGSIL’,-1,3) SUBSTR(‘SOONGSIL’,-3,2)
+———————- ———————- ———————– ———————–
+soo                    oon                    l                       si         <br />
+select substrb(‘soongsil’,1,3), substrb(‘soongsil’,2,3), substrb(‘soongsil’,-1,3), substrb(‘soongsil’,-3,2)
+from dual</p>
+
+<p>SUBSTRB(‘SOONGSIL’,1,3) SUBSTRB(‘SOONGSIL’,2,3) SUBSTRB(‘SOONGSIL’,-1,3) SUBSTRB(‘SOONGSIL’,-3,2)
+———————– ———————– ———————— ————————
+soo                     oon                     l                        si</p>
+
+<h3 id="13">13.</h3>
+<p>select substr(‘홍길동’,1,3), substr(‘홍길동’,2,3), substr(‘홍길동’,-1,3),substr(‘홍길동’,-3,2)
+from dual</p>
+
+<p>SUBSTR(‘홍길동’,1,3) SUBSTR(‘홍길동’,2,3) SUBSTR(‘홍길동’,-1,3) SUBSTR(‘홍길동’,-3,2)
+—————– —————– —————— ——————
+홍길동            길동              동                 홍길</p>
+
+<p>select substrb(‘홍길동’,1,3), substrb(‘홍길동’,4,3), substrb(‘홍길동’,-6,3),substrb(‘홍길동’,-3,3)
+from dual</p>
+
+<p>SUBSTRB(‘홍길동’,1,3) SUBSTRB(‘홍길동’,4,3) SUBSTRB(‘홍길동’,-6,3) SUBSTRB(‘홍길동’,-3,3)
+—————— —————— ——————- ——————-
+홍                 길                 길                  동</p>
+
+<h3 id="14">14.</h3>
+<p>select instr(‘soongsil’,’o’,1,1), instr(‘soongsil’,’o’,1,2), instr(‘soongsil’,’o’,-1,1), instr(‘soongsil’,’o’,-1,2),
+	instr(‘soongsil’,’oo’,1,1)
+from dual</p>
+
+<p>INSTR(‘SOONGSIL’,’O’,1,1) INSTR(‘SOONGSIL’,’O’,1,2) INSTR(‘SOONGSIL’,’O’,-1,1) INSTR(‘SOONGSIL’,’O’,-1,2) INSTR(‘SOONGSIL’,’OO’,1,1)
+————————- ————————- ————————– ————————– ————————–
+                        2                         3                          3                          2                          2</p>
+
+<h3 id="15">15.</h3>
+<p>select replace(‘soongsil’,’o’,’*’), replace(‘soongsil’,’oo’,’O’), replace(‘s o o n’,’ ‘,’’), replace(‘soongsil’,’s’,’%’)
+from dual</p>
+
+<p>REPLACE(‘SOONGSIL’,’O’,’*’) REPLACE(‘SOONGSIL’,’OO’,’O’) REPLACE(‘SOON’,’’,’’) REPLACE(‘SOONGSIL’,’S’,’%’)
+————————— —————————- ——————— —————————
+s**ngsil                    sOngsil                      soon                  %oong%il</p>
+
+<h3 id="16">16.</h3>
+<p>select lpad(‘soong’,15,’<em>’), lpad(‘soong’,10,’ab’), rpad(‘soong’,15,’</em>’), rpad(‘soong’,10,’ab’),
+	lpad(‘soong’,15,’ ‘), rpad(1234,10, ‘ ‘)
+from dual</p>
+
+<p>LPAD(‘SOONG’,15,’<em>’) LPAD(‘SOONG’,10,’AB’) RPAD(‘SOONG’,15,’</em>’) RPAD(‘SOONG’,10,’AB’) LPAD(‘SOONG’,15,’’) RPAD(1234,10,’’)
+——————– ——————— ——————– ——————— ——————- —————-
+<strong>**</strong><strong>**soong      ababasoong            soong</strong><strong>**</strong>**      soongababa                      soong     1234</p>
+<h3 id="17">17.</h3>
+<p>select greatest (10,20,30), greatest(‘ab’,’AB’,’xy’),
+           least (10,20,30), least(‘ab’,’AB’,’xy’)
+from dual</p>
+
+<p>GREATEST(10,20,30) GREATEST(‘AB’,’AB’,’XY’) LEAST(10,20,30) LEAST(‘AB’,’AB’,’XY’)
+—————— ———————— ————— ———————
+                30 xy                                    10 AB</p>
+
+<h3 id="18사번의-두번째자리에서-2자리가-92-또는-90-또는-56-인사원들에-대해-사번-사원명첫글자만-대문자로-직무소문자로-급여앞에-를-붙여서를-보이시오">18.사번의 두번째자리에서 2자리가 92 또는 90 또는 56 인사원들에 대해 사번, 사원명(첫글자만 대문자로), 직무(소문자로), 급여(앞에 $를 붙여서)를 보이시오.</h3>
+<p>select empno, initcap(ename) ename, lower(job) lowerjob, concat(‘$’, sal) sal
+from emp
+where substr(empno, 2, 2) in (‘92’, ‘90’, ‘56’);	- substr은 문자함수이므로 ‘‘를 붙여주는 것이 좋다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      LOWERJOB  SAL                                       ---------- ---------- --------- -----------------------------------------
+  7566 Jones      manager   $2975                                    
+  7902 Ford       analyst   $3000                                    
+  7900 James      clerk     $950         
+</code></pre></div></div>
+
+<h3 id="19-사번의-뒤에서-세번째자리별로-사원수-급여합계십의자리에서-반올림를-보이시오">19. 사번의 뒤에서 세번째자리별로 사원수, 급여합계(십의자리에서 반올림)를 보이시오.</h3>
+<p>select substr(empno, -3, 1) groupempno, count(*) cnt, round(sum(sal), -2) sumsal
+from emp
+group by substr(empno, -3, 1);</p>
+
+<p>G        CNT     SUMSAL</p>
+<hr />
+<p>3          1        800
+6          2       4100
+8          3       7600
+5          2       4200
+7          2       5500
+9          3       5300
+4          1       1600</p>
+
+<h3 id="20-사원명의-길이가-5이상인-사원들에-대해-부서번호별로-사원수-급여합계-급여평균정수만-보이시오을-부서명과-같이-보이시오">20. 사원명의 길이가 5이상인 사원들에 대해 부서번호별로 사원수, 급여합계, 급여평균(정수만 보이시오)을 부서명과 같이 보이시오.</h3>
+<p>select deptno, dname, cnt, sumsal, avgsal
+from ( select deptno, count(*) cnt, sum(sal) sumsal, trunc(avg(nvl(sal, 0)), 0) avgsal
+	from emp
+	where length(ename) &gt;= 5
+	group by deptno ) join dept using(deptno);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL     AVGSAL ---------- -------------- ---------- ---------- ----------
+    30 SALES                   5       8150       1630
+    20 RESEARCH                4       7875       1968
+    10 ACCOUNTING              2       3750       1875
+</code></pre></div></div>
+
+<h3 id="21-사원명의-가운데-글자가-l인-사원들에-대해-사원명을-보이시오">21. 사원명의 가운데 글자가 ‘L’인 사원들에 대해 사원명을 보이시오.</h3>
+<p>/ -&gt; sql 에서 나눗셈은 소수점이 있는 실수값이 나온다. 
+참고한 함수 - length(열이름), ceil(열이름), instr(열이름,’찾는문자’,시작위치,숫자), substr(열이름, 시작위치, 숫자)</p>
+
+<p>select ename
+from emp
+where instr(upper(ename), ‘L’, ceil(length(ename)/2), 1) = ceil((length(ename)/2));
+또는
+select ename
+from emp
+where upper(substr(ename, ceil(length(ename)/2),1)) = ‘L’</p>
+
+<h2 id="ename">ENAME</h2>
+<p>ALLEN
+MILLER</p>
+
+<p>-&gt; 다만 이름의 길이가 짝수인 경우 가운데 글자에 대한 정의가 모호하여 결과가 부정확할 수있음. (위의 쿼리문의 경우 이름의 길이가 6개인 경우 3번째 글자를 가운데 글자로 파악)</p>
+
+<h3 id="22-사번의-처음에서-2글자가-73-또는-79-또는-78인-사원들에-대해-관리자사번의-뒤에서-두글자-별로-사원수-급여합계를-보이시오">22. 사번의 처음에서 2글자가 73 또는 79 또는 78인 사원들에 대해 관리자사번의 뒤에서 두글자 별로 사원수, 급여합계를 보이시오.</h3>
+<p>select substr(mgr, -2, 2) groupmgr, count(*) cnt, sum(sal) sumsal
+from emp
+where substr(empno, 1, 2) in (‘73’, ‘79’, ‘78’)
+group by substr(mgr, -2, 2);</p>
+
+<p>GR        CNT     SUMSAL
+– ———- ———-
+            1       5000
+66          1       3000
+88          1       1100
+82          1       1300
+02          1        800
+98          2       2450</p>
+
+<p>-&gt; KING 은 관리자 사번이 존재하지 않는데 출력되네요.</p>
+
+<h3 id="23-사원명의-두번째글자가-a-또는-l-또는-o인-사원들에-대해서-부서번호별로-사원수-급여합계를-보이시오substr함수-사용">23. 사원명의 두번째글자가 a 또는 l 또는 o인 사원들에 대해서 부서번호별로 사원수, 급여합계를 보이시오.(substr함수 사용)</h3>
+<p>select deptno, count(*) cnt, sum(sal) sumsal
+from emp
+where lower(substr(ename, 2, 1)) in (‘a’, ‘l’, ‘o’)
+group by deptno;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     SUMSAL ---------- ---------- ----------
+    30          5       7900
+    20          2       5975
+    10          1       2450
+</code></pre></div></div>
+
+<h3 id="23-1-부서명과-같이-보이시오">23-1 부서명과 같이 보이시오</h3>
+<p>select deptno, dname, cnt, sumsal
+from ( select deptno, count(*) cnt, sum(sal) sumsal
+	from emp
+	where lower(substr(ename, 2, 1)) in (‘a’, ‘l’, ‘o’)
+	group by deptno ) join dept using(deptno);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     SUMSAL ---------- -------------- ---------- ----------
+    30 SALES                   5       7900
+    20 RESEARCH                2       5975
+    10 ACCOUNTING              1       2450
+</code></pre></div></div>
+
+<h3 id="24-abcddaumnet-id와-포털사이트로-구분하여-보이시오">24. abcd@daum.net id와 포털사이트로 구분하여 보이시오.</h3>
+<p>select substr(‘abcd@daum.net’, 1, instr(‘abcd@daum.net’, ‘@’, 1, 1) -1) id, substr(‘abcd@daum.net’, instr(‘abcd@daum.net’, ‘@’, 1, 1) +1, length(‘abcd@daum.net’)) portal
+from dual;</p>
+
+<p>ID   PORTAL<br />
+—- ——–
+abcd daum.net</p>
+
+<h3 id="25-사원명에서-a에서-두-문자가-ar인-사원에-대해-사번-사원명전체를-10자로-오른쪽을-으로-채운다을-사원명에서-a가-처음-나오는-위치가-작은-것부터-보이시오">25. 사원명에서 ‘a’에서 두 문자가 ‘ar’인 사원에 대해 사번, 사원명(전체를 10자로 오른쪽을 #으로 채운다)을 사원명에서 ‘a’가 처음 나오는 위치가 작은 것부터 보이시오.</h3>
+<p>-&gt; 사원명에서 ‘a’에서 두 문자가 ‘ar’이라는게 무슨 말씀이신지 잘 모르겠습니다….</p>
+
+<h3 id="26-부서위치가-new-york인-부서에-근무하는-사원들에-대해-사번-사원명을-보이시오공백제거">26. 부서위치가 new york인 부서에 근무하는 사원들에 대해 사번 사원명을 보이시오.(공백제거)</h3>
+<p>select trim(empno) empno, trim(ename) ename
+from emp
+where deptno in ( select distinct deptno
+		from dept
+		where lower(loc) = ‘new york’ );</p>
+
+<p>EMPNO                                    ENAME   <br />
+—————————————- ———-
+7839                                     KING    <br />
+7782                                     CLARK   <br />
+7934                                     MILLER</p>
+
+<h3 id="27-사원명에-a가-처음나오는-위치가-3-이상인-사원들에-대해서-직무별로-사원수-급여평균을-사원수가-적은-것부터-보이시오">27. 사원명에 a가 처음나오는 위치가 3 이상인 사원들에 대해서 직무별로 사원수, 급여평균을 사원수가 적은 것부터 보이시오.</h3>
+<p>select job, count(*) cnt, avg(nvl(sal, 0)) avgsal
+from emp
+where instr(lower(ename), ‘a’, 1, 1) &gt;= 3
+group by job
+order by cnt asc;</p>
+
+<p>JOB              CNT     AVGSAL
+——— ———- ———-
+MANAGER            2       2650</p>
+
+<h3 id="28-사번이-짝수인-사원들에-대해-부서번호별로-사원수-급여평균소숫점-이하-첫째-자리에서-반올림을-보이시오">28. 사번이 짝수인 사원들에 대해 부서번호별로 사원수, 급여평균(소숫점 이하 첫째 자리에서 반올림)을 보이시오.</h3>
+<p>select deptno, count(*) cnt, round(avg(nvl(sal, 0)), 0) avgsal
+from emp
+where mod(empno, 2) = 0
+group by deptno;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT     AVGSAL ---------- ---------- ----------
+    30          4       1638
+    20          4       2519
+    10          2       1875
+</code></pre></div></div>
+
+<h3 id="28-1-부서명소문자로과-같이-보이시오">28-1. 부서명(소문자로)과 같이 보이시오.</h3>
+<p>select deptno, lower(dname) dname, cnt, avgsal
+from ( select deptno, count(*) cnt, round(avg(nvl(sal, 0)), 0) avgsal
+	from emp
+	where mod(empno, 2) = 0
+	group by deptno ) join dept using(deptno);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT     AVGSAL ---------- -------------- ---------- ----------
+    30 sales                   4       1638
+    20 research                4       2519
+    10 accounting              2       1875
+</code></pre></div></div>
+
+<h3 id="29-급여가-전체-급여평균-이상인-사원들에-대해-사원명의-뒤에서-첫째자리별로-사원수-급여합계백의자리에서-절삭--천의자리까지-보여라를-사원명의-뒤에서-첫째-자리가-큰것-부터-보이시오">29. 급여가 전체 급여평균 이상인 사원들에 대해 사원명의 뒤에서 첫째자리별로 사원수, 급여합계(백의자리에서 절삭 = 천의자리까지 보여라)를 사원명의 뒤에서 첫째 자리가 큰것 부터 보이시오.</h3>
+<p>select substr(ename, -1, 1) groupename, count(*) cnt, trunc(sum(sal), -3) trunsumsal
+from emp
+where sal &gt;= ( select avg(nvl(sal, 0))
+		from emp)
+group by substr(ename, -1, 1)
+order by groupename desc;</p>
+
+<p>G        CNT TRUNSUMSAL</p>
+<hr />
+<p>T          1       3000
+S          1       2000
+K          1       2000
+G          1       5000
+E          1       2000
+D          1       3000</p>
+
+<h3 id="30-사번의-두번째자리가-짝홀수별로-사원수-최대급여-최소급여를-보이시오">30. 사번의 두번째자리가 짝홀수별로 사원수, 최대급여, 최소급여를 보이시오.</h3>
+<p>select mod(substr(empno, 2, 1), 2) groupempno, count(*) cnt, max(sal) maxsal, min(sal) minsal
+from emp
+group by mod(substr(empno, 2, 1), 2);</p>
+
+<p>GROUPEMPNO        CNT     MAXSAL     MINSAL
+———- ———- ———- ———-
+         1          8       3000        800
+         0          6       5000       1100</p>
+
+<h3 id="31--부서번호별로-사원수-사원명의-최대값-사원명의-최소값-급여평균무조건-올림을-사원명-최대값의-3번째자리에서-1글자가-k-이상인-것만-보이시오">31.  부서번호별로 사원수, 사원명의 최대값, 사원명의 최소값, 급여평균(무조건 올림)을 사원명 최대값의 3번째자리에서 1글자가 k 이상인 것만 보이시오.</h3>
+<p>select deptno, count(*) cnt, max(ename) maxname, min(ename) minname, ceil(avg(nvl(sal,0))) avgsal
+from emp
+group by deptno
+having lower(substr(max(ename), 3, 1)) &gt;= ‘k’;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO        CNT MAXNAME    MINNAME        AVGSAL ---------- ---------- ---------- ---------- ----------
+    30          6 WARD       ALLEN            1567
+    10          3 MILLER     CLARK            2917
+</code></pre></div></div>
+
+<h3 id="31-1-부서명과-같이">31-1. 부서명과 같이</h3>
+<p>select deptno, dname, cnt, maxname, minname, avgsal
+from ( select deptno, count(*) cnt, max(ename) maxname, min(ename) minname, ceil(avg(nvl(sal,0))) avgsal
+	from emp
+	group by deptno
+	having lower(substr(max(ename), 3, 1)) &gt;= ‘k’ ) join dept using(deptno);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEPTNO DNAME                 CNT MAXNAME    MINNAME        AVGSAL ---------- -------------- ---------- ---------- ---------- ----------
+    30 SALES                   6 WARD       ALLEN            1567
+    10 ACCOUNTING              3 MILLER     CLARK            2917
+</code></pre></div></div>
+
+<p>**  변환함수
+** to_number ( 문자형 타입) - 문자를 숫자로 형변환</p>
+<h3 id="32">32.</h3>
+<p>select to_number(‘123’)
+from dual</p>
+
+<h2 id="to_number123">TO_NUMBER(‘123’)</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         123 
+</code></pre></div></div>
+
+<p>숫자는 무조건 오른쪽 정렬, 문자는 무조건 왼쪽정렬</p>
+
+<p>select ‘123’+’456’,to_number(‘123’)+to_number(‘456’)
+from dual</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'123'+'456' TO_NUMBER('123')+TO_NUMBER('456') ----------- ---------------------------------
+    579                               579 
+</code></pre></div></div>
+
+<p>to_number()를 쓰지 않아도 숫자로 자동 형변환하여 더함. -&gt; 문자끼리 문자 그대로 붙이고 싶다면 concat을 쓰자.</p>
+
+<p>select to_number(‘a’)
+from dual;</p>
+
+<p>SQL 오류: ORA-01722: invalid number</p>
+<ol>
+  <li>00000 -  “invalid number”
+*Cause:  <br />
+*Action:</li>
+</ol>
+
+<p>숫자로 변환할 수 없는 값은 에러가 뜬다.</p>
+
+<h3 id="33">33.</h3>
+<p>select empno, substr(empno,1,2)   a, substr(empno,1,2) + 10   b,
+	to_number(substr(empno,1,2) + 10)  c
+from emp;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO    A                                  B                                C ----------   ----------------- -------------------- -------------------------------
+  7369   73                                  83                              83 
+  7499   74                                  84                              84 
+  7521   75                                  85                              85 
+  7566   75                                  85                              85 
+  7654   76                                  86                              86 
+  7698   76                                  86                              86 
+  7782   77                                  87                              87 
+  7839   78                                  88                              88 
+  7844   78                                  88                              88 
+  7900   79                                  89                              89 
+  7902   79                                  89                              89 
+  7934   79                                  89                              89
+</code></pre></div></div>
+
+<p>empno는 숫자로 선언되어있음을 알 수 있다.
+substr을 하면 결과가 문자가 됨을 볼 수 있다. (A)
+substr에 10을 더하면 숫자가 됨을 알 수 있다. (B)
+B의 결과값에 to_number()를 해도 동일하다. (C)</p>
+
+<p>** to_char (숫자 또는 날짜형 타입, ‘형식’)</p>
+<ul>
+  <li>to_char (숫자형 타입, ‘형식’) -&gt; 숫자 값을 형식에 맞게 편집하여 볼 수 있다. 
+형식은 무조건 작은따옴표로 묶자.
+형식에 들어올 수 있는 값은 아래와 같다. 섞어쓰기 가능 
+9 
+0 
+$ 
+L 
+, 
+.</li>
+</ul>
+
+<h3 id="34">34.</h3>
+<p>Select to_char(234545,’999,999,999’)  A, -&gt; 세자리마다 쉼표를 넣어 보이기.
+	to_char(123.345,’999,999.00’) B, -&gt; 소수점 이하는 2자리만 보겠다(반올림) - 반올림은 round() 쓸 수도 있다.
+	to_char(1234,’$9,999’) C, -&gt; $ 붙이기
+	to_char(1234.2,’L9,999.00’) D -&gt; Local 화폐를 의미한다. 한글버전인 경우 원화표기
+from dual;
+A                        B                        C                    D	
+——————-   ——————–  —————–  —————–
+234,545              123.35               $1,234          ￦1,234.20</p>
+
+<p>결과는 왼쪽정렬로 되어 보인다.(문자 값)
+왼쪽에 공간을 넣거나 오른쪽에 공간넣기 - lpad, rpad</p>
+
+<p>형식에서 0이라는 값은 자리가 없는 값도 0으로 표기시킨다. -&gt; (D)를 보면 알 수 있다. 
+9는 숫자의 자리수를 의미하며 의미가 없는 값은 표시 안한다.</p>
+
+<p>to_char(1234, ‘000,000’) -&gt; 결과는 001,234가 나온다.</p>
+
+<h3 id="35">35.</h3>
+<p>select to_char(12345.5555, ‘999,999’)  A,
+	to_char(12345.5555, ‘9999.99’)  B,
+	to_char(4, ‘000’)  C,
+  	to_char(12345, ‘$999,999’)  D,
+	to_char(12345, ‘L999,999’)  E
+from dual;
+   A                          B                              C                D                         E
+—————————– —————————– —————- ————————- ————————-
+  12,346                      ########                       004              $12,345                  ￦12,345
+A가 반올림이 되었다.
+B는 오류이다. 형식에 비해 숫자가 크다는 것. 형식에 자리수를 늘려줘야 한다. 
+C는 자리수 채우기
+D는 $붙이기
+E는 지역화폐</p>
+
+<h3 id="36-사원명에--s를-포함하는-사원들에-대해-사번-사원명첫글자만-대문자-급여123234-직무뒤에-를-붙인다-를-급여가-많은-것부터-보이시오">36. 사원명에  s를 포함하는 사원들에 대해 사번, 사원명(첫글자만 대문자), 급여(￦123,234), 직무(뒤에 ‘**‘를 붙인다) 를 급여가 많은 것부터 보이시오.</h3>
+
+<p>select empno, initcap(ename) iename, to_char(sal,’L999,999’) saldollar, concat(job,’**’) jobb
+from emp
+where lower(ename) like ‘%s%’
+order by sal desc;		-&gt; saldollar를 쓰지 않은 이유는 해당 값은 원화 표시가 있을 것이기 때문(해도 괜찮긴 하지만 정확하게)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO IENAME     SALDOLLAR          JOBB       ---------- ---------- ------------------ -----------
+  7788 Scott                ￦3,000  ANALYST**   
+  7566 Jones                ￦2,975  MANAGER**   
+  7876 Adams                ￦1,100  CLERK**     
+  7900 James                  ￦950  CLERK**     
+  7369 Smith                  ￦800  CLERK**'
+</code></pre></div></div>
+
+<ul>
+  <li>to_char (날짜형 타입, ‘형식’)
+날짜형 타입에는 열의 데이터 타입이 date로 선언되어있어야 한다.</li>
+</ul>
+
+<p>형식
+yyyy 	- 연도를 4자리로 보이기
+yy 	- 연도 중 뒤의 두자리만 보이기
+mm 	- 몇월인지 표기 01 ~ 12
+dd 	- 날짜 값 표기 01 ~ 31
+mon 	- 몇월인지 ~월로 표기 (영문이었으면 세자리로 표기함. Jan, Feb 와 같이)
+month 	- 몇월인지 ~월로 표기 (풀네임)
+d	- 일요일을 1로 시작하여 요일을 숫자로 표기. 
+dy	- 몇요일인지 약어로 표시(영어의 경우 SUN, MON 등)
+day 	- 몇요일인지 풀네임으로 표시 (Sunday ..)
+w	- week의 약어이다. 이달의 몇번째 주인지
+ww	- 그 해의 몇주차인지
+q	- quater 분기를 의미. 1~4분기로 구성	
+hh 	- 시
+hh24	- 시(24시 표기법)
+mi	- 분
+ss	- 초
+“of(문자)” -&gt;형식안에 문자열을 포함하고 싶을때 큰따움표 ““ 내에 넣어준다.
+am or pm -오전인지 오후인지표현
+sp  : 기수 one two       (ddsp -&gt; 날짜를 기수로 표현)
+th  : 서수 02nd	            (ddth -&gt; 날짜를 서수로 표현)
+spth  :  서수 second    (ddspth-&gt; 날짜를 서수로 표현)
+-
+/
+:
+ -&gt; 위의 3개는 형식 값 사이 보이는 문자역할을 함. (구분 값)</p>
+
+<h3 id="37">37.</h3>
+<p>select sysdate, to_char(sysdate, ‘yyyy/mm/dd’)
+from dual;</p>
+
+<p>SYSDATE  TO_CHAR(SYSDATE,’YYYY/MM/DD’)
+————— —————————–
+17/04/06      2017/04/06</p>
+
+<p>sysdate는 date로 정의되어있는 시스템 기본 값이다.</p>
+
+<h3 id="38">38.</h3>
+<p>select to_char(sysdate,’yyyy-mm-dd mon month d dy day hh:mi:ss’)
+from dual;</p>
+
+<h2 id="to_charsysdateyyyy-mm-ddmonmonthddydayhhmiss">TO_CHAR(SYSDATE,’YYYY-MM-DDMONMONTHDDYDAYHH:MI:SS’)</h2>
+<p>2019-04-02 4월  4월  3 화 화요일 09:49:33</p>
+
+<h3 id="39">39.</h3>
+<p>select to_char(sysdate,’w ww q  hh:mi:ss hh24 am hh’)	-&gt; am, pm은 단순 오전 오후 표기
+from dual;</p>
+
+<h2 id="to_charsysdatewwwqhhmisshh24amhh">TO_CHAR(SYSDATE,’WWWQHH:MI:SSHH24AMHH’)</h2>
+<p>1 14 2  09:54:36 09 오전 09</p>
+
+<h3 id="40">40.</h3>
+<p>select to_char(sysdate,’ddsp ddth ddspth’) 
+	from dual;</p>
+
+<h2 id="to_charsysdateddspddthddspth">TO_CHAR(SYSDATE,’DDSPDDTHDDSPTH’)</h2>
+<p>two 02nd second</p>
+
+<p>기수표기, 서수표기, 복합표기</p>
+
+<h3 id="41-입사일자의-분기별로-사원수-급여합계-999999-형식를-보이시오">41. 입사일자의 분기별로 사원수, 급여합계 ($999,999 형식)를 보이시오.</h3>
+<p>select to_char(hiredate,’q’) quater,  count(*) cou, 	to_char(sum(sal),’$999,999’) sum_sal
+from emp
+group by to_char(hiredate,’q’);</p>
+
+<p>QUATER        COU SUM_SAL 
+—— ———- ———
+1               3    $4,150 
+3               2    $2,750 
+4               4    $9,750 
+2               5   $12,375</p>
+
+<h3 id="42--입사일자가-1982년-2월-이전에-입사한-사원들에-대해-직무명을-보이시오">42.  입사일자가 1982년 2월 이전에 입사한 사원들에 대해 직무명을 보이시오.</h3>
+<p>select distinct job	-&gt; distinct 잊지 말자. 
+from emp
+where to_char(hiredate, ‘yyyy/mm’) &lt;= ‘1982/02’;</p>
+
+<p>또는 아래와 같이 where절을 쓸 수도 있다. 
+hiredate &lt;= to_date(‘1982/02/01’, ‘yyyy/mm/dd’) 
+to_date –&gt; 문자를 형태에 맞춰 날짜(date 타입)로 바꾼다.</p>
+
+<h2 id="job">JOB</h2>
+<p>CLERK
+SALESMAN
+PRESIDENT
+MANAGER
+ANALYST</p>
+
+<h3 id="43-급여가-부서번호-30의-급여평균-이상-받는-사원들에-대해-입사년도-별로-사원수-최대급여123345-형식-최소급여123456-형식를-최대급여가-많은-것부터-보이시오">43. 급여가 부서번호 30의 급여평균 이상 받는 사원들에 대해 입사년도 별로 사원수, 최대급여(￦123,345 형식), 최소급여($123,456 형식)를 최대급여가 많은 것부터 보이시오.</h3>
+<p>select to_char(hiredate, ‘yyyy’) hireyear, count(*) cou, to_char(max(sal), ‘L999,999’) lmaxsal, to_char(min(sal), ‘$999,999’) dminsal
+from emp
+where sal &gt;= (select avg(nvl(sal, 0))
+		from emp
+		where deptno = 30)
+group by to_char(hiredate, ‘yyyy’)
+order by max(sal) desc;	-&gt; lmaxsal을 써도 되긴 하는데 문자값이 들어갔으니.. 편집값을 쓰는 것보다 다시 구해서 쓰는게 낫다.</p>
+
+<p>HIRE        COU LMAXSAL            DMINSAL<br />
+—- ———- —————— ———
+1981          6           ￦5,000     $1,600
+1982          1           ￦3,000     $3,000</p>
+
+<h3 id="44급여가-전체평균급여-이상인-사원들에-대해-사번-사원명-입사일자년-4자리-월두자리-일두자리-수요일형식으로를--입사요일순으로-보이시오">44.급여가 전체평균급여 이상인 사원들에 대해 사번, 사원명, 입사일자(년 4자리-월두자리-일두자리 수요일형식으로)를  입사요일순으로 보이시오.</h3>
+<p>select empno, ename, sal, to_char(hiredate, ‘yyyy-mm-dd day’) hireday, deptno, mgr
+from emp
+where sal &gt;= (select avg(nvl(sal, 0))
+		from emp)
+order by to_char(hiredate, ‘d’) asc;</p>
+
+<p>년월의 요일 순 : order by to_char(hiredate, ‘yyyymmd’) asc;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL HIREDAY                     DEPTNO        MGR ---------- ---------- ---------- ----------------------- ---------- ----------
+  7839 KING             5000 1981-11-17 화요일               10           
+  7782 CLARK            2450 1981-06-09 화요일               10       7839
+  7902 FORD             3000 1981-12-03 목요일               20       7566
+  7566 JONES            2975 1981-04-02 목요일               20       7839
+  7788 SCOTT            3000 1982-04-09 금요일               20       7566
+  7698 BLAKE            2850 1981-05-01 금요일               30       7839
+</code></pre></div></div>
+
+<h3 id="45-44번-문제를-부서명-관리자사원명-급여에-따른-등급-까지-보이시오">45. 44번 문제를 부서명, 관리자사원명, 급여에 따른 등급 까지 보이시오.</h3>
+<p>select e.empno eempno, e.ename eename, e.sal esal, e.hireday hireday, e.deptno edeptno, e.mgr emgr, d.dname ddname, m.ename mgrname, grade
+from ( select empno, ename, sal, to_char(hiredate, ‘yyyy-mm-dd day’) hireday, deptno, mgr
+	from emp
+	where sal &gt;= (select avg(nvl(sal, 0))
+			from emp) ) e join dept d on e.deptno=d.deptno
+					join emp m on e.mgr=m.empno
+					join salgrade on e.sal between losal and hisal
+order by to_char(hiredate, ‘d’) asc;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EEMPNO EENAME           ESAL HIREDAY                    EDEPTNO       EMGR DDNAME         MGRNAME         GRADE ---------- ---------- ---------- ----------------------- ---------- ---------- -------------- ---------- ----------
+  7566 JONES            2975 1981-04-02 목요일               20       7839 RESEARCH       KING                4
+  7698 BLAKE            2850 1981-05-01 금요일               30       7839 SALES          KING                4
+  7782 CLARK            2450 1981-06-09 화요일               10       7839 ACCOUNTING     KING                4
+  7902 FORD             3000 1981-12-03 목요일               20       7566 RESEARCH       JONES               4
+  7788 SCOTT            3000 1982-04-09 금요일               20       7566 RESEARCH       JONES               4
+</code></pre></div></div>
+
+<h3 id="46-입사년월이-1981년-2월에-입사한-사원들에-대해-사번-사원명-입사-일자-부서번호-부서명을-보이시오">46. 입사년월이 1981년 2월에 입사한 사원들에 대해 사번, 사원명, 입사 일자, 부서번호, 부서명을 보이시오.</h3>
+<p>select empno, ename, hiredate, deptno, dname
+from ( select empno, ename, hiredate, deptno
+	from emp
+	where to_char(hiredate, ‘yyyy/mm’) = ‘1981/02’ ) e join dept using(deptno);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
+  7499 ALLEN      81/02/20         30 SALES         
+  7521 WARD       81/02/22         30 SALES         
+</code></pre></div></div>
+
+<h3 id="47-사원명에-a가-처음나오는-위치부터-2자리별로-사원수-급여평균십의자리에서-반올림-123123-형식을-사원수가-적은것-부터-보이시오">47. 사원명에 a가 처음나오는 위치부터 2자리별로 사원수, 급여평균(십의자리에서 반올림, $123,123 형식)을 사원수가 적은것 부터 보이시오.</h3>
+<p>select lower(substr(ename, instr(lower(ename), ‘a’, 1, 1), 2)) namegroup, count(*) cou, to_char(round(avg(nvl(sal, 0)), -2), ‘$999,999’) avgsal
+from emp
+group by substr(ename, instr(lower(ename), ‘a’, 1, 1), 2)
+order by cou asc;</p>
+
+<p>NA        COU AVGSAL <br />
+– ———- ———
+ak          1    $2,900
+fo          1    $3,000
+al          1    $1,600
+ad          1    $1,100
+ki          1    $5,000
+sc          1    $3,000
+am          1    $1,000
+jo          1    $3,000
+tu          1    $1,500
+mi          1    $1,300
+sm          1      $800</p>
+
+<p>NA        COU AVGSAL <br />
+– ———- ———
+ar          3    $1,700</p>
+
+<p>to_char에 0이 있는 것은 빈 자리들은 0으로 채워준다. 정수부나 소수부나 둘 다에 대해서.</p>
+
+<h3 id="48-입사일자가-1980년-7월-1일-이후인-사원들에-대해-사번-사원명s를-로-바꾸어서-보이기-직무소문자로를-보이시오">48. 입사일자가 1980년 7월 1일 이후인 사원들에 대해 사번, 사원명(s를 *로 바꾸어서 보이기), 직무(소문자로)를 보이시오.</h3>
+<p>select empno, replace(lower(ename), ‘s’, ‘*’) repename, lower(job) lojob
+from emp
+where to_char(hiredate, ‘yyyy/mm/dd’) &gt;= ‘1980/07/01’;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO REPENAME   LOJOB     ---------- ---------- ---------
+  7839 king       president
+  7566 jone*      manager  
+  7698 blake      manager  
+  7782 clark      manager  
+  7902 ford       analyst  
+  7369 *mith      clerk    
+  7499 allen      salesman 
+  7521 ward       salesman 
+  7654 martin     salesman 
+  7788 *cott      analyst  
+  7844 turner     salesman 
+
+ EMPNO REPENAME   LOJOB     ---------- ---------- ---------
+  7876 adam*      clerk    
+  7900 jame*      clerk    
+  7934 miller     clerk    
+</code></pre></div></div>
+
+<p>replace 중요하다!! 공백제거 시 사용!</p>
+
+<h3 id="49-입사일자가-1980년-20주차-이전에-입사한-사원들에-대해-사원수-최대입사일자-최소입사일자를-보이시오">49. 입사일자가 1980년 20주차 이전에 입사한 사원들에 대해 사원수, 최대입사일자, 최소입사일자를 보이시오.</h3>
+<p>select count(*) cou, max(hiredate) maxhiredate, min(hiredate) minhiredate
+from emp
+where to_char(hiredate, ‘yyyy ww’) &lt;= ‘1980 20’;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   COU MAXHIREDATE                 MINHIREDATE                 ---------- --------------------------- ---------------------------
+     0                                                        
+</code></pre></div></div>
+
+<p>-&gt; 확인결과 80년대 20주차 이전에 입사한 사람은 없었습니다. 
+greatest: 단일 행 함수
+max: 다중행 함수</p>
+
+<h3 id="50-입사년도가-1982년-이전에-입사한-사원들에-대해-사번사원명-부서번호-관리자사번-부서명-관리자사원명을-보이시오">50. 입사년도가 1982년 이전에 입사한 사원들에 대해 사번,사원명, 부서번호, 관리자사번, 부서명, 관리자사원명을 보이시오.</h3>
+<p>select e.empno empno, e.ename ename, e.deptno deptno, e.mgr mgr, dname, m.ename mgrname
+from ( select empno, ename, deptno, mgr
+	from emp
+	where to_char(hiredate, ‘yyyy’) &lt;= ‘1982’ ) e join dept d on e.deptno = d.deptno
+					join emp m on e.mgr = m.empno;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME          DEPTNO        MGR DNAME          MGRNAME    ---------- ---------- ---------- ---------- -------------- ----------
+  7566 JONES              20       7839 RESEARCH       KING      
+  7698 BLAKE              30       7839 SALES          KING      
+  7782 CLARK              10       7839 ACCOUNTING     KING      
+  7902 FORD               20       7566 RESEARCH       JONES     
+  7369 SMITH              20       7902 RESEARCH       FORD      
+  7499 ALLEN              30       7698 SALES          BLAKE     
+  7521 WARD               30       7698 SALES          BLAKE     
+  7654 MARTIN             30       7698 SALES          BLAKE     
+  7788 SCOTT              20       7566 RESEARCH       JONES     
+  7844 TURNER             30       7698 SALES          BLAKE     
+  7900 JAMES              30       7698 SALES          BLAKE     
+
+ EMPNO ENAME          DEPTNO        MGR DNAME          MGRNAME    ---------- ---------- ---------- ---------- -------------- ----------
+  7934 MILLER             10       7782 ACCOUNTING     CLARK     
+</code></pre></div></div>
+
+<h3 id="51-입사년도별2016년-으로-표현로-사원수-급여평균소숫점이하-2번째자리에서-반올림-9999990으로를-입사년도의-오름차순으로-보이시오">51. 입사년도별(2016년 으로 표현)로 사원수, 급여평균(소숫점이하 2번째자리에서 반올림, 999,999.0으로)를 입사년도의 오름차순으로 보이시오.</h3>
+<p>select concat(to_char(hiredate, ‘yyyy’),’년’) hireyear, count(*) cou, to_char(avg(nvl(sal, 0)), ‘999,999.0’) avgsal
+from emp
+group by to_char(hiredate, ‘yyyy’)
+order by to_char(hiredate, ‘yyyy’) asc;</p>
+
+<p>HIREY        COU AVGSAL  <br />
+—– ———- ———-
+1980년          1      800.0
+1981년         10    2,282.5
+1982년          2    2,150.0
+1983년          1    1,100.0</p>
+
+<h3 id="52-입사년월이-1981년-2월에-입사한-사원들에-대해-사번-사원명-입사일자-부서번호-부서명을-보이시오">52. 입사년월이 1981년 2월에 입사한 사원들에 대해 사번, 사원명, 입사일자, 부서번호, 부서명을 보이시오.</h3>
+<p>select empno, ename, hiredate, deptno, dname
+from ( select empno, ename, hiredate, deptno
+	from emp
+	where to_char(hiredate, ‘yyyy/mm’) = ‘1981/02’ ) e join dept using(deptno);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE     DEPTNO DNAME          ---------- ---------- -------- ---------- --------------
+  7499 ALLEN      81/02/20         30 SALES         
+  7521 WARD       81/02/22         30 SALES         
+</code></pre></div></div>
+
+<p>select empno, ename, hiredate, deptno, dname
+from ( select empno, ename, hiredate, deptno
+	from emp
+	where hiredate ???  to_date(‘1981/02/01’,’yyyy/mm/dd’ ) e join dept using(deptno);</p>
+
+<p>-&gt; to_date로 문자를 날짜로 바꾸려면 포맷을 다 넣어줘야 함. 연월일 전부 다 넣어줘야 한다. 일 부분을 안넣으면 어떻게 될지 모른다. 
+2월에 입사한걸 따지려면 2월 3월 and로 사잇값 제한을 두거나 between..?</p>
+
+<h3 id="53-입사년도별-분기별로-사원수-급여평균을-l12345612-형식-반올림을-보이시오">53. 입사년도별, 분기별로 사원수, 급여평균을 (L123,456.12 형식, 반올림)을 보이시오.</h3>
+<p>select to_char(hiredate, ‘yyyy’) hireyear, to_char(hiredate, ‘q’) hirequarter, count(*) cou, to_char(avg(nvl(sal, 0)), ‘L999,999.99’) avgsal
+from emp
+group by to_char(hiredate, ‘yyyy’), to_char(hiredate, ‘q’);</p>
+
+<p>HIRE H        COU AVGSAL             <br />
+—- - ———- ———————
+1981 4          3           ￦2,983.33 
+1982 1          1           ￦1,300.00 
+1981 2          3           ￦2,758.33 
+1980 4          1             ￦800.00 
+1983 2          1           ￦1,100.00 
+1981 3          2           ￦1,375.00 
+1982 2          1           ￦3,000.00 
+1981 1          2           ￦1,425.00</p>
+
+<p>select to_char(hiredate, ‘yyyy q’) hireyear, count(*) cou, to_char(avg(nvl(sal, 0)), ‘L999,990.00’) avgsal
+from emp
+group by to_char(hiredate, ‘yyyy q’)</p>
+
+<p>위와 같이 하는 것이 낫다. 이렇게 해도 쿼터별로 나뉜다. 그리고 to_char 표현식에서도 소수점 이하 두자리를 표현해주기 위해 .00을 넣어준다. .99보다 낫다
+그리고 0원이 나오는 경우 999.00 하면 .00만 나오므로 000.00 방식으로 해서 000.00 처럼 나오게 하는게 좋다. 
+999.99 라고 하면 .만 나올 수도 있다.</p>
+
+<p>** to_date (문자형타입, ‘형식’)
+형식 : To_char의 날짜형타입 형식과 동일</p>
+
+<h3 id="54-사번이-9999-사원명이-나다-입사일자-2020년1월1로-추가">54. 사번이 9999, 사원명이 나다, 입사일자 2020년1월1로 추가</h3>
+
+<p>insert into emp(empno, ename, hiredate)
+	value(9999, ‘나다’, to_date(‘2020/01/01’,’yyyy/mm/dd’));</p>
+
+<p>insert into emp(empno, ename, hiredate)
+	value(9999, ‘나다’, ‘2020/01/01’));
+와 같이 하는 경우 되는 경우도 있고 안되는 경우도 있지만 정확하지 않다.</p>
+
+<p>** 날짜함수
+날짜형 + 숫자 = 날짜형 -&gt; 날짜는 시스템 내에서 숫자값으로도 파악하고 있어서 숫자를 더하고 빼는 것이 가능하다. 
+날짜형 - 숫자 = 날짜형
+날짜형 - 날짜형 = 숫자 -&gt; 차이 값이 나온다. 시분초까지 나온다.(소수점으로)</p>
+
+<p>add_months(날짜형열이름, 숫자)				-&gt;숫자값 개월을 더하는 함수
+last_day(날짜형이름)					-&gt; 해당 월의 마지막 일에 해당하는 date값 반환
+next_day(날짜형이름, 인수)   다가오는 ‘인수’요일
+		 인수에는 ‘일’, ‘월’ …
+			1,   2 …… (1 = 일요일 ) 
+		 	‘일요일’,,,,’토요일’
+months_between(날짜형이름,날짜형열이름) 두 날짜 사이의 개월수</p>
+
+<h3 id="54-1--sysdate-가-2020년-4월-10일-일-경우">54-1.  sysdate 가 2020년 4월 10일 일 경우</h3>
+
+<p>Select sysdate + 50, sysdate – 50 
+From dual</p>
+
+<p>SYSDATE+50 SYSDATE-50
+———-            ———-
+20/05/30         20/02/20</p>
+
+<p>날짜값에 숫자를 더하고 빼는 것은 일수값을 더하고 빼는 것과 같다.</p>
+
+<p>2000/01/01 기준으로 30일 이전, 이후를 보이시오
+select to_date(‘2000/01/01’, ‘yyyy/mm/dd’) + 40, to_date(‘2000/01/01’, ‘yyyy/mm/dd’) - 40 
+from dual;</p>
+
+<h3 id="55">55.</h3>
+<p>2019년 12월 01일 과 현재의 차</p>
+
+<p>select to_date(‘20191201’,’yyyymmdd’) - sysdate
+from dual</p>
+
+<h2 id="to_date20191201yyyymmdd-sysdate">TO_DATE(‘20191201’,’YYYYMMDD’)-SYSDATE</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                         -131.39581 
+</code></pre></div></div>
+
+<p>select sysdate- to_date(‘20191201’,’yyyymmdd’)
+from dual
+SYSDATE-TO_DATE(‘20191201’,’YYYYMMDD’)
+————————————–
+                           131.39581</p>
+
+<p>앞의 정수는 일수, 소수점은 시분초를 표현한 것임. 
+단순히 차이값만을 표현하고자 한다면 abs를 같이 써줘 음수 값을 없애주는 것이 좋다.</p>
+
+<h3 id="56-sysdate-가-2020년-4월-10일-일-경우">56. sysdate 가 2020년 4월 10일 일 경우</h3>
+
+<p>select add_months(sysdate,5), add_months(sysdate,-5)
+from dual</p>
+
+<p>ADD_MONTHS(SYSDATE,20) ADD_MONTHS(SYSDATE,-20)
+———————- ———————–
+20/09/10              19/12/10</p>
+
+<p>기준값으로부터 두번째 인자만큼의 개월 수를 더한다.</p>
+
+<h3 id="57--sysdate-가-2020년-4월-10일-일-경우">57.  sysdate 가 2020년 4월 10일 일 경우</h3>
+
+<p>select last_day(sysdate)
+from dual;</p>
+
+<h2 id="last_daysysdate">LAST_DAY(SYSDATE)</h2>
+<p>20/04/30</p>
+
+<p>last_day는 해당 연월의 마지막 일을 구하는 함수이다.</p>
+
+<p>57-1. 2020년 3월 15일 입사해서 그 달에 근무한 일수는?
+select last_day(to_date(‘2020/03/15’, ‘yyyy/mm/dd’)) - to_date(‘2020/03/15’, ‘yyyy/mm/dd’) + 1
+from dual;</p>
+
+<p>+1을 해줘야 근무일수가 정확히 계산된다!</p>
+
+<h3 id="58-sysdate가-2020년-4월-10일-일-경우">58. sysdate가 2020년 4월 10일 일 경우</h3>
+
+<p>select sysdate, next_day(sysdate,2)  A, next_day(sysdate, ‘화’) B,
+	next_day(sysdate, ‘화요일’) C
+from dual;</p>
+
+<p>SYSDATE    A                     B                        C
+————     ——————- ——————— ———————–
+20/04/10     20/04/13            20/04/14            20/04/14</p>
+
+<p>4월 10일(금요일)을 기준으로 돌아오는 2(월요일)은 언제야?
+‘화’나 ‘화요일’이라고 써도 된다.</p>
+
+<p>58-1. sysdate에 입사해서 돌아오는 금요일까지 근무일수를 구하세요.
+select next_day(sysdate, 6) - sysdate + 1
+from dual;</p>
+
+<h3 id="59">59.</h3>
+<p>select sysdate,
+       months_between( sysdate, to_date(‘2017/12/01’, ‘yyyy/mm/dd’)) A,
+       months_between(to_date(‘2017/12/01’, ‘yyyy/mm/dd’), sysdate) B
+from dual;</p>
+
+<p>SYSDATE                                        A                                B
+————–   ——————————— —————————
+17/04/06                         -7.81620557               7.81620557</p>
+
+<p>months_between()은 사이 개월 수를 구해온다. 정수부는 개월, 소수부는 일자, 시분초를 의미한다. (앞의 인자에서 뒤의 인자를 뺀 것과 비슷하다.)</p>
+
+<p>sysdate는 보일 때 문자취급하여 보인다.(왼쪽 정렬)
+A와 B는 오른쪽 정렬이 되어있는데, 이는 숫자 값을 의미한다.</p>
+
+<h3 id="59-1-1991년-1월-1일과-1995년-12월-4일-사이의-개월-수를-보이시오정수부분만">59-1. 1991년 1월 1일과 1995년 12월 4일 사이의 개월 수를 보이시오.(정수부분만)</h3>
+<p>select floor(abs(months_between(to_date(‘1991/01/01’, ‘yyyy/mm/dd’), to_date(‘1995/12/04’, ‘yyyy/mm/dd’))))
+from dual;</p>
+
+<p>floor(abs())와 abs(floor())는 달라짐을 주의하자.</p>
+
+<h3 id="60-오늘-입사한-경우-이-달에-근무해야-하는-일수를-구하시오">60. 오늘 입사한 경우 이 달에 근무해야 하는 일수를 구하시오.</h3>
+<p>select last_day(sysdate) - sysdate + 1
+from dual;</p>
+
+<h3 id="61-1980년도-입사한-사원들에-대해-사원수-급여합계-급여평균소수점-2번째자리에서-반올림-12345690을-보이시오">61. 1980년도 입사한 사원들에 대해 사원수, 급여합계, 급여평균(소수점 2번째자리에서 반올림, $123,456.90)을 보이시오.</h3>
+<p>select count(*) cnt, sum(sal) sumsal, to_char(round(avg(nvl(sal, 0)), 1), ‘$999,990.00’) avgsal
+from emp
+where to_char(hiredate, ‘yyyy’) = ‘1980’</p>
+
+<h3 id="62-사원명에-s를-포함하고-입사일이-1분기에-입사한-사원과-같은-직무를-갖는-사원들에-대해-사번-사원명첫글자-대문자-입사일자1980-02-01-요일짧게-입사일자에-3개월-후를-1980-05-01-보이시오">62. 사원명에 s를 포함하고 입사일이 1분기에 입사한 사원과 같은 직무를 갖는 사원들에 대해 사번, 사원명(첫글자 대문자), 입사일자(1980-02-01 요일짧게), 입사일자에 3개월 후를 (1980-05-01) 보이시오.</h3>
+<p>select empno, initcap(ename) ename, to_char(hiredate, ‘yyyy-mm-dd dy) hiredatewithdy, to_char(add_months(hiredate, 3), ‘yyyy-mm-dd’) added_hiredate
+from emp
+where lower(job) in (select distinct lower(job)
+		from emp
+		where lower(ename) like ‘%s%’ and to_char(hiredate, ‘q’) = ‘1’);</p>
+
+<p>문제가 약간 애매한데..
+select empno, initcap(ename) ename, to_char(hiredate, ‘yyyy-mm-dd dy) hiredatewithdy, to_char(add_months(hiredate, 3), ‘yyyy-mm-dd’) added_hiredate
+from emp
+where (lower(ename) like ‘%s%’) and
+	(lower(job) in (select distinct lower(job)
+			from emp
+			where to_char(hiredate, ‘q’) = ‘1’));</p>
+
+<p>아래가 더 빠르지 않을까
+select empno, initcap(ename) ename, to_char(hiredate, ‘yyyy-mm-dd dy) hiredatewithdy, to_char(add_months(hiredate, 3), ‘yyyy-mm-dd’) added_hiredate
+from ( select empno, ename, hiredate
+	from emp
+	where lower(job) in (select distinct lower(job)
+				from emp
+				where to_char(hiredate, ‘q’) = ‘1’))
+where lower(ename) like ‘%s%’;</p>
+
+<h3 id="63-현재기준-입사-개월수가-500-이상인-사원들에-사번-사원명-급여-등급-부서번호-부서명을-등급-작은-것부터-보이시오">63. 현재기준 입사 개월수가 500 이상인 사원들에 사번, 사원명, 급여, 등급, 부서번호, 부서명을 등급 작은 것부터 보이시오.</h3>
+<p>select empno, ename, sal, e.deptno, grade, dname
+from ( select empno, ename, sal, deptno
+	from emp
+	where months_between(sysdate, hiredate) &gt;= 500 ) e join dept using(deptno)		&lt;- 꼭 동등조인을 해야할까? 안되는 경우 동등조인을 해주고 select절에 ambiguous안되게. 
+							join salgrade on e.sal between losal and hisal;
+order by grade asc;</p>
+
+<h3 id="64-짝수해에-입사하고-사원명의-길이가-4이상인-사원들에-대해-사번-사원명-입사일자월-일-년4자리-관리자사번-관리자사원명을-보이시오">64. 짝수해에 입사하고 사원명의 길이가 4이상인 사원들에 대해 사번, 사원명, 입사일자(월-일-년4자리), 관리자사번, 관리자사원명을 보이시오.</h3>
+<p>select e.empno, e.ename, hired, e.mgr, m.ename mgrname
+from ( select empno, ename, to_char(hiredate, ‘mm-dd-yyyy’) hired, mgr
+	from emp
+	where (mod(to_char(hiredate, ‘yyyy’), 2) = 0) and length(ename) &gt;= 4) e join emp m on e.mgr = m.empno;</p>
+
+<p>to_char한 것을 mod 가능하다. (알아서 숫자로 형변환)</p>
+
+<h3 id="65-부서번호-입사년도별로-사원수-최대급여-최소급여를-최소급여가-부서번호-20의-최소급여-이상인-것만-부서명과-같이-보이시오">65. 부서번호, 입사년도별로 사원수, 최대급여, 최소급여를 최소급여가 부서번호 20의 최소급여 이상인 것만 부서명과 같이 보이시오.</h3>
+<p>select deptno, dname, yhiredate, cnt, maxsal, minsal
+from (	select deptno, to_char(hiredate, ‘yyyy’) yhiredate, count(*) cnt, max(sal) maxsal, min(sal) minsal 
+	from emp
+	group by deptno, to_char(hiredate, ‘yyyy’)
+	having min(sal) &gt;= (select min(sal)
+				from emp
+				where deptno = 20)
+	) e join dept using(deptno) ;</p>
+
+<h3 id="66-입사일자가-1981년-3월-1일-이전에-입사한-사원들에-대해-사번-사원명-입사일자-1984년-1월-1일-기준으로-근무한-일수를-보이시오">66. 입사일자가 1981년 3월 1일 이전에 입사한 사원들에 대해 사번, 사원명, 입사일자, 1984년 1월 1일 기준으로 근무한 일수를 보이시오.</h3>
+<p>select empno, ename, hiredate, trunc(sysdate - to_date(‘1984/01/01’, ‘yyyy/mm/dd’), 0) workdays
+from emp
+where hiredate &lt; to_date(‘1981/03/01’, ‘yyyy/mm/dd’);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE   WORKDAYS ---------- ---------- -------- ----------
+  7369 SMITH      80/12/17      13260
+  7499 ALLEN      81/02/20      13260
+  7521 WARD       81/02/22      13260
+</code></pre></div></div>
+
+<p>trunc(abs(hiredate - to_date(‘1984/01/01’, ‘yyyy/mm/dd’)), 0) + 1</p>
+
+<p>흠..</p>
+
+<h3 id="67-현재기준으로-근무개월수별무조건-버림로-사원수를-보이는데-근무개월수의-오름차순으로-보이시오">67. 현재기준으로 근무개월수별(무조건 버림)로 사원수를 보이는데 근무개월수의 오름차순으로 보이시오.</h3>
+<p>select floor(months_between(sysdate, hiredate)) workmon, count(*) cnt
+from emp
+group by floor(abs(months_between(sysdate, hiredate)))
+order by workmon asc;
+-&gt; floor 는 trunc로 대체 가능하다.</p>
+
+<p>WORKMON        CNT
+———- ———-
+       443          1
+       456          1
+       458          1
+       460          2
+       461          1
+       462          1
+       463          1
+       466          1
+       467          1
+       468          1
+       469          1</p>
+
+<p>WORKMON        CNT
+———- ———-
+       470          1
+       472          1</p>
+
+<p>round나 trunc 함수에서 두번째 인수를 안쓰면 기본 정수까지 보이기 설정임.</p>
+
+<h3 id="68-부서번호가-30인-사원들에-대해-사번-사원명-입사일자-입사일자에-100일을-더한-날짜를-보이시오">68. 부서번호가 30인 사원들에 대해 사번, 사원명, 입사일자, 입사일자에 100일을 더한 날짜를 보이시오.</h3>
+<p>select empno, ename, hiredate, hiredate+100 addedhiredate
+from emp
+where deptno = 30;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE ADDEDHIR ---------- ---------- -------- --------
+  7698 BLAKE      81/05/01 81/08/09
+  7499 ALLEN      81/02/20 81/05/31
+  7521 WARD       81/02/22 81/06/02
+  7654 MARTIN     81/09/28 82/01/06
+  7844 TURNER     81/09/08 81/12/17
+  7900 JAMES      81/12/03 82/03/13
+</code></pre></div></div>
+
+<h3 id="69-현재기준으로-근무개월수가-452개월-이상인-사원들에-대해-사번-사원명-급여-보너스-급여보너스-입사일자-근무개월수소수점이하-버림를-근무개월수가-많은-것부터-보이시오">69. 현재기준으로 근무개월수가 452개월 이상인 사원들에 대해 사번, 사원명, 급여, 보너스, 급여+보너스, 입사일자, 근무개월수(소수점이하 버림)를 근무개월수가 많은 것부터 보이시오.</h3>
+<p>select empno, ename, sal, comm, nvl(sal, 0)+nvl(comm, 0) commsal, hiredate, trunc(abs(months_between(sysdate, hiredate)), 0) workmon
+from emp
+where abs(months_between(sysdate, hiredate)) &gt;= 452
+order by workmon desc;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL       COMM    COMMSAL HIREDATE    WORKMON ---------- ---------- ---------- ---------- ---------- -------- ----------
+  7369 SMITH             800                   800 80/12/17        472
+  7499 ALLEN            1600        300       1900 81/02/20        470
+  7521 WARD             1250        500       1750 81/02/22        469
+  7566 JONES            2975                  2975 81/04/02        468
+  7698 BLAKE            2850                  2850 81/05/01        467
+  7782 CLARK            2450                  2450 81/06/09        466
+  7844 TURNER           1500          0       1500 81/09/08        463
+  7654 MARTIN           1250       1400       2650 81/09/28        462
+  7839 KING             5000                  5000 81/11/17        461
+  7902 FORD             3000                  3000 81/12/03        460
+  7900 JAMES             950                   950 81/12/03        460
+
+ EMPNO ENAME             SAL       COMM    COMMSAL HIREDATE    WORKMON ---------- ---------- ---------- ---------- ---------- -------- ----------
+  7934 MILLER           1300                  1300 82/01/23        458
+  7788 SCOTT            3000                  3000 82/04/09        456
+</code></pre></div></div>
+
+<h3 id="70-부서위치가-newyork인-부서에-근무하면서-현재기준-근무개월수가-450-개월이상인-사원들에-대해-입사년도-분기별로-사원수-급여합계를-사원수가-3이상인-것만-보이시오">70. 부서위치가 newyork인 부서에 근무하면서 현재기준 근무개월수가 450 개월이상인 사원들에 대해 입사년도, 분기별로 사원수, 급여합계를 사원수가 3이상인 것만 보이시오.</h3>
+<p>select to_char(hiredate, ‘yyyy q’) hireyq, count(<em>) cnt, sum(sal) sumsal
+from emp
+where deptno in (select deptno
+		from dept
+		where lower(replace(loc, ‘ ‘, ‘’)) =’newyork’) and abs(months_between(sysdate, hiredate)) &gt;= 450 
+group by to_char(hiredate, ‘yyyy q’)
+having count(</em>) &gt;= 3;</p>
+
+<p>선택된 행 없음.</p>
+
+<h3 id="71-사번의-두번째자리가-홀수인-사원들에-대해-관리자사번-및-입사년도별로-사원수-가장-늦은-입사일자-가장-빠른-입사일자를-관리자사원명과-같이-보이시오-입사일자는-년4자리월2자리일2자리-그-달의-주차">71. 사번의 두번째자리가 홀수인 사원들에 대해 관리자사번 및 입사년도별로 사원수, 가장 늦은 입사일자, 가장 빠른 입사일자를 관리자사원명과 같이 보이시오. (입사일자는 년4자리/월2자리/일2자리 그 달의 주차)</h3>
+<p>select e.mgr, hireyear, cnt, maxhiredate, minhiredate, m.ename mgrname
+from ( select mgr, to_char(hiredate, ‘yyyy’) hireyear, count(*) cnt, to_char(max(hiredate), ‘yyyy/mm/dd w’) maxhiredate, to_char(min(hiredate), ‘yyyy/mm/dd w’) minhiredate
+	from emp
+	where mod(substr(empno, 2, 1), 2) = 1
+	group by mgr, to_char(hiredate, ‘yyyy’) ) e join emp m on e.mgr = m.empno;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   MGR HIRE        CNT MAXHIREDATE  MINHIREDATE  MGRNAME    ---------- ---- ---------- ------------ ------------ ----------
+  7698 1981          2 1981/12/03 1 1981/02/22 4 BLAKE     
+  7839 1981          2 1981/06/09 2 1981/04/02 1 KING      
+  7566 1982          1 1982/04/09 2 1982/04/09 2 JONES     
+  7566 1981          1 1981/12/03 1 1981/12/03 1 JONES     
+  7782 1982          1 1982/01/23 4 1982/01/23 4 CLARK     
+  7902 1980          1 1980/12/17 3 1980/12/17 3 FORD      
+</code></pre></div></div>
+
+<h3 id="72-사원명에-am-또는-an-또는-as를-포함하는-사원들에-대해-사번-사원명-급여-급여--12-일의-자리에서-반올림하여-123230-형식으로-입사일자년4자리-월2자리-일2자-월요일-그해의-주차-입사일자-기준-50-개월-이후-일자년4자리월2자리일2자를-급여가-적은-것부터-보이시오">72. 사원명에 am 또는 an 또는 as를 포함하는 사원들에 대해 사번, 사원명, 급여, 급여 * 12 (일의 자리에서 반올림하여 $123,230 형식으로), 입사일자(년4자리-월2자리-일2자 월요일 그해의 주차), 입사일자 기준 50 개월 이후 일자(년4자리/월2자리/일2자)를 급여가 적은 것부터 보이시오.</h3>
+
+<p>select empno, ename, sal, to_char(round(nvl(sal, 0)*12, -1), ‘$999,990’) sal12, to_char(hiredate, ‘yyyy-mm-dd day ww’) hired, to_char(add_months(hiredate, 50), ‘yyyy/mm/dd’) hire50
+from emp
+where regexp_like (lower(ename), ‘(am|an|as)’)
+order by sal asc;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME             SAL SAL12     HIRED                      HIRE50     ---------- ---------- ---------- --------- -------------------------- ----------
+  7900 JAMES             950   $11,400 1981-12-03 목요일 49        1986/02/03
+  7876 ADAMS            1100   $13,200 1983-05-12 목요일 19        1987/07/12
+</code></pre></div></div>
+
+<h3 id="73-사번-사원명-입사일자-입사한-달의-근무일수-1더해줌-를-근무일수가-적은것부터-보이시오">73. 사번, 사원명, 입사일자, 입사한 달의 근무일수 (1더해줌) 를 근무일수가 적은것부터 보이시오.</h3>
+<p>select empno, ename, hiredate, last_day(hiredate)-hiredate+1 workdayofhiremon
+from emp
+order by workdayofhiremon asc;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO ENAME      HIREDATE WORKDAYOFHIREMON ---------- ---------- -------- ----------------
+  7654 MARTIN     81/09/28                3
+  7521 WARD       81/02/22                7
+  7499 ALLEN      81/02/20                9
+  7934 MILLER     82/01/23                9
+  7839 KING       81/11/17               14
+  7369 SMITH      80/12/17               15
+  7876 ADAMS      83/05/12               20
+  7788 SCOTT      82/04/09               22
+  7782 CLARK      81/06/09               22
+  7844 TURNER     81/09/08               23
+  7902 FORD       81/12/03               29
+
+ EMPNO ENAME      HIREDATE WORKDAYOFHIREMON ---------- ---------- -------- ----------------
+  7900 JAMES      81/12/03               29
+  7566 JONES      81/04/02               29
+  7698 BLAKE      81/05/01               31
+</code></pre></div></div>
+
+<h3 id="74-시스템일자기준으로-500개월-이전에-입사한-사원들에-대해-사번의-2번째자리부터-1-자리별로-사원수-급여합계를-사원수가-많은것-부터-보이시오">74. 시스템일자기준으로 500개월 이전에 입사한 사원들에 대해 사번의 2번째자리부터 1 자리별로 사원수, 급여합계를 사원수가 많은것 부터 보이시오.</h3>
+<p>select substr(empno, 2, 1) eno, count(*) cnt, sum(sal) sumsal
+from emp
+where months_between(sysdate, hiredate) &gt; 500
+group by substr(empno, 2, 1)
+order by cnt desc;</p>
+
+<p>선택된 행 없음</p>
+
+<p>아래와 같이 작성도 가능하다.</p>
+
+<p>select substr(empno, 2, 1) eno, count(*) cnt, sum(sal) sumsal
+from emp
+where hiredate &lt; add_months(sysdate, -500) 
+group by substr(empno, 2, 1)
+order by cnt desc;</p>
+
+<p>선택된 행 없음</p>
+
+<h3 id="75-입사일자가-1980년-7월-1일-이후인-사원들에-대해-사번-사원명-s를-로-바꾸어-보이기-직무-소문자로-를-보이시오">75. 입사일자가 1980년 7월 1일 이후인 사원들에 대해 사번, 사원명 (s를 *로 바꾸어 보이기), 직무 (소문자로) 를 보이시오.</h3>
+<p>select empno, replace(lower(ename), ‘s’, ‘*’) repname, lower(job) lojob
+from emp
+where hiredate &gt; to_date(‘1980/07/01’, ‘yyyy/mm/dd’);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EMPNO REPNAME    LOJOB     ---------- ---------- ---------
+  7839 king       president
+  7566 jone*      manager  
+  7698 blake      manager  
+  7782 clark      manager  
+  7902 ford       analyst  
+  7369 *mith      clerk    
+  7499 allen      salesman 
+  7521 ward       salesman 
+  7654 martin     salesman 
+  7788 *cott      analyst  
+  7844 turner     salesman 
+
+ EMPNO REPNAME    LOJOB     ---------- ---------- ---------
+  7876 adam*      clerk    
+  7900 jame*      clerk    
+  7934 miller     clerk    
+</code></pre></div></div>
+
+<h1 id="plsql">pl/sql</h1>
+<h3 id="1-사원-테이블에서-empno가-7900인-사원에-대해-사번사원명을-보이는-익명-블럭을-작성하시오">1. 사원 테이블에서 empno가 7900인 사원에 대해 사번,사원명을 보이는 익명 블럭을 작성하시오.</h3>
+
+<p>declare
+  vempno emp.empno%type; — 사번의 자료형 -&gt;테이블에있는 값에 타입을 상속받아서 사용.
+  vename  emp.ename%type; — 사원의 자료형
+  
+begin
+  select empno, ename
+  into vempno,vename
+  from emp
+  where empno = 7900;  
+  
+  DBMS_output.put_line(‘empno =’ ||vempno);
+  DBMS_output.put_line(‘ename =’ ||vename);
+end;</p>
+
+<p>익명 블록이 완료되었습니다.
+empno =7900
+ename =JAMES</p>
+
+<h3 id="2-부서테이블에서-부서번호가-20인-부서명위치를-보이는-익명블럭을-작성하시오">2. 부서테이블에서 부서번호가 20인 부서명,위치를 보이는 익명블럭을 작성하시오.</h3>
+<p>set serveroutput on;
+declare
+    vdname dept.dname%TYPE;
+    vloc dept.loc%TYPE;
+begin
+    select dname, loc
+    into vdname, vloc
+    from dept
+    where deptno = 20;
+    
+    DBMS_output.put_line(‘dname = ‘ || vdname);
+    DBMS_output.put_line(‘loc = ‘ || vloc);
+end;
+(변수명의 v는 variable인듯)</p>
+
+<h3 id="3사원명이-james-인-사원에-대해-사번-사원명급여-보너스를-보이는-익명블럭을-작성하시오">3.사원명이 james 인 사원에 대해 사번, 사원명,급여+ 보너스를 보이는 익명블럭을 작성하시오.</h3>
+<p>set serveroutput on;
+declare
+    vempno emp.empno%type;
+    vename emp.ename%type;
+    vsal emp.sal%type;
+    vcomm emp.comm%type;
+begin
+    select empno, ename, nvl(sal, 0), nvl(comm, 0)
+    into vempno, vename, vsal, vcomm
+    from emp
+    where lower(ename) = ‘james’;
+    
+    DBMS_output.put_line(‘empno = ‘ || vempno);
+    DBMS_output.put_line(‘ename = ‘ || vename);
+    DBMS_output.put_line(‘sal + comm = ‘ || (vsal + vcomm));
+end;
+또는 그냥 vsal과 vcomm을 하나의 변수로 합치고 변수 타입을 알아서 정하는 것도 될 수 있다. 그러면 select에서 nvl이용 두 합을 구해준 다음 그 하나로 만든 변수에 넣으면 됨.</p>
+
+<h3 id="4-사원명에-s를-포함하는-사원들에-대해-사원수급여합계급여평균최대급여를-보이는-익명블럭을-작성하시오">4. 사원명에 s를 포함하는 사원들에 대해 사원수,급여합계,급여평균,최대급여를 보이는 익명블럭을 작성하시오.</h3>
+<p>set serveroutput on;
+declare
+    vempcnt number;  //number로 하면 double로 생성되며 값 제한이 없음
+    vsumsal number;  
+    vavgsal number;  
+    vmaxsal number;  //emp.sal%type으로 하는게 좋다. 어차피 sal 중 가장 큰 값이니
+begin
+    select count(*), sum(sal), avg(nvl(sal, 0)), max(sal)
+    into vempcnt, vsumsal, vavgsal, vmaxsal
+    from emp
+    where lower(ename) like ‘%s%’;
+    
+    dbms_output.put_line(‘empcnt = ‘ || vempcnt);
+    dbms_output.put_line(‘vsumsal = ‘ || vsumsal);
+    dbms_output.put_line(‘vavgsal = ‘ || vavgsal);
+    dbms_output.put_line(‘vmaxsal = ‘ || vmaxsal);
+end;
+변수 타입을 number 말고 다르게 할 수 없을까..?</p>
+
+<h3 id="5-부서번호가-10인-부서번호부서명-위치를-보이는-익명블럭을-작성하시오">5. 부서번호가 10인 부서번호,부서명, 위치를 보이는 익명블럭을 작성하시오.</h3>
+
+<p>declare
+  vdept dept%rowtype; –&gt;레코드 전체를 다상속해서 사용
+//rowtype 앞에는 테이블 이름이 나온다. 
+begin
+  select *  //별표로 다 가져와야 한다. 
+  into vdept
+  from dept
+  where deptno =10;
+  
+  DBMS_output.put_line(‘deptno =’ || vdept.deptno);
+  DBMS_output.put_line(‘dname =’ || vdept.dname);
+  DBMS_output.put_line(‘loc =’ || vdept.loc);
+end;</p>
+
+<h3 id="6-사번이-7369인-사원에-대해-사번-사원명직무를-보이는-익명블럭을-보이시오-rowtype-을-사용">6. 사번이 7369인 사원에 대해 사번 사원명,직무를 보이는 익명블럭을 보이시오. (%rowtype 을 사용)</h3>
+<p>set serveroutput on;
+declare
+    vemprow emp%rowtype;
+begin
+    select *
+    into vemprow
+    from emp
+    where empno = 7369;
+    
+    dbms_output.put_line(‘empno = ‘ || vemprow.empno);
+    dbms_output.put_line(‘ename = ‘ || vemprow.ename);
+    dbms_output.put_line(‘job = ‘ || vemprow.job);
+end;</p>
+
+<h3 id="7-급여가-1500-이상인-사원들에-대해-사번사원명급여를-보이는-익명-블럭을-작성하시오">7. 급여가 1500 이상인 사원들에 대해 사번,사원명,급여를 보이는 익명 블럭을 작성하시오.</h3>
+
+<p>  declare
+  cursor c1 is
+  select empno,ename,sal
+  from emp
+  where sal &gt;=1500;  –cursor 선언
+  
+  vempno emp.empno%type;                          –&gt;사번의 변수  
+  vename emp.ename%type; 
+  vsal   emp.sal%type; 
+  begin
+  open c1; – cursor 실행
+  
+  loop
+  fetch c1 into vempno,vename,vsal;   –&gt;변수선언해야함
+  exit when c1%notfound;
+  DBMS_output.put_line(‘empno =’ || vempno );
+  DBMS_output.put_line(‘ename =’ || vename );
+  DBMS_output.put_line(‘sal   =’ || vsal );
+  
+  end loop;
+  
+  DBMS_output.put_line(c1%rowcount ||’행이 선택되었습니다.’ );
+  
+  close c1;                                                              –&gt;cursor 종료
+  
+  end;</p>
+
+<h3 id="8-급여가-1000이상이면서-3000이하인-사원들에-대해-사번사원명급여-보너스-부서번호부서명을-보이는-익명블럭을-작성하시오">8. 급여가 1000이상이면서 3000이하인 사원들에 대해 사번,사원명,급여 보너스 부서번호,부서명을 보이는 익명블럭을 작성하시오.</h3>
+<p>set serveroutput on;
+declare
+    cursor empc is
+    select empno, ename, sal, comm, deptno, dname
+    from (select empno, ename, sal, comm, deptno
+            from emp
+            where sal between 1000 and 3000) join dept using(deptno);
+            
+    vempno emp.empno%type;
+    vename emp.ename%type;
+    vsal emp.sal%type;
+    vcomm emp.comm%type;
+    vdeptno emp.deptno%type;
+    vdname dept.dname%type;
+begin
+    open empc;
+    
+    loop
+        fetch empc into vempno, vename, vsal, vcomm, vdeptno, vdname;
+        exit when empc%NOTFOUND;
+        dbms_output.put_line(‘empno = ‘ || vempno);
+        dbms_output.put_line(‘ename = ‘ || vename);
+        dbms_output.put_line(‘sal = ‘ || vsal);
+        dbms_output.put_line(‘comm = ‘ || vcomm);
+        dbms_output.put_line(‘deptno = ‘ || vdeptno);
+        dbms_output.put_line(‘dname = ‘ || vdname);
+    
+    end loop;
+    
+    dbms_output.put_line(‘총 열 개수: ‘ || empc%rowcount);
+    close empc;
+end;</p>
+
+<h3 id="9-부서번호-별로-사원수-급여합계급여평균을-보이는-익명-블럭을-작성하시오">9. 부서번호 별로 사원수 ,급여합계,급여평균을 보이는 익명 블럭을 작성하시오.</h3>
+<p>set serveroutput on;
+declare
+    cursor rowc
+    is
+    select deptno, count(*) cnt, sum(sal) sumsal, avg(nvl(sal, 0)) avgsal
+    from emp
+    group by deptno;
+            
+    vdeptno emp.deptno%type;
+    vcnt number;
+    vsumsal number;
+    vavgsal number;
+begin
+    open rowc;
+    
+    loop
+        fetch rowc into vdeptno, vcnt, vsumsal, vavgsal;
+        exit when rowc%NOTFOUND;
+        dbms_output.put_line(‘deptno = ‘ || vdeptno);
+        dbms_output.put_line(‘cnt = ‘ || vcnt);
+        dbms_output.put_line(‘sumsal = ‘ || vsumsal);
+        dbms_output.put_line(‘avgsal = ‘ || vavgsal);
+    
+    end loop;
+    
+    dbms_output.put_line(‘총 열 개수: ‘ || rowc%rowcount);
+    close rowc;
+end;</p>
+
+<h3 id="91-부서번호-별로-사원수-급여합계급여평균을-보이는-익명-블럭을-작성하시오-à-부서명과-같이-보이게-수정하시오">9.1 부서번호 별로 사원수 ,급여합계,급여평균을 보이는 익명 블럭을 작성하시오. à 부서명과 같이 보이게 수정하시오.</h3>
+<p>set serveroutput on;
+declare
+    cursor rowc
+    is
+    select deptno, cnt, sumsal, avgsal, dname
+    from (select deptno, count(*) cnt, sum(sal) sumsal, avg(nvl(sal, 0)) avgsal
+            from emp
+            group by deptno) join dept using(deptno);
+            
+    vdeptno emp.deptno%type;
+    vdname dept.dname%type;
+    vcnt number;
+    vsumsal number;
+    vavgsal number;
+begin
+    open rowc;
+    
+    loop
+        fetch rowc into vdeptno, vcnt, vsumsal, vavgsal, vdname;
+        exit when rowc%NOTFOUND;
+        dbms_output.put_line(‘deptno = ‘ || vdeptno);
+        dbms_output.put_line(‘cnt = ‘ || vcnt);
+        dbms_output.put_line(‘sumsal = ‘ || vsumsal);
+        dbms_output.put_line(‘avgsal = ‘ || vavgsal);
+        dbms_output.put_line(‘dname = ‘ || vdname);
+    
+    end loop;
+    
+    dbms_output.put_line(‘총 열 개수: ‘ || rowc%rowcount);
+    close rowc;
+end;</p>
+
+<h3 id="10-화면에서-부서번호를-입력받아-해당부서번호에-근무하는-사원번호사원명-직무를-보이는-익명블럭을-작성하시오">10. 화면에서 부서번호를 입력받아 해당부서번호에 근무하는 사원번호,사원명, 직무를 보이는 익명블럭을 작성하시오.</h3>
+<p> (rowtype을 이용 cursor명은 cursor2로 부서번호 10)
+set serveroutput on;
+declare
+    cursor cursor2
+    is
+    select *
+    from emp
+    where deptno = 10;
+            
+    vemprow emp%rowtype;
+begin
+    open cursor2;
+    
+    loop
+        fetch cursor2 into vemprow;
+        exit when cursor2%NOTFOUND;
+        dbms_output.put_line(‘empno = ‘ || vemprow.empno);
+        dbms_output.put_line(‘ename = ‘ || vemprow.ename);
+        dbms_output.put_line(‘job = ‘ || vemprow.job);
+    
+    end loop;
+    
+    dbms_output.put_line(‘총 열 개수: ‘ || cursor2%rowcount);
+    close cursor2;
+end;</p>
+
+<h3 id="10-1-화면에서-부서번호를-입력받아-해당부서번호에-근무하는-사원번호사원명-직무를-보이는-익명블럭을-작성하시오">10-1. 화면에서 부서번호를 입력받아 해당부서번호에 근무하는 사원번호,사원명, 직무를 보이는 익명블럭을 작성하시오.</h3>
+<p> (rowtype을 이용 cursor명은 cursor2로)
+set serveroutput on;
+declare
+    cursor cursor2
+    is
+    select *
+    from emp
+    where deptno = &amp;deptno;  // -&gt; &amp;로 하면 팝업창으로 값을 입력받는다. 
+            
+    vemprow emp%rowtype;
+begin
+    open cursor2;
+    
+    loop
+        fetch cursor2 into vemprow;
+        exit when cursor2%NOTFOUND;
+        dbms_output.put_line(‘empno = ‘ || vemprow.empno);
+        dbms_output.put_line(‘ename = ‘ || vemprow.ename);
+        dbms_output.put_line(‘job = ‘ || vemprow.job);
+    
+    end loop;
+    
+    dbms_output.put_line(‘총 열 개수: ‘ || cursor2%rowcount);
+    close cursor2;
+end;</p>
+
+<h3 id="11-부서번호를-인수로-받아-부서명을-return하는-fdname이라는-함수를-생성하시오">11. 부서번호를 인수로 받아 부서명을 return하는 fdname이라는 함수를 생성하시오.</h3>
+
+<p>create or replace function fdname (vdeptno in emp.deptno%type ) 
+  return dept.dname%type
+is     —-    declare 대신 사용
+  vdname dept.dname%type;
+begin
+  select dname
+  into vdname
+  from dept
+  where  deptno = vdeptno;
+  
+  return vdname;
+  
+end; </p>
+
+<p>FUNCTION FDNAME이(가) 컴파일되었습니다.</p>
+
+<h1 id="procedure">procedure</h1>
+<h3 id="15-부서번호를-인수로-받아-사번-사원명-급여를-화면출력하는-pemp1-이라는-procedure를-생성하시오">15. 부서번호를 인수로 받아 사번, 사원명, 급여를 화면출력하는 pemp1 이라는 procedure를 생성하시오.</h3>
+
+<p>create or replace procedure pemp1 (vdeptno in emp.deptno%type)
+is
+    cursor c1 is
+    select empno, ename, sal
+    from emp
+    where deptno=vdeptno;</p>
+
+<p>  vempno emp.empno%type;
+  vename emp.ename%type;
+  vsal emp.sal%type;
+begin
+  open c1;
+  loop
+  fetch c1 into vempno, vename, vsal;
+  exit when c1%notfound;
+  dbms_output.put_line(‘empno= ‘|| vempno);
+  dbms_output.put_line(‘ename= ‘|| vename);
+  dbms_output.put_line(‘sal= ‘|| vsal);</p>
+
+<p>  end loop;
+  close c1;
+end;</p>
+
+<h3 id="16-부서번호를-인수로-받아-해당-부서의-부서명-위치를-화면출력하는-pdept1-이라는-procedure를-생성하시오rowtype-사용-select-into">16. 부서번호를 인수로 받아 해당 부서의 부서명, 위치를 화면출력하는 pdept1 이라는 procedure를 생성하시오.(rowtype 사용, select~ into)</h3>
+
+<p>create or replace procedure pdept1(vdeptno in emp.deptno%type)
+is
+  vdept dept%rowtype;
+  
+begin
+  select *
+  into vdept
+  from dept
+  where deptno=vdeptno;</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>  dbms_output.put_line (‘dname = ‘</td>
+      <td> </td>
+      <td>vdept.dname);</td>
+    </tr>
+    <tr>
+      <td>        dbms_output.put_line (‘loc = ‘</td>
+      <td> </td>
+      <td>vdept.loc);</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>end;</p>
+
+<p>exec pdept1 (40);</p>
+
+<p>dname = OPERATIONS
+loc = BOSTON</p>
+
+<p>함수 프로시져</p>
+<h3 id="11-부서번호를-인수로-받아-부서명을-return하는-fdname이라는-함수를-생성하시오-1">11. 부서번호를 인수로 받아 부서명을 return하는 fdname이라는 함수를 생성하시오.</h3>
+
+<p>create or replace function fdname (vdeptno in emp.deptno%type ) 
+  return dept.dname%type
+is     —-    declare 대신 사용
+  vdname dept.dname%type;
+begin
+  select dname
+  into vdname
+  from dept
+  where  deptno = vdeptno;
+  
+  return vdname;
+  
+end; </p>
+
+<p>FUNCTION FDNAME이(가) 컴파일되었습니다.</p>
+
+<h3 id="12-급여를-인수로-받아-급여등급을-return하는-fsalgrade라는-함수를-생성하시오">12. 급여를 인수로 받아 급여등급을 return하는 fsalgrade라는 함수를 생성하시오.</h3>
+<p>create or replace FUNCTION fsalgrade (vsal in emp.sal%type)
+    return salgrade.grade%type
+is
+    vgrade salgrade.grade%type;
+begin
+    select grade
+    into vgrade
+    from salgrade
+    where vsal between losal and hisal;
+    
+    return vgrade;
+    
+end;</p>
+
+<p>질의 : 사원명에 s를 포함하는 사원들에 대해서 사번,사원명,급여 급여등급을 보이시오.
+select empno, ename, sal, fsalgrade(sal) salgrade
+from emp
+where lower(ename) like ‘%s%’;</p>
+
+<h3 id="13-입사일자를-인수로-받아-현재기준-근속개월수months_between-사용-를-return하는-fguen라는-function를-생성하시오">13. 입사일자를 인수로 받아 현재기준 근속개월수(months_between 사용) 를 return하는 fguen라는 function를 생성하시오.</h3>
+<p>create or replace function fguen (v_hiredate in emp.hiredate%type)
+    return number
+is
+    v_months number;
+begin
+    select ceil(abs(months_between(sysdate, v_hiredate))) //floor로 내림처리 해도 됨. Trunc, round 등
+    into v_months
+    from dual;
+    
+    return v_months;
+    
+end;</p>
+
+<p>질의 : 급여가 1000이상이면서 3000 이하인 사원들에 대해 사번, 사원명, 부서번호, 부서명, 입사일자, 근속개월수를 보이시오.
+select empno, ename, deptno, dname, hiredate, fguen(hiredate) fguen
+from (select empno, ename, deptno, hiredate
+    from emp
+    where sal between 1000 and 3000) join dept using(deptno);</p>
+
+<p>이전에 사용한 함수(deptno로 dname구하는 함수)를 쓴다면,
+Select empno, ename, deptno, fdname(deptno) dname, fguen(hiredate) fguen
+From emp
+Where sal between 1000 and 3000;</p>
+
+<h3 id="14-부서명을-인수로-받아-부서번호를-return하는-fdeptno-하는-함수를-생성하시오-자료형은-type을-사용">14. 부서명을 인수로 받아 부서번호를 return하는 fdeptno  하는 함수를 생성하시오. (자료형은 %type을 사용)</h3>
+<p>create or replace function fdeptno (vdname in dept.dname%type)
+    return dept.deptno%type
+is
+    vdeptno dept.deptno%type;
+begin
+    select deptno
+    into vdeptno
+    from dept
+    where replace(lower(vdname), ‘ ‘, ‘’) = replace(lower(dname), ‘ ‘, ‘’);
+    
+    return vdeptno;
+end;
+질의: 부서명이 sales 에 근무하는 사원들에 대해 사원수, 급여합계, 급여평균을 보이시오.
+select count(*) cnt, sum(sal) sumsal, avg(nvl(sal, 0)) avgsal
+from emp
+where deptno = fdeptno(‘sales’);
+–&gt; 만약에 sales가 여러개 부서 번호 나올 수 있다면 함수는 쓸 수 없고 조인 써야함. (위의 함수는 하나의 값만 반환하도록 되어있음)</p>
+
+<h3 id="15-부서번호를-인수로-받아-사번-사원명-급여를-화면출력하는-pemp1-이라는-procedure를-생성하시오-1">15. 부서번호를 인수로 받아 사번, 사원명, 급여를 화면출력하는 pemp1 이라는 procedure를 생성하시오.</h3>
+
+<p>create or replace procedure pemp1 (vdeptno in emp.deptno%type)
+is
+    cursor c1 is
+    select empno, ename, sal
+    from emp
+    where deptno=vdeptno;</p>
+
+<p>  vempno emp.empno%type;
+  vename emp.ename%type;
+  vsal emp.sal%type;
+begin
+  open c1;
+  loop
+   fetch c1 into vempno, vename, vsal;
+  exit when c1%notfound;
+  dbms_output.put_line(‘empno= ‘|| vempno);
+  dbms_output.put_line(‘ename= ‘|| vename);
+  dbms_output.put_line(‘sal= ‘|| vsal);</p>
+
+<p>  end loop;
+  close c1;
+end;</p>
+
+<h3 id="16-부서번호를-인수로-받아-해당-부서의-부서명-위치를-화면출력하는-pdept1-이라는-procedure를-생성하시오rowtype-사용-select-into-1">16. 부서번호를 인수로 받아 해당 부서의 부서명, 위치를 화면출력하는 pdept1 이라는 procedure를 생성하시오.(rowtype 사용, select~ into)</h3>
+
+<p>create or replace procedure pdept1(vdeptno in emp.deptno%type)
+is
+  vdept dept%rowtype;
+  
+begin
+  select *
+  into vdept
+  from dept
+  where deptno=vdeptno;</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>  dbms_output.put_line (‘dname = ‘</td>
+      <td> </td>
+      <td>vdept.dname);</td>
+    </tr>
+    <tr>
+      <td>                 dbms_output.put_line (‘loc = ‘</td>
+      <td> </td>
+      <td>vdept.loc);</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>end;</p>
+
+<p>exec pdept1 (40);</p>
+
+<p>dname = OPERATIONS
+loc = BOSTON</p>
+
+<h3 id="17-관리자사번을-인수로-받아-해당관리자의-부하사원의-사번-사원명-급여를-화면-출력하는-pemp9이라는-procedure-생성단-cusor명은-m1-rowtype을-사용">17. 관리자사번을 인수로 받아 해당관리자의 부하사원의 사번, 사원명, 급여를 화면 출력하는 pemp9이라는 procedure 생성(단, cusor명은 m1, %rowtype을 사용)</h3>
+<p>create or replace PROCEDURE pemp9(vmgr in emp.mgr%type)
+is
+    cursor m1 is
+    select *
+    from emp
+    where mgr=vmgr;
+    
+    vemps emp%rowtype;
+begin
+    open m1;
+    loop
+        fetch m1 into vemps;
+        exit when m1%notfound;
+        dbms_output.put(‘empno: ‘||vemps.empno);
+        dbms_output.put(‘ename: ‘||vemps.ename);
+        dbms_output.put_line(‘sal: ‘||vemps.sal);
+        
+    end loop;
+    close m1;
+end;</p>
+
+<p>exec pemp9(7839);</p>
+
+<h3 id="18-부서번호를-인수로-받아-직무가-salesman이면-급여15로-직무가-manager이면-급여12로-그-밖에는-sal로-update하는-pempsal이라는-procedure를-생성하시오">18. 부서번호를 인수로 받아 직무가 salesman이면 급여<em>1.5로, 직무가 manager이면 급여</em>1.2로 그 밖에는 sal로 update하는 pempsal이라는 procedure를 생성하시오.</h3>
+
+<p>create or replace procedure pempsal(vdeptno in emp.deptno%type)</p>
+
+<p>is</p>
+
+<p>cursor d1 is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select sal, replace(lower(job), ' ', '')
+
+from emp
+
+where deptno = vdeptno
+
+for update;
+</code></pre></div></div>
+
+<p>vsal emp.sal%type;</p>
+
+<p>vjob emp.job%type;</p>
+
+<p>vcsal emp.sal%type;</p>
+
+<p>begin</p>
+
+<p>open d1;</p>
+
+<p>loop</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch d1 into vsal, vjob;
+
+exit when d1%notfound;
+
+
+
+  if vjob='salesman' then
+
+    vcsal := (vsal*1.5);
+
+  elsif vjob='manager' then
+
+    vcsal := vsal * 2;
+
+  else
+
+    vcsal := vsal;
+
+  end if;
+
+    
+
+  update emp
+
+  set sal = vcsal
+
+  where current of d1;
+</code></pre></div></div>
+
+<p>end loop;</p>
+
+<p>close d1;</p>
+
+<p>end;</p>
+
+<p>\</p>
+
+<p>select *</p>
+
+<p>from emp;</p>
+
+<p>exec pempsal(10);</p>
+
+<p>select *</p>
+
+<p>from emp;</p>
+
+<h3 id="19-직무를-인수로-받아-사번-사원명-급여-보너스를-화면출력하는-pjob-이라는-procedure-를-생성하시오">19. 직무를 인수로 받아 사번, 사원명, 급여, 보너스를 화면출력하는 pjob 이라는 procedure 를 생성하시오.</h3>
+
+<p>(자료형은  %rowrype 을 사용, cursor명 c1)</p>
+
+<p>set serveroutput on</p>
+
+<p>create or replace procedure pjob(vjob in emp.job%type)</p>
+
+<p>is</p>
+
+<p>cursor c1 is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select *
+
+from emp
+
+where lower(job) = lower(vjob);
+</code></pre></div></div>
+
+<p>vrow emp%rowtype;</p>
+
+<p>begin</p>
+
+<p>open c1;</p>
+
+<p>loop</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vrow;
+
+exit when c1%notfound;
+
+
+
+SYS.DBMS_OUTPUT.PUT_LINE('사번' || vrow.empno);
+
+SYS.DBMS_OUTPUT.PUT_LINE('사원명' || vrow.ename);
+
+SYS.DBMS_OUTPUT.PUT_LINE('급여' || vrow.sal);
+
+SYS.DBMS_OUTPUT.PUT_LINE('보너스' || vrow.comm);
+</code></pre></div></div>
+
+<p>end loop;</p>
+
+<p>close c1;</p>
+
+<p>end;</p>
+
+<p>exec pjob(‘manager’);</p>
+
+<p>결과는</p>
+
+<p>사번7566</p>
+
+<p>사원명JONES</p>
+
+<p>급여2975</p>
+
+<p>보너스</p>
+
+<p>사번7698</p>
+
+<p>사원명BLAKE</p>
+
+<p>급여2850</p>
+
+<p>보너스</p>
+
+<p>사번7782</p>
+
+<p>사원명CLARK</p>
+
+<p>급여4900</p>
+
+<p>보너스</p>
+
+<p>-&gt; 보너스의 경우 안나온다. 여기의 경우 nvl을 안해주는게 낫다.</p>
+
+<h3 id="20-급여와-직무를-인수를-받아-급여-이상이면서-직무가-입력받는-직무와-같은-사원들에-대해-사번-사원명-급여-직무를-화면출력하는-pemp_sal-이라는-procedure를-생성하시오">20. 급여와 직무를 인수를 받아 급여 이상이면서 직무가 입력받는 직무와 같은 사원들에 대해 사번, 사원명, 급여, 직무를 화면출력하는 pemp_sal 이라는 procedure를 생성하시오.</h3>
+
+<p>create or replace procedure pemp_sal(vsal in emp.sal%type, vjob in emp.job%type)</p>
+
+<p>is</p>
+
+<p>cursor c1 is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select *
+
+from emp
+
+where sal &gt;= vsal and lower(job) = lower(vjob);
+</code></pre></div></div>
+
+<p>vrow emp%rowtype;</p>
+
+<p>begin</p>
+
+<p>open c1;</p>
+
+<p>loop</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vrow;
+
+exit when c1%notfound;
+
+
+
+SYS.DBMS_OUTPUT.PUT_LINE('사번' || vrow.empno);
+
+SYS.DBMS_OUTPUT.PUT_LINE('사원명' || vrow.ename);
+
+SYS.DBMS_OUTPUT.PUT_LINE('급여' || vrow.sal);
+
+SYS.DBMS_OUTPUT.PUT_LINE('직무' || vrow.job);
+</code></pre></div></div>
+
+<p>end loop;</p>
+
+<p>close c1;</p>
+
+<p>end;</p>
+
+<p>exec pemp_sal(1000, ‘salesman’);</p>
+
+<p>사번7499</p>
+
+<p>사원명ALLEN</p>
+
+<p>급여1600</p>
+
+<p>직무SALESMAN</p>
+
+<p>사번7521</p>
+
+<p>사원명WARD</p>
+
+<p>급여1250</p>
+
+<p>직무SALESMAN</p>
+
+<p>사번7654</p>
+
+<p>사원명MARTIN</p>
+
+<p>급여1250</p>
+
+<p>직무SALESMAN</p>
+
+<p>사번7844</p>
+
+<p>사원명TURNER</p>
+
+<p>급여1500</p>
+
+<p>직무SALESMAN</p>
+
+<h3 id="21-급여를-인수로-받아-입력받은-급여이상인-사원들에-대해-부서번호별로-사원수-급여합계를-화면-출력하는-procedure를-완성하시오">21. 급여를 인수로 받아 입력받은 급여이상인 사원들에 대해 부서번호별로 사원수, 급여합계를 화면 출력하는 procedure를 완성하시오.</h3>
+
+<p>create or replace procedure empsum(vsal in emp.sal%type)</p>
+
+<p>is</p>
+
+<p>cursor c1 is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select deptno, count(*) cnt, sum(sal) sumsal
+
+from emp
+
+where sal &gt;= vsal
+
+group by deptno;
+</code></pre></div></div>
+
+<p>vdeptno emp.deptno%type;		//reference</p>
+
+<p>vcnt number;				//scalar</p>
+
+<p>vsumsal number;</p>
+
+<p>begin</p>
+
+<p>open c1;</p>
+
+<p>loop</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vdeptno, vcnt, vsumsal;
+
+exit when c1%notfound;
+
+
+
+SYS.DBMS_OUTPUT.PUT_LINE('부서번호' || vdeptno);
+
+SYS.DBMS_OUTPUT.PUT_LINE('사원수' || vcnt);
+
+SYS.DBMS_OUTPUT.PUT_LINE('급여합계' || vsumsal);
+</code></pre></div></div>
+
+<p>end loop;</p>
+
+<p>close c1;</p>
+
+<p>end;</p>
+
+<p>exec empsum(1000);</p>
+
+<p>부서번호30</p>
+
+<p>사원수5</p>
+
+<p>급여합계8450</p>
+
+<p>부서번호20</p>
+
+<p>사원수4</p>
+
+<p>급여합계10075</p>
+
+<p>부서번호10</p>
+
+<p>사원수3</p>
+
+<p>급여합계11200</p>
+
+<h3 id="21-1-급여를-인수로-받아-입력받은-급여이상인-사원들에-대해-부서번호별로-사원수-급여합계를-화면-출력하는-procedure를-완성하시오---부서명과-같이-보이시오">21-1. 급여를 인수로 받아 입력받은 급여이상인 사원들에 대해 부서번호별로 사원수, 급여합계를 화면 출력하는 procedure를 완성하시오. - 부서명과 같이 보이시오</h3>
+
+<p>create or replace procedure empsumanddname(vsal in emp.sal%type)</p>
+
+<p>is</p>
+
+<p>cursor c1 is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select deptno, cnt, sumsal, dname
+
+from ( select deptno, count(*) cnt, sum(sal) sumsal
+
+from emp
+
+	where sal &gt;= vsal
+
+	group by deptno) join dept using(deptno);
+</code></pre></div></div>
+
+<p>vdeptno emp.deptno%type;</p>
+
+<p>vcnt number;</p>
+
+<p>vsumsal number;</p>
+
+<p>vdname dept.dname%type;</p>
+
+<p>begin</p>
+
+<p>open c1;</p>
+
+<p>loop</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch c1 into vdeptno, vcnt, vsumsal, vdname;
+
+exit when c1%notfound;
+
+
+
+SYS.DBMS_OUTPUT.PUT_LINE('부서번호' || vdeptno);
+
+SYS.DBMS_OUTPUT.PUT_LINE('사원수' || vcnt);
+
+SYS.DBMS_OUTPUT.PUT_LINE('급여합계' || vsumsal);
+
+SYS.DBMS_OUTPUT.PUT_LINE('부서명' || vdname);
+</code></pre></div></div>
+
+<p>end loop;</p>
+
+<p>close c1;</p>
+
+<p>end;</p>
+
+<p>exec empsumanddname(1000);</p>
+
+<p>부서번호30</p>
+
+<p>사원수5</p>
+
+<p>급여합계8450</p>
+
+<p>부서명SALES</p>
+
+<p>부서번호20</p>
+
+<p>사원수4</p>
+
+<p>급여합계10075</p>
+
+<p>부서명RESEARCH</p>
+
+<p>부서번호10</p>
+
+<p>사원수3</p>
+
+<p>급여합계11200</p>
+
+<p>부서명ACCOUNTING</p>
+:ET
