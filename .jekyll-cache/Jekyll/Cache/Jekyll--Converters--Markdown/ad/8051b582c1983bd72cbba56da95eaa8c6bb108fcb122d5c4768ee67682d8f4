@@ -1,8 +1,0 @@
-I"<p>Swift를 다시 공부하던 도중 기록하면 좋을만한 부분이 있어서 작성한다.</p>
-
-<p>Any?, AnyObject? 같은 옵셔널이 아닌 Any, AnyObject 등에는 nil을 직접적으로 넣을 수 없다. 하지만 아래와 같은 경우에는 가능하다.</p>
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="k">let</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">a</span> <span class="k">as</span> <span class="kt">Any</span>   <span class="c1">//syntax error가 뜨지 않는다. 'Any?'로 쓰십시오!라고 뜰 줄 알았는데..</span>
-</code></pre></div></div>
-<p>b는 실질적으로 nil이지만 nil이 아닌 것처럼 보인다. 이런 부분에 있어 유의하도록 하자.</p>
-:ET

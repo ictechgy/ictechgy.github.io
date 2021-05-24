@@ -1,17 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://ictechgy.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ictechgy.github.io/" rel="alternate" type="text/html" /><updated>2021-05-24T02:05:23+09:00</updated><id>https://ictechgy.github.io/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>개인 공부 기록소입니다.</subtitle><author><name>JJanghong</name></author><entry><title type="html">Swift(스위프트) nil에 대한 기록 with RxSwift</title><link href="https://ictechgy.github.io/swift/rxswift/Swift-nil/" rel="alternate" type="text/html" title="Swift(스위프트) nil에 대한 기록 with RxSwift" /><published>2021-05-24T00:00:00+09:00</published><updated>2021-05-24T00:00:00+09:00</updated><id>https://ictechgy.github.io/swift/rxswift/Swift-nil</id><content type="html" xml:base="https://ictechgy.github.io/swift/rxswift/Swift-nil/">&lt;p&gt;Swift를 다시 공부하던 도중 기록하면 좋을만한 부분이 있어서 작성한다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://ictechgy.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ictechgy.github.io/" rel="alternate" type="text/html" /><updated>2021-05-25T00:44:55+09:00</updated><id>https://ictechgy.github.io/feed.xml</id><title type="html">개발 끄적끄적</title><subtitle>개인 공부 기록소입니다.</subtitle><author><name>JJanghong</name></author><entry><title type="html">Swift(스위프트) nil과 Type Casting(타입캐스팅)에 대한 기록 with RxSwift</title><link href="https://ictechgy.github.io/swift/rxswift/Swift-nil/" rel="alternate" type="text/html" title="Swift(스위프트) nil과 Type Casting(타입캐스팅)에 대한 기록 with RxSwift" /><published>2021-05-24T00:00:00+09:00</published><updated>2021-05-24T00:00:00+09:00</updated><id>https://ictechgy.github.io/swift/rxswift/Swift-nil</id><content type="html" xml:base="https://ictechgy.github.io/swift/rxswift/Swift-nil/">&lt;p&gt;Swift를 다시 공부하던 도중 기록하면 좋을만한 부분이 있어서 작성한다.&lt;/p&gt;
 
 &lt;p&gt;Any?, AnyObject? 같은 옵셔널이 아닌 Any, AnyObject 등에는 nil을 직접적으로 넣을 수 없다. 하지만 아래와 같은 경우에는 가능하다.&lt;/p&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//syntax error가 뜨지 않는다. 'Any?'로 쓰십시오!라고 뜰 줄 알았는데..&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//또는&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyObject&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;b는 실질적으로 nil이지만 nil이 아닌 것처럼 보인다. 이런 부분에 있어 유의하도록 하자.&lt;/p&gt;
+&lt;p&gt;b는 실질적으로 nil이지만 nil이 아닌 것처럼 보인다. 이런 부분에 있어 유의하도록 하자. (d도 마찬가지. 값 자체가 복사됐느냐 참조가 복사됐느냐의 차이는 존재)&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;위와 같은 경우가 있을 수 있다는 것은 &lt;a href=&quot;https://github.com/ReactiveX/RxSwift/blob/main/RxExample/Extensions/CLLocationManager%2BRx.swift&quot;&gt;RxSwift Github - ‘CLLocationManager+Rx’ Example&lt;/a&gt;을 통해 알았다.&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;castOptionalOrThrow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;resultType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;isEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;isEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// object == nil 로 조건문을 바꾸면 warning 표시.&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 		 &lt;span class=&quot;c1&quot;&gt;//NSNull: nil을 허용하지 않는 콜렉션에서 null value를 대표하는 싱글톤 오브젝트&lt;/span&gt;
@@ -27,7 +31,50 @@
 &lt;p&gt;링크 맨 밑에 위와 같은 함수가 있는데 ‘nil일 수 있는 인자를 Any?가 아닌 Any타입의 object로 받는 것’과 내부에서 ‘nil 체크를 NSNull().isEqual()로 하는 것’을 보고.. 처음에 굉장히 혼란스러웠다. 왜 object 파라미터가 Any?타입이 아닌 Any일까 하면서.. 물론 외부에서 넘어오는 것 자체가 [Any]에서 하나를 고른 Any이기는 하지만.&lt;/p&gt;
 
 &lt;p&gt;delegate.methodInvoked()에 의해 메소드 파라미터들은 Any로 캐스팅되고 [Any] 배열로 반환된다. 따라서 특정 파라미터는 Any타입이라고 보여도 사실은 nil일 수 있다. (이를테면 CLLocationManagerDelegate - didFinishDeferredUpdatesWithError의 두번째 파라미터는 Error? 옵셔널인데, Any로 캐스팅되어도 사실 nil일 수 있다는 것) &lt;br /&gt;
-그렇다면 methodInvoked()에 의해 반환되는 시퀀스가 Observable&amp;lt;Any&amp;gt;가 아닌 Observable&amp;lt;Any?&amp;gt;이어야 하는 것 아닌가?&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Swift" /><category term="RxSwift" /><summary type="html">Swift를 다시 공부하던 도중 기록하면 좋을만한 부분이 있어서 작성한다.</summary></entry><entry><title type="html">파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)</title><link href="https://ictechgy.github.io/python-map/" rel="alternate" type="text/html" title="파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)" /><published>2021-05-19T00:00:00+09:00</published><updated>2021-05-19T00:00:00+09:00</updated><id>https://ictechgy.github.io/python-map</id><content type="html" xml:base="https://ictechgy.github.io/python-map/">&lt;p&gt; &lt;/p&gt;
+왜 methodInvoked()에 의해 반환되는 Observable시퀀스가 Observable&amp;lt;Any?&amp;gt;가 아닌 Observable&amp;lt;Any&amp;gt;인걸까?&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;h1 id=&quot;다른-타입캐스팅업캐스팅에도-되는걸까&quot;&gt;다른 타입캐스팅(업캐스팅)에도 되는걸까?&lt;/h1&gt;
+&lt;p&gt;결론부터 말하자면 안된다. Any와 AnyObject에만 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//struct 테스트&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DescendantStruct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;descendant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DescendantStruct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descendant&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;pre&gt;
+&lt;span style=&quot;color:red&quot;&gt;Value of type 'DescendantStruct?' does not conform to 'ParentProtocol' in coercion&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//class, protocol 테스트&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DescendantClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;descendant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DescendantClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descendant&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentProtocol&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;pre&gt;
+&lt;span style=&quot;color:red&quot;&gt;Value of type 'DescendantClass?' does not conform to 'ParentProtocol' in coercion&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//class 테스트&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DescendantClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;descendant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DescendantClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descendant&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ParentClass&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;pre&gt;
+&lt;span style=&quot;color:red&quot;&gt;Value of optional type 'DescendantClass?' must be unwrapped to a value of type 'DescendantClass'&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;세가지 경우 모두 컴파일러에서 오류를 띄웠다.
+Optional 타입을 Any타입으로 캐스팅 하는 것은 &lt;a href=&quot;https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html&quot;&gt;Swift 공식문서&lt;/a&gt; 맨 밑에도 나와있기는 하다. 그런데 왜 가능하게 한걸까?&lt;/p&gt;</content><author><name>JJanghong</name></author><category term="Swift" /><category term="RxSwift" /><summary type="html">Swift를 다시 공부하던 도중 기록하면 좋을만한 부분이 있어서 작성한다.</summary></entry><entry><title type="html">파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)</title><link href="https://ictechgy.github.io/python-map/" rel="alternate" type="text/html" title="파이썬 Map 함수는 중첩해서 쓸 수 있을까? (Python Map)" /><published>2021-05-19T00:00:00+09:00</published><updated>2021-05-19T00:00:00+09:00</updated><id>https://ictechgy.github.io/python-map</id><content type="html" xml:base="https://ictechgy.github.io/python-map/">&lt;p&gt; &lt;/p&gt;
 
 &lt;h1 id=&quot;python-map함수는-중첩이-가능할까&quot;&gt;Python Map함수는 중첩이 가능할까?&lt;/h1&gt;
 
